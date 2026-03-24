@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Savora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+/* ========== LIGHT (default) ========== */
+:root,[data-theme="light"]{
+  --bg:#f6f1eb;--bg2:#eee8e0;
+  --card:#ffffff;--card-b:rgba(0,0,0,.05);--card-s:0 4px 20px rgba(45,30,15,.06);
+  --t1:#2a231d;--t2:#6b6058;--t3:#a09690;--t4:#cfc7bf;
+  --terra:#c4654a;--terra-l:#b55a42;--terra-g:rgba(196,101,74,.08);
+  --sage:#6da06d;--gold:#b89840;
+  --tab-bg:rgba(255,255,255,.55);--tab-b:rgba(0,0,0,.06);
+  --glass:rgba(255,255,255,.45);--glass-b:rgba(0,0,0,.05);--glass-s:0 2px 12px rgba(45,30,15,.04);
+  --grad-up:linear-gradient(0deg,rgba(246,241,235,1) 0%,rgba(246,241,235,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(246,241,235,1) 0%,rgba(246,241,235,0) 100%);
+  --sep:rgba(0,0,0,.05);--input-bg:rgba(0,0,0,.03);
+  --sbar-c:#2a231d;
+  --hdr-bg:rgba(246,241,235,.65);
+  --sbar-glass:rgba(246,241,235,.55);
+  --bg-paper:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E"),repeating-conic-gradient(rgba(180,160,140,.02) 0% 25%,transparent 0% 50%) 0 0/3px 3px;
+}
+/* ========== DARK ========== */
+[data-theme="dark"]{
+  --bg:#151311;--bg2:#1d1a17;
+  --card:rgba(255,255,255,.04);--card-b:rgba(255,255,255,.06);--card-s:0 4px 20px rgba(0,0,0,.25);
+  --t1:#f0ebe4;--t2:#b5ab9f;--t3:#7a7168;--t4:#3a3530;
+  --terra:#c4654a;--terra-l:#d4876f;--terra-g:rgba(196,101,74,.12);
+  --sage:#7aad7a;--gold:#c9a84c;
+  --tab-bg:rgba(255,255,255,.06);--tab-b:rgba(255,255,255,.08);
+  --glass:rgba(255,255,255,.05);--glass-b:rgba(255,255,255,.07);--glass-s:0 2px 12px rgba(0,0,0,.15);
+  --grad-up:linear-gradient(0deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --sep:rgba(255,255,255,.04);--input-bg:rgba(255,255,255,.04);
+  --sbar-c:#f0ebe4;
+  --hdr-bg:rgba(21,19,17,.65);
+  --sbar-glass:rgba(21,19,17,.55);
+  --bg-paper:none;
+}
+
+html,body{height:100%;overflow:hidden;background:#0a0908}
+[data-theme="light"] body{background:#c5bdb4}
+body{display:flex;justify-content:center;align-items:center;font-family:'Inter',system-ui,sans-serif;transition:background .5s}
+.home,.explore,.shop,.prof,.det,.fridge,.import,.academy,.meal{background-image:var(--bg-paper);background-size:256px}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;-webkit-font-smoothing:antialiased}
+
+/* === PHONE === */
+.ph{
+  width:390px;height:844px;position:relative;
+  background:var(--bg);border-radius:54px;overflow:hidden;
+  box-shadow:0 0 0 11px #1a1816,0 0 0 13px #3a3632,0 50px 100px rgba(0,0,0,.5);
+  contain:layout style paint;transition:background .5s;
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:34px;background:#000;border-radius:0 0 20px 20px;z-index:300}
+
+/* Status bar */
+.sbar{
+  position:absolute;top:0;left:0;right:0;height:54px;z-index:250;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 34px 8px;font-size:15px;font-weight:600;
+  color:var(--sbar-c);transition:color .4s;
+}
+.sbar.on-hero{color:#fff}
+.sbar-r{display:flex;gap:5px;align-items:center;font-size:12px}
+
+/* === SCREENS === */
+.scr{
+  position:absolute;inset:0;will-change:transform,opacity;
+  transition:transform .5s cubic-bezier(.32,.72,.0,1),opacity .35s cubic-bezier(.32,.72,.0,1);
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  overscroll-behavior-y:contain;scrollbar-width:none;
+}
+.scr::-webkit-scrollbar{display:none}
+/* Premium scroll physics */
+.scr{scroll-snap-type:y proximity}
+.scr::before{content:'';position:sticky;top:-1px;left:0;right:0;height:1px;display:block;z-index:50}
+.scr[data-s="on"]{transform:none;opacity:1;pointer-events:all;z-index:10}
+.scr[data-s="l"]{transform:translateX(-30px);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="r"]{transform:translateX(30px);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="off"]{transform:translateX(40px);opacity:0;pointer-events:none;z-index:1}
+
+/* === HEADER — minimal, liquid glass === */
+.hdr{
+  position:sticky;top:0;z-index:100;
+  height:96px;display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:14px;
+  background:var(--hdr-bg);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+  border-bottom:none;
+  transition:background .4s;
+}
+.hdr-logo{
+  font-family:'Playfair Display',serif;font-weight:300;
+  font-size:16px;letter-spacing:7px;text-transform:uppercase;
+  color:var(--terra);user-select:none;
+}
+.hdr-side{position:absolute;bottom:14px;display:flex;gap:10px}
+.hdr-side.l{left:24px}.hdr-side.r{right:24px}
+.hdr-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .4s,border-color .4s,box-shadow .4s;
+}
+.hdr-btn:active{transform:scale(.9)}
+.hdr-btn .ms{font-size:20px;color:var(--t2);transition:color .4s}
+/* Active state for all tappable elements */
+.qa-i:active,.imp:active,.magic:active,.rr:active,.daily-ch:active,.aca-mini:active,
+.fridge-rc:active,.fridge-chip:active,.meal-slot:active,.aca-lesson:active,
+.set-row:active,.bdg:active,.si:active{transform:scale(.97)}
+
+/* === SECTION === */
+.sh{display:flex;justify-content:space-between;align-items:baseline;padding:0 24px;margin-bottom:16px}
+.sh-t{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;letter-spacing:-.2px;color:var(--t1);transition:color .4s}
+.sh-link{font-size:12px;color:var(--terra);font-weight:500;background:none;border:none;cursor:pointer;letter-spacing:.3px}
+
+/* Horizontal scroll */
+.hs{display:flex;gap:14px;padding:0 24px 32px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-padding:0 24px}
+.hs::-webkit-scrollbar{display:none}
+
+/* Pill — liquid glass active */
+.pill{
+  height:40px;padding:0 20px;border-radius:20px;border:1.5px solid var(--t4);
+  background:transparent;color:var(--t2);font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;
+  white-space:nowrap;transition:all .35s cubic-bezier(.16,1,.3,1);
+}
+.pill.on{
+  background:var(--terra);color:#fff;border-color:var(--terra);
+  box-shadow:0 4px 16px rgba(196,101,74,.25);
+}
+.pill.terra{background:var(--terra);color:#fff;border-color:var(--terra);box-shadow:0 4px 16px rgba(196,101,74,.25)}
+.pill:active:not(.on):not(.terra){border-color:var(--terra);color:var(--terra)}
+
+/* Toggle — liquid glass */
+.tg{
+  width:52px;height:30px;border-radius:15px;
+  background:var(--t4);border:none;cursor:pointer;position:relative;
+  transition:background .4s cubic-bezier(.16,1,.3,1);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(255,255,255,.15);
+}
+.tg.on{background:var(--terra);box-shadow:inset 0 1px 3px rgba(0,0,0,.12),0 0 12px rgba(196,101,74,.2)}
+.tg-k{
+  width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(245,240,235,.92));
+  position:absolute;top:3px;left:3px;
+  box-shadow:0 2px 8px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.08),inset 0 1px 1px rgba(255,255,255,.6);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.tg.on .tg-k{transform:translateX(22px)}
+
+/* =========================================
+   S0: ONBOARDING — cinematic experience
+   ========================================= */
+.onboard{height:100%;position:relative;overflow:hidden}
+.onboard-bg{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  animation:slowZoom 20s ease-in-out infinite alternate;
+  transition:background .6s ease;
+}
+@keyframes slowZoom{
+  0%{transform:scale(1)}
+  100%{transform:scale(1.08)}
+}
+.onboard-grad{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg,
+      rgba(18,14,10,.15) 0%,
+      rgba(18,14,10,.05) 25%,
+      rgba(18,14,10,.2) 45%,
+      rgba(18,14,10,.7) 65%,
+      rgba(18,14,10,.92) 80%,
+      rgba(18,14,10,.97) 100%
+    );
+}
+.onboard-body{
+  position:relative;z-index:2;height:100%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 32px 56px;
+}
+.onboard-eyebrow{
+  font-family:'Playfair Display',serif;font-weight:300;font-style:italic;
+  font-size:14px;color:rgba(212,135,111,.9);letter-spacing:1px;
+  margin-bottom:14px;
+  opacity:0;animation:obIn .9s cubic-bezier(.16,1,.3,1) .4s forwards;
+}
+.onboard-title{
+  font-family:'Playfair Display',serif;font-weight:300;
+  font-size:42px;line-height:1.04;color:#f0ebe4;letter-spacing:-.5px;
+  margin-bottom:18px;
+  opacity:0;animation:obIn .9s cubic-bezier(.16,1,.3,1) .7s forwards;
+}
+.onboard-desc{
+  font-size:15px;line-height:1.6;color:rgba(200,192,184,.75);
+  font-weight:300;max-width:300px;margin-bottom:40px;
+  opacity:0;animation:obIn .9s cubic-bezier(.16,1,.3,1) 1s forwards;
+}
+.onboard-cta{
+  display:flex;gap:12px;align-items:center;
+  opacity:0;animation:obIn .8s cubic-bezier(.16,1,.3,1) 1.4s forwards;
+}
+.ob-btn-main{
+  flex:1;height:58px;border-radius:29px;border:none;
+  background:var(--terra);color:#fff;
+  font-family:'Inter',sans-serif;font-size:16px;font-weight:500;
+  cursor:pointer;letter-spacing:.4px;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.ob-btn-main::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 50%);
+  pointer-events:none;
+}
+.ob-btn-main:active{transform:scale(.96);box-shadow:0 6px 20px rgba(196,101,74,.25)}
+.ob-btn-ghost{
+  width:58px;height:58px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+  transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1);
+}
+.ob-btn-ghost:active{transform:scale(.9);background:rgba(255,255,255,.12)}
+.ob-btn-ghost .ms{font-size:22px;color:rgba(240,235,228,.8)}
+.onboard-login{
+  text-align:center;margin-top:20px;
+  opacity:0;animation:obIn .7s cubic-bezier(.16,1,.3,1) 1.8s forwards;
+}
+.onboard-login a{
+  font-size:13px;color:rgba(200,192,184,.5);text-decoration:none;
+  font-weight:400;letter-spacing:.3px;
+  transition:color .2s;
+}
+.onboard-login a:hover{color:rgba(200,192,184,.8)}
+/* Savora watermark */
+.onboard-mark{
+  position:absolute;top:0;left:0;right:0;padding-top:72px;
+  z-index:2;text-align:center;
+  font-family:'Playfair Display',serif;font-weight:300;
+  font-size:18px;letter-spacing:10px;text-transform:uppercase;
+  color:rgba(240,235,228,.85);
+  opacity:0;animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+}
+@keyframes obIn{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* =========================================
+   S1: HOME
+   ========================================= */
+.home{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.greet{padding:0 24px;margin-bottom:12px}
+.greet-hi{font-size:14px;color:var(--t3);font-weight:400;margin-bottom:2px}
+.greet-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s}
+.greet-date{font-size:12px;color:var(--t3);margin-top:4px;letter-spacing:.3px}
+
+/* === GLASS UTILITY === */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+}
+
+/* Quick actions */
+.qa{display:flex;gap:12px;padding:24px 24px 28px}
+.qa-i{
+  flex:1;padding:18px 8px 14px;
+  background:var(--card);
+  border:1px solid var(--card-b);
+  border-radius:22px;text-align:center;cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s,border-color .4s;
+}
+.qa-i:active{transform:scale(.93)}
+.qa-i .ms{font-size:28px;color:var(--terra);display:block;margin-bottom:6px}
+.qa-i span{font-size:11px;color:var(--t2);font-weight:500;transition:color .4s}
+
+/* Import */
+.imp{
+  margin:0 24px 24px;display:flex;align-items:center;gap:14px;
+  background:var(--card);
+  border:1px solid var(--card-b);border-radius:22px;
+  padding:16px 18px;cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.imp:active{transform:scale(.98)}
+.imp-ic{width:44px;height:44px;border-radius:16px;background:var(--terra-g);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.imp-ic .ms{color:var(--terra);font-size:22px}
+.imp-body{flex:1}
+.imp-body b{font-size:14px;font-weight:500;color:var(--t1);display:block;margin-bottom:3px;transition:color .4s}
+.imp-body span{font-size:12px;color:var(--t3);line-height:1.4}
+.imp .ms:last-child{font-size:18px;color:var(--t4)}
+
+/* Featured hero */
+.feat{
+  margin:0 24px 32px;border-radius:24px;overflow:hidden;
+  position:relative;height:270px;cursor:pointer;
+  box-shadow:0 16px 48px rgba(45,30,15,.14);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.feat:active{transform:scale(.985)}
+.feat img{width:100%;height:100%;object-fit:cover;display:block}
+.feat-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(16,12,8,.88) 0%,rgba(16,12,8,.0) 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
+}
+.feat-cat{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--terra-l);margin-bottom:6px}
+.feat-t{font-family:'Playfair Display',serif;font-size:30px;font-weight:300;color:#fff;line-height:1.08;margin-bottom:10px}
+.feat-row{display:flex;gap:18px}
+.feat-s{display:flex;align-items:center;gap:4px;font-size:12px;color:rgba(255,255,255,.65)}
+.feat-s .ms{font-size:16px;color:var(--terra-l)}
+.feat-dots{position:absolute;bottom:16px;right:24px;display:flex;gap:5px}
+.fdot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.2);transition:all .3s}
+.fdot.on{width:18px;background:var(--terra-l)}
+
+/* Cuisine circles */
+.cuisine{display:flex;gap:12px;padding:0 24px 28px;overflow-x:auto;scrollbar-width:none}
+.cuisine::-webkit-scrollbar{display:none}
+.cu{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;transition:transform .2s}
+.cu:active{transform:scale(.92)}
+.cu-img{width:60px;height:60px;border-radius:50%;overflow:hidden;border:2.5px solid var(--card-b);box-shadow:var(--card-s);transition:border-color .4s}
+.cu-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cu span{font-size:11px;color:var(--t2);font-weight:500;transition:color .4s}
+
+/* Collection card */
+.cc{
+  min-width:160px;height:210px;border-radius:22px;overflow:hidden;
+  position:relative;cursor:pointer;scroll-snap-align:start;flex-shrink:0;
+  box-shadow:0 6px 24px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.cc:active{transform:scale(.95)}
+.cc img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-ov{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(0deg,rgba(16,12,8,.8),transparent)}
+.cc-n{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:#fff;margin-bottom:2px}
+.cc-c{font-size:11px;color:rgba(255,255,255,.6)}
+
+/* Recipe list item */
+.rr{
+  display:flex;gap:12px;align-items:center;padding:12px;margin:0 24px 12px;
+  background:var(--card);border:1px solid var(--card-b);border-radius:16px;
+  cursor:pointer;box-shadow:var(--card-s);position:relative;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.rr:active{transform:scale(.98)}
+.rr-img{width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.rr-img img{width:100%;height:100%;object-fit:cover;display:block}
+.rr-info{flex:1;min-width:0}
+.rr-n{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .4s}
+.rr-d{font-size:12px;color:var(--t3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rr-m{display:flex;gap:10px;margin-top:6px;align-items:center}
+.rr-star{font-size:12px;color:var(--terra);font-weight:600;display:flex;align-items:center;gap:3px}
+.rr-star .ms{font-size:14px;font-variation-settings:'FILL' 1}
+.rr-time{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px}
+.rr-time .ms{font-size:14px}
+
+/* =========================================
+   S2: EXPLORE
+   ========================================= */
+.explore{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.sbar-in{
+  margin:8px 24px 20px;display:flex;align-items:center;gap:10px;
+  background:var(--sbar-glass);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid var(--card-b);
+  border-radius:50px;padding:0 8px 0 18px;height:50px;transition:background .4s,border-color .4s;
+}
+.sbar-in input{flex:1;background:none;border:none;outline:none;color:var(--t1);font-family:'Inter',sans-serif;font-size:15px;transition:color .4s}
+.sbar-in input::placeholder{color:var(--t3)}
+.mic{width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}
+.mic:active{transform:scale(.9)}.mic .ms{font-size:18px;color:#fff}
+.magic{
+  margin:0 24px 22px;padding:18px 20px;
+  background:var(--card);
+  border:1px solid var(--card-b);border-radius:22px;
+  display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.magic:active{transform:scale(.98)}
+.magic-t{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:2px;transition:color .4s}
+.magic-s{font-size:12px;color:var(--t2);line-height:1.4}
+.cats{display:flex;gap:8px;padding:0 24px 22px;overflow-x:auto;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 24px 20px}
+.gc2{border-radius:22px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer;box-shadow:0 6px 24px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.gc2:active{transform:scale(.96)}
+.gc2 img{width:100%;height:100%;object-fit:cover;display:block}
+.gc2-ov{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(0deg,rgba(16,12,8,.82),transparent)}
+.gc2-n{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.2;margin-bottom:4px}
+.gc2-m{font-size:11px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:3px}
+.gc2-m .ms{font-size:14px}
+
+/* =========================================
+   S3: RECIPE DETAIL
+   ========================================= */
+.det{background:var(--bg);min-height:100%;transition:background .5s}
+.det-hero{width:100%;height:420px;position:relative}
+.det-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.det-hero-g{position:absolute;bottom:0;left:0;right:0;height:200px;background:var(--grad-up)}
+.det-nav{position:absolute;top:56px;left:0;right:0;display:flex;justify-content:space-between;padding:10px 24px;z-index:10}
+.nb{width:42px;height:42px;border-radius:50%;background:rgba(20,16,12,.35);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s,background .2s}
+.nb:active{transform:scale(.9);background:rgba(20,16,12,.6)}.nb .ms{font-size:20px;color:#fff}
+.nb-r{display:flex;gap:10px}
+.det-body{padding:0 24px 140px;margin-top:-32px;position:relative;z-index:5}
+.det-cat{font-size:11px;color:var(--terra);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px}
+.det-t{font-family:'Playfair Display',serif;font-size:30px;font-weight:300;color:var(--t1);line-height:1.08;margin-bottom:6px;transition:color .4s}
+.det-au{font-size:12px;color:var(--t3);margin-bottom:20px;display:flex;align-items:center;gap:6px}
+.det-au-av{width:22px;height:22px;border-radius:50%;overflow:hidden}.det-au-av img{width:100%;height:100%;object-fit:cover}
+.det-stats{display:flex;gap:12px;margin-bottom:24px}
+.ds{
+  flex:1;padding:14px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);border-radius:16px;text-align:center;
+  box-shadow:var(--glass-s);transition:background .4s;
+}
+.ds .ms{font-size:20px;color:var(--terra);display:block;margin-bottom:4px}
+.ds-v{font-size:16px;font-weight:600;color:var(--t1);transition:color .4s}
+.ds-l{font-size:10px;color:var(--t3);margin-top:2px}
+.por-l{font-size:13px;color:var(--t3);font-weight:500;margin-bottom:10px}
+.por-pills{display:flex;gap:8px;margin-bottom:24px}
+/* Nutrition */
+.nutri{display:flex;gap:12px;margin-bottom:28px}
+.nut{flex:1;padding:12px 8px;background:var(--card);border:1px solid var(--card-b);border-radius:12px;text-align:center;box-shadow:var(--card-s);transition:background .4s}
+.nut-v{font-size:17px;font-weight:700;color:var(--t1);transition:color .4s}
+.nut-l{font-size:9px;color:var(--t3);margin-top:2px}
+.nut-bar{height:3px;background:var(--t4);border-radius:2px;margin-top:8px;overflow:hidden;transition:background .4s}
+.nut-fill{height:100%;border-radius:2px}
+
+.ing-h{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--t1);margin-bottom:14px;transition:color .4s}
+.ing{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--sep)}
+.ing:last-child{border-bottom:none}
+.ing-l{display:flex;align-items:center;gap:12px}
+.ing-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ing-n{font-size:14px;color:var(--t1);transition:color .4s}
+.ing-a{font-size:13px;color:var(--t3);font-weight:500}
+.step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--sep)}
+.step:last-child{border-bottom:none}
+.step-n{width:28px;height:28px;border-radius:50%;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--terra);flex-shrink:0;box-shadow:var(--card-s);transition:background .4s}
+.step-t{font-size:14px;color:var(--t2);line-height:1.55}
+.det-cta{position:absolute;bottom:0;left:0;width:390px;z-index:100;padding:12px 24px 36px;background:var(--grad-up);transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s}
+.det-cta.hide{transform:translateY(100%);opacity:0;pointer-events:none}
+.cta-row{display:flex;gap:12px}
+.cta-main{flex:1;height:56px;border-radius:28px;border:none;background:var(--terra);color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 28px rgba(196,101,74,.28);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.cta-main:active{transform:scale(.96)}.cta-main .ms{font-size:22px}
+.cta-save{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--t4);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s}
+.cta-save:active{transform:scale(.9)}.cta-save .ms{font-size:24px;color:var(--t2)}
+.cta-save.on{border-color:var(--terra);background:var(--terra-g)}.cta-save.on .ms{color:var(--terra);font-variation-settings:'FILL' 1}
+
+/* =========================================
+   S4: COOKING
+   ========================================= */
+.cook{background:var(--bg);height:100%;display:flex;flex-direction:column;transition:background .5s}
+.cook-hdr{padding:60px 24px 16px;display:flex;align-items:center;justify-content:space-between}
+.cook-cl{width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--card-s);transition:background .4s}.cook-cl .ms{font-size:18px;color:var(--t2)}
+.cook-tt{font-size:14px;font-weight:500;color:var(--t1);transition:color .4s}
+.cook-sn{font-size:13px;color:var(--terra);font-weight:600}
+.cook-dots{display:flex;gap:4px;justify-content:center;margin-bottom:18px}
+.ckd{width:6px;height:6px;border-radius:3px;background:var(--t4);transition:all .3s}.ckd.on{width:20px;background:var(--terra)}.ckd.done{background:var(--sage)}
+.cook-body{flex:1;display:flex;flex-direction:column;padding:0 24px}
+.cook-img{width:100%;height:220px;border-radius:22px;overflow:hidden;margin-bottom:24px;box-shadow:0 8px 28px rgba(45,30,15,.1)}.cook-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cook-inst{font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:var(--t1);line-height:1.5;margin-bottom:22px;transition:color .4s}
+.cook-timer{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--card);border:1px solid var(--card-b);border-radius:22px;margin-bottom:auto;box-shadow:var(--glass-s);transition:background .4s}
+.cook-timer .ms{font-size:24px;color:var(--terra)}
+.cook-timer-t{font-size:44px;font-weight:600;color:var(--t1);font-variant-numeric:tabular-nums;transition:color .4s}
+.cook-timer-l{font-size:12px;color:var(--t3);margin-left:auto}
+.timer-btn{width:40px;height:40px;border-radius:50%;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(196,101,74,.25);transition:transform .2s}.timer-btn:active{transform:scale(.9)}.timer-btn .ms{font-size:20px;color:#fff}
+.cook-nav{display:flex;gap:12px;padding:22px 0 42px}
+.cook-prev,.cook-next{flex:1;height:54px;border-radius:27px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.cook-prev{background:var(--card);border:1px solid var(--card-b);color:var(--t2);box-shadow:var(--card-s);transition:background .4s}.cook-next{background:var(--terra);color:#fff;box-shadow:0 6px 20px rgba(196,101,74,.28)}
+.cook-prev:active,.cook-next:active{transform:scale(.96)}.cook-prev .ms,.cook-next .ms{font-size:18px}
+
+/* Cooking mode — forced dark for kitchen conditions */
+.cook{
+  background:#1a1612 !important;
+  color:#f0ebe4;
+}
+.cook .cook-tt{color:#f0ebe4 !important}
+.cook .cook-sn{color:var(--terra) !important}
+.cook-inst{color:#f0ebe4 !important}
+.cook-timer{background:rgba(255,255,255,.06) !important;border-color:rgba(255,255,255,.08) !important}
+.cook-timer .ms{color:var(--terra) !important}
+.cook-timer-t{color:#f0ebe4 !important}
+.cook-timer-l{color:rgba(240,235,228,.5) !important}
+.cook-prev{background:rgba(255,255,255,.06) !important;border-color:rgba(255,255,255,.08) !important;color:rgba(240,235,228,.7) !important}
+.cook-prev .ms{color:rgba(240,235,228,.7) !important}
+.cook-cl{background:rgba(255,255,255,.06) !important;border-color:rgba(255,255,255,.08) !important}
+.cook-cl .ms{color:#f0ebe4 !important}
+.cook-body{background:#1a1612 !important}
+.cook-nav{background:#1a1612 !important}
+
+/* =========================================
+   S5: SHOPPING
+   ========================================= */
+.shop{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.shop-sum{margin:8px 24px 20px;padding:18px 20px;background:var(--card);border:1px solid var(--card-b);border-radius:22px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--glass-s);transition:background .4s}
+.shop-sum-l{font-size:12px;color:var(--t3)}.shop-sum-v{font-size:24px;font-weight:600;color:var(--t1);margin-top:3px;transition:color .4s}.shop-sum-r{font-size:13px;color:var(--terra);font-weight:500}
+.shop-cat{padding:0 24px;margin:18px 0 6px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:6px}
+.shop-cat .ms{font-size:16px}
+.si{display:flex;align-items:center;gap:14px;padding:14px 24px;border-bottom:1px solid var(--sep);cursor:pointer;transition:opacity .35s}
+.si.ck{opacity:.3}
+.si-ch{width:24px;height:24px;border-radius:50%;border:2px solid var(--t4);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s cubic-bezier(.16,1,.3,1)}
+.si.ck .si-ch{background:var(--terra);border-color:var(--terra);transform:scale(1.05)}
+.si-ch .ms{font-size:16px;color:transparent;transition:color .2s}.si.ck .si-ch .ms{color:#fff}
+.si-n{flex:1;font-size:14px;color:var(--t1);transition:color .4s}.si.ck .si-n{text-decoration:line-through;color:var(--t3)}
+.si-a{font-size:13px;color:var(--t3)}.si-p{font-size:13px;color:var(--terra);font-weight:600;min-width:52px;text-align:right}
+
+/* =========================================
+   S6: PROFILE
+   ========================================= */
+.prof{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.prof-card{margin:8px 24px 20px;padding:24px;background:var(--card);border:1px solid var(--card-b);border-radius:22px;text-align:center;box-shadow:var(--glass-s);transition:background .4s}
+.prof-av{width:76px;height:76px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--terra)}
+.prof-av img{width:100%;height:100%;object-fit:cover}
+.prof-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);margin-bottom:3px;transition:color .4s}
+.prof-lvl{font-size:12px;color:var(--terra);font-weight:500;letter-spacing:.3px}
+.prof-xp{margin-top:16px}.prof-xp-bar{height:5px;background:var(--t4);border-radius:3px;overflow:hidden;transition:background .4s}
+.prof-xp-fill{height:100%;background:var(--terra);border-radius:3px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+.prof-xp-t{font-size:11px;color:var(--t3);margin-top:8px}
+.prof-stats{display:flex;gap:12px;margin:0 24px 24px}
+.ps{flex:1;padding:18px 12px;background:var(--card);border:1px solid var(--card-b);border-radius:16px;text-align:center;box-shadow:var(--glass-s);transition:background .4s}
+.ps-v{font-size:24px;font-weight:600;color:var(--t1);transition:color .4s}.ps-l{font-size:10px;color:var(--t3);margin-top:4px}
+.badges{display:flex;gap:12px;padding:0 24px;flex-wrap:wrap;margin-bottom:28px}
+.bdg{width:60px;height:60px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;box-shadow:var(--card-s);transition:transform .2s,background .4s}
+.bdg:active{transform:scale(.9)}.bdg .ms{font-size:22px;color:var(--t3)}.bdg span{font-size:8px;color:var(--t3);font-weight:500}
+.bdg.on .ms{color:var(--terra);font-variation-settings:'FILL' 1}.bdg.on{border-color:rgba(196,101,74,.12);background:var(--terra-g)}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--sep);cursor:pointer;transition:border-color .4s}
+.set-l{display:flex;align-items:center;gap:14px}.set-l .ms{font-size:22px;color:var(--t3)}
+.set-label{font-size:14px;color:var(--t1);transition:color .4s}.set-val{font-size:13px;color:var(--t3)}
+.set-arr .ms{font-size:18px;color:var(--t4)}
+
+/* =========================================
+   TAB BAR — liquid glass
+   ========================================= */
+.tabs{
+  position:absolute;bottom:0;left:0;right:0;z-index:200;padding:0;
+  transform:translateY(0);opacity:1;
+  transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .45s cubic-bezier(.22,1,.36,1);
+  will-change:transform,opacity;
+}
+.tabs.hide{transform:translateY(100%);opacity:0;pointer-events:none}
+.tabs-in{
+  display:flex;justify-content:space-around;align-items:center;height:82px;padding:8px 0 24px;
+  background:var(--tab-bg);
+  backdrop-filter:blur(24px) saturate(190%);
+  -webkit-backdrop-filter:blur(24px) saturate(190%);
+  border-top:1px solid var(--tab-b);
+  transition:background .4s,border-color .4s;
+}
+.tb{
+  width:auto;height:auto;border-radius:0;background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  padding:4px 0;
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.tb .ms{font-size:22px;color:var(--t3);transition:color .3s,transform .35s cubic-bezier(.34,1.56,.64,1)}
+.tb.on .ms{color:var(--terra);transform:scale(1.08)}
+.tb-label{font-size:10px;font-weight:500;color:var(--t3);letter-spacing:.2px;transition:color .3s}
+.tb.on .tb-label{color:var(--terra)}
+.tb-c{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--terra);border:none;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  box-shadow:0 6px 18px rgba(196,101,74,.35);
+  margin:0;padding:0;margin-top:-16px;
+}
+.tb-c:active{transform:scale(.88)}
+.tb-c .ms{font-size:24px;color:#fff}
+
+/* Action Menu */
+.action-overlay{position:absolute;inset:0;z-index:300;pointer-events:none;opacity:0;transition:opacity .35s cubic-bezier(.32,.72,.0,1)}
+.action-overlay.open{pointer-events:all;opacity:1}
+.action-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.action-sheet{
+  position:absolute;bottom:0;left:0;right:0;
+  background:var(--bg);
+  border-radius:28px 28px 0 0;
+  padding:12px 24px 40px;
+  transform:translateY(100%);
+  transition:transform .45s cubic-bezier(.32,.72,.0,1);
+  box-shadow:0 -8px 40px rgba(0,0,0,.12);
+}
+.action-overlay.open .action-sheet{transform:translateY(0)}
+.action-handle{width:36px;height:4px;border-radius:2px;background:var(--t4);margin:0 auto 18px}
+.action-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--t1);text-align:center;margin-bottom:22px;transition:color .4s}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.action-item{
+  padding:18px 14px;border-radius:18px;
+  background:var(--card);border:1px solid var(--card-b);
+  cursor:pointer;text-align:center;
+  transition:transform .25s cubic-bezier(.32,.72,.0,1),background .4s;
+}
+.action-item:active{transform:scale(.95)}
+.action-icon{width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.action-icon .ms{font-size:24px;color:#fff}
+.action-label{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px;transition:color .4s}
+.action-desc{font-size:10px;color:var(--t3);line-height:1.4}
+.action-cancel{
+  width:100%;height:48px;border-radius:24px;border:none;
+  background:var(--card);color:var(--t2);
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;transition:background .3s,color .4s;
+}
+.action-cancel:active{transform:scale(.98)}
+
+/* NAV DOTS — removed for clean user experience */
+/* =========================================
+   S7: MEAL PLAN
+   ========================================= */
+.meal{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.meal-week{display:flex;align-items:center;justify-content:space-between;padding:8px 24px 18px}
+.meal-week-btn{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--card-s);transition:transform .2s,background .4s}
+.meal-week-btn:active{transform:scale(.9)}.meal-week-btn .ms{font-size:18px;color:var(--t2)}
+.meal-week-t{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--t1);transition:color .4s}
+.meal-days{padding:0 24px;display:flex;flex-direction:column;gap:14px}
+.meal-day{background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;padding:16px;box-shadow:var(--glass-s);transition:background .4s}
+.meal-day-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.meal-day-name{font-size:14px;font-weight:600;color:var(--t1);transition:color .4s}
+.meal-day-cal{font-size:11px;color:var(--terra);font-weight:500}
+.meal-slots{display:flex;flex-direction:column;gap:8px}
+.meal-slot{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--input-bg);border-radius:14px;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.meal-slot:active{transform:scale(.98)}
+.meal-slot-img{width:42px;height:42px;border-radius:10px;overflow:hidden;flex-shrink:0}
+.meal-slot-img img{width:100%;height:100%;object-fit:cover;display:block}
+.meal-slot-empty{width:42px;height:42px;border-radius:10px;border:2px dashed var(--t4);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.meal-slot-empty .ms{font-size:18px;color:var(--t4)}
+.meal-slot-info{flex:1;min-width:0}
+.meal-slot-type{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:2px}
+.meal-slot-name{font-size:13px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .4s}
+.meal-slot-name.empty{color:var(--t4);font-weight:400;font-style:italic}
+.meal-macros{display:flex;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--sep)}
+.meal-macro{flex:1;text-align:center}
+.meal-macro-v{font-size:13px;font-weight:600;color:var(--t1);transition:color .4s}
+.meal-macro-l{font-size:9px;color:var(--t3)}
+.meal-ai-fab{position:sticky;bottom:110px;margin-left:auto;margin-right:20px;width:56px;height:56px;border-radius:50%;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(196,101,74,.35);z-index:150;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.meal-ai-fab:active{transform:scale(.9)}.meal-ai-fab .ms{font-size:26px;color:#fff}
+
+/* =========================================
+   S8: FRIDGE MAGIC
+   ========================================= */
+.fridge{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.fridge-cam{margin:8px 24px 20px;height:180px;border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:2px dashed var(--glass-b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:background .4s,border-color .4s}
+.fridge-cam:active{border-color:var(--terra)}
+.fridge-cam .ms{font-size:44px;color:var(--t4)}
+.fridge-cam-t{font-family:'Playfair Display',serif;font-size:16px;color:var(--t2);transition:color .4s}
+.fridge-cam-s{font-size:12px;color:var(--t3)}
+.fridge-or{text-align:center;font-size:12px;color:var(--t3);margin-bottom:16px;font-weight:500;letter-spacing:2px;text-transform:uppercase}
+.fridge-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 20px}
+.fridge-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--card);border:1px solid var(--card-b);border-radius:20px;font-size:13px;color:var(--t1);cursor:pointer;box-shadow:var(--card-s);transition:all .25s cubic-bezier(.16,1,.3,1)}
+.fridge-chip:active{transform:scale(.95)}
+.fridge-chip .ms{font-size:14px;color:var(--t3)}
+.fridge-chip.active{border-color:var(--terra);background:var(--terra-g)}
+.fridge-chip.active .ms{color:var(--terra)}
+.fridge-add{display:inline-flex;align-items:center;gap:4px;padding:8px 14px;background:transparent;border:2px dashed var(--t4);border-radius:20px;font-size:13px;color:var(--t3);cursor:pointer;transition:all .25s}
+.fridge-add:active{border-color:var(--terra);color:var(--terra)}
+.fridge-find{margin:8px 24px 24px;height:56px;border-radius:28px;border:none;width:calc(100% - 48px);background:var(--terra);color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 28px rgba(196,101,74,.28);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.fridge-find:active{transform:scale(.96)}.fridge-find .ms{font-size:20px}
+.fridge-results{padding:0 24px}
+.fridge-rc{display:flex;gap:12px;align-items:center;padding:12px;margin-bottom:12px;background:var(--card);border:1px solid var(--card-b);border-radius:16px;cursor:pointer;box-shadow:var(--card-s);transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s;position:relative}
+.fridge-rc:active{transform:scale(.98)}
+.fridge-rc-img{width:68px;height:68px;border-radius:14px;overflow:hidden;flex-shrink:0}
+.fridge-rc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fridge-rc-info{flex:1;min-width:0}
+.fridge-rc-n{font-size:14px;font-weight:500;color:var(--t1);margin-bottom:3px;transition:color .4s}
+.fridge-rc-d{font-size:12px;color:var(--t3);margin-bottom:6px}
+.fridge-rc-m{display:flex;gap:8px;align-items:center}
+.fridge-rc-match{font-size:12px;font-weight:600;color:var(--sage);display:flex;align-items:center;gap:3px}
+.fridge-rc-match .ms{font-size:14px}
+.fridge-rc-time{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px}
+.fridge-rc-time .ms{font-size:14px}
+.fridge-rc-badge{position:absolute;top:-6px;right:12px;padding:3px 10px;background:var(--gold);color:#fff;font-size:10px;font-weight:600;border-radius:10px;letter-spacing:.2px}
+
+/* =========================================
+   S9: IMPORT RECIPE
+   ========================================= */
+.import{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.import-url{margin:8px 24px 20px;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:6px 8px 6px 18px;box-shadow:var(--card-s);transition:background .4s}
+.import-url input{flex:1;background:none;border:none;outline:none;color:var(--t1);font-family:'Inter',sans-serif;font-size:14px;transition:color .4s}
+.import-url input::placeholder{color:var(--t3)}
+.import-paste{height:40px;padding:0 16px;border-radius:20px;background:var(--terra);border:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:transform .2s}
+.import-paste:active{transform:scale(.92)}.import-paste .ms{font-size:16px}
+.import-platforms{margin:0 24px 24px;text-align:center}
+.import-platforms-t{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+.import-picons{display:flex;justify-content:center;gap:16px}
+.import-pi{width:52px;height:52px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;box-shadow:var(--card-s);cursor:pointer;transition:transform .2s,background .4s}
+.import-pi:active{transform:scale(.9)}.import-pi .ms{font-size:24px;color:var(--t2)}
+.import-progress{margin:0 24px 24px;padding:20px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);transition:background .4s}
+.import-step{display:flex;align-items:center;gap:12px;padding:10px 0}
+.import-step-ic{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.import-step-ic.done{background:var(--sage);}.import-step-ic.done .ms{color:#fff;font-size:18px}
+.import-step-ic.active{background:var(--terra-g);animation:importPulse 1.5s ease-in-out infinite}
+.import-step-ic.active .ms{color:var(--terra);font-size:18px}
+.import-step-ic.pending{background:var(--input-bg)}.import-step-ic.pending .ms{color:var(--t4);font-size:18px}
+.import-step-t{font-size:14px;color:var(--t1);font-weight:500;transition:color .4s}
+.import-step-t.pending{color:var(--t4)}
+@keyframes importPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.import-preview{margin:0 24px 24px;border-radius:22px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);transition:background .4s}
+.import-preview-img{width:100%;height:200px;overflow:hidden}
+.import-preview-img img{width:100%;height:100%;object-fit:cover;display:block}
+.import-preview-body{padding:18px}
+.import-preview-cat{font-size:11px;color:var(--terra);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.import-preview-t{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);line-height:1.15;margin-bottom:8px;transition:color .4s}
+.import-preview-meta{display:flex;gap:14px;margin-bottom:14px}
+.import-preview-s{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--t3)}
+.import-preview-s .ms{font-size:16px;color:var(--terra)}
+.import-save{width:100%;height:50px;border-radius:25px;border:none;background:var(--terra);color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(196,101,74,.25);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.import-save:active{transform:scale(.96)}.import-save .ms{font-size:18px}
+
+/* =========================================
+   S10: ACADEMY / PROGRESSION
+   ========================================= */
+.academy{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.aca-level{margin:8px 24px 20px;padding:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);transition:background .4s}
+.aca-level-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.aca-level-badge{width:52px;height:52px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(196,101,74,.3)}
+.aca-level-badge .ms{font-size:28px;color:#fff;font-variation-settings:'FILL' 1}
+.aca-level-info{flex:1}
+.aca-level-t{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--t1);transition:color .4s}
+.aca-level-s{font-size:12px;color:var(--terra);font-weight:500}
+.aca-xp-bar{height:6px;background:var(--t4);border-radius:3px;overflow:hidden;transition:background .4s}
+.aca-xp-fill{height:100%;background:var(--terra);border-radius:3px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+.aca-xp-t{font-size:11px;color:var(--t3);margin-top:6px}
+.aca-streak{display:flex;align-items:center;gap:10px;margin:0 24px 20px;padding:16px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);transition:background .4s}
+.aca-streak-fire{font-size:28px;line-height:1}
+.aca-streak-info{flex:1}
+.aca-streak-v{font-size:22px;font-weight:600;color:var(--t1);transition:color .4s}
+.aca-streak-l{font-size:12px;color:var(--t3)}
+.aca-daily{margin:0 24px 22px;padding:18px;background:linear-gradient(135deg,var(--terra),#d4876f);border:1px solid rgba(255,255,255,.15);border-radius:22px;cursor:pointer;box-shadow:0 8px 28px rgba(196,101,74,.25);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.aca-daily:active{transform:scale(.98)}
+.aca-daily-eyebrow{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px}
+.aca-daily-t{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#fff;margin-bottom:4px}
+.aca-daily-row{display:flex;justify-content:space-between;align-items:center}
+.aca-daily-xp{font-size:13px;color:rgba(255,255,255,.8);font-weight:500}
+.aca-daily-timer{font-size:12px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:4px}
+.aca-daily-timer .ms{font-size:16px}
+.aca-path{margin:0 24px 20px;padding:18px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);transition:background .4s}
+.aca-path-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.aca-path-t{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--t1);transition:color .4s}
+.aca-path-prog{font-size:12px;color:var(--terra);font-weight:500}
+.aca-lesson{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--sep)}
+.aca-lesson:last-child{border-bottom:none}
+.aca-lesson-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600}
+.aca-lesson-num.done{background:var(--sage);color:#fff}
+.aca-lesson-num.current{background:var(--terra);color:#fff}
+.aca-lesson-num.locked{background:var(--input-bg);color:var(--t4)}
+.aca-lesson-info{flex:1;min-width:0}
+.aca-lesson-n{font-size:14px;font-weight:500;color:var(--t1);transition:color .4s}
+.aca-lesson-n.locked{color:var(--t4)}
+.aca-lesson-skill{font-size:11px;color:var(--t3)}
+.aca-lesson-xp{font-size:12px;font-weight:600;color:var(--terra)}
+.aca-lesson-xp.locked{color:var(--t4)}
+.aca-lesson-lock .ms{font-size:18px;color:var(--t4)}
+.aca-skills{margin:0 24px 20px}
+.aca-skills-t{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--t1);margin-bottom:16px;transition:color .4s}
+.aca-tree{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:10px 0}
+.aca-node{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}
+.aca-node:active{transform:scale(.9)}
+.aca-node.done{background:var(--sage);box-shadow:0 2px 8px rgba(109,160,109,.3)}
+.aca-node.done .ms{color:#fff;font-size:18px;font-variation-settings:'FILL' 1}
+.aca-node.current{background:var(--terra);box-shadow:0 2px 8px rgba(196,101,74,.3)}
+.aca-node.current .ms{color:#fff;font-size:18px}
+.aca-node.locked{background:var(--input-bg);border:1.5px solid var(--t4)}
+.aca-node.locked .ms{color:var(--t4);font-size:18px}
+.aca-conn{width:20px;height:2px;background:var(--t4);border-radius:1px}
+.aca-conn.done{background:var(--sage)}
+
+/* =========================================
+   DAILY CHALLENGE CARD (for S1 Home)
+   ========================================= */
+.daily-ch{margin:0 24px 24px;padding:20px;background:linear-gradient(135deg,var(--terra),#d4876f);border:1px solid rgba(255,255,255,.15);border-radius:22px;cursor:pointer;box-shadow:0 8px 28px rgba(196,101,74,.2);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.daily-ch:active{transform:scale(.98)}
+.daily-ch-eyebrow{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px}
+.daily-ch-t{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#fff;margin-bottom:10px}
+.daily-ch-row{display:flex;justify-content:space-between;align-items:center}
+.daily-ch-xp{display:flex;align-items:center;gap:5px;font-size:13px;color:rgba(255,255,255,.85);font-weight:500}
+.daily-ch-xp .ms{font-size:18px;font-variation-settings:'FILL' 1}
+.daily-ch-time{font-size:12px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:4px}
+.daily-ch-time .ms{font-size:16px}
+
+/* Academy mini card (for S1 Home) */
+.aca-mini{margin:0 24px 28px;display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;cursor:pointer;box-shadow:var(--glass-s);transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s}
+.aca-mini:active{transform:scale(.98)}
+.aca-mini-fire{font-size:26px;line-height:1}
+.aca-mini-info{flex:1}
+.aca-mini-streak{font-size:15px;font-weight:600;color:var(--t1);transition:color .4s}
+.aca-mini-level{font-size:12px;color:var(--terra);font-weight:500}
+.aca-mini .ms{font-size:18px;color:var(--t4)}
+
+/* Saved Recipes + Dietary (for S6 Profile) */
+.saved-cards{display:flex;gap:12px;padding:0 24px 24px;overflow-x:auto;scrollbar-width:none}
+.saved-cards::-webkit-scrollbar{display:none}
+.saved-card{min-width:130px;height:170px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;box-shadow:0 6px 24px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.saved-card:active{transform:scale(.95)}
+.saved-card img{width:100%;height:100%;object-fit:cover;display:block}
+.saved-card-ov{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(0deg,rgba(16,12,8,.8),transparent)}
+.saved-card-n{font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:#fff;margin-bottom:2px}
+.saved-card-m{font-size:10px;color:rgba(255,255,255,.6)}
+.diet-tags{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 24px}
+.diet-tag{padding:8px 16px;border-radius:20px;font-size:12px;font-weight:500;background:var(--terra-g);color:var(--terra);border:1px solid rgba(196,101,74,.12)}
+
+/* Detail tabs */
+.det-tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--glass-b);border-radius:14px;padding:4px}
+.det-tab{flex:1;height:36px;border-radius:10px;border:none;background:transparent;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1)}
+.det-tab.on{background:var(--card);color:var(--t1);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.det-panel{transition:opacity .3s}
+
+/* Scroll containers — fade right edge */
+.hs,.cuisine,.cats,[style*="overflow-x:auto"]{
+  mask-image:linear-gradient(90deg,#000 0%,#000 85%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 85%,transparent 100%);
+}
+/* Page load entrance — stagger content */
+.scr[data-s="on"] .greet,.scr[data-s="on"] .sh,.scr[data-s="on"] .rr,.scr[data-s="on"] .feat{
+  animation:contentIn .4s cubic-bezier(.32,.72,.0,1) both;
+}
+@keyframes contentIn{from{opacity:.85;transform:translateY(4px)}to{opacity:1;transform:none}}
+.scr[data-s="on"] .greet{animation-delay:.05s}
+.scr[data-s="on"] .feat{animation-delay:.1s}
+.scr[data-s="on"] .sh{animation-delay:.08s}
+.scr[data-s="on"] .rr{animation-delay:.12s}
+
+/* Ripple tap effect */
+.rr::after,.feat::after,.cc::after,.gc2::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(circle at var(--tap-x,50%) var(--tap-y,50%),rgba(196,101,74,.08),transparent 60%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.rr:active::after,.feat:active::after,.cc:active::after,.gc2:active::after{opacity:1}
+
+@media(max-width:430px){.ph{width:100vw;height:100dvh;border-radius:0;box-shadow:none}.notch{display:none}}
+</style>
+</head>
+<body>
+<div class="ph">
+<div class="notch"></div>
+<div class="sbar" id="sbar"><span>9:41</span><div class="sbar-r"><span style="font-size:11px">5G</span><span style="font-size:11px">78%</span></div></div>
+
+<!-- S0: ONBOARDING -->
+<div class="scr" id="s0" data-s="on">
+<div class="onboard" id="onboardContainer">
+  <div class="onboard-bg" id="obBg" style="background:radial-gradient(ellipse at 50% 30%, rgba(60,40,25,.95), rgba(18,14,10,.98))"></div>
+  <div class="onboard-grad"></div>
+  <div class="onboard-mark">Savora</div>
+  <div class="onboard-body">
+    <div class="onboard-eyebrow" id="obEyebrow" style="display:none"></div>
+    <div class="onboard-title" id="obTitle" style="display:none"></div>
+    <div class="onboard-desc" id="obDesc" style="display:none"></div>
+    <!-- Panel 0: Language picker (shown by default) -->
+    <div id="obLangPanel" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px;flex:1">
+      <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:300;color:#f0ebe4;margin-bottom:8px;text-align:center">Bienvenue</div>
+      <div style="font-size:14px;color:rgba(200,192,184,.6);margin-bottom:40px;text-align:center">Choisissez votre langue</div>
+      <div style="display:flex;flex-direction:column;gap:12px;width:100%">
+        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#f0ebe4;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EB;&#x1F1F7; Francais</button>
+        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EC;&#x1F1E7; English</button>
+        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EE;&#x1F1F3; Hindi</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:5px;justify-content:center;margin-bottom:24px" id="obDots">
+      <div style="width:18px;height:6px;border-radius:3px;background:var(--terra);transition:all .3s" data-obd="0"></div>
+      <div style="width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.2);transition:all .3s" data-obd="1"></div>
+      <div style="width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.2);transition:all .3s" data-obd="2"></div>
+      <div style="width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.2);transition:all .3s" data-obd="3"></div>
+    </div>
+    <div class="onboard-cta" style="display:none">
+      <button class="ob-btn-main" onclick="go(1)">Commencer</button>
+      <button class="ob-btn-ghost" onclick="advanceOnboard()"><span class="ms">arrow_forward</span></button>
+    </div>
+    <div class="onboard-login" style="display:none"><a href="#">Deja un compte ? Se connecter</a></div>
+  </div>
+</div>
+</div>
+
+<!-- S1: HOME -->
+<div class="scr" id="s1" data-s="r">
+<div class="home">
+  <div class="hdr">
+    <div class="hdr-side l"></div>
+    <div class="hdr-logo">Savora</div>
+    <div class="hdr-side r"><div class="hdr-btn"><span class="ms">notifications</span></div></div>
+  </div>
+  <div style="padding:0 24px;margin-bottom:6px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div>
+        <div style="font-size:13px;color:var(--t3);font-weight:400">Bonjour, Chef</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s">Nicolas</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--t3)">Dimanche 23 mars</div>
+        <div style="font-size:11px;color:var(--terra);font-weight:500;margin-top:2px">1 494 901 recettes</div>
+      </div>
+    </div>
+    <!-- Mood inspiration card -->
+    <div onclick="go(3)" style="border-radius:20px;overflow:hidden;position:relative;height:140px;cursor:pointer;margin-bottom:4px;box-shadow:0 8px 28px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,12,8,.75) 0%,rgba(16,12,8,.2) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:center;padding:20px 24px">
+        <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:#f0ebe4;line-height:1.15">Laissez-vous<br>inspirer</div>
+      </div>
+    </div>
+  </div>
+  <!-- Search Bar -->
+  <div style="margin:0 24px 14px;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--glass-b);border-radius:50px;padding:0 8px 0 18px;height:46px;cursor:pointer;transition:background .4s" onclick="go(2)">
+    <span class="ms" style="color:var(--t3);font-size:20px">search</span>
+    <span style="flex:1;font-size:14px;color:var(--t3);font-family:'Inter',sans-serif">Rechercher parmi 1 494 901 recettes...</span>
+    <div style="width:34px;height:34px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:16px;color:#fff">mic</span></div>
+  </div>
+  <!-- Continue Cooking -->
+  <div onclick="go(4)" style="margin:0 24px 16px;display:flex;align-items:center;gap:14px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:18px;padding:14px 16px;cursor:pointer;transition:transform .25s cubic-bezier(.16,1,.3,1)">
+    <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=120&q=75" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
+    <div style="flex:1;min-width:0">
+      <div style="font-size:11px;color:var(--terra);font-weight:600;letter-spacing:.5px;text-transform:uppercase">REPRENDRE</div>
+      <div style="font-size:14px;font-weight:500;color:var(--t1);margin-top:2px;transition:color .4s">Poulet Basquaise</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:1px">Etape 3 sur 8 &middot; 25 min restantes</div>
+    </div>
+    <div style="width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(196,101,74,.25)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span></div>
+  </div>
+  <!-- Quick Action Chips -->
+  <div style="display:flex;gap:8px;padding:0 24px 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+    <button onclick="go(8)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">auto_awesome</span>Frigo Magique</button>
+    <button onclick="go(9)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">add_link</span>Importer</button>
+    <button onclick="go(7)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">calendar_month</span>Menu Semaine</button>
+    <button onclick="go(5)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">shopping_cart</span>Courses</button>
+  </div>
+  <!-- Magazine Grid -->
+  <div style="padding:0 24px 24px">
+    <!-- Row 1: 1 large + 1 column of 2 small -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:160px 160px;gap:10px;margin-bottom:10px">
+      <div onclick="go(3)" style="grid-row:1/3;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 8px 28px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+        <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&q=80" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px">&#x1F1EB;&#x1F1F7; Plat principal</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:6px">Poulet Basquaise</div>
+          <div style="display:flex;gap:12px;font-size:11px;color:rgba(255,255,255,.6)"><span>45 min</span><span>380 cal</span><span>&#9733; 4.8</span></div>
+        </div>
+      </div>
+      <div onclick="go(11)" style="border-radius:20px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+        <img src="https://images.unsplash.com/photo-1588013273468-315fd88ea34c?w=400&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.15">Truffle Carbonara</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1EE;&#x1F1F9; 20 min &middot; &#9733; 4.9</div>
+        </div>
+      </div>
+      <div onclick="go(12)" style="border-radius:20px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+        <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=400&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.15">Lamb Tagine</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1F2;&#x1F1E6; 1h 30 &middot; &#9733; 4.9</div>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2: 3 equal cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div onclick="go(3)" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer;box-shadow:0 4px 14px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px;background:linear-gradient(0deg,rgba(16,12,8,.8),transparent)">
+          <div style="font-size:12px;font-weight:500;color:#fff;line-height:1.2">Saumon Grille</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.5);margin-top:2px">&#x1F1EB;&#x1F1F7; 25 min</div>
+        </div>
+      </div>
+      <div onclick="go(3)" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer;box-shadow:0 4px 14px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px;background:linear-gradient(0deg,rgba(16,12,8,.8),transparent)">
+          <div style="font-size:12px;font-weight:500;color:#fff;line-height:1.2">Fondant Chocolat</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.5);margin-top:2px">&#x1F1EB;&#x1F1F7; 35 min</div>
+        </div>
+      </div>
+      <div onclick="go(3)" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer;box-shadow:0 4px 14px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px;background:linear-gradient(0deg,rgba(16,12,8,.8),transparent)">
+          <div style="font-size:12px;font-weight:500;color:#fff;line-height:1.2">Buddha Bowl</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.5);margin-top:2px">&#x1F1FA;&#x1F1F8; 15 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sh"><div class="sh-t">Cuisines du monde</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
+  <div class="cuisine">
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=120&q=70" alt=""></div><span>Italienne</span></div>
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=120&q=70" alt=""></div><span>Japonaise</span></div>
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=120&q=70" alt=""></div><span>Marocaine</span></div>
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=120&q=70" alt=""></div><span>Indienne</span></div>
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=120&q=70" alt=""></div><span>Francaise</span></div>
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=120&q=70" alt=""></div><span>Mexicaine</span></div>
+    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1559314809-0d155014e29e?w=120&q=70" alt=""></div><span>Thailandaise</span></div>
+  </div>
+  <div style="background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;padding:20px;margin:0 24px 20px">
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:8px">CONSEIL DU CHEF</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--t1);margin-bottom:12px;transition:color .4s">"Laissez toujours reposer votre viande apres cuisson. Les jus se redistribuent, offrant un resultat plus tendre et savoureux."</div>
+    <div style="display:flex;align-items:center;gap:8px"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=100&q=80" style="width:28px;height:28px;border-radius:50%;object-fit:cover"><span style="font-size:12px;color:var(--t3)">Chef Marie Laurent</span></div>
+  </div>
+  <!-- Serendipity -->
+  <div style="padding:0 24px 20px">
+    <div onclick="go(12)" style="border-radius:22px;overflow:hidden;position:relative;height:200px;cursor:pointer;box-shadow:0 12px 36px rgba(45,30,15,.12);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=800&q=80" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.88) 0%,rgba(16,12,8,.15) 50%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <span style="font-size:14px">&#x2728;</span>
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,135,111,.9)">Decouverte du jour</span>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:6px">Tagine d'agneau<br>aux abricots</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.55)">Maroc &middot; 1h 30 &middot; 6 parts &middot; &#9733; 4.9</div>
+      </div>
+      <div style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)"><span class="ms" style="font-size:16px;color:rgba(255,255,255,.8)">shuffle</span></div>
+    </div>
+  </div>
+  <div class="sh"><div class="sh-t">Collections</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
+  <div class="hs">
+    <div class="cc" onclick="go(11)"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Rapide & Facile</div><div class="cc-c">154 recettes</div></div></div>
+    <div class="cc" onclick="go(3)"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Equilibre</div><div class="cc-c">312 recettes</div></div></div>
+    <div class="cc" onclick="go(3)"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Desserts</div><div class="cc-c">89 recettes</div></div></div>
+    <div class="cc" onclick="go(3)"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Soupes</div><div class="cc-c">67 recettes</div></div></div>
+    <div class="cc" onclick="go(3)"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Brunch</div><div class="cc-c">48 recettes</div></div></div>
+  </div>
+  <div class="sh"><div class="sh-t">Tendances de la semaine</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Saumon Grille a la Toscane</div><div class="rr-d">Saumon de l'Atlantique, croute aux herbes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 25 min</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1FA;&#x1F1F8; Buddha Bowl Avocat</div><div class="rr-d">Quinoa, legumes rotis et tahini</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Fondant au Chocolat Noir</div><div class="rr-d">Chocolat belge intense a la vanille</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 35 min</div></div></div></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EE;&#x1F1F9; Truffle Carbonara</div><div class="rr-d">Guanciale, pecorino, truffe noire</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 20 min</div></div></div></div>
+  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F2;&#x1F1E6; Lamb Tagine</div><div class="rr-d">Mijoté aux abricots et amandes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 1h 30</div></div></div></div>
+  <div class="sh" style="margin-top:16px"><div class="sh-t">Vus recemment</div><button class="sh-link">Effacer</button></div>
+  <div class="hs">
+    <div class="cc" style="min-width:130px;height:170px" onclick="go(11)"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=280&q=75" alt=""><div class="cc-ov"><div class="cc-n">Tarte Tatin</div><div class="cc-c">50 min</div></div></div>
+    <div class="cc" style="min-width:130px;height:170px" onclick="go(12)"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=280&q=75" alt=""><div class="cc-ov"><div class="cc-n">Pave de Saumon</div><div class="cc-c">15 min</div></div></div>
+    <div class="cc" style="min-width:130px;height:170px" onclick="go(3)"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=280&q=75" alt=""><div class="cc-ov"><div class="cc-n">Fish Tacos</div><div class="cc-c">25 min</div></div></div>
+    <div class="cc" style="min-width:130px;height:170px" onclick="go(3)"><img src="https://images.unsplash.com/photo-1559314809-0d155014e29e?w=280&q=75" alt=""><div class="cc-ov"><div class="cc-n">Green Curry</div><div class="cc-c">30 min</div></div></div>
+  </div>
+  <div style="text-align:center;padding:30px 24px 20px">
+    <div style="font-family:'Playfair Display',serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--t4);transition:color .4s">Savora</div>
+    <div style="font-size:10px;color:var(--t4);margin-top:6px;transition:color .4s">1 494 901 recettes du monde entier</div>
+  </div>
+</div>
+</div>
+
+<!-- S2: EXPLORE -->
+<div class="scr" id="s2" data-s="off">
+<div class="explore">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn"><span class="ms">tune</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="sbar-in"><span class="ms" style="color:var(--t3);font-size:22px">search</span><input type="text" placeholder="Rechercher parmi 1 494 901 recettes..."><div class="mic"><span class="ms">mic</span></div></div>
+  <div class="magic" onclick="go(8)"><span style="font-size:30px">&#x1FA84;</span><div><div class="magic-t">Frigo Magique</div><div class="magic-s">Dites-nous ce que vous avez, on trouve la recette</div></div><span class="ms" style="color:var(--terra)">chevron_right</span></div>
+  <div class="cats">
+    <button class="pill on" onclick="pickCat(this)">Tout</button><button class="pill" onclick="pickCat(this)">Rapide</button><button class="pill" onclick="pickCat(this)">Budget</button><button class="pill" onclick="pickCat(this)">Equilibre</button><button class="pill" onclick="pickCat(this)">Comfort</button><button class="pill" onclick="pickCat(this)">Fetes</button><button class="pill" onclick="pickCat(this)">Vegan</button><button class="pill" onclick="pickCat(this)">Halal</button><button class="pill" onclick="pickCat(this)">Keto</button>
+  </div>
+  <div class="sh"><div class="sh-t">Populaires</div></div>
+  <div class="grid">
+    <div class="gc2" onclick="go(11)"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=350&q=75" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EE;&#x1F1F9; Truffle Carbonara</div><div class="gc2-m"><span class="ms">schedule</span> 20 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=350&q=75" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EF;&#x1F1F5; Salmon Maki Roll</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
+    <div class="gc2" onclick="go(12)"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=350&q=75" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EE;&#x1F1F3; Madras Curry</div><div class="gc2-m"><span class="ms">schedule</span> 40 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=350&q=75" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Tarte Tatin</div><div class="gc2-m"><span class="ms">schedule</span> 50 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=350&q=75" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Pumpkin Soup</div><div class="gc2-m"><span class="ms">schedule</span> 25 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=350&q=75" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1FA;&#x1F1F8; Eggs Benedict</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
+  </div>
+  <div class="sh" style="margin-top:6px"><div class="sh-t">Coups de coeur</div></div>
+  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F2;&#x1F1E6; Lamb Tagine</div><div class="rr-d">Mijoté aux abricots et amandes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 1h 30</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1559314809-0d155014e29e?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F9;&#x1F1ED; Thai Green Curry</div><div class="rr-d">Lait de coco, citronnelle, basilic thai</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 30 min</div></div></div></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F2;&#x1F1FD; Baja Fish Tacos</div><div class="rr-d">Cabillaud pane, crema chipotle, salade</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 25 min</div></div></div></div>
+</div>
+</div>
+
+<!-- S3: RECIPE DETAIL -->
+<div class="scr" id="s3" data-s="off">
+<div class="det">
+  <div class="det-hero"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&q=80" alt=""><div class="det-hero-g"></div>
+    <div class="det-nav"><button class="nb" onclick="goBack()"><span class="ms">arrow_back</span></button><div class="nb-r"><button class="nb"><span class="ms">share</span></button><button class="nb" id="likeBtn" onclick="toggleLike()"><span class="ms" id="likeIcon">favorite_border</span></button></div></div>
+  </div>
+  <div class="det-body">
+    <div class="det-cat">&#127467;&#127479; Plat principal &middot; Basque</div>
+    <div class="det-t">Poulet<br>Basquaise</div>
+    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=70" alt=""></div>par Chef Marie &middot; 240 avis</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s">Un classique du Pays basque, ou le poulet dore rencontre les poivrons fondants et le piment d'Espelette. Simple, genereux, imbattable.</p>
+    <div class="det-stats">
+      <div class="ds"><span class="ms">restaurant</span><div class="ds-v">10</div><div class="ds-l">min prep</div></div>
+      <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">35</div><div class="ds-l">min cuisson</div></div>
+      <div class="ds"><span class="ms">group</span><div class="ds-v">4</div><div class="ds-l">parts</div></div>
+      <div class="ds"><span class="ms">signal_cellular_alt</span><div class="ds-v">2/5</div><div class="ds-l">difficulte</div></div>
+    </div>
+    <div class="det-tabs">
+      <button class="det-tab on" onclick="switchDetTab(this,0)">Apercu</button>
+      <button class="det-tab" onclick="switchDetTab(this,1)">Ingredients</button>
+      <button class="det-tab" onclick="switchDetTab(this,2)">Preparation</button>
+    </div>
+    <div class="det-panel" data-panel="0">
+    <div class="por-l">Portions</div>
+    <div class="por-pills"><button class="pill" onclick="pickP(this)">1x</button><button class="pill" onclick="pickP(this)">2x</button><button class="pill on" onclick="pickP(this)">4x</button><button class="pill" onclick="pickP(this)">6x</button><button class="pill" onclick="pickP(this)">8x</button></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Cout estime : <strong style="color:var(--t1);transition:color .4s">2,80 EUR</strong> par personne</div>
+    <div class="nutri">
+      <div class="nut"><div class="nut-v">32g</div><div class="nut-l">Proteines</div><div class="nut-bar"><div class="nut-fill" style="width:65%;background:var(--terra)"></div></div></div>
+      <div class="nut"><div class="nut-v">18g</div><div class="nut-l">Glucides</div><div class="nut-bar"><div class="nut-fill" style="width:35%;background:var(--gold)"></div></div></div>
+      <div class="nut"><div class="nut-v">22g</div><div class="nut-l">Lipides</div><div class="nut-bar"><div class="nut-fill" style="width:50%;background:var(--sage)"></div></div></div>
+      <div class="nut"><div class="nut-v">4g</div><div class="nut-l">Fibres</div><div class="nut-bar"><div class="nut-fill" style="width:20%;background:var(--t3)"></div></div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px">
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Sans porc</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en proteines</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(109,160,109,.1);color:var(--sage);font-weight:500">Sans gluten</span>
+    </div>
+    </div><!-- /panel 0 -->
+    <div class="det-panel" data-panel="1" style="display:none">
+    <div style="display:flex;align-items:center;gap:12px;margin:28px 0 20px">
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Ingredients</span>
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+    </div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--terra)"></div><span class="ing-n">&#x1F357; Poulet fermier</span></div><span class="ing-a">1.2 kg</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e85050"></div><span class="ing-n">&#x1FAD1; Poivrons rouges</span></div><span class="ing-a">3</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--gold)"></div><span class="ing-n">&#x1F9C5; Oignons</span></div><span class="ing-a">2 gros</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#d4cdc4"></div><span class="ing-n">&#x1F9C4; Ail</span></div><span class="ing-a">4 gousses</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#c85040"></div><span class="ing-n">&#x1F345; Tomates concassees</span></div><span class="ing-a">400g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--sage)"></div><span class="ing-n">&#x1F33F; Thym frais</span></div><span class="ing-a">3 brins</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e8c860"></div><span class="ing-n">&#x1F336;&#xFE0F; Piment d'Espelette</span></div><span class="ing-a">1 c.c.</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#c8b870"></div><span class="ing-n">&#x1F377; Vin blanc</span></div><span class="ing-a">150 ml</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#a8c050"></div><span class="ing-n">&#x1FAD2; Huile d'olive</span></div><span class="ing-a">3 c.s.</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e0d8d0"></div><span class="ing-n">&#x1F9C2; Sel &amp; poivre</span></div><span class="ing-a">a gout</span></div>
+    </div><!-- /panel 1 -->
+    <div class="det-panel" data-panel="2" style="display:none">
+    <div style="display:flex;align-items:center;gap:12px;margin:28px 0 20px">
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Preparation</span>
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+    </div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">Cut the chicken into pieces. Season generously with salt, pepper, and Espelette.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Sear the chicken in olive oil over high heat, 3 minutes per side until golden brown.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Add sliced onions and bell peppers. Cook for 5 minutes until softened.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Add garlic, cook 1 minute. Deglaze with white wine, scraping the fond.</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">Add crushed tomatoes and thyme. Simmer covered for 35 minutes.</div></div>
+    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 8 etapes</button></div>
+    </div><!-- /panel 2 -->
+    <div style="margin:24px 0;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
+      <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Laissez toujours reposer la viande 5 minutes avant de servir. Les jus se redistribuent pour un resultat infiniment plus tendre.</div>
+    </div>
+    <div style="text-align:center;padding:20px 0 8px">
+      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Suggerer une correction</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S4: COOKING MODE -->
+<div class="scr" id="s4" data-s="off">
+<div class="cook">
+  <div class="cook-hdr"><button class="cook-cl" onclick="goBack()"><span class="ms">close</span></button><div class="cook-tt">Poulet Basquaise</div><div class="cook-sn" id="cookStepLabel">Etape 1 / 3</div></div>
+  <div style="padding:0 24px;margin-bottom:18px">
+    <div style="height:3px;background:var(--t4);border-radius:2px;overflow:hidden;transition:background .4s">
+      <div id="cookProgress" style="height:100%;background:var(--terra);border-radius:2px;width:33.3%;transition:width .5s cubic-bezier(.16,1,.3,1)"></div>
+    </div>
+  </div>
+  <div class="cook-body">
+    <div class="cook-img"><img id="cookImg" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt=""></div>
+    <div class="cook-inst" id="cookInst">Season the chicken pieces generously with salt, pepper, and piment d'Espelette. Let rest for 10 minutes.</div>
+    <div class="cook-timer"><span class="ms">timer</span><div class="cook-timer-t" id="timerD">10:00</div><div class="cook-timer-l" id="timerLabel">repos</div><button class="timer-btn" onclick="toggleTimer()"><span class="ms" id="timerI">play_arrow</span></button></div>
+    <div style="text-align:center;font-size:11px;color:var(--t3);margin-top:12px;letter-spacing:.3px">Dites 'OK Chef, etape suivante' pour le controle vocal</div>
+    <div class="cook-nav"><button class="cook-prev" id="cookPrevBtn" onclick="prevStep()" disabled style="opacity:.4"><span class="ms">arrow_back</span> Precedent</button><button class="cook-next" id="cookNextBtn" onclick="nextStep()">Suivant <span class="ms">arrow_forward</span></button></div>
+  </div>
+</div>
+</div>
+
+<!-- S5: SHOPPING LIST -->
+<div class="scr" id="s5" data-s="off">
+<div class="shop">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div><div class="hdr-side r"><div class="hdr-btn"><span class="ms">share</span></div></div></div>
+  <div class="shop-sum"><div><div class="shop-sum-l">Total estime</div><div class="shop-sum-v">28.50 &#8364;</div></div><div class="shop-sum-r">13 articles</div></div>
+  <div style="padding:0 24px;margin:14px 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra)">Pour Poulet Basquaise</div>
+  <div class="shop-cat"><span class="ms">eco</span> Fruits &amp; Legumes</div>
+  <div class="si ck" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Tomates</div><div class="si-a">&times;4</div></div>
+  <div class="si ck" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Bell peppers</div><div class="si-a">&times;3</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Onions</div><div class="si-a">&times;2</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Ail</div><div class="si-a">1 head</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Fresh cilantro</div><div class="si-a">1 bunch</div></div>
+  <div class="shop-cat"><span class="ms">restaurant</span> Viandes &amp; Poissons</div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Chicken thighs</div><div class="si-a">800g</div></div>
+  <div style="padding:0 24px;margin:18px 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra)">Pour Truffle Carbonara</div>
+  <div class="shop-cat"><span class="ms">kitchen</span> Cremerie</div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Egg yolks</div><div class="si-a">&times;4</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Pecorino Romano</div><div class="si-a">80g</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Parmesan</div><div class="si-a">30g</div></div>
+  <div class="shop-cat"><span class="ms">restaurant</span> Viandes &amp; Poissons</div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Guanciale</div><div class="si-a">150g</div></div>
+  <div class="shop-cat"><span class="ms">local_grocery_store</span> Epicerie</div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Spaghetti</div><div class="si-a">200g</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Truffle oil</div><div class="si-a">1 bottle</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Ras el hanout</div><div class="si-a">1 jar</div></div>
+  <div style="text-align:center;padding:24px 24px 16px;font-size:14px;color:var(--t2);font-weight:500;transition:color .4s">Total estime &#8364;28.50 &middot; 13 articles</div>
+</div>
+</div>
+
+<!-- S6: LIBRARY -->
+<div class="scr" id="s6" data-s="off">
+<div style="background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s">
+  <div class="hdr">
+    <div class="hdr-side l"></div>
+    <div class="hdr-logo">Savora</div>
+    <div class="hdr-side r">
+      <div class="hdr-btn" onclick="go(14)"><span class="ms">person</span></div>
+    </div>
+  </div>
+
+  <!-- Mini profile strip -->
+  <div style="display:flex;align-items:center;gap:12px;padding:8px 24px 20px">
+    <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--terra)"><img src="nicolas.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+    <div>
+      <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Nicolas B.</div>
+      <div style="font-size:11px;color:var(--terra);font-weight:500">Sous-Chef &middot; Niveau 4 &middot; 12 jours de serie</div>
+    </div>
+  </div>
+
+  <!-- My Collections -->
+  <div class="sh"><div class="sh-t">Mes collections</div><button class="sh-link">Creer</button></div>
+  <div class="hs">
+    <div onclick="go(3)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:var(--terra-l);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;font-variation-settings:'FILL' 1;vertical-align:-2px">favorite</span> Favoris</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">47 recettes</div>
+      </div>
+    </div>
+    <div onclick="go(11)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Diners rapides</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">23 recettes</div>
+      </div>
+    </div>
+    <div onclick="go(12)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Classiques francais</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">12 recettes</div>
+      </div>
+    </div>
+    <div onclick="go(3)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Healthy</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">31 recettes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recently Cooked -->
+  <div class="sh"><div class="sh-t">Cuisines recemment</div><button class="sh-link" onclick="go(10)">Historique</button></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1588013273468-315fd88ea34c?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">Truffle Carbonara</div><div class="rr-d">Hier &middot; Note 5 etoiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 18 min</div></div></div></div>
+  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">Lamb Tagine</div><div class="rr-d">Il y a 3 jours &middot; Note 4 etoiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.0</div><div class="rr-time"><span class="ms">schedule</span> 1h 25</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">Poulet Basquaise</div><div class="rr-d">Il y a 5 jours &middot; Note 5 etoiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 42 min</div></div></div></div>
+
+  <!-- Badges -->
+  <div class="sh" style="margin-top:8px"><div class="sh-t">Accomplissements</div><button class="sh-link" onclick="go(10)">Academie</button></div>
+  <div class="badges" style="padding:0 24px;margin-bottom:24px">
+    <div class="bdg on"><span class="ms">local_fire_department</span><span>7j Serie</span></div>
+    <div class="bdg on"><span class="ms">emoji_events</span><span>10 Recettes</span></div>
+    <div class="bdg on"><span class="ms">public</span><span>Explorer</span></div>
+    <div class="bdg"><span class="ms">restaurant</span><span>Expert</span></div>
+    <div class="bdg"><span class="ms">timer</span><span>Vitesse</span></div>
+    <div class="bdg"><span class="ms">cake</span><span>Patisserie</span></div>
+  </div>
+
+  <!-- Imported Recipes -->
+  <div class="sh"><div class="sh-t">Recettes importees</div><button class="sh-link" onclick="go(9)">Importer</button></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">Buddha Bowl via Instagram</div><div class="rr-d">Importe il y a 2 jours</div><div class="rr-m"><div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px"><span class="ms" style="font-size:14px">link</span> instagram.com</div></div></div></div>
+
+  <!-- Settings shortcut -->
+  <div style="margin:16px 24px 0">
+    <div class="set-row" onclick="go(14)"><div class="set-l"><span class="ms">settings</span><div class="set-label">Reglages &amp; Preferences</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
+  </div>
+</div>
+</div>
+
+<!-- S7: MEAL PLAN -->
+<div class="scr" id="s7" data-s="off">
+<div class="meal">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <!-- Warm personal intro -->
+  <div style="padding:0 24px 16px">
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">"Bien manger, c'est le debut de tout."</div>
+    <div style="font-size:11px;color:var(--t3);margin-top:4px">Votre semaine, vos recettes, votre rythme.</div>
+  </div>
+  <div class="meal-week">
+    <div class="meal-week-btn"><span class="ms">chevron_left</span></div>
+    <div class="meal-week-t">Semaine du 24 mars</div>
+    <div class="meal-week-btn"><span class="ms">chevron_right</span></div>
+  </div>
+  <div class="meal-days">
+    <div class="meal-day">
+      <div class="meal-day-h"><div class="meal-day-name">Lundi 24 mars</div><div class="meal-day-cal">1 420 cal</div></div>
+      <div class="meal-slots">
+        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name">Toast avocat & oeufs</div></div></div>
+        <div class="meal-slot" onclick="go(11)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1588013273468-315fd88ea34c?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name">Truffle Carbonara</div></div></div>
+        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name">Poulet Basquaise</div></div></div>
+      </div>
+      <div class="meal-macros">
+        <div class="meal-macro"><div class="meal-macro-v">86g</div><div class="meal-macro-l">Proteines</div></div>
+        <div class="meal-macro"><div class="meal-macro-v">142g</div><div class="meal-macro-l">Glucides</div></div>
+        <div class="meal-macro"><div class="meal-macro-v">58g</div><div class="meal-macro-l">Lipides</div></div>
+        <div class="meal-macro"><div class="meal-macro-v">18g</div><div class="meal-macro-l">Fibres</div></div>
+      </div>
+    </div>
+    <div class="meal-day">
+      <div class="meal-day-h"><div class="meal-day-name">Mardi 25 mars</div><div class="meal-day-cal">1 280 cal</div></div>
+      <div class="meal-slots">
+        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name">Oeufs Benedict</div></div></div>
+        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
+        <div class="meal-slot" onclick="go(12)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name">Tagine d'agneau</div></div></div>
+      </div>
+    </div>
+    <div class="meal-day">
+      <div class="meal-day-h"><div class="meal-day-name">Mercredi 26 mars</div><div class="meal-day-cal">0 cal</div></div>
+      <div class="meal-slots">
+        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
+        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
+        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
+      </div>
+    </div>
+  </div>
+  <button class="meal-ai-fab" style="position:absolute;bottom:80px;right:24px"><span class="ms">auto_awesome</span></button>
+</div>
+</div>
+
+<!-- S8: FRIDGE MAGIC -->
+<div class="scr" id="s8" data-s="off">
+<div class="fridge">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="fridge-cam">
+    <span class="ms" style="font-size:44px;color:var(--t4)">photo_camera</span>
+    <div class="fridge-cam-t">Photographiez votre frigo</div>
+    <div class="fridge-cam-s">On identifie vos ingredients instantanement</div>
+  </div>
+  <div class="fridge-or">OU AJOUTEZ MANUELLEMENT</div>
+  <div class="sh"><div class="sh-t">Vos ingredients</div><button class="sh-link">Tout effacer</button></div>
+  <div class="fridge-chips">
+    <div class="fridge-chip active"><span class="ms">close</span> Tomates</div>
+    <div class="fridge-chip active"><span class="ms">close</span> Poulet</div>
+    <div class="fridge-chip active"><span class="ms">close</span> Oignons</div>
+    <div class="fridge-chip active"><span class="ms">close</span> Ail</div>
+    <div class="fridge-chip active"><span class="ms">close</span> Poivrons</div>
+    <div class="fridge-chip active"><span class="ms">close</span> Huile d'olive</div>
+    <button class="fridge-add"><span class="ms" style="font-size:16px">add</span> Ajouter</button>
+  </div>
+  <button class="fridge-find" onclick="void(0)"><span class="ms">auto_awesome</span> Trouver des recettes</button>
+  <div class="sh" style="margin-top:24px"><div class="sh-t">Meilleures correspondances</div></div>
+  <div class="fridge-results">
+    <div class="fridge-rc" onclick="go(3)">
+      <div class="fridge-rc-img"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=160&q=75" alt=""></div>
+      <div class="fridge-rc-info">
+        <div class="fridge-rc-n">Poulet Basquaise</div>
+        <div class="fridge-rc-d">Poulet basque classique aux poivrons</div>
+        <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 98% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 45 min</div></div>
+      </div>
+    </div>
+    <div class="fridge-rc" onclick="go(12)">
+      <div class="fridge-rc-img"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=160&q=75" alt=""></div>
+      <div class="fridge-rc-info">
+        <div class="fridge-rc-n">Chicken Tikka Masala</div>
+        <div class="fridge-rc-d">Curry cremeux aux tomates epicees</div>
+        <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 85% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 40 min</div></div>
+      </div>
+      <div class="fridge-rc-badge">1 ingredient manquant</div>
+    </div>
+    <div class="fridge-rc" onclick="go(11)">
+      <div class="fridge-rc-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=160&q=75" alt=""></div>
+      <div class="fridge-rc-info">
+        <div class="fridge-rc-n">Tomato & Chicken Pizza</div>
+        <div class="fridge-rc-d">Homemade dough, fresh toppings</div>
+        <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 78% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 55 min</div></div>
+      </div>
+      <div class="fridge-rc-badge">2 ingredients manquants</div>
+    </div>
+    <div class="fridge-rc" onclick="go(11)">
+      <div class="fridge-rc-img"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=160&q=75" alt=""></div>
+      <div class="fridge-rc-info">
+        <div class="fridge-rc-n">Tomato Bisque Soup</div>
+        <div class="fridge-rc-d">Creamy roasted tomato with basil</div>
+        <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 72% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 30 min</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S9: IMPORT RECIPE -->
+<div class="scr" id="s9" data-s="off">
+<div class="import">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="import-url">
+    <input type="text" placeholder="Paste recipe URL here..." value="instagram.com/p/Cx8k2mL...">
+    <button class="import-paste"><span class="ms">content_paste</span> Coller</button>
+  </div>
+  <div class="import-platforms">
+    <div class="import-platforms-t">PLATEFORMES SUPPORTEES</div>
+    <div class="import-picons">
+      <div class="import-pi"><span class="ms">photo_camera</span></div>
+      <div class="import-pi"><span class="ms">music_note</span></div>
+      <div class="import-pi"><span class="ms">smart_display</span></div>
+      <div class="import-pi"><span class="ms">language</span></div>
+    </div>
+  </div>
+  <div class="sh"><div class="sh-t">Progression</div></div>
+  <div class="import-progress">
+    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">Recuperation du contenu...</div></div>
+    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">Extraction de la recette...</div></div>
+    <div class="import-step"><div class="import-step-ic active"><span class="ms">sync</span></div><div class="import-step-t">Analyse nutritionnelle...</div></div>
+    <div class="import-step"><div class="import-step-ic pending"><span class="ms">hourglass_empty</span></div><div class="import-step-t pending">Enregistrement</div></div>
+  </div>
+  <div class="sh"><div class="sh-t">Apercu</div></div>
+  <div class="import-preview">
+    <div class="import-preview-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt=""></div>
+    <div class="import-preview-body">
+      <div class="import-preview-cat">Healthy &middot; Bowl</div>
+      <div class="import-preview-t">Rainbow Buddha Bowl</div>
+      <div class="import-preview-meta">
+        <div class="import-preview-s"><span class="ms">schedule</span> 15 min</div>
+        <div class="import-preview-s"><span class="ms">local_fire_department</span> 320 cal</div>
+        <div class="import-preview-s"><span class="ms">group</span> 2 servings</div>
+      </div>
+      <button class="import-save"><span class="ms">bookmark_add</span> Enregistrer dans ma bibliotheque</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S10: ACADEMY / PROGRESSION -->
+<div class="scr" id="s10" data-s="off">
+<div class="academy">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="aca-level">
+    <div class="aca-level-row">
+      <div class="aca-level-badge"><span class="ms">restaurant_menu</span></div>
+      <div class="aca-level-info">
+        <div class="aca-level-t">Sous-Chef</div>
+        <div class="aca-level-s">Niveau 4 &middot; 340 / 500 XP</div>
+      </div>
+    </div>
+    <div class="aca-xp-bar"><div class="aca-xp-fill" style="width:68%"></div></div>
+    <div class="aca-xp-t">160 XP avant Chef de Partie</div>
+  </div>
+  <div class="aca-streak">
+    <div class="aca-streak-fire">&#x1F525;</div>
+    <div class="aca-streak-info">
+      <div class="aca-streak-v">12 jours</div>
+      <div class="aca-streak-l">Serie en cours &middot; Record : 18 jours</div>
+    </div>
+  </div>
+  <div class="aca-daily" onclick="go(3)" style="cursor:pointer">
+    <div class="aca-daily-eyebrow">DEFI DU JOUR</div>
+    <div class="aca-daily-t">Maitriser l'omelette parfaite</div>
+    <div class="aca-daily-row">
+      <div class="aca-daily-xp">+50 XP recompense</div>
+      <div class="aca-daily-timer"><span class="ms">schedule</span> 6h 24m restantes</div>
+    </div>
+  </div>
+  <div class="aca-path">
+    <div class="aca-path-h">
+      <div class="aca-path-t">Classiques francais</div>
+      <div class="aca-path-prog">3 / 5 termines</div>
+    </div>
+    <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
+      <div class="aca-lesson-num done"><span class="ms" style="font-size:16px;color:#fff">check</span></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n">Croque Monsieur</div><div class="aca-lesson-skill">Technique : Sauce bechamel</div></div>
+      <div class="aca-lesson-xp">+30 XP</div>
+    </div>
+    <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
+      <div class="aca-lesson-num done"><span class="ms" style="font-size:16px;color:#fff">check</span></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n">Ratatouille</div><div class="aca-lesson-skill">Technique : Decoupe</div></div>
+      <div class="aca-lesson-xp">+40 XP</div>
+    </div>
+    <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
+      <div class="aca-lesson-num done"><span class="ms" style="font-size:16px;color:#fff">check</span></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n">Bouillabaisse</div><div class="aca-lesson-skill">Technique : Fumet de poisson</div></div>
+      <div class="aca-lesson-xp">+50 XP</div>
+    </div>
+    <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
+      <div class="aca-lesson-num current">4</div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n">Poulet Basquaise</div><div class="aca-lesson-skill">Technique : Braisage</div></div>
+      <div class="aca-lesson-xp">+50 XP</div>
+    </div>
+    <div class="aca-lesson">
+      <div class="aca-lesson-num locked"><span class="ms" style="font-size:16px">lock</span></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n locked">Tarte Tatin</div><div class="aca-lesson-skill">Technique : Caramelisation</div></div>
+      <div class="aca-lesson-xp locked">+60 XP</div>
+    </div>
+  </div>
+  <div class="aca-skills">
+    <div class="aca-skills-t">Skills Tree</div>
+    <div class="aca-tree">
+      <div class="aca-node done"><span class="ms">egg</span></div>
+      <div class="aca-conn done"></div>
+      <div class="aca-node done"><span class="ms">soup_kitchen</span></div>
+      <div class="aca-conn done"></div>
+      <div class="aca-node done"><span class="ms">restaurant</span></div>
+      <div class="aca-conn"></div>
+      <div class="aca-node current"><span class="ms">local_fire_department</span></div>
+      <div class="aca-conn"></div>
+      <div class="aca-node locked"><span class="ms">cake</span></div>
+      <div class="aca-conn"></div>
+      <div class="aca-node locked"><span class="ms">emoji_events</span></div>
+    </div>
+  </div>
+  <div class="sh" style="margin-top:8px"><div class="sh-t">Autres parcours</div><button class="sh-link">Voir tout</button></div>
+  <div class="hs">
+    <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Japanese Essentials</div><div class="cc-c">8 lessons</div></div></div>
+    <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Pastry Mastery</div><div class="cc-c">6 lessons</div></div></div>
+    <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Indian Spice Route</div><div class="cc-c">7 lessons</div></div></div>
+  </div>
+</div>
+</div>
+
+<!-- S11: TRUFFLE CARBONARA DETAIL -->
+<div class="scr" id="s11" data-s="off">
+<div class="det">
+  <div class="det-hero"><img src="https://images.unsplash.com/photo-1588013273468-315fd88ea34c?w=800&q=80" alt=""><div class="det-hero-g"></div>
+    <div class="det-nav"><button class="nb" onclick="goBack()"><span class="ms">arrow_back</span></button><div class="nb-r"><button class="nb"><span class="ms">share</span></button><button class="nb" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='favorite_border'?'favorite':'favorite_border'"><span class="ms">favorite_border</span></button></div></div>
+  </div>
+  <div class="det-body">
+    <div class="det-cat">&#127470;&#127481; Pates &middot; Italien</div>
+    <div class="det-t">Truffle<br>Carbonara</div>
+    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&q=70" alt=""></div>par Chef Marco &middot; 186 avis</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s">La vraie carbonara romaine, sublimee d'un filet d'huile de truffe. Quatre ingredients, zero creme, cent pour cent de plaisir.</p>
+    <div class="det-stats">
+      <div class="ds"><span class="ms">restaurant</span><div class="ds-v">5</div><div class="ds-l">min prep</div></div>
+      <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">15</div><div class="ds-l">min cuisson</div></div>
+      <div class="ds"><span class="ms">group</span><div class="ds-v">2</div><div class="ds-l">parts</div></div>
+      <div class="ds"><span class="ms">signal_cellular_alt</span><div class="ds-v">1/5</div><div class="ds-l">difficulte</div></div>
+    </div>
+    <div class="por-l">Portions</div>
+    <div class="por-pills"><button class="pill" onclick="pickP(this)">1x</button><button class="pill on" onclick="pickP(this)">2x</button><button class="pill" onclick="pickP(this)">4x</button><button class="pill" onclick="pickP(this)">6x</button><button class="pill" onclick="pickP(this)">8x</button></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Cout estime : <strong style="color:var(--t1);transition:color .4s">3,50 EUR</strong> par personne</div>
+    <div class="nutri">
+      <div class="nut"><div class="nut-v">28g</div><div class="nut-l">Proteines</div><div class="nut-bar"><div class="nut-fill" style="width:56%;background:var(--terra)"></div></div></div>
+      <div class="nut"><div class="nut-v">48g</div><div class="nut-l">Glucides</div><div class="nut-bar"><div class="nut-fill" style="width:70%;background:var(--gold)"></div></div></div>
+      <div class="nut"><div class="nut-v">32g</div><div class="nut-l">Lipides</div><div class="nut-bar"><div class="nut-fill" style="width:60%;background:var(--sage)"></div></div></div>
+      <div class="nut"><div class="nut-v">2g</div><div class="nut-l">Fibres</div><div class="nut-bar"><div class="nut-fill" style="width:10%;background:var(--t3)"></div></div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px">
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en proteines</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(184,152,64,.1);color:var(--gold);font-weight:500">Comfort food</span>
+    </div>
+    <div class="ing-h">Ingredients</div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--gold)"></div><span class="ing-n">&#x1F35D; Spaghetti</span></div><span class="ing-a">200g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--terra)"></div><span class="ing-n">&#x1F953; Guanciale</span></div><span class="ing-a">150g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e8c860"></div><span class="ing-n">&#x1F95A; Jaunes d'oeufs</span></div><span class="ing-a">4</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#d4cdc4"></div><span class="ing-n">&#x1F9C0; Pecorino Romano</span></div><span class="ing-a">80g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#2a231d"></div><span class="ing-n">&#x1F336;&#xFE0F; Poivre noir</span></div><span class="ing-a">2 c.c.</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--sage)"></div><span class="ing-n">&#x1FAD2; Huile de truffe</span></div><span class="ing-a">1 c.s.</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e0d8d0"></div><span class="ing-n">&#x1F9C0; Parmesan</span></div><span class="ing-a">30g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#c8b870"></div><span class="ing-n">&#x1F9C2; Sel</span></div><span class="ing-a">pincee</span></div>
+    <div class="ing-h" style="margin-top:28px">Preparation</div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">Boil salted water, cook spaghetti al dente.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Slice guanciale into strips, render in dry pan until crispy.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Whisk egg yolks with grated pecorino and pepper.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Reserve pasta water, drain spaghetti.</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">Toss hot pasta with guanciale, remove from heat, fold in egg mixture.</div></div>
+    <div class="step"><div class="step-n">6</div><div class="step-t">Drizzle with truffle oil, finish with parmesan and cracked pepper.</div></div>
+    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Cuisiner</button></div>
+    <div style="margin:24px 0;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
+      <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Ne jamais ajouter de creme dans une vraie carbonara. Le melange oeuf-pecorino suffit a creer une sauce onctueuse. La cle : retirer la poele du feu avant d'incorporer le melange.</div>
+    </div>
+    <div style="text-align:center;padding:20px 0 8px">
+      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Suggerer une correction</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S12: LAMB TAGINE DETAIL -->
+<div class="scr" id="s12" data-s="off">
+<div class="det">
+  <div class="det-hero"><img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=800&q=80" alt=""><div class="det-hero-g"></div>
+    <div class="det-nav"><button class="nb" onclick="goBack()"><span class="ms">arrow_back</span></button><div class="nb-r"><button class="nb"><span class="ms">share</span></button><button class="nb" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='favorite_border'?'favorite':'favorite_border'"><span class="ms">favorite_border</span></button></div></div>
+  </div>
+  <div class="det-body">
+    <div class="det-cat">&#127474;&#127462; Ragout &middot; Marocain</div>
+    <div class="det-t">Lamb<br>Tagine</div>
+    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70" alt=""></div>par Chef Fatima &middot; 312 avis</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s">Un voyage au coeur de Marrakech. L'agneau s'attendrit doucement avec les abricots et le safran, dans un parfum qui envahit toute la maison.</p>
+    <div class="det-stats">
+      <div class="ds"><span class="ms">restaurant</span><div class="ds-v">20</div><div class="ds-l">min prep</div></div>
+      <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">70</div><div class="ds-l">min cuisson</div></div>
+      <div class="ds"><span class="ms">group</span><div class="ds-v">6</div><div class="ds-l">parts</div></div>
+      <div class="ds"><span class="ms">signal_cellular_alt</span><div class="ds-v">3/5</div><div class="ds-l">difficulte</div></div>
+    </div>
+    <div class="por-l">Portions</div>
+    <div class="por-pills"><button class="pill" onclick="pickP(this)">1x</button><button class="pill" onclick="pickP(this)">2x</button><button class="pill on" onclick="pickP(this)">4x</button><button class="pill" onclick="pickP(this)">6x</button><button class="pill" onclick="pickP(this)">8x</button></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Cout estime : <strong style="color:var(--t1);transition:color .4s">4,20 EUR</strong> par personne</div>
+    <div class="nutri">
+      <div class="nut"><div class="nut-v">42g</div><div class="nut-l">Proteines</div><div class="nut-bar"><div class="nut-fill" style="width:80%;background:var(--terra)"></div></div></div>
+      <div class="nut"><div class="nut-v">38g</div><div class="nut-l">Glucides</div><div class="nut-bar"><div class="nut-fill" style="width:55%;background:var(--gold)"></div></div></div>
+      <div class="nut"><div class="nut-v">28g</div><div class="nut-l">Lipides</div><div class="nut-bar"><div class="nut-fill" style="width:50%;background:var(--sage)"></div></div></div>
+      <div class="nut"><div class="nut-v">6g</div><div class="nut-l">Fibres</div><div class="nut-bar"><div class="nut-fill" style="width:30%;background:var(--t3)"></div></div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px">
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Halal</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Sans porc</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(109,160,109,.1);color:var(--sage);font-weight:500">Sans gluten</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(184,152,64,.1);color:var(--gold);font-weight:500">Saison : automne</span>
+    </div>
+    <div class="ing-h">Ingredients</div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--terra)"></div><span class="ing-n">&#x1F356; Epaule d'agneau</span></div><span class="ing-a">1kg</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--gold)"></div><span class="ing-n">&#x1F9C5; Oignons</span></div><span class="ing-a">3</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e8a040"></div><span class="ing-n">&#x1F7E0; Abricots secs</span></div><span class="ing-a">150g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#c8b870"></div><span class="ing-n">&#x1F95C; Amandes</span></div><span class="ing-a">80g</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#c85040"></div><span class="ing-n">&#x1F33F; Ras el hanout</span></div><span class="ing-a">2 c.s.</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#a86040"></div><span class="ing-n">&#x1FADA; Baton de cannelle</span></div><span class="ing-a">1</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e8c860"></div><span class="ing-n">&#x1F338; Filaments de safran</span></div><span class="ing-a">pincee</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#d4a030"></div><span class="ing-n">&#x1F36F; Miel</span></div><span class="ing-a">2 c.s.</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--sage)"></div><span class="ing-n">&#x1F33F; Coriandre fraiche</span></div><span class="ing-a">bouquet</span></div>
+    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e0d8d0"></div><span class="ing-n">&#x1F963; Couscous</span></div><span class="ing-a">400g</span></div>
+    <div class="ing-h" style="margin-top:28px">Preparation</div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">Season lamb with ras el hanout, salt and pepper.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Sear lamb in batches until golden brown.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Soften onions in the same pot.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Return lamb, add apricots, almonds, cinnamon, saffron.</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">Cover with water, bring to simmer, cook 1h30.</div></div>
+    <div class="step"><div class="step-n">6</div><div class="step-t">Stir in honey, adjust seasoning.</div></div>
+    <div class="step"><div class="step-n">7</div><div class="step-t">Serve over fluffy couscous with fresh cilantro.</div></div>
+    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Cuisiner</button></div>
+    <div style="margin:24px 0;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
+      <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Pour un tagine plus profond en gout, faites mariner l'agneau la veille avec le ras el hanout. Le safran s'ajoute en fin de cuisson pour preserver tout son parfum.</div>
+    </div>
+    <div style="text-align:center;padding:20px 0 8px">
+      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Suggerer une correction</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S13: SEARCH RESULTS (placeholder) -->
+<div class="scr" id="s13" data-s="off">
+<div style="background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div style="text-align:center;padding:80px 24px;color:var(--t3);font-size:14px">Search results will appear here</div>
+</div>
+</div>
+
+<!-- S14: SETTINGS -->
+<div class="scr" id="s14" data-s="off">
+<div class="prof">
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Reglages</div><div class="hdr-side r"></div></div>
+  <div class="prof-card">
+    <div class="prof-av"><img src="nicolas.jpg" alt=""></div>
+    <div class="prof-name">Nicolas B.</div>
+    <div class="prof-lvl">Sous-Chef &middot; Niveau 4</div>
+    <div class="prof-xp"><div class="prof-xp-bar"><div class="prof-xp-fill" style="width:68%"></div></div><div class="prof-xp-t">340 / 500 XP &middot; 160 XP avant Chef de Partie</div></div>
+  </div>
+  <div class="prof-stats"><div class="ps"><div class="ps-v">47</div><div class="ps-l">Recettes</div></div><div class="ps"><div class="ps-v">23h</div><div class="ps-l">Cuisine</div></div><div class="ps"><div class="ps-v">12</div><div class="ps-l">Jours de serie</div></div></div>
+  <div class="sh"><div class="sh-t">Preferences alimentaires</div><button class="sh-link">Modifier</button></div>
+  <div class="diet-tags">
+    <div class="diet-tag">Halal</div>
+    <div class="diet-tag">Sans arachides</div>
+    <div class="diet-tag">Pauvre en sel</div>
+    <div class="diet-tag">Mediterraneen</div>
+  </div>
+  <div class="sh" style="margin-top:8px"><div class="sh-t">Reglages</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">person</span><div class="set-label">Modifier le profil</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
+  <div class="set-row"><div class="set-l"><span class="ms">restaurant</span><div class="set-label">Preferences alimentaires</div></div><div class="set-val">Halal</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">kitchen</span><div class="set-label">Mon equipement</div></div><div class="set-val">6 elements</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">straighten</span><div class="set-label">Mesures</div></div><div class="set-val">Metrique</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">translate</span><div class="set-label">Langue</div></div><div class="set-val">Francais</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">dark_mode</span><div class="set-label">Mode sombre</div></div><button class="tg" id="darkTg" onclick="event.stopPropagation();toggleTheme()"><div class="tg-k"></div></button></div>
+  <div class="set-row"><div class="set-l"><span class="ms">notifications</span><div class="set-label">Notifications</div></div><button class="tg on" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
+  <div class="set-row"><div class="set-l"><span class="ms" style="color:var(--terra)">workspace_premium</span><div class="set-label" style="color:var(--terra)">Savora Premium</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
+  <div class="set-row"><div class="set-l"><span class="ms">help</span><div class="set-label">Help & Support</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
+  <div class="set-row"><div class="set-l"><span class="ms">info</span><div class="set-label">About Savora</div></div><div class="set-val">v1.0.0</div></div>
+  <div style="text-align:center;padding:20px 0 0;cursor:pointer"><span style="font-size:14px;color:#d04040;font-weight:500">Se deconnecter</span></div>
+  <div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t4);transition:color .4s">Savora v1.0 &middot; Fait avec amour a Paris</div>
+</div>
+</div>
+
+<!-- Action Menu Overlay -->
+<div class="action-overlay" id="actionOverlay">
+  <div class="action-backdrop" onclick="closeActionMenu()"></div>
+  <div class="action-sheet">
+    <div class="action-handle"></div>
+    <div class="action-title">Que souhaitez-vous faire ?</div>
+    <div class="action-grid">
+      <div class="action-item" onclick="closeActionMenu();go(9)">
+        <div class="action-icon" style="background:linear-gradient(135deg,#e8856c,#c4654a)"><span class="ms">link</span></div>
+        <div class="action-label">Importer un lien</div>
+        <div class="action-desc">TikTok, Instagram, tout site de recettes</div>
+      </div>
+      <div class="action-item" onclick="closeActionMenu();go(9)">
+        <div class="action-icon" style="background:linear-gradient(135deg,#d4876f,#b55a42)"><span class="ms">language</span></div>
+        <div class="action-label">Scraper un site</div>
+        <div class="action-desc">Extraire une recette de n'importe quel lien web</div>
+      </div>
+      <div class="action-item" onclick="closeActionMenu();go(8)">
+        <div class="action-icon" style="background:linear-gradient(135deg,#7aad7a,#5a8f5a)"><span class="ms">kitchen</span></div>
+        <div class="action-label">Scanner mon frigo</div>
+        <div class="action-desc">Photographiez, on trouve les recettes</div>
+      </div>
+      <div class="action-item" onclick="closeActionMenu();go(8)">
+        <div class="action-icon" style="background:linear-gradient(135deg,#c9a84c,#a88a30)"><span class="ms">photo_camera</span></div>
+        <div class="action-label">Identifier un plat</div>
+        <div class="action-desc">Prenez en photo n'importe quel plat</div>
+      </div>
+    </div>
+    <button class="action-cancel" onclick="closeActionMenu()">Annuler</button>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tabs hide" id="tabs">
+<div class="tabs-in">
+  <button class="tb on" onclick="navTab(1)"><span class="ms">home</span><span class="tb-label">Accueil</span></button>
+  <button class="tb" onclick="navTab(2)"><span class="ms">explore</span><span class="tb-label">Explorer</span></button>
+  <button class="tb-c" onclick="handleCookAction()"><span class="ms">add</span></button>
+  <button class="tb" onclick="navTab(7)"><span class="ms">calendar_month</span><span class="tb-label">Planifier</span></button>
+  <button class="tb" onclick="navTab(6)"><span class="ms">menu_book</span><span class="tb-label">Biblio.</span></button>
+</div>
+</div>
+
+<!-- DETAIL CTA -->
+<div class="det-cta hide" id="dcta">
+<div class="cta-row"><button class="cta-main" onclick="go(4)"><span class="ms">play_arrow</span> Cuisiner</button><button class="cta-save" id="saveBtn" onclick="toggleSave()"><span class="ms" id="saveIcon">bookmark_border</span></button></div>
+</div>
+</div>
+
+<!-- NAV DOTS removed for clean UX -->
+
+<script>
+let cur=0;const T=15;
+const history=[];
+const mainScreens=[1,2,6,7];
+let lastMainScreen=1;
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+
+/* THEME — kept for internal testing via nav dots */
+function syncDarkToggle(){
+  const isDark=document.documentElement.dataset.theme==='dark';
+  const tg=document.getElementById('darkTg');
+  if(tg)tg.classList.toggle('on',isDark);
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  const dark=h.dataset.theme==='dark';
+  h.dataset.theme=dark?'light':'dark';
+  localStorage.setItem('sv-theme',h.dataset.theme);
+  syncDarkToggle();
+}
+(function(){
+  const s=localStorage.getItem('sv-theme')||'light';
+  document.documentElement.dataset.theme=s;
+  requestAnimationFrame(syncDarkToggle);
+})();
+
+/* NAV */
+function go(n){
+  if(n===cur||n<0||n>=T)return;
+  history.push(cur);
+  if(mainScreens.includes(cur))lastMainScreen=cur;
+  const dir=n>cur?1:-1;
+  $(`#s${cur}`).dataset.s=dir>0?'l':'r';
+  const nx=$(`#s${n}`);
+  nx.style.transition='none';nx.dataset.s=dir>0?'r':'l';nx.scrollTop=0;
+  nx.offsetHeight;nx.style.transition='';
+  requestAnimationFrame(()=>{nx.dataset.s='on'});
+  for(let i=0;i<T;i++)if(i!==cur&&i!==n)$(`#s${i}`).dataset.s='off';
+  cur=n;
+  /* Dock-style tab bar */
+  clearTimeout(tabTimer);
+  lastScrollY[n]=0;
+  if(alwaysHide.includes(n)){
+    setTabVisible(false);
+  }else if(detailScreens.includes(n)){
+    /* Recipe detail: hide initially, scroll reveals it */
+    setTabVisible(false);
+  }else{
+    /* Main/sub screens: slide in after a beat */
+    setTimeout(()=>setTabVisible(true),200);
+  }
+  $('#dcta').classList.toggle('hide',!detailScreens.includes(n));
+  /* dots removed */
+  const sb=$('#sbar');sb.classList.toggle('on-hero',n===0||n===4||detailScreens.includes(n));
+  /* Tab highlighting: highlight correct tab for main screens, keep last active for sub screens */
+  updateTabHighlight(n);
+}
+function updateTabHighlight(n){
+  const tabBtns=$$('.tabs-in .tb');
+  const tabMap={1:0, 2:1, 7:2, 6:3};
+  tabBtns.forEach(t=>t.classList.remove('on'));
+  if(tabMap[n]!==undefined && tabBtns[tabMap[n]]) tabBtns[tabMap[n]].classList.add('on');
+}
+function handleCookAction(){
+  document.getElementById('actionOverlay').classList.add('open');
+}
+function closeActionMenu(){
+  document.getElementById('actionOverlay').classList.remove('open');
+}
+function switchDetTab(el,idx){
+  const parent=el.closest('.det-body')||el.closest('.det');
+  parent.querySelectorAll('.det-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  parent.querySelectorAll('.det-panel').forEach(p=>{
+    p.style.display=+p.dataset.panel===idx?'':'none';
+  });
+}
+function goBack(){
+  if(history.length>0){
+    const prev=history.pop();
+    const dir=prev<cur?-1:1;
+    $(`#s${cur}`).dataset.s=dir>0?'l':'r';
+    const nx=$(`#s${prev}`);
+    nx.style.transition='none';nx.dataset.s=dir>0?'r':'l';nx.scrollTop=0;
+    nx.offsetHeight;nx.style.transition='';
+    requestAnimationFrame(()=>{nx.dataset.s='on'});
+    for(let i=0;i<T;i++)if(i!==cur&&i!==prev)$(`#s${i}`).dataset.s='off';
+    cur=prev;
+    clearTimeout(tabTimer);
+    lastScrollY[prev]=0;
+    if(alwaysHide.includes(prev)){
+      setTabVisible(false);
+    }else if(detailScreens.includes(prev)){
+      setTabVisible(false);
+    }else{
+      setTimeout(()=>setTabVisible(true),200);
+    }
+    $('#dcta').classList.toggle('hide',!detailScreens.includes(prev));
+    $$('.dot').forEach(d=>d.classList.toggle('on',+d.dataset.n===prev));
+    const sb=$('#sbar');sb.classList.toggle('on-hero',prev===0||prev===4||detailScreens.includes(prev));
+    updateTabHighlight(prev);
+  }else{
+    go(lastMainScreen);
+  }
+}
+function navTab(n){
+  go(n);
+}
+function pickP(el){$$('.por-pills .pill').forEach(p=>p.classList.remove('on'));el.classList.add('on')}
+function pickCat(el){$$('.cats .pill').forEach(p=>p.classList.remove('on'));el.classList.add('on')}
+
+/* ── Dock-style tab bar: hide on scroll down, reveal on scroll up ── */
+const tabEl=$('#tabs');
+const alwaysHide=[0,4]; /* onboarding, cooking mode */
+const detailScreens=[3,11,12];
+let lastScrollY={};
+let tabVisible=true;
+let scrollTick=false;
+let tabTimer=null;
+
+function setTabVisible(show){
+  if(show===tabVisible)return;
+  tabVisible=show;
+  if(alwaysHide.includes(cur)){tabEl.classList.add('hide');return}
+  tabEl.classList.toggle('hide',!show);
+}
+
+/* Attach scroll listeners to every screen */
+for(let i=0;i<T;i++){
+  (function(idx){
+    const scr=$(`#s${idx}`);
+    if(!scr)return;
+    let prevY=0;
+    scr.addEventListener('scroll',()=>{
+      if(cur!==idx)return;
+      if(alwaysHide.includes(cur))return;
+      const y=scr.scrollTop;
+      const delta=y-prevY;
+      prevY=y;
+
+      /* Recipe detail: hide until scrolled past hero */
+      if(detailScreens.includes(cur)&&y<300){return}
+
+      /* Near top: always show */
+      if(y<60){
+        setTabVisible(true);clearTimeout(tabTimer);
+      }else if(delta>6){
+        setTabVisible(false);
+        clearTimeout(tabTimer);
+        tabTimer=setTimeout(()=>setTabVisible(true),1800);
+      }else if(delta<-3){
+        setTabVisible(true);clearTimeout(tabTimer);
+      }
+    },{passive:true});
+  })(i);
+}
+
+let liked=false;
+function toggleLike(){liked=!liked;const i=$('#likeIcon');i.textContent=liked?'favorite':'favorite_border';i.style.color=liked?'#e85d4a':'';i.style.fontVariationSettings=liked?"'FILL' 1":'';$('#likeBtn').style.transform='scale(1.15)';setTimeout(()=>$('#likeBtn').style.transform='',200)}
+let saved=false;
+function toggleSave(){saved=!saved;$('#saveBtn').classList.toggle('on',saved);$('#saveIcon').textContent=saved?'bookmark':'bookmark_border';$('#saveIcon').style.fontVariationSettings=saved?"'FILL' 1":''}
+function checkI(el){el.classList.toggle('ck')}
+
+let timerOn=false,timerV=600,timerInt;
+function toggleTimer(){timerOn=!timerOn;$('#timerI').textContent=timerOn?'pause':'play_arrow';if(timerOn){timerInt=setInterval(()=>{if(timerV<=0){clearInterval(timerInt);timerOn=false;$('#timerI').textContent='play_arrow';return}timerV--;const m=Math.floor(timerV/60),s=timerV%60;$('#timerD').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`},1000)}else clearInterval(timerInt)}
+
+/* Cooking step navigation */
+let cookStep=0;
+const cookSteps=[
+  {n:1,text:'Assaisonnez les morceaux de poulet genereusement avec le sel, le poivre et le piment d\'Espelette. Laissez reposer 10 minutes.',time:'10:00',timeS:600,img:'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80'},
+  {n:2,text:'Faites chauffer l\'huile d\'olive dans une grande poele. Saisissez le poulet sur toutes les faces jusqu\'a coloration doree, environ 4 minutes par cote.',time:'08:00',timeS:480,img:'https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=600&q=80'},
+  {n:3,text:'Ajoutez les poivrons eminces, les oignons et l\'ail. Faites revenir jusqu\'a ce qu\'ils soient fondants. Ajoutez les tomates concassees et le jambon de Bayonne. Laissez mijoter a couvert pendant 35 minutes.',time:'35:00',timeS:2100,img:'https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80'}
+];
+function renderCookStep(){
+  const s=cookSteps[cookStep];
+  $('#cookStepLabel').textContent=`Etape ${s.n} / ${cookSteps.length}`;
+  $('#cookInst').textContent=s.text;
+  $('#cookImg').src=s.img;
+  $('#timerD').textContent=s.time;
+  timerV=s.timeS;clearInterval(timerInt);timerOn=false;$('#timerI').textContent='play_arrow';
+  const cp=document.getElementById('cookProgress');if(cp)cp.style.width=((cookStep+1)/cookSteps.length*100)+'%';
+  $('#cookPrevBtn').disabled=cookStep===0;$('#cookPrevBtn').style.opacity=cookStep===0?'.4':'1';
+  if(cookStep===cookSteps.length-1){$('#cookNextBtn').innerHTML='Terminer <span class="ms">check</span>'}else{$('#cookNextBtn').innerHTML='Suivant <span class="ms">arrow_forward</span>'}
+}
+function prevStep(){if(cookStep>0){cookStep--;renderCookStep()}}
+function nextStep(){if(cookStep<cookSteps.length-1){cookStep++;renderCookStep()}else{goBack()}}
+
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&cur<T-1)go(cur+1);if(e.key==='ArrowLeft'&&cur>0)go(cur-1)});
+/* Theme toggle via keyboard shortcut (hidden for testing) */
+
+/* Onboarding panels */
+let obPanel=0;
+const obPanels=[
+  {bg:'none',gradient:'radial-gradient(ellipse at 50% 30%, rgba(60,40,25,.95), rgba(18,14,10,.98))',eyebrow:'',title:'',desc:'',isLang:true},
+  {bg:'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',gradient:'',eyebrow:'1,5 million de recettes',title:'Decouvrez les cuisines<br>du monde',desc:'Des classiques francais aux epices indiennes, trouvez votre prochain plat prefere.'},
+  {bg:'https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=800&q=80',gradient:'',eyebrow:'Pas a pas',title:'Cuisinez comme<br>un chef',desc:'Suivez le mode cuisine guide avec minuteurs, astuces et controle vocal.'},
+  {bg:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90',gradient:'',eyebrow:'1 494 901 recettes a portee de main',title:'Cuisinez en toute<br>confiance',desc:'Des recettes creees par les meilleurs chefs, adaptees a vos gouts, votre niveau et votre cuisine.'}
+];
+function setObPanel(idx){
+  obPanel=idx;
+  const p=obPanels[idx];
+  const bg=$('#obBg');
+  if(p.gradient){
+    bg.style.background=p.gradient;
+  }else{
+    bg.style.background=`url('${p.bg}') center/cover no-repeat`;
+  }
+  const langPanel=document.getElementById('obLangPanel');
+  const eyebrow=$('#obEyebrow');
+  const title=$('#obTitle');
+  const desc=$('#obDesc');
+  const ctaArea=$('.onboard-cta');
+  const loginArea=$('.onboard-login');
+  if(p.isLang){
+    langPanel.style.display='flex';
+    eyebrow.style.display='none';title.style.display='none';desc.style.display='none';
+    if(ctaArea)ctaArea.style.display='none';
+    if(loginArea)loginArea.style.display='none';
+  }else{
+    langPanel.style.display='none';
+    eyebrow.style.display='';title.style.display='';desc.style.display='';
+    if(ctaArea)ctaArea.style.display='';
+    if(loginArea)loginArea.style.display='';
+    eyebrow.textContent=p.eyebrow;
+    title.innerHTML=p.title;
+    desc.textContent=p.desc;
+  }
+  $$('#obDots > div').forEach((d,i)=>{d.style.width=i===idx?'18px':'6px';d.style.background=i===idx?'var(--terra)':'rgba(255,255,255,.2)'});
+}
+function advanceOnboard(){if(obPanel<3){setObPanel(obPanel+1)}else{go(1)}}
+/* Auto-cycle removed — user controls onboarding pace via arrow button */
+
+/* ── Premium scroll: weighted momentum ── */
+document.querySelectorAll('.scr').forEach(scr=>{
+  let lastT=0,lastY=0,vel=0,raf=0;
+  scr.addEventListener('touchstart',e=>{
+    cancelAnimationFrame(raf);
+    lastT=Date.now();lastY=e.touches[0].pageY;vel=0;
+  },{passive:true});
+  scr.addEventListener('touchmove',e=>{
+    const now=Date.now(),y=e.touches[0].pageY;
+    const dt=now-lastT||16;
+    vel=(y-lastY)/dt;
+    lastT=now;lastY=y;
+  },{passive:true});
+  scr.addEventListener('touchend',()=>{
+    const friction=0.95;
+    function momentum(){
+      if(Math.abs(vel)<0.01)return;
+      vel*=friction;
+      scr.scrollTop-=vel*16;
+      raf=requestAnimationFrame(momentum);
+    }
+    momentum();
+  },{passive:true});
+});
+</script>
+</body>
+</html>
