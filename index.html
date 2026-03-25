@@ -595,41 +595,38 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .tb-c:active{transform:scale(.88)}
 .tb-c .ms{font-size:24px;color:#fff}
 
-/* Action Menu */
-.action-overlay{position:absolute;inset:0;z-index:300;pointer-events:none;opacity:0;transition:opacity .35s cubic-bezier(.32,.72,.0,1)}
+/* Action Menu — Restaurant menu card style */
+.action-overlay{position:absolute;inset:0;z-index:300;pointer-events:none;opacity:0;transition:opacity .4s cubic-bezier(.32,.72,.0,1)}
 .action-overlay.open{pointer-events:all;opacity:1}
-.action-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.action-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .action-sheet{
   position:absolute;bottom:0;left:0;right:0;
   background:var(--bg);
   border-radius:28px 28px 0 0;
-  padding:12px 24px 40px;
+  padding:16px 32px 44px;
   transform:translateY(100%);
-  transition:transform .45s cubic-bezier(.32,.72,.0,1);
-  box-shadow:0 -8px 40px rgba(0,0,0,.12);
+  transition:transform .5s cubic-bezier(.32,.72,.0,1);
+  box-shadow:0 -12px 48px rgba(0,0,0,.1);
 }
 .action-overlay.open .action-sheet{transform:translateY(0)}
-.action-handle{width:36px;height:4px;border-radius:2px;background:var(--t4);margin:0 auto 18px}
-.action-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--t1);text-align:center;margin-bottom:22px;transition:color .4s}
-.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
-.action-item{
-  padding:18px 14px;border-radius:18px;
-  background:var(--card);border:1px solid var(--card-b);
-  cursor:pointer;text-align:center;
-  transition:transform .25s cubic-bezier(.32,.72,.0,1),background .4s;
+.action-handle{width:32px;height:3px;border-radius:2px;background:var(--t4);margin:0 auto 24px}
+.action-row{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 0;border-bottom:1px dotted var(--t4);
+  cursor:pointer;transition:opacity .2s;
 }
-.action-item:active{transform:scale(.95)}
-.action-icon{width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.action-icon .ms{font-size:24px;color:#fff}
-.action-label{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px;transition:color .4s}
-.action-desc{font-size:10px;color:var(--t3);line-height:1.4}
-.action-cancel{
-  width:100%;height:48px;border-radius:24px;border:none;
-  background:var(--card);color:var(--t2);
-  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
-  cursor:pointer;transition:background .3s,color .4s;
+.action-row:last-child{border-bottom:none}
+.action-row:active{opacity:.6}
+.action-row .ms{font-size:22px;color:var(--terra);flex-shrink:0;width:28px;text-align:center}
+.action-row-text{flex:1}
+.action-row-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--t1);transition:color .4s}
+.action-row-desc{font-size:11px;color:var(--t3);margin-top:2px;line-height:1.4}
+.action-close{
+  display:block;margin:20px auto 0;background:none;border:none;
+  font-family:'Inter',sans-serif;font-size:13px;color:var(--t3);
+  cursor:pointer;letter-spacing:.3px;transition:color .2s;
 }
-.action-cancel:active{transform:scale(.98)}
+.action-close:active{color:var(--terra)}
 
 /* NAV DOTS — removed for clean user experience */
 /* =========================================
@@ -1996,30 +1993,43 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="action-backdrop" onclick="closeActionMenu()"></div>
   <div class="action-sheet">
     <div class="action-handle"></div>
-    <div class="action-title">Que souhaitez-vous faire ?</div>
-    <div class="action-grid">
-      <div class="action-item" onclick="closeActionMenu();go(9)">
-        <div class="action-icon" style="background:linear-gradient(135deg,#e8856c,#c4654a)"><span class="ms">link</span></div>
-        <div class="action-label">Importer un lien</div>
-        <div class="action-desc">TikTok, Instagram, tout site de recettes</div>
-      </div>
-      <div class="action-item" onclick="closeActionMenu();go(9)">
-        <div class="action-icon" style="background:linear-gradient(135deg,#d4876f,#b55a42)"><span class="ms">language</span></div>
-        <div class="action-label">Scraper un site</div>
-        <div class="action-desc">Extraire une recette de n'importe quel lien web</div>
-      </div>
-      <div class="action-item" onclick="closeActionMenu();go(8)">
-        <div class="action-icon" style="background:linear-gradient(135deg,#7aad7a,#5a8f5a)"><span class="ms">kitchen</span></div>
-        <div class="action-label">Scanner mon frigo</div>
-        <div class="action-desc">Photographiez, on trouve les recettes</div>
-      </div>
-      <div class="action-item" onclick="closeActionMenu();go(8)">
-        <div class="action-icon" style="background:linear-gradient(135deg,#c9a84c,#a88a30)"><span class="ms">photo_camera</span></div>
-        <div class="action-label">Identifier un plat</div>
-        <div class="action-desc">Prenez en photo n'importe quel plat</div>
-      </div>
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:20px;font-weight:300;color:var(--t1);transition:color .4s">Comment puis-je vous aider ?</div>
     </div>
-    <button class="action-cancel" onclick="closeActionMenu()">Annuler</button>
+    <div class="action-row" onclick="closeActionMenu();go(9)">
+      <span class="ms">link</span>
+      <div class="action-row-text">
+        <div class="action-row-label">Importer une recette</div>
+        <div class="action-row-desc">Depuis TikTok, Instagram ou tout site web</div>
+      </div>
+      <span class="ms" style="font-size:16px;color:var(--t4)">chevron_right</span>
+    </div>
+    <div class="action-row" onclick="closeActionMenu();go(9)">
+      <span class="ms">language</span>
+      <div class="action-row-text">
+        <div class="action-row-label">Extraire une recette</div>
+        <div class="action-row-desc">Collez n'importe quel lien, on fait le reste</div>
+      </div>
+      <span class="ms" style="font-size:16px;color:var(--t4)">chevron_right</span>
+    </div>
+    <div class="action-row" onclick="closeActionMenu();go(8)">
+      <span class="ms">kitchen</span>
+      <div class="action-row-text">
+        <div class="action-row-label">Ouvrir mon frigo</div>
+        <div class="action-row-desc">Photographiez vos ingredients, on trouve la recette</div>
+      </div>
+      <span class="ms" style="font-size:16px;color:var(--t4)">chevron_right</span>
+    </div>
+    <div class="action-row" onclick="closeActionMenu();go(8)">
+      <span class="ms">photo_camera</span>
+      <div class="action-row-text">
+        <div class="action-row-label">Identifier un plat</div>
+        <div class="action-row-desc">Prenez en photo n'importe quel plat</div>
+      </div>
+      <span class="ms" style="font-size:16px;color:var(--t4)">chevron_right</span>
+    </div>
+    <button class="action-close" onclick="closeActionMenu()">Fermer</button>
+    <div style="text-align:center;margin-top:16px;font-family:'Playfair Display',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t4);transition:color .4s">Savora</div>
   </div>
 </div>
 
