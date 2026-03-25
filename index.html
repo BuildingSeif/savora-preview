@@ -455,7 +455,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .ing-a{font-size:13px;color:var(--t3);font-weight:500}
 .step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--sep)}
 .step:last-child{border-bottom:none}
-.step-n{width:28px;height:28px;border-radius:50%;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--terra);flex-shrink:0;box-shadow:var(--card-s);transition:background .4s}
+.step-n{width:30px;height:30px;border-radius:50%;background:transparent;border:1.5px solid var(--terra);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:var(--terra);flex-shrink:0}
 .step-t{font-size:14px;color:var(--t2);line-height:1.55}
 .det-cta{position:absolute;bottom:0;left:0;width:390px;z-index:100;padding:12px 24px 36px;background:var(--grad-up);transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s}
 .det-cta.hide{transform:translateY(100%);opacity:0;pointer-events:none}
@@ -924,6 +924,25 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <span style="flex:1;font-size:14px;color:var(--t3);font-family:'Inter',sans-serif">Rechercher parmi 1 494 901 recettes...</span>
     <div style="width:34px;height:34px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:16px;color:#fff">mic</span></div>
   </div>
+  <!-- AI Features strip -->
+  <div style="display:flex;gap:8px;padding:0 24px 12px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 0%,#000 85%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 85%,transparent 100%)">
+    <div onclick="go(9)" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:linear-gradient(135deg,rgba(196,101,74,.08),rgba(196,101,74,.03));border:1px solid rgba(196,101,74,.1);border-radius:14px;cursor:pointer;flex-shrink:0;transition:transform .2s">
+      <span class="ms" style="font-size:18px;color:var(--terra)">link</span>
+      <div><div style="font-size:12px;font-weight:600;color:var(--t1);transition:color .4s">Importer</div><div style="font-size:9px;color:var(--t3)">TikTok, Instagram</div></div>
+    </div>
+    <div onclick="go(8)" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:linear-gradient(135deg,rgba(109,160,109,.08),rgba(109,160,109,.03));border:1px solid rgba(109,160,109,.1);border-radius:14px;cursor:pointer;flex-shrink:0;transition:transform .2s">
+      <span class="ms" style="font-size:18px;color:var(--sage)">kitchen</span>
+      <div><div style="font-size:12px;font-weight:600;color:var(--t1);transition:color .4s">Mon frigo</div><div style="font-size:9px;color:var(--t3)">Scanner & cuisiner</div></div>
+    </div>
+    <div onclick="go(8)" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:linear-gradient(135deg,rgba(184,152,64,.08),rgba(184,152,64,.03));border:1px solid rgba(184,152,64,.1);border-radius:14px;cursor:pointer;flex-shrink:0;transition:transform .2s">
+      <span class="ms" style="font-size:18px;color:var(--gold)">photo_camera</span>
+      <div><div style="font-size:12px;font-weight:600;color:var(--t1);transition:color .4s">Identifier</div><div style="font-size:9px;color:var(--t3)">Photo d'un plat</div></div>
+    </div>
+    <div onclick="go(2)" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:linear-gradient(135deg,rgba(196,101,74,.08),rgba(196,101,74,.03));border:1px solid rgba(196,101,74,.1);border-radius:14px;cursor:pointer;flex-shrink:0;transition:transform .2s">
+      <span class="ms" style="font-size:18px;color:var(--terra)">eco</span>
+      <div><div style="font-size:12px;font-weight:600;color:var(--t1);transition:color .4s">Eco-score</div><div style="font-size:9px;color:var(--t3)">Impact CO&#x2082;</div></div>
+    </div>
+  </div>
   <!-- Continue Cooking -->
   <div onclick="go(4)" style="margin:0 24px 16px;display:flex;align-items:center;gap:14px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:18px;padding:14px 16px;cursor:pointer;transition:transform .25s cubic-bezier(.16,1,.3,1)">
     <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=120&q=75" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
@@ -934,13 +953,6 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
     <div style="width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(196,101,74,.25)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span></div>
   </div>
-  <!-- Quick Action Chips -->
-  <div style="display:flex;gap:8px;padding:0 24px 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch">
-    <button onclick="go(8)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">auto_awesome</span>Frigo Magique</button>
-    <button onclick="go(9)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">add_link</span>Importer</button>
-    <button onclick="go(7)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">calendar_month</span>Menu Semaine</button>
-    <button onclick="go(5)" style="display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);transition:transform .2s,color .4s"><span class="ms" style="font-size:18px;color:var(--terra)">shopping_cart</span>Courses</button>
-  </div>
   <!-- Magazine Grid -->
   <div style="padding:0 24px 24px">
     <!-- Row 1: 1 large + 1 column of 2 small -->
@@ -950,21 +962,21 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px">
           <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px">&#x1F1EB;&#x1F1F7; Plat principal</div>
           <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:6px">Poulet Basquaise</div>
-          <div style="display:flex;gap:12px;font-size:11px;color:rgba(255,255,255,.6)"><span>45 min</span><span>380 cal</span><span>&#9733; 4.8</span></div>
+          <div style="display:flex;gap:12px;font-size:11px;color:rgba(255,255,255,.6)"><span>45 min</span><span>380 cal</span><span>&#9733; 4.8</span><span style="color:#7aad7a">&#x1F331; B</span></div>
         </div>
       </div>
       <div onclick="go(11)" style="border-radius:20px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
         <img src="https://images.unsplash.com/photo-1588013273468-315fd88ea34c?w=400&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
         <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
           <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.15">Truffle Carbonara</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1EE;&#x1F1F9; 20 min &middot; &#9733; 4.9</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1EE;&#x1F1F9; 20 min &middot; &#9733; 4.9 <span style="color:#7aad7a">&#x1F331; A</span></div>
         </div>
       </div>
       <div onclick="go(12)" style="border-radius:20px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
         <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=400&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
         <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
           <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.15">Lamb Tagine</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1F2;&#x1F1E6; 1h 30 &middot; &#9733; 4.9</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1F2;&#x1F1E6; 1h 30 &middot; &#9733; 4.9 <span style="color:#c9a84c">&#x1F331; C</span></div>
         </div>
       </div>
     </div>
@@ -993,16 +1005,88 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
   </div>
-  <div class="sh"><div class="sh-t">Cuisines du monde</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
-  <div class="cuisine">
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=120&q=70" alt=""></div><span>Italienne</span></div>
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=120&q=70" alt=""></div><span>Japonaise</span></div>
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=120&q=70" alt=""></div><span>Marocaine</span></div>
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=120&q=70" alt=""></div><span>Indienne</span></div>
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=120&q=70" alt=""></div><span>Francaise</span></div>
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=120&q=70" alt=""></div><span>Mexicaine</span></div>
-    <div class="cu" onclick="go(2)"><div class="cu-img"><img src="https://images.unsplash.com/photo-1559314809-0d155014e29e?w=120&q=70" alt=""></div><span>Thailandaise</span></div>
+<!-- World Map — Global Scale -->
+<div style="padding:0 24px 24px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
+    <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:400;color:var(--t1);transition:color .4s">Cuisines du monde</div>
+    <span style="font-size:11px;color:var(--terra);font-weight:500">40+ pays</span>
   </div>
+  <!-- SVG World Map (simplified) -->
+  <div style="background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:20px 16px 14px;box-shadow:0 2px 12px rgba(45,30,15,.04);transition:background .4s,border-color .4s;overflow:hidden">
+    <svg viewBox="0 0 360 180" style="width:100%;height:auto;opacity:.15" fill="var(--t3)">
+      <!-- Simplified world continents -->
+      <ellipse cx="180" cy="90" rx="170" ry="80" fill="none" stroke="var(--t4)" stroke-width=".5" stroke-dasharray="2,3"/>
+      <!-- Europe -->
+      <circle cx="175" cy="55" r="18" fill="var(--t4)" opacity=".3"/>
+      <!-- Africa -->
+      <circle cx="175" cy="100" r="22" fill="var(--t4)" opacity=".25"/>
+      <!-- Asia -->
+      <circle cx="240" cy="65" r="30" fill="var(--t4)" opacity=".25"/>
+      <!-- Americas -->
+      <circle cx="90" cy="70" r="25" fill="var(--t4)" opacity=".25"/>
+      <!-- Oceania -->
+      <circle cx="280" cy="120" r="12" fill="var(--t4)" opacity=".2"/>
+    </svg>
+    <!-- Country pins overlaid -->
+    <div style="position:relative;margin-top:-140px;height:140px">
+      <!-- France -->
+      <div onclick="go(2)" style="position:absolute;left:42%;top:22%;cursor:pointer;text-align:center">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--terra);margin:0 auto 2px;box-shadow:0 0 8px rgba(196,101,74,.4)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--terra)">320K</div>
+      </div>
+      <!-- India -->
+      <div onclick="go(2)" style="position:absolute;left:65%;top:38%;cursor:pointer;text-align:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);margin:0 auto 2px;box-shadow:0 0 6px rgba(184,152,64,.4)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--gold)">180K</div>
+      </div>
+      <!-- USA -->
+      <div onclick="go(2)" style="position:absolute;left:18%;top:28%;cursor:pointer;text-align:center">
+        <div style="width:9px;height:9px;border-radius:50%;background:var(--sage);margin:0 auto 2px;box-shadow:0 0 7px rgba(109,160,109,.4)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--sage)">240K</div>
+      </div>
+      <!-- Brazil -->
+      <div onclick="go(2)" style="position:absolute;left:26%;top:62%;cursor:pointer;text-align:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--terra);margin:0 auto 2px;box-shadow:0 0 6px rgba(196,101,74,.3)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--terra)">91K</div>
+      </div>
+      <!-- Italy -->
+      <div onclick="go(2)" style="position:absolute;left:45%;top:30%;cursor:pointer;text-align:center">
+        <div style="width:7px;height:7px;border-radius:50%;background:var(--terra);margin:0 auto 2px;box-shadow:0 0 5px rgba(196,101,74,.3)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--terra)">85K</div>
+      </div>
+      <!-- Morocco -->
+      <div onclick="go(2)" style="position:absolute;left:38%;top:42%;cursor:pointer;text-align:center">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 auto 2px;box-shadow:0 0 5px rgba(184,152,64,.3)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--gold)">47K</div>
+      </div>
+      <!-- Japan -->
+      <div onclick="go(2)" style="position:absolute;left:82%;top:30%;cursor:pointer;text-align:center">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--sage);margin:0 auto 2px;box-shadow:0 0 5px rgba(109,160,109,.3)"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--sage)">52K</div>
+      </div>
+      <!-- Mexico -->
+      <div onclick="go(2)" style="position:absolute;left:12%;top:42%;cursor:pointer;text-align:center">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 auto 2px"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--gold)">38K</div>
+      </div>
+      <!-- Thailand -->
+      <div onclick="go(2)" style="position:absolute;left:70%;top:48%;cursor:pointer;text-align:center">
+        <div style="width:5px;height:5px;border-radius:50%;background:var(--sage);margin:0 auto 2px"></div>
+        <div style="font-size:8px;font-weight:600;color:var(--sage)">29K</div>
+      </div>
+    </div>
+    <!-- Bottom row: top cuisines -->
+    <div style="display:flex;justify-content:space-around;padding-top:10px;border-top:1px solid var(--sep)">
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EB;&#x1F1F7;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">France</div></div>
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EE;&#x1F1F3;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Inde</div></div>
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1FA;&#x1F1F8;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">USA</div></div>
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1E7;&#x1F1F7;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Bresil</div></div>
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EE;&#x1F1F9;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Italie</div></div>
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1F2;&#x1F1E6;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Maroc</div></div>
+      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EF;&#x1F1F5;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Japon</div></div>
+    </div>
+  </div>
+</div>
   <div style="background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;padding:20px;margin:0 24px 20px">
     <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:8px">CONSEIL DU CHEF</div>
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--t1);margin-bottom:12px;transition:color .4s">"Laissez toujours reposer votre viande apres cuisson. Les jus se redistribuent, offrant un resultat plus tendre et savoureux."</div>
@@ -1086,7 +1170,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="det-cat">&#127467;&#127479; Plat principal &middot; Basque</div>
     <div class="det-t">Poulet<br>Basquaise</div>
     <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=70" alt=""></div>par Chef Marie &middot; 240 avis</div>
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s">Un classique du Pays basque, ou le poulet dore rencontre les poivrons fondants et le piment d'Espelette. Simple, genereux, imbattable.</p>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">U</span>n classique du Pays basque, ou le poulet dore rencontre les poivrons fondants et le piment d'Espelette. Simple, genereux, imbattable.</p>
     <div class="det-stats">
       <div class="ds"><span class="ms">restaurant</span><div class="ds-v">10</div><div class="ds-l">min prep</div></div>
       <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">35</div><div class="ds-l">min cuisson</div></div>
@@ -1113,6 +1197,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en proteines</span>
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(109,160,109,.1);color:var(--sage);font-weight:500">Sans gluten</span>
     </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(109,160,109,.06);border:1px solid rgba(109,160,109,.12);border-radius:14px;margin-bottom:20px">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(109,160,109,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px">&#x1F331;</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Impact environnemental : <span style="color:#7aad7a">B</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">1.8 kg CO&#x2082; par portion &middot; <span style="color:var(--terra);cursor:pointer;text-decoration:underline">Ameliorer avec des substituts</span></div>
+      </div>
+    </div>
     </div><!-- /panel 0 -->
     <div class="det-panel" data-panel="1" style="display:none">
     <div style="display:flex;align-items:center;gap:12px;margin:28px 0 20px">
@@ -1120,9 +1211,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Ingredients</span>
       <div style="flex:1;height:1px;background:var(--sep)"></div>
     </div>
-    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--terra)"></div><span class="ing-n">&#x1F357; Poulet fermier</span></div><span class="ing-a">1.2 kg</span></div>
-    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#e85050"></div><span class="ing-n">&#x1FAD1; Poivrons rouges</span></div><span class="ing-a">3</span></div>
-    <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--gold)"></div><span class="ing-n">&#x1F9C5; Oignons</span></div><span class="ing-a">2 gros</span></div>
+    <div class="ing" style="display:flex;align-items:center"><div class="ing-l"><div class="ing-dot" style="background:var(--terra)"></div><span class="ing-n">&#x1F357; Poulet fermier</span></div><span class="ing-a">1.2 kg</span><button style="width:28px;height:28px;border-radius:50%;background:rgba(109,160,109,.1);border:1px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:8px"><span class="ms" style="font-size:14px;color:#7aad7a">swap_horiz</span></button></div>
+    <div class="ing" style="display:flex;align-items:center"><div class="ing-l"><div class="ing-dot" style="background:#e85050"></div><span class="ing-n">&#x1FAD1; Poivrons rouges</span></div><span class="ing-a">3</span><button style="width:28px;height:28px;border-radius:50%;background:rgba(109,160,109,.1);border:1px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:8px"><span class="ms" style="font-size:14px;color:#7aad7a">swap_horiz</span></button></div>
+    <div class="ing" style="display:flex;align-items:center"><div class="ing-l"><div class="ing-dot" style="background:var(--gold)"></div><span class="ing-n">&#x1F9C5; Oignons</span></div><span class="ing-a">2 gros</span><button style="width:28px;height:28px;border-radius:50%;background:rgba(109,160,109,.1);border:1px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:8px"><span class="ms" style="font-size:14px;color:#7aad7a">swap_horiz</span></button></div>
     <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#d4cdc4"></div><span class="ing-n">&#x1F9C4; Ail</span></div><span class="ing-a">4 gousses</span></div>
     <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:#c85040"></div><span class="ing-n">&#x1F345; Tomates concassees</span></div><span class="ing-a">400g</span></div>
     <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--sage)"></div><span class="ing-n">&#x1F33F; Thym frais</span></div><span class="ing-a">3 brins</span></div>
@@ -1166,6 +1257,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div class="cook-body">
     <div class="cook-img"><img id="cookImg" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt=""></div>
+    <div id="cookStepHint" style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:8px">ASSAISONNEMENT</div>
     <div class="cook-inst" id="cookInst">Season the chicken pieces generously with salt, pepper, and piment d'Espelette. Let rest for 10 minutes.</div>
     <div class="cook-timer"><span class="ms">timer</span><div class="cook-timer-t" id="timerD">10:00</div><div class="cook-timer-l" id="timerLabel">repos</div><button class="timer-btn" onclick="toggleTimer()"><span class="ms" id="timerI">play_arrow</span></button></div>
     <div style="text-align:center;font-size:11px;color:var(--t3);margin-top:12px;letter-spacing:.3px">Dites 'OK Chef, etape suivante' pour le controle vocal</div>
@@ -1322,11 +1414,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
     <div class="meal-day">
-      <div class="meal-day-h"><div class="meal-day-name">Mercredi 26 mars</div><div class="meal-day-cal">0 cal</div></div>
+      <div class="meal-day-h"><div class="meal-day-name">Mercredi 26 mars</div><div class="meal-day-cal" style="display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:12px">auto_awesome</span>~1 350 cal</div></div>
       <div class="meal-slots">
-        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
-        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
-        <div class="meal-slot"><div class="meal-slot-empty"><span class="ms">add</span></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name empty">Ajouter une recette</div></div></div>
+        <div class="meal-slot" onclick="go(3)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name">Suggestion : Granola maison</div></div></div>
+        <div class="meal-slot" onclick="go(11)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name">Suggestion : Salade nicoise</div></div></div>
+        <div class="meal-slot" onclick="go(12)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name">Suggestion : Soupe de lentilles</div></div></div>
       </div>
     </div>
   </div>
@@ -1532,7 +1624,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="det-cat">&#127470;&#127481; Pates &middot; Italien</div>
     <div class="det-t">Truffle<br>Carbonara</div>
     <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&q=70" alt=""></div>par Chef Marco &middot; 186 avis</div>
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s">La vraie carbonara romaine, sublimee d'un filet d'huile de truffe. Quatre ingredients, zero creme, cent pour cent de plaisir.</p>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">L</span>a vraie carbonara romaine, sublimee d'un filet d'huile de truffe. Quatre ingredients, zero creme, cent pour cent de plaisir.</p>
     <div class="det-stats">
       <div class="ds"><span class="ms">restaurant</span><div class="ds-v">5</div><div class="ds-l">min prep</div></div>
       <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">15</div><div class="ds-l">min cuisson</div></div>
@@ -1551,6 +1643,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px">
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en proteines</span>
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(184,152,64,.1);color:var(--gold);font-weight:500">Comfort food</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(109,160,109,.06);border:1px solid rgba(109,160,109,.12);border-radius:14px;margin-bottom:20px">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(109,160,109,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px">&#x1F331;</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Impact environnemental : <span style="color:#5a9f5a">A</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">0.6 kg CO&#x2082; par portion &middot; Faible impact</div>
+      </div>
     </div>
     <div class="ing-h">Ingredients</div>
     <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--gold)"></div><span class="ing-n">&#x1F35D; Spaghetti</span></div><span class="ing-a">200g</span></div>
@@ -1590,7 +1689,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="det-cat">&#127474;&#127462; Ragout &middot; Marocain</div>
     <div class="det-t">Lamb<br>Tagine</div>
     <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70" alt=""></div>par Chef Fatima &middot; 312 avis</div>
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s">Un voyage au coeur de Marrakech. L'agneau s'attendrit doucement avec les abricots et le safran, dans un parfum qui envahit toute la maison.</p>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">U</span>n voyage au coeur de Marrakech. L'agneau s'attendrit doucement avec les abricots et le safran, dans un parfum qui envahit toute la maison.</p>
     <div class="det-stats">
       <div class="ds"><span class="ms">restaurant</span><div class="ds-v">20</div><div class="ds-l">min prep</div></div>
       <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">70</div><div class="ds-l">min cuisson</div></div>
@@ -1611,6 +1710,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Sans porc</span>
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(109,160,109,.1);color:var(--sage);font-weight:500">Sans gluten</span>
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(184,152,64,.1);color:var(--gold);font-weight:500">Saison : automne</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(184,152,64,.06);border:1px solid rgba(184,152,64,.12);border-radius:14px;margin-bottom:20px">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(184,152,64,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px">&#x1F331;</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Impact environnemental : <span style="color:#c9a84c">C</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">3.2 kg CO&#x2082; par portion &middot; <span style="color:var(--terra);cursor:pointer;text-decoration:underline">Ameliorer avec des substituts</span></div>
+      </div>
     </div>
     <div class="ing-h">Ingredients</div>
     <div class="ing"><div class="ing-l"><div class="ing-dot" style="background:var(--terra)"></div><span class="ing-n">&#x1F356; Epaule d'agneau</span></div><span class="ing-a">1kg</span></div>
@@ -1913,6 +2019,8 @@ function renderCookStep(){
   const s=cookSteps[cookStep];
   $('#cookStepLabel').textContent=`Etape ${s.n} / ${cookSteps.length}`;
   $('#cookInst').textContent=s.text;
+  const hint=s.n===1?'ASSAISONNEMENT':s.n===2?'CUISSON':'MIJOTAGE';
+  const hintEl=document.getElementById('cookStepHint');if(hintEl)hintEl.textContent=hint;
   $('#cookImg').src=s.img;
   $('#timerD').textContent=s.time;
   timerV=s.timeS;clearInterval(timerInt);timerOn=false;$('#timerI').textContent='play_arrow';
