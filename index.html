@@ -906,7 +906,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
       <div style="text-align:right">
         <div style="font-size:11px;color:var(--t3)">Dimanche 23 mars</div>
-        <div style="font-size:11px;color:var(--terra);font-weight:500;margin-top:2px">1 494 901 recettes</div>
+        <div style="font-size:11px;color:var(--terra);font-weight:500;margin-top:2px">1 484 101 recettes</div>
       </div>
     </div>
     <!-- Mood inspiration card -->
@@ -921,7 +921,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <!-- Search Bar -->
   <div style="margin:0 24px 14px;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--glass-b);border-radius:50px;padding:0 8px 0 18px;height:46px;cursor:pointer;transition:background .4s" onclick="go(2)">
     <span class="ms" style="color:var(--t3);font-size:20px">search</span>
-    <span style="flex:1;font-size:14px;color:var(--t3);font-family:'Inter',sans-serif">Rechercher parmi 1 494 901 recettes...</span>
+    <span style="flex:1;font-size:14px;color:var(--t3);font-family:'Inter',sans-serif">Rechercher parmi 1 484 101 recettes...</span>
     <div style="width:34px;height:34px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:16px;color:#fff">mic</span></div>
   </div>
   <!-- AI Features strip -->
@@ -1005,85 +1005,117 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
   </div>
-<!-- World Map — Global Scale -->
+<!-- Cuisines du monde — Real data -->
 <div style="padding:0 24px 24px">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
     <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:400;color:var(--t1);transition:color .4s">Cuisines du monde</div>
-    <span style="font-size:11px;color:var(--terra);font-weight:500">40+ pays</span>
+    <span style="font-size:11px;color:var(--terra);font-weight:500">303 pays</span>
   </div>
-  <!-- SVG World Map (simplified) -->
-  <div style="background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:20px 16px 14px;box-shadow:0 2px 12px rgba(45,30,15,.04);transition:background .4s,border-color .4s;overflow:hidden">
-    <svg viewBox="0 0 360 180" style="width:100%;height:auto;opacity:.15" fill="var(--t3)">
-      <!-- Simplified world continents -->
-      <ellipse cx="180" cy="90" rx="170" ry="80" fill="none" stroke="var(--t4)" stroke-width=".5" stroke-dasharray="2,3"/>
-      <!-- Europe -->
-      <circle cx="175" cy="55" r="18" fill="var(--t4)" opacity=".3"/>
-      <!-- Africa -->
-      <circle cx="175" cy="100" r="22" fill="var(--t4)" opacity=".25"/>
-      <!-- Asia -->
-      <circle cx="240" cy="65" r="30" fill="var(--t4)" opacity=".25"/>
-      <!-- Americas -->
-      <circle cx="90" cy="70" r="25" fill="var(--t4)" opacity=".25"/>
-      <!-- Oceania -->
-      <circle cx="280" cy="120" r="12" fill="var(--t4)" opacity=".2"/>
-    </svg>
-    <!-- Country pins overlaid -->
-    <div style="position:relative;margin-top:-140px;height:140px">
-      <!-- France -->
-      <div onclick="go(2)" style="position:absolute;left:42%;top:22%;cursor:pointer;text-align:center">
-        <div style="width:10px;height:10px;border-radius:50%;background:var(--terra);margin:0 auto 2px;box-shadow:0 0 8px rgba(196,101,74,.4)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--terra)">320K</div>
-      </div>
-      <!-- India -->
-      <div onclick="go(2)" style="position:absolute;left:65%;top:38%;cursor:pointer;text-align:center">
-        <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);margin:0 auto 2px;box-shadow:0 0 6px rgba(184,152,64,.4)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--gold)">180K</div>
-      </div>
-      <!-- USA -->
-      <div onclick="go(2)" style="position:absolute;left:18%;top:28%;cursor:pointer;text-align:center">
-        <div style="width:9px;height:9px;border-radius:50%;background:var(--sage);margin:0 auto 2px;box-shadow:0 0 7px rgba(109,160,109,.4)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--sage)">240K</div>
-      </div>
-      <!-- Brazil -->
-      <div onclick="go(2)" style="position:absolute;left:26%;top:62%;cursor:pointer;text-align:center">
-        <div style="width:8px;height:8px;border-radius:50%;background:var(--terra);margin:0 auto 2px;box-shadow:0 0 6px rgba(196,101,74,.3)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--terra)">91K</div>
-      </div>
-      <!-- Italy -->
-      <div onclick="go(2)" style="position:absolute;left:45%;top:30%;cursor:pointer;text-align:center">
-        <div style="width:7px;height:7px;border-radius:50%;background:var(--terra);margin:0 auto 2px;box-shadow:0 0 5px rgba(196,101,74,.3)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--terra)">85K</div>
-      </div>
-      <!-- Morocco -->
-      <div onclick="go(2)" style="position:absolute;left:38%;top:42%;cursor:pointer;text-align:center">
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 auto 2px;box-shadow:0 0 5px rgba(184,152,64,.3)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--gold)">47K</div>
-      </div>
-      <!-- Japan -->
-      <div onclick="go(2)" style="position:absolute;left:82%;top:30%;cursor:pointer;text-align:center">
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--sage);margin:0 auto 2px;box-shadow:0 0 5px rgba(109,160,109,.3)"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--sage)">52K</div>
-      </div>
-      <!-- Mexico -->
-      <div onclick="go(2)" style="position:absolute;left:12%;top:42%;cursor:pointer;text-align:center">
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 auto 2px"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--gold)">38K</div>
-      </div>
-      <!-- Thailand -->
-      <div onclick="go(2)" style="position:absolute;left:70%;top:48%;cursor:pointer;text-align:center">
-        <div style="width:5px;height:5px;border-radius:50%;background:var(--sage);margin:0 auto 2px"></div>
-        <div style="font-size:8px;font-weight:600;color:var(--sage)">29K</div>
+  <!-- Total counter -->
+  <div style="text-align:center;margin-bottom:16px;padding:14px;background:var(--card);border:1px solid var(--card-b);border-radius:16px;transition:background .4s,border-color .4s">
+    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:var(--t1);letter-spacing:-.5px;transition:color .4s">1 484 101</div>
+    <div style="font-size:11px;color:var(--t3);margin-top:2px;letter-spacing:.5px">recettes de 303 pays et regions</div>
+  </div>
+  <!-- Country cards horizontal scroll -->
+  <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px;mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%)">
+    <!-- USA -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇺🇸</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Etats-Unis</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">612 407</div>
       </div>
     </div>
-    <!-- Bottom row: top cuisines -->
-    <div style="display:flex;justify-content:space-around;padding-top:10px;border-top:1px solid var(--sep)">
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EB;&#x1F1F7;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">France</div></div>
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EE;&#x1F1F3;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Inde</div></div>
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1FA;&#x1F1F8;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">USA</div></div>
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1E7;&#x1F1F7;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Bresil</div></div>
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EE;&#x1F1F9;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Italie</div></div>
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1F2;&#x1F1E6;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Maroc</div></div>
-      <div onclick="go(2)" style="text-align:center;cursor:pointer"><div style="font-size:14px">&#x1F1EF;&#x1F1F5;</div><div style="font-size:9px;color:var(--t3);margin-top:2px">Japon</div></div>
+    <!-- France -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇫🇷</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">France</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">259 935</div>
+      </div>
+    </div>
+    <!-- Italy -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇮🇹</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Italie</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">170 287</div>
+      </div>
+    </div>
+    <!-- Mexico -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇲🇽</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Mexique</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">73 821</div>
+      </div>
+    </div>
+    <!-- Brazil -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇧🇷</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Bresil</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">73 083</div>
+      </div>
+    </div>
+    <!-- India -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇮🇳</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Inde</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">39 554</div>
+      </div>
+    </div>
+    <!-- Japan -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇯🇵</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Japon</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">34 058</div>
+      </div>
+    </div>
+    <!-- China -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇨🇳</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Chine</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">30 344</div>
+      </div>
+    </div>
+    <!-- UK -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇬🇧</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Royaume-Uni</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">28 630</div>
+      </div>
+    </div>
+    <!-- Greece -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇬🇷</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Grece</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">19 034</div>
+      </div>
+    </div>
+    <!-- Morocco -->
+    <div onclick="go(2)" style="min-width:120px;border-radius:18px;overflow:hidden;position:relative;height:150px;cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
+      <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+        <div style="font-size:16px;margin-bottom:2px">🇲🇦</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Maroc</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">6 641</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1130,7 +1162,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div style="text-align:center;padding:30px 24px 20px">
     <div style="font-family:'Playfair Display',serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--t4);transition:color .4s">Savora</div>
-    <div style="font-size:10px;color:var(--t4);margin-top:6px;transition:color .4s">1 494 901 recettes du monde entier</div>
+    <div style="font-size:10px;color:var(--t4);margin-top:6px;transition:color .4s">1 484 101 recettes du monde entier</div>
   </div>
 </div>
 </div>
@@ -1139,7 +1171,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s2" data-s="off">
 <div class="explore">
   <div class="hdr"><div class="hdr-side l"><div class="hdr-btn"><span class="ms">tune</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
-  <div class="sbar-in"><span class="ms" style="color:var(--t3);font-size:22px">search</span><input type="text" placeholder="Rechercher parmi 1 494 901 recettes..."><div class="mic"><span class="ms">mic</span></div></div>
+  <div class="sbar-in"><span class="ms" style="color:var(--t3);font-size:22px">search</span><input type="text" placeholder="Rechercher parmi 1 484 101 recettes..."><div class="mic"><span class="ms">mic</span></div></div>
   <div class="magic" onclick="go(8)"><span style="font-size:30px">&#x1FA84;</span><div><div class="magic-t">Frigo Magique</div><div class="magic-s">Dites-nous ce que vous avez, on trouve la recette</div></div><span class="ms" style="color:var(--terra)">chevron_right</span></div>
   <div class="cats">
     <button class="pill on" onclick="pickCat(this)">Tout</button><button class="pill" onclick="pickCat(this)">Rapide</button><button class="pill" onclick="pickCat(this)">Budget</button><button class="pill" onclick="pickCat(this)">Equilibre</button><button class="pill" onclick="pickCat(this)">Comfort</button><button class="pill" onclick="pickCat(this)">Fetes</button><button class="pill" onclick="pickCat(this)">Vegan</button><button class="pill" onclick="pickCat(this)">Halal</button><button class="pill" onclick="pickCat(this)">Keto</button>
@@ -2040,7 +2072,7 @@ const obPanels=[
   {bg:'none',gradient:'radial-gradient(ellipse at 50% 30%, rgba(60,40,25,.95), rgba(18,14,10,.98))',eyebrow:'',title:'',desc:'',isLang:true},
   {bg:'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',gradient:'',eyebrow:'1,5 million de recettes',title:'Decouvrez les cuisines<br>du monde',desc:'Des classiques francais aux epices indiennes, trouvez votre prochain plat prefere.'},
   {bg:'https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=800&q=80',gradient:'',eyebrow:'Pas a pas',title:'Cuisinez comme<br>un chef',desc:'Suivez le mode cuisine guide avec minuteurs, astuces et controle vocal.'},
-  {bg:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90',gradient:'',eyebrow:'1 494 901 recettes a portee de main',title:'Cuisinez en toute<br>confiance',desc:'Des recettes creees par les meilleurs chefs, adaptees a vos gouts, votre niveau et votre cuisine.'}
+  {bg:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90',gradient:'',eyebrow:'1 484 101 recettes a portee de main',title:'Cuisinez en toute<br>confiance',desc:'Des recettes creees par les meilleurs chefs, adaptees a vos gouts, votre niveau et votre cuisine.'}
 ];
 function setObPanel(idx){
   obPanel=idx;
