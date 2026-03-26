@@ -267,26 +267,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   to{opacity:1;transform:translateY(0)}
 }
 /* Animated food orbit around SAVORA mark */
-.ob-orbit{
-  position:absolute;top:0;left:0;right:0;padding-top:96px;z-index:2;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
+/* Subtle glow behind SAVORA mark */
+.onboard-mark::after{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:200px;height:60px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(196,101,74,.15),transparent 70%);
+  animation:markGlow 4s ease-in-out infinite alternate;
+  pointer-events:none;z-index:-1;
 }
-.ob-orbit-ring{
-  width:180px;height:180px;position:relative;
-  animation:orbitSpin 30s linear infinite;
-}
-@keyframes orbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.ob-orbit-item{
-  position:absolute;font-size:13px;opacity:.45;
-  animation:orbitSpin 30s linear infinite reverse;
-}
-.ob-orbit-item:nth-child(1){top:0;left:50%;transform:translateX(-50%)}
-.ob-orbit-item:nth-child(2){top:15%;right:3%}
-.ob-orbit-item:nth-child(3){bottom:15%;right:3%}
-.ob-orbit-item:nth-child(4){bottom:0;left:50%;transform:translateX(-50%)}
-.ob-orbit-item:nth-child(5){bottom:15%;left:3%}
-.ob-orbit-item:nth-child(6){top:15%;left:3%}
+@keyframes markGlow{from{opacity:.4;transform:translate(-50%,-50%) scale(.9)}to{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
 
 /* =========================================
    S1: HOME
@@ -888,27 +877,18 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="onboard-bg" id="obBg" style="background:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80') center/cover no-repeat"></div>
   <div class="onboard-grad"></div>
   <div class="onboard-mark">Savora</div>
-  <div class="ob-orbit"><div class="ob-orbit-ring"><span class="ob-orbit-item">&#x1F345;</span><span class="ob-orbit-item">&#x1F9C5;</span><span class="ob-orbit-item">&#x1F33F;</span><span class="ob-orbit-item">&#x1F34B;</span><span class="ob-orbit-item">&#x1F9C4;</span><span class="ob-orbit-item">&#x1FAD2;</span></div></div>
   <div class="onboard-body">
     <div class="onboard-eyebrow" id="obEyebrow" style="display:none"></div>
     <div class="onboard-title" id="obTitle" style="display:none"></div>
     <div class="onboard-desc" id="obDesc" style="display:none"></div>
     <!-- Panel 0: Language picker (shown by default) -->
-    <div id="obLangPanel" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px;flex:1">
-      <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:300;color:#f0ebe4;margin-bottom:8px;text-align:center">Bienvenue</div>
-      <div style="font-size:14px;color:rgba(200,192,184,.6);margin-bottom:40px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">&#x1F310; Choisissez votre langue</div>
-      <div style="display:flex;flex-direction:column;gap:10px;width:100%">
-        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1.5px solid var(--terra);background:rgba(196,101,74,.18);color:#f0ebe4;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s;box-shadow:0 4px 16px rgba(196,101,74,.2)">&#x1F1EB;&#x1F1F7; Fran&ccedil;ais</button>
-        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EC;&#x1F1E7; English</button>
-        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EE;&#x1F1F3; Hindi</button>
-        <div style="display:flex;gap:10px">
-          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1EA;&#x1F1F8; Espa&ntilde;ol</button>
-          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1E9;&#x1F1EA; Deutsch</button>
-        </div>
-        <div style="display:flex;gap:10px">
-          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1F8;&#x1F1E6; &#x0627;&#x0644;&#x0639;&#x0631;&#x0628;&#x064A;&#x0629;</button>
-          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1E8;&#x1F1F3; &#x4E2D;&#x6587;</button>
-        </div>
+    <div id="obLangPanel" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 32px;flex:1;padding-bottom:8px">
+      <div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:300;color:#f0ebe4;margin-bottom:6px;text-align:center;letter-spacing:-.5px">Bienvenue</div>
+      <div style="font-size:13px;color:rgba(200,192,184,.45);margin-bottom:36px;text-align:center;letter-spacing:.5px">Choisissez votre langue</div>
+      <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:280px">
+        <button onclick="advanceOnboard()" style="height:52px;border-radius:26px;border:1.5px solid rgba(196,101,74,.5);background:rgba(196,101,74,.12);color:#f0ebe4;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .3s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">&#x1F1EB;&#x1F1F7; Fran&ccedil;ais</button>
+        <button onclick="advanceOnboard()" style="height:52px;border-radius:26px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(220,212,204,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .3s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">&#x1F1EC;&#x1F1E7; English</button>
+        <button onclick="advanceOnboard()" style="height:44px;border-radius:22px;border:none;background:transparent;color:rgba(200,192,184,.4);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .3s;letter-spacing:.3px">Plus de langues &rarr;</button>
       </div>
     </div>
     <div style="display:flex;gap:5px;justify-content:center;margin-bottom:24px" id="obDots">
