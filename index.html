@@ -82,9 +82,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .scr{scroll-snap-type:y proximity}
 .scr::before{content:'';position:sticky;top:-1px;left:0;right:0;height:1px;display:block;z-index:50}
 .scr[data-s="on"]{transform:none;opacity:1;pointer-events:all;z-index:10}
-.scr[data-s="l"]{transform:translateX(-30px);opacity:0;pointer-events:none;z-index:5}
-.scr[data-s="r"]{transform:translateX(30px);opacity:0;pointer-events:none;z-index:5}
-.scr[data-s="off"]{transform:translateX(40px);opacity:0;pointer-events:none;z-index:1}
+.scr[data-s="l"]{transform:translateX(-60px) scale(.95);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="r"]{transform:translateX(60px) scale(.95);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="off"]{transform:translateX(80px) scale(.92);opacity:0;pointer-events:none;z-index:1}
 
 /* === HEADER — minimal, liquid glass === */
 .hdr{
@@ -390,7 +390,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* =========================================
    S2: EXPLORE
    ========================================= */
-.explore{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.explore{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s;position:relative}
 .sbar-in{
   margin:8px 24px 20px;display:flex;align-items:center;gap:10px;
   background:var(--sbar-glass);
@@ -864,6 +864,41 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .rr:active::after,.feat:active::after,.cc:active::after,.gc2:active::after{opacity:1}
 
 @media(max-width:430px){.ph{width:100vw;height:100dvh;border-radius:0;box-shadow:none}.notch{display:none}}
+
+/* === PHASE A: Scroll-reveal animations === */
+.scroll-reveal{opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.scroll-reveal.visible{opacity:1;transform:none}
+
+/* === PHASE A: Tap ripple === */
+@keyframes tapRipple{
+  0%{transform:scale(0);opacity:.3}
+  100%{transform:scale(2.5);opacity:0}
+}
+.tap-ripple{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,101,74,.15),rgba(196,101,74,.05));
+  pointer-events:none;animation:tapRipple .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+/* === PHASE A: Timer flash === */
+@keyframes timerFlash{
+  0%,100%{opacity:1;color:#f0ebe4}
+  50%{opacity:.3;color:var(--terra)}
+}
+.timer-flash{animation:timerFlash .5s ease-in-out 6}
+@keyframes timerGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(196,101,74,.2)}
+  50%{box-shadow:0 0 16px 4px rgba(196,101,74,.25)}
+}
+.timer-counting{animation:timerGlow 2s ease-in-out infinite}
+
+/* === PHASE B: Map pulse === */
+@keyframes mapPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+
+/* === PHASE C: Hover/focus states === */
+.hdr-btn:hover{background:var(--glass);transform:scale(1.05)}
+.pill:hover:not(.on):not(.terra){border-color:var(--terra);color:var(--terra)}
+.det-tab:hover:not(.on){color:var(--t2)}
 </style>
 </head>
 <body>
@@ -1022,10 +1057,26 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:400;color:var(--t1);transition:color .4s">Cuisines du monde</div>
     <span style="font-size:11px;color:var(--terra);font-weight:500">303 pays</span>
   </div>
-  <!-- Total counter -->
-  <div style="text-align:center;margin-bottom:16px;padding:14px;background:var(--card);border:1px solid var(--card-b);border-radius:16px;transition:background .4s,border-color .4s">
-    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:var(--t1);letter-spacing:-.3px;transition:color .4s">Plus de 1,4 million</div>
-    <div style="font-size:11px;color:var(--t3);margin-top:2px;letter-spacing:.5px">de recettes du monde entier</div>
+  <!-- Visual world map -->
+  <div class="scroll-reveal" style="margin:0 0 20px;padding:20px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);text-align:center">
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:12px">CUISINES DU MONDE</div>
+    <div style="position:relative;width:100%;max-width:300px;margin:0 auto 12px;height:140px">
+      <svg viewBox="0 0 300 140" style="width:100%;opacity:.15">
+      <ellipse cx="80" cy="55" rx="45" ry="35" fill="none" stroke="currentColor" stroke-width=".5" style="color:var(--t4)"/>
+      <ellipse cx="85" cy="95" rx="20" ry="18" fill="none" stroke="currentColor" stroke-width=".5" style="color:var(--t4)"/>
+      <ellipse cx="150" cy="50" rx="35" ry="30" fill="none" stroke="currentColor" stroke-width=".5" style="color:var(--t4)"/>
+      <ellipse cx="200" cy="55" rx="40" ry="30" fill="none" stroke="currentColor" stroke-width=".5" style="color:var(--t4)"/>
+      <ellipse cx="260" cy="95" rx="25" ry="20" fill="none" stroke="currentColor" stroke-width=".5" style="color:var(--t4)"/>
+      </svg>
+      <div style="position:absolute;top:32%;left:26%;width:10px;height:10px;border-radius:50%;background:var(--terra);box-shadow:0 0 8px rgba(196,101,74,.4);animation:mapPulse 2s ease-in-out infinite" title="France 259K"></div>
+      <div style="position:absolute;top:42%;left:30%;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px rgba(184,152,64,.3)" title="Italie 170K"></div>
+      <div style="position:absolute;top:45%;left:63%;width:9px;height:9px;border-radius:50%;background:var(--terra);box-shadow:0 0 7px rgba(196,101,74,.3);animation:mapPulse 2s ease-in-out infinite .5s" title="Inde 39K"></div>
+      <div style="position:absolute;top:38%;left:25%;width:6px;height:6px;border-radius:50%;background:var(--sage);box-shadow:0 0 5px rgba(109,160,109,.3)" title="Maroc 6.6K"></div>
+      <div style="position:absolute;top:38%;left:32%;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 5px rgba(184,152,64,.3)" title="Gr&egrave;ce 19K"></div>
+      <div style="position:absolute;top:50%;left:10%;width:8px;height:8px;border-radius:50%;background:var(--sage);box-shadow:0 0 6px rgba(109,160,109,.3)" title="Mexique 73K"></div>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--t1);margin-bottom:4px;transition:color .4s">303 pays</div>
+    <div style="font-size:12px;color:var(--t3)">Plus de 1,4 million de recettes</div>
   </div>
   <!-- Country cards horizontal scroll -->
   <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px;mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%)">
@@ -1185,6 +1236,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="explore">
   <div class="hdr"><div class="hdr-side l"><div class="hdr-btn"><span class="ms">tune</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
   <div class="sbar-in"><span class="ms" style="color:var(--t3);font-size:22px">search</span><input type="text" placeholder="Rechercher parmi plus de 1,4 million de recettes..."><div class="mic"><span class="ms">mic</span></div></div>
+  <div id="searchOverlay" style="display:none;position:absolute;left:24px;right:24px;top:160px;z-index:200;background:var(--card);border:1px solid var(--card-b);border-radius:18px;box-shadow:0 12px 40px rgba(45,30,15,.12);padding:12px;max-height:400px;overflow-y:auto;transition:background .4s,border-color .4s">
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:600;padding:8px 8px 12px">R&Eacute;SULTATS</div>
+    <div id="searchResults"></div>
+  </div>
   <div class="magic" onclick="go(8)"><span style="font-size:30px">&#x1FA84;</span><div><div class="magic-t">Frigo Magique</div><div class="magic-s">Dites-nous ce que vous avez, on trouve la recette</div></div><span class="ms" style="color:var(--terra)">chevron_right</span></div>
   <div class="cats">
     <button class="pill on" onclick="pickCat(this)">Tout</button><button class="pill" onclick="pickCat(this)">Rapide</button><button class="pill" onclick="pickCat(this)">Budget</button><button class="pill" onclick="pickCat(this)">&Eacute;quilibr&eacute;</button><button class="pill" onclick="pickCat(this)">Comfort</button><button class="pill" onclick="pickCat(this)">F&ecirc;tes</button><button class="pill" onclick="pickCat(this)">Vegan</button><button class="pill" onclick="pickCat(this)">Halal</button><button class="pill" onclick="pickCat(this)">Keto</button>
@@ -1484,6 +1539,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <span>3 suggestions IA</span>
     <span style="color:var(--t4)">&middot;</span>
     <span>~4 080 cal/jour</span>
+  </div>
+  <div style="margin:8px 24px 16px;padding:14px 16px;background:var(--terra-g);border:1px solid rgba(196,101,74,.12);border-radius:14px;display:flex;align-items:center;gap:10px">
+    <span class="ms" style="font-size:20px;color:var(--terra)">auto_awesome</span>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Planification assist&eacute;e par IA</div>
+      <div style="font-size:11px;color:var(--t3)">Appuyez sur un cr&eacute;neau vide pour une suggestion</div>
+    </div>
   </div>
   <div class="meal-week">
     <div class="meal-week-btn"><span class="ms">chevron_left</span></div>
@@ -1932,6 +1994,16 @@ function showRecipe(idx){
     const fl=r.desc.charAt(0);
     desc.innerHTML='<span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">'+fl+'</span>'+r.desc.slice(1);
   }
+  /* Editorial story */
+  let storyEl=document.querySelector('#s3 .det-story');
+  if(!storyEl){
+    storyEl=document.createElement('div');
+    storyEl.className='det-story';
+    desc.parentNode.insertBefore(storyEl,desc.nextSibling);
+  }
+  const countryAdj=r.country==='France'?'fran\u00e7aise':r.country==='Italie'?'italienne':r.country==='Inde'?'indienne':r.country==='Gr\u00e8ce'?'grecque':'mexicaine';
+  storyEl.innerHTML='<div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:14px;margin-bottom:22px"><span class="ms" style="font-size:18px;color:var(--terra);flex-shrink:0;margin-top:2px">auto_stories</span><div style="font-family:\'Playfair Display\',serif;font-style:italic;font-size:12px;line-height:1.6;color:var(--t2)">Recette traditionnelle '+countryAdj+', transmise de g\u00e9n\u00e9ration en g\u00e9n\u00e9ration. Un classique qui r\u00e9unit les familles autour de la table.</div></div>';
+
   /* Stats */
   const statsBox=document.querySelector('#s3 .det-stats');
   if(statsBox)statsBox.innerHTML=`
@@ -2203,6 +2275,122 @@ document.querySelectorAll('.scr').forEach(scr=>{
   scr.addEventListener('touchmove',e=>{const now=Date.now(),y=e.touches[0].pageY;const dt=now-lastT||16;vel=(y-lastY)/dt;lastT=now;lastY=y},{passive:true});
   scr.addEventListener('touchend',()=>{const friction=0.95;function momentum(){if(Math.abs(vel)<0.01)return;vel*=friction;scr.scrollTop-=vel*16;raf=requestAnimationFrame(momentum)}momentum()},{passive:true});
 });
+
+/* ═══ PHASE A1: Working countdown timer ═══ */
+/* Override the existing toggleTimer to use timerV from renderCookStep */
+toggleTimer=function(){
+  timerOn=!timerOn;
+  $('#timerI').textContent=timerOn?'pause':'play_arrow';
+  const timerCard=document.querySelector('.cook-timer');
+  if(timerOn){
+    timerCard.classList.add('timer-counting');
+    clearInterval(timerInt);
+    timerInt=setInterval(()=>{
+      if(timerV<=0){
+        clearInterval(timerInt);timerOn=false;
+        $('#timerI').textContent='play_arrow';
+        timerCard.classList.remove('timer-counting');
+        const display=$('#timerD');
+        display.classList.add('timer-flash');
+        setTimeout(()=>display.classList.remove('timer-flash'),3000);
+        return;
+      }
+      timerV--;
+      const m=Math.floor(timerV/60),s=timerV%60;
+      $('#timerD').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    },1000);
+  }else{
+    clearInterval(timerInt);
+    timerCard.classList.remove('timer-counting');
+  }
+};
+
+/* ═══ PHASE A2: Scroll-triggered card entrance animations ═══ */
+const scrollObserver=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*40);
+      scrollObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+
+/* Add scroll-reveal to elements */
+document.querySelectorAll('.rr,.cc,.sh,.feat,.magic,.daily-ch,.aca-mini,.gc2,.si,.meal-slot,.meal-day').forEach(el=>{
+  el.classList.add('scroll-reveal');
+});
+document.querySelectorAll('.scroll-reveal').forEach(el=>scrollObserver.observe(el));
+
+/* Re-observe on navigation */
+function reobserveScreen(n){
+  setTimeout(()=>{
+    document.querySelectorAll('#s'+n+' .scroll-reveal').forEach(el=>{
+      el.classList.remove('visible');
+      scrollObserver.observe(el);
+    });
+    setTimeout(()=>{
+      document.querySelectorAll('#s'+n+' .scroll-reveal').forEach(el=>{
+        const rect=el.getBoundingClientRect();
+        if(rect.top<window.innerHeight&&rect.bottom>0){
+          el.classList.add('visible');
+        }
+      });
+    },50);
+  },200);
+}
+
+/* Patch go, goBack, navTab to re-observe */
+const _go2=go;
+go=function(n){_go2(n);reobserveScreen(n)};
+const _goBack2=goBack;
+goBack=function(){_goBack2();reobserveScreen(cur)};
+
+/* ═══ PHASE A3: Premium tap ripple effect ═══ */
+document.querySelectorAll('.rr,.feat,.cc,.gc2,.qa-i,.magic,.pill,.imp').forEach(el=>{
+  el.style.position=el.style.position||'relative';
+  el.style.overflow='hidden';
+  el.addEventListener('click',function(e){
+    const ripple=document.createElement('div');
+    ripple.className='tap-ripple';
+    const rect=this.getBoundingClientRect();
+    const size=Math.max(rect.width,rect.height);
+    ripple.style.width=ripple.style.height=size+'px';
+    ripple.style.left=(e.clientX-rect.left-size/2)+'px';
+    ripple.style.top=(e.clientY-rect.top-size/2)+'px';
+    this.appendChild(ripple);
+    setTimeout(()=>ripple.remove(),600);
+  });
+});
+
+/* ═══ PHASE B3: Search with live filtering ═══ */
+const searchInput=document.querySelector('#s2 .sbar-in input');
+if(searchInput){
+  searchInput.addEventListener('input',function(){
+    const q=this.value.toLowerCase().trim();
+    const overlay=document.getElementById('searchOverlay');
+    const results=document.getElementById('searchResults');
+    if(q.length<2){overlay.style.display='none';return}
+    overlay.style.display='block';
+    const matches=RECIPES.filter(r=>r.title.toLowerCase().includes(q)||r.country.toLowerCase().includes(q)||r.category.toLowerCase().includes(q));
+    results.innerHTML=matches.slice(0,5).map((r)=>{
+      const idx=RECIPES.indexOf(r);
+      return '<div onclick="document.getElementById(\'searchOverlay\').style.display=\'none\';showRecipe('+idx+')" style="display:flex;align-items:center;gap:12px;padding:10px 8px;cursor:pointer;border-radius:12px;transition:background .2s"><img src="'+r.img+'" style="width:48px;height:48px;border-radius:10px;object-fit:cover" alt=""><div><div style="font-size:14px;font-weight:500;color:var(--t1);transition:color .4s">'+r.title+'</div><div style="font-size:11px;color:var(--t3)">'+r.country+' &middot; '+r.cal+' cal</div></div></div>';
+    }).join('')||'<div style="padding:16px;text-align:center;font-size:13px;color:var(--t3)">Aucun r&eacute;sultat</div>';
+  });
+  searchInput.addEventListener('blur',function(){
+    setTimeout(()=>{document.getElementById('searchOverlay').style.display='none'},200);
+  });
+}
+
+/* ═══ PHASE C1: Image fallback ═══ */
+document.addEventListener('error',function(e){
+  if(e.target.tagName==='IMG'){
+    e.target.style.background='var(--input-bg)';
+    e.target.alt='';
+    e.target.onerror=null;
+  }
+},true);
+
 </script>
 </body>
 </html>
