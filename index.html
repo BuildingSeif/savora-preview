@@ -11,20 +11,20 @@
 
 /* ========== LIGHT (default) ========== */
 :root,[data-theme="light"]{
-  --bg:#f6f1eb;--bg2:#eee8e0;
-  --card:#ffffff;--card-b:rgba(0,0,0,.05);--card-s:0 4px 20px rgba(45,30,15,.06);
-  --t1:#2a231d;--t2:#6b6058;--t3:#a09690;--t4:#cfc7bf;
-  --terra:#c4654a;--terra-l:#b55a42;--terra-g:rgba(196,101,74,.08);
+  --bg:#f8f3ec;--bg2:#f0eae1;
+  --card:#fffefa;--card-b:rgba(0,0,0,.05);--card-s:0 4px 20px rgba(45,30,15,.06);
+  --t1:#33291f;--t2:#6b6058;--t3:#a09690;--t4:#cfc7bf;
+  --terra:#c4654a;--terra-l:#b55a42;--terra-g:rgba(196,101,74,.10);
   --sage:#6da06d;--gold:#b89840;
   --tab-bg:rgba(255,255,255,.55);--tab-b:rgba(0,0,0,.06);
   --glass:rgba(255,255,255,.45);--glass-b:rgba(0,0,0,.05);--glass-s:0 2px 12px rgba(45,30,15,.04);
-  --grad-up:linear-gradient(0deg,rgba(246,241,235,1) 0%,rgba(246,241,235,0) 100%);
-  --grad-dn:linear-gradient(180deg,rgba(246,241,235,1) 0%,rgba(246,241,235,0) 100%);
+  --grad-up:linear-gradient(0deg,rgba(248,243,236,1) 0%,rgba(248,243,236,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(248,243,236,1) 0%,rgba(248,243,236,0) 100%);
   --sep:rgba(0,0,0,.05);--input-bg:rgba(0,0,0,.03);
   --sbar-c:#2a231d;
-  --hdr-bg:rgba(246,241,235,.65);
-  --sbar-glass:rgba(246,241,235,.55);
-  --bg-paper:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E"),repeating-conic-gradient(rgba(180,160,140,.02) 0% 25%,transparent 0% 50%) 0 0/3px 3px;
+  --hdr-bg:rgba(248,243,236,.65);
+  --sbar-glass:rgba(248,243,236,.55);
+  --bg-paper:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"),repeating-conic-gradient(rgba(180,160,140,.02) 0% 25%,transparent 0% 50%) 0 0/3px 3px;
 }
 /* ========== DARK ========== */
 [data-theme="dark"]{
@@ -116,7 +116,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 }
 .hdr-btn:active{transform:scale(.9)}
 .hdr-btn .ms{font-size:20px;color:var(--t2);transition:color .4s}
-/* Active state for all tappable elements */
+/* Active state for all tappable &eacute;l&eacute;ments */
 .qa-i:active,.imp:active,.magic:active,.rr:active,.daily-ch:active,.aca-mini:active,
 .fridge-rc:active,.fridge-chip:active,.meal-slot:active,.aca-lesson:active,
 .set-row:active,.bdg:active,.si:active{transform:scale(.97)}
@@ -183,12 +183,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   position:absolute;inset:0;z-index:1;
   background:
     linear-gradient(180deg,
-      rgba(18,14,10,.15) 0%,
-      rgba(18,14,10,.05) 25%,
-      rgba(18,14,10,.2) 45%,
-      rgba(18,14,10,.7) 65%,
-      rgba(18,14,10,.92) 80%,
-      rgba(18,14,10,.97) 100%
+      rgba(18,14,10,.05) 0%,
+      rgba(18,14,10,.02) 20%,
+      rgba(18,14,10,.08) 40%,
+      rgba(18,14,10,.35) 58%,
+      rgba(18,14,10,.7) 75%,
+      rgba(18,14,10,.85) 100%
     );
 }
 .onboard-body{
@@ -266,6 +266,27 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   from{opacity:0;transform:translateY(18px)}
   to{opacity:1;transform:translateY(0)}
 }
+/* Animated food orbit around SAVORA mark */
+.ob-orbit{
+  position:absolute;top:0;left:0;right:0;padding-top:96px;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.ob-orbit-ring{
+  width:180px;height:180px;position:relative;
+  animation:orbitSpin 30s linear infinite;
+}
+@keyframes orbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ob-orbit-item{
+  position:absolute;font-size:13px;opacity:.45;
+  animation:orbitSpin 30s linear infinite reverse;
+}
+.ob-orbit-item:nth-child(1){top:0;left:50%;transform:translateX(-50%)}
+.ob-orbit-item:nth-child(2){top:15%;right:3%}
+.ob-orbit-item:nth-child(3){bottom:15%;right:3%}
+.ob-orbit-item:nth-child(4){bottom:0;left:50%;transform:translateX(-50%)}
+.ob-orbit-item:nth-child(5){bottom:15%;left:3%}
+.ob-orbit-item:nth-child(6){top:15%;left:3%}
 
 /* =========================================
    S1: HOME
@@ -419,7 +440,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .det{background:var(--bg);min-height:100%;transition:background .5s}
 .det-hero{width:100%;height:420px;position:relative}
 .det-hero img{width:100%;height:100%;object-fit:cover;display:block}
-.det-hero-g{position:absolute;bottom:0;left:0;right:0;height:250px;background:linear-gradient(0deg,var(--bg) 0%,rgba(246,241,235,.6) 40%,transparent 100%);transition:background .5s}
+.det-hero-g{position:absolute;bottom:0;left:0;right:0;height:250px;background:linear-gradient(0deg,var(--bg) 0%,rgba(248,243,236,.6) 40%,transparent 100%);transition:background .5s}
 [data-theme="dark"] .det-hero-g{background:linear-gradient(0deg,var(--bg) 0%,rgba(26,22,18,.6) 40%,transparent 100%)}
 .det-nav{position:absolute;top:56px;left:0;right:0;display:flex;justify-content:space-between;padding:10px 24px;z-index:10}
 .nb{width:42px;height:42px;border-radius:50%;background:rgba(20,16,12,.35);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s,background .2s}
@@ -485,7 +506,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .ckd{width:6px;height:6px;border-radius:3px;background:var(--t4);transition:all .3s}.ckd.on{width:20px;background:var(--terra)}.ckd.done{background:var(--sage)}
 .cook-body{flex:1;display:flex;flex-direction:column;padding:0 24px}
 .cook-img{width:100%;height:220px;border-radius:22px;overflow:hidden;margin-bottom:24px;box-shadow:0 8px 28px rgba(45,30,15,.1)}.cook-img img{width:100%;height:100%;object-fit:cover;display:block}
-.cook-inst{font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:var(--t1);line-height:1.5;margin-bottom:22px;transition:color .4s}
+.cook-inst{font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:var(--t1);line-height:1.5;margin-bottom:22px;transition:color .4s,font-size .3s}
 .cook-timer{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--card);border:1px solid var(--card-b);border-radius:22px;margin-bottom:auto;box-shadow:var(--glass-s);transition:background .4s}
 .cook-timer .ms{font-size:24px;color:var(--terra)}
 .cook-timer-t{font-size:44px;font-weight:600;color:var(--t1);font-variant-numeric:tabular-nums;transition:color .4s}
@@ -864,9 +885,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S0: ONBOARDING -->
 <div class="scr" id="s0" data-s="on">
 <div class="onboard" id="onboardContainer">
-  <div class="onboard-bg" id="obBg" style="background:radial-gradient(ellipse at 50% 30%, rgba(60,40,25,.95), rgba(18,14,10,.98))"></div>
+  <div class="onboard-bg" id="obBg" style="background:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80') center/cover no-repeat"></div>
   <div class="onboard-grad"></div>
   <div class="onboard-mark">Savora</div>
+  <div class="ob-orbit"><div class="ob-orbit-ring"><span class="ob-orbit-item">&#x1F345;</span><span class="ob-orbit-item">&#x1F9C5;</span><span class="ob-orbit-item">&#x1F33F;</span><span class="ob-orbit-item">&#x1F34B;</span><span class="ob-orbit-item">&#x1F9C4;</span><span class="ob-orbit-item">&#x1FAD2;</span></div></div>
   <div class="onboard-body">
     <div class="onboard-eyebrow" id="obEyebrow" style="display:none"></div>
     <div class="onboard-title" id="obTitle" style="display:none"></div>
@@ -874,11 +896,19 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <!-- Panel 0: Language picker (shown by default) -->
     <div id="obLangPanel" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px;flex:1">
       <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:300;color:#f0ebe4;margin-bottom:8px;text-align:center">Bienvenue</div>
-      <div style="font-size:14px;color:rgba(200,192,184,.6);margin-bottom:40px;text-align:center">Choisissez votre langue</div>
-      <div style="display:flex;flex-direction:column;gap:12px;width:100%">
-        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#f0ebe4;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EB;&#x1F1F7; Francais</button>
+      <div style="font-size:14px;color:rgba(200,192,184,.6);margin-bottom:40px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">&#x1F310; Choisissez votre langue</div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%">
+        <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1.5px solid var(--terra);background:rgba(196,101,74,.18);color:#f0ebe4;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s;box-shadow:0 4px 16px rgba(196,101,74,.2)">&#x1F1EB;&#x1F1F7; Fran&ccedil;ais</button>
         <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EC;&#x1F1E7; English</button>
         <button onclick="advanceOnboard()" style="height:54px;border-radius:27px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.7);font-family:'Inter',sans-serif;font-size:15px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .3s">&#x1F1EE;&#x1F1F3; Hindi</button>
+        <div style="display:flex;gap:10px">
+          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1EA;&#x1F1F8; Espa&ntilde;ol</button>
+          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1E9;&#x1F1EA; Deutsch</button>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1F8;&#x1F1E6; &#x0627;&#x0644;&#x0639;&#x0631;&#x0628;&#x064A;&#x0629;</button>
+          <button onclick="advanceOnboard()" style="flex:1;height:48px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(200,192,184,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .3s">&#x1F1E8;&#x1F1F3; &#x4E2D;&#x6587;</button>
+        </div>
       </div>
     </div>
     <div style="display:flex;gap:5px;justify-content:center;margin-bottom:24px" id="obDots">
@@ -891,8 +921,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <button class="ob-btn-main" onclick="go(1)">Commencer</button>
       <button class="ob-btn-ghost" onclick="advanceOnboard()"><span class="ms">arrow_forward</span></button>
     </div>
-    <div style="text-align:center;font-size:11px;color:rgba(200,192,184,.5);margin-top:8px;letter-spacing:.5px;display:none" id="obSubtitle">15 ecrans a decouvrir</div>
-    <div class="onboard-login" style="display:none"><a href="#">Deja un compte ? Se connecter</a></div>
+    <div style="text-align:center;font-size:11px;color:rgba(200,192,184,.5);margin-top:8px;letter-spacing:.5px;display:none" id="obSubtitle">15 &eacute;crans &agrave; d&eacute;couvrir</div>
+    <div class="onboard-login" style="display:none"><a href="#">D&eacute;j&agrave; un compte ? Se connecter</a></div>
   </div>
 </div>
 </div>
@@ -913,7 +943,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
       <div style="text-align:right">
         <div style="font-size:11px;color:var(--t3)">Dimanche 23 mars</div>
-        <div style="font-size:11px;color:var(--terra);font-weight:500;margin-top:2px">1 484 101 recettes</div>
+        <div style="font-size:11px;color:var(--terra);font-weight:500;margin-top:2px">Plus de 1,4 million de recettes</div>
       </div>
     </div>
     <!-- Mood inspiration card -->
@@ -928,7 +958,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <!-- Search Bar -->
   <div style="margin:0 24px 14px;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--glass-b);border-radius:50px;padding:0 8px 0 18px;height:46px;cursor:pointer;transition:background .4s" onclick="go(2)">
     <span class="ms" style="color:var(--t3);font-size:20px">search</span>
-    <span style="flex:1;font-size:14px;color:var(--t3);font-family:'Inter',sans-serif">Rechercher parmi 1 484 101 recettes...</span>
+    <span style="flex:1;font-size:14px;color:var(--t3);font-family:'Inter',sans-serif">Rechercher parmi plus de 1,4 million de recettes...</span>
     <div style="width:34px;height:34px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:16px;color:#fff">mic</span></div>
   </div>
   <!-- Quick actions — simple, ancien Internet -->
@@ -939,13 +969,18 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <span style="color:var(--t4)">&middot;</span>
     <button onclick="go(8)" style="display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:12px;color:var(--terra);font-weight:500;padding:0;transition:opacity .2s"><span class="ms" style="font-size:16px">photo_camera</span>Identifier un plat</button>
   </div>
+  <!-- Prêt en 15 minutes — Quick section for beginners/families -->
+  <div class="sh" style="margin-top:4px"><div class="sh-t">Pr&ecirc;t en 15 minutes</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
+  <div class="rr" onclick="go(3)" style="margin-bottom:8px"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773904340400-7h8a0clk.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; G&acirc;teau chocolat en tasse</div><div class="rr-d">Fondant au micro-ondes &middot; Ultra facile</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 8 min</div><span style="font-size:10px;font-weight:600;color:#fff;background:var(--sage);padding:2px 8px;border-radius:8px;margin-left:6px">Facile</span></div></div></div>
+  <div class="rr" onclick="go(11)" style="margin-bottom:8px"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773897784412-sa63q9w6.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Salade rapide poulet avocat</div><div class="rr-d">Fra&icirc;che et nourrissante</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 12 min</div><span style="font-size:10px;font-weight:600;color:#fff;background:var(--sage);padding:2px 8px;border-radius:8px;margin-left:6px">D&eacute;butant</span></div></div></div>
+  <div class="rr" onclick="go(12)" style="margin-bottom:8px"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773901710580-zlhc8idy.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Pav&eacute; de saumon express</div><div class="rr-d">Po&ecirc;l&eacute; au beurre citronn&eacute;</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div><span style="font-size:10px;font-weight:600;color:#fff;background:var(--sage);padding:2px 8px;border-radius:8px;margin-left:6px">Facile</span></div></div></div>
   <!-- Continue Cooking -->
   <div onclick="go(4)" style="margin:0 24px 16px;display:flex;align-items:center;gap:14px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:18px;padding:14px 16px;cursor:pointer;transition:transform .25s cubic-bezier(.16,1,.3,1)">
     <img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
     <div style="flex:1;min-width:0">
       <div style="font-size:11px;color:var(--terra);font-weight:600;letter-spacing:.5px;text-transform:uppercase">REPRENDRE</div>
       <div style="font-size:14px;font-weight:500;color:var(--t1);margin-top:2px;transition:color .4s">Gratin de gnocchis</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:1px">Etape 2 sur 3 &middot; 8 min restantes</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:1px">&Eacute;tape 2 sur 3 &middot; 8 min restantes</div>
     </div>
     <div style="width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(196,101,74,.25)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span></div>
   </div>
@@ -957,14 +992,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         <img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
         <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px">
           <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px">&#x1F1EB;&#x1F1F7; Plat</div>
-          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:6px">Gratin de gnocchis a la creme d'ail</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:6px">Gratin de gnocchis a la cr&egrave;me d'ail</div>
           <div style="display:flex;gap:12px;font-size:11px;color:rgba(255,255,255,.6)"><span>45 min</span><span>600 cal</span><span>&#9733; 4.8</span></div>
         </div>
       </div>
       <div onclick="go(11)" style="border-radius:20px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 4px 16px rgba(45,30,15,.08);transition:transform .25s cubic-bezier(.32,.72,.0,1)">
         <img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
         <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
-          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.15">Poulet tikka aux epices</div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:#fff;line-height:1.15">Poulet tikka aux &eacute;pices</div>
           <div style="font-size:10px;color:rgba(255,255,255,.55);margin-top:3px">&#x1F1EE;&#x1F1F3; 25 min &middot; &#9733; 4.9</div>
         </div>
       </div>
@@ -1009,8 +1044,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <!-- Total counter -->
   <div style="text-align:center;margin-bottom:16px;padding:14px;background:var(--card);border:1px solid var(--card-b);border-radius:16px;transition:background .4s,border-color .4s">
-    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:var(--t1);letter-spacing:-.5px;transition:color .4s">1 484 101</div>
-    <div style="font-size:11px;color:var(--t3);margin-top:2px;letter-spacing:.5px">recettes de 303 pays et regions</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:var(--t1);letter-spacing:-.3px;transition:color .4s">Plus de 1,4 million</div>
+    <div style="font-size:11px;color:var(--t3);margin-top:2px;letter-spacing:.5px">de recettes du monde entier</div>
   </div>
   <!-- Country cards horizontal scroll -->
   <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px;mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%)">
@@ -1019,7 +1054,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <img src="https://optirecipe.com/uploads/recipe-img-1773897419142-cu759vbt.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
         <div style="font-size:16px;margin-bottom:2px">🇺🇸</div>
-        <div style="font-size:12px;font-weight:600;color:#fff">Etats-Unis</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">&Eacute;tats-Unis</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">612 407</div>
       </div>
     </div>
@@ -1055,7 +1090,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
         <div style="font-size:16px;margin-bottom:2px">🇧🇷</div>
-        <div style="font-size:12px;font-weight:600;color:#fff">Bresil</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Br&eacute;sil</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">73 083</div>
       </div>
     </div>
@@ -1100,7 +1135,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=260&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.1) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
         <div style="font-size:16px;margin-bottom:2px">🇬🇷</div>
-        <div style="font-size:12px;font-weight:600;color:#fff">Grece</div>
+        <div style="font-size:12px;font-weight:600;color:#fff">Gr&egrave;ce</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">19 034</div>
       </div>
     </div>
@@ -1117,7 +1152,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
   <div style="background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;padding:20px;margin:0 24px 20px">
     <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:8px">CONSEIL DU CHEF</div>
-    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--t1);margin-bottom:12px;transition:color .4s">"Laissez toujours reposer votre viande apres cuisson. Les jus se redistribuent, offrant un resultat plus tendre et savoureux."</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--t1);margin-bottom:12px;transition:color .4s">"Laissez toujours reposer votre viande apr&egrave;s cuisson. Les jus se redistribuent, offrant un r&eacute;sultat plus tendre et savoureux."</div>
     <div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:var(--terra-g);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="ms" style="font-size:16px;color:var(--terra)">restaurant</span></div><span style="font-size:12px;color:var(--t3)">Chef Marie Laurent</span></div>
   </div>
   <!-- Serendipity -->
@@ -1127,7 +1162,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.88) 0%,rgba(16,12,8,.15) 50%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px">
         <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
           <span style="font-size:14px">&#x2728;</span>
-          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,135,111,.9)">Decouverte du jour</span>
+          <span style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,135,111,.9)">D&eacute;couverte du jour</span>
         </div>
         <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:6px">Nouilles soba<br>au poulet</div>
         <div style="font-size:12px;color:rgba(255,255,255,.55)">Japon &middot; 40 min &middot; 4 parts &middot; &#9733; 4.7</div>
@@ -1137,26 +1172,28 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div class="sh"><div class="sh-t">Collections</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
   <div class="hs">
-    <div class="cc" onclick="go(11)"><img src="https://optirecipe.com/uploads/recipe-img-1773897784412-sa63q9w6.jpg" alt=""><div class="cc-ov"><div class="cc-n">Rapide & Facile</div><div class="cc-c">154 recettes</div></div></div>
-    <div class="cc" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773899630049-ky45nopb.jpg" alt=""><div class="cc-ov"><div class="cc-n">Equilibre</div><div class="cc-c">312 recettes</div></div></div>
+    <div class="cc" onclick="go(11)" style="position:relative"><img src="https://optirecipe.com/uploads/recipe-img-1773897784412-sa63q9w6.jpg" alt=""><span style="position:absolute;top:10px;left:10px;font-size:10px;font-weight:600;color:#fff;background:var(--terra);padding:3px 8px;border-radius:8px;z-index:2">15 min</span><div class="cc-ov"><div class="cc-n">Rapide & Facile</div><div class="cc-c">154 recettes</div></div></div>
+    <div class="cc" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773899630049-ky45nopb.jpg" alt=""><div class="cc-ov"><div class="cc-n">&Eacute;quilibr&eacute;</div><div class="cc-c">312 recettes</div></div></div>
     <div class="cc" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773903901248-6wp836v9.jpg" alt=""><div class="cc-ov"><div class="cc-n">Desserts</div><div class="cc-c">89 recettes</div></div></div>
     <div class="cc" onclick="go(3)"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Soupes</div><div class="cc-c">67 recettes</div></div></div>
     <div class="cc" onclick="go(3)"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Brunch</div><div class="cc-c">48 recettes</div></div></div>
   </div>
   <div class="sh"><div class="sh-t">Tendances de la semaine</div><button class="sh-link" onclick="go(2)">Voir tout</button></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773897784412-sa63q9w6.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Roules de poulet aux epinards</div><div class="rr-d">&#x1F1EB;&#x1F1F7; &middot; 164 cal &middot; Roules croustillants farcis</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 50 min</div></div></div></div>
-  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773897386553-2xov0blt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EE;&#x1F1F9; Poulet piccata aux amandes</div><div class="rr-d">&#x1F1EE;&#x1F1F9; &middot; 366 cal &middot; Poulet pane citron amandes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 35 min</div></div></div></div>
-  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773901380039-6hdbcfdt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1E8;&#x1F1F3; Fondue chinoise vegetarienne</div><div class="rr-d">&#x1F1E8;&#x1F1F3; &middot; 110 cal &middot; Bouillon parfume aux legumes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 1h 30</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773897784412-sa63q9w6.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Roul&eacute;s de poulet aux &eacute;pinards</div><div class="rr-d">&#x1F1EB;&#x1F1F7; &middot; 164 cal &middot; Roul&eacute;s croustillants farcis</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 50 min</div></div></div></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773897386553-2xov0blt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EE;&#x1F1F9; Poulet piccata aux amandes</div><div class="rr-d">&#x1F1EE;&#x1F1F9; &middot; 366 cal &middot; Poulet pan&eacute; citron amandes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 35 min</div></div></div></div>
+  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773901380039-6hdbcfdt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1E8;&#x1F1F3; Fondue chinoise v&eacute;g&eacute;tarienne</div><div class="rr-d">&#x1F1E8;&#x1F1F3; &middot; 110 cal &middot; Bouillon parfum&eacute; aux l&eacute;gumes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 1h 30</div></div></div></div>
   <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773900583997-yoxgtobp.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F2;&#x1F1FD; Patates douces farcies chili</div><div class="rr-d">&#x1F1F2;&#x1F1FD; &middot; 203 cal &middot; Farcies au chili et fromage</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 55 min</div></div></div></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773904340400-7h8a0clk.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; Gateau chocolat en tasse</div><div class="rr-d">&#x1F1EB;&#x1F1F7; &middot; 769 cal &middot; Fondant au micro-ondes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 8 min</div></div></div></div>
-  <div class="sh" style="margin-top:16px"><div class="sh-t">Vus recemment</div><button class="sh-link">Effacer</button></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773904340400-7h8a0clk.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EB;&#x1F1F7; G&acirc;teau chocolat en tasse</div><div class="rr-d">&#x1F1EB;&#x1F1F7; &middot; 769 cal &middot; Fondant au micro-ondes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 8 min</div></div></div></div>
+  <div class="sh" style="margin-top:16px"><div class="sh-t">Vus r&eacute;cemment</div><button class="sh-link">Effacer</button></div>
   <div class="hs">
     <div class="cc" style="min-width:130px;height:170px" onclick="go(11)"><img src="https://optirecipe.com/uploads/recipe-img-1773899915841-3d5sqh9i.jpg" alt=""><div class="cc-ov"><div class="cc-n">Tarte Tatin</div><div class="cc-c">50 min</div></div></div>
-    <div class="cc" style="min-width:130px;height:170px" onclick="go(12)"><img src="https://optirecipe.com/uploads/recipe-img-1773901710580-zlhc8idy.jpg" alt=""><div class="cc-ov"><div class="cc-n">Pave de Saumon</div><div class="cc-c">15 min</div></div></div>
+    <div class="cc" style="min-width:130px;height:170px" onclick="go(12)"><img src="https://optirecipe.com/uploads/recipe-img-1773901710580-zlhc8idy.jpg" alt=""><div class="cc-ov"><div class="cc-n">Pav&eacute; de saumon</div><div class="cc-c">15 min</div></div></div>
     <div class="cc" style="min-width:130px;height:170px" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773900583997-yoxgtobp.jpg" alt=""><div class="cc-ov"><div class="cc-n">Fish Tacos</div><div class="cc-c">25 min</div></div></div>
     <div class="cc" style="min-width:130px;height:170px" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773901005101-94y16qr5.jpg" alt=""><div class="cc-ov"><div class="cc-n">Green Curry</div><div class="cc-c">30 min</div></div></div>
   </div>
-  <div style="text-align:center;padding:30px 24px 20px">
+  <!-- Surprise me button -->
+  <div style="text-align:center;padding:10px 24px 30px"><button onclick="go(Math.random()>0.5?11:12)" style="height:48px;padding:0 28px;border-radius:24px;border:1.5px solid var(--terra);background:transparent;color:var(--terra);font-family:'Playfair Display',serif;font-size:14px;font-weight:400;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .3s"><span class="ms" style="font-size:18px">shuffle</span>Surprenez-moi !</button></div>
+  <div style="text-align:center;padding:10px 24px 20px">
     <div style="font-family:'Playfair Display',serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--t4);transition:color .4s">Savora</div>
     <div style="font-size:10px;color:var(--t4);margin-top:6px;transition:color .4s">Fait avec passion pour les cuisiniers du monde entier</div>
   </div>
@@ -1167,29 +1204,29 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s2" data-s="off">
 <div class="explore">
   <div class="hdr"><div class="hdr-side l"><div class="hdr-btn"><span class="ms">tune</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
-  <div class="sbar-in"><span class="ms" style="color:var(--t3);font-size:22px">search</span><input type="text" placeholder="Rechercher parmi 1 484 101 recettes..."><div class="mic"><span class="ms">mic</span></div></div>
+  <div class="sbar-in"><span class="ms" style="color:var(--t3);font-size:22px">search</span><input type="text" placeholder="Rechercher parmi plus de 1,4 million de recettes..."><div class="mic"><span class="ms">mic</span></div></div>
   <div class="magic" onclick="go(8)"><span style="font-size:30px">&#x1FA84;</span><div><div class="magic-t">Frigo Magique</div><div class="magic-s">Dites-nous ce que vous avez, on trouve la recette</div></div><span class="ms" style="color:var(--terra)">chevron_right</span></div>
   <div class="cats">
-    <button class="pill on" onclick="pickCat(this)">Tout</button><button class="pill" onclick="pickCat(this)">Rapide</button><button class="pill" onclick="pickCat(this)">Budget</button><button class="pill" onclick="pickCat(this)">Equilibre</button><button class="pill" onclick="pickCat(this)">Comfort</button><button class="pill" onclick="pickCat(this)">Fetes</button><button class="pill" onclick="pickCat(this)">Vegan</button><button class="pill" onclick="pickCat(this)">Halal</button><button class="pill" onclick="pickCat(this)">Keto</button>
+    <button class="pill on" onclick="pickCat(this)">Tout</button><button class="pill" onclick="pickCat(this)">Rapide</button><button class="pill" onclick="pickCat(this)">Budget</button><button class="pill" onclick="pickCat(this)">&Eacute;quilibr&eacute;</button><button class="pill" onclick="pickCat(this)">Comfort</button><button class="pill" onclick="pickCat(this)">F&ecirc;tes</button><button class="pill" onclick="pickCat(this)">Vegan</button><button class="pill" onclick="pickCat(this)">Halal</button><button class="pill" onclick="pickCat(this)">Keto</button>
   </div>
   <div class="sh"><div class="sh-t">Populaires</div></div>
   <div class="grid">
-    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773899601367-dc3cijdq.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Gratin legumes orge perle</div><div class="gc2-m"><span class="ms">schedule</span> 1h 10</div></div></div>
-    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773899915841-3d5sqh9i.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1FA;&#x1F1F8; Tofu croustillant mais epice</div><div class="gc2-m"><span class="ms">schedule</span> 36 min</div></div></div>
-    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773901710580-zlhc8idy.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1E8;&#x1F1F3; Canard vegetarien chinois</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773899601367-dc3cijdq.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Gratin l&eacute;gumes orge perle</div><div class="gc2-m"><span class="ms">schedule</span> 1h 10</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773899915841-3d5sqh9i.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1FA;&#x1F1F8; Tofu croustillant mais &eacute;pic&eacute;</div><div class="gc2-m"><span class="ms">schedule</span> 36 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773901710580-zlhc8idy.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1E8;&#x1F1F3; Canard v&eacute;g&eacute;tarien chinois</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
     <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773901005101-94y16qr5.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1F2;&#x1F1FD; Chili courge quinoa</div><div class="gc2-m"><span class="ms">schedule</span> 1h 10</div></div></div>
     <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773885615961-mnzt7g1d.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Salade cantaloup noix</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
-    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773898928131-6381041o.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Poulet clementines avocat</div><div class="gc2-m"><span class="ms">schedule</span> 50 min</div></div></div>
+    <div class="gc2" onclick="go(3)"><img src="https://optirecipe.com/uploads/recipe-img-1773898928131-6381041o.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Poulet cl&eacute;mentines avocat</div><div class="gc2-m"><span class="ms">schedule</span> 50 min</div></div></div>
   </div>
   <div class="sh" style="margin-top:6px"><div class="sh-t">Coups de coeur</div></div>
-  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EE;&#x1F1F3; Poulet tikka leger</div><div class="rr-d">Marinade delicate au yaourt et epices</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 25 min</div></div></div></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773900613725-osnflkyc.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F2;&#x1F1FD; Roules chili epinards</div><div class="rr-d">Croustillants et garnis de poulet et haricots noirs</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 27 min</div></div></div></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773901147880-vaba0w6f.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1E8;&#x1F1F3; Tofu sauce bourbon</div><div class="rr-d">Croustillant, sucre-epice, sur lit de riz</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1EE;&#x1F1F3; Poulet tikka l&eacute;ger</div><div class="rr-d">Marinade d&eacute;licate au yaourt et &eacute;pices</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.9</div><div class="rr-time"><span class="ms">schedule</span> 25 min</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773900613725-osnflkyc.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1F2;&#x1F1FD; Roul&eacute;s chili &eacute;pinards</div><div class="rr-d">Croustillants et garnis de poulet et haricots noirs</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.8</div><div class="rr-time"><span class="ms">schedule</span> 27 min</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773901147880-vaba0w6f.jpg" alt=""></div><div class="rr-info"><div class="rr-n">&#x1F1E8;&#x1F1F3; Tofu sauce bourbon</div><div class="rr-d">Croustillant, sucre-&eacute;pic&eacute;, sur lit de riz</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 4.7</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
   <div class="sh"><div class="sh-t">Par cuisine</div><button class="sh-link" onclick="go(13)">Voir tout</button></div>
   <div style="display:flex;gap:10px;padding:0 24px 20px;overflow-x:auto;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%)">
     <div onclick="go(13)" style="text-align:center;cursor:pointer;flex-shrink:0">
       <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--terra)"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Francaise</div>
+      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Fran&ccedil;aise</div>
       <div style="font-size:9px;color:var(--t3)">259K</div>
     </div>
     <div onclick="go(13)" style="text-align:center;cursor:pointer;flex-shrink:0">
@@ -1218,7 +1255,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div style="font-size:9px;color:var(--t3)">30K</div>
     </div>
   </div>
-  <div class="sh"><div class="sh-t">Par theme</div></div>
+  <div class="sh"><div class="sh-t">Par th&egrave;me</div></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px 24px">
     <div onclick="go(13)" style="padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);cursor:pointer;transition:transform .2s,background .4s">
       <div style="font-size:20px;margin-bottom:6px">&#x23F1;&#xFE0F;</div>
@@ -1227,7 +1264,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
     <div onclick="go(13)" style="padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);cursor:pointer;transition:transform .2s,background .4s">
       <div style="font-size:20px;margin-bottom:6px">&#x1F331;</div>
-      <div style="font-family:'Playfair Display',serif;font-size:14px;color:var(--t1);transition:color .4s">Vegetarien</div>
+      <div style="font-family:'Playfair Display',serif;font-size:14px;color:var(--t1);transition:color .4s">V&eacute;g&eacute;tarien</div>
       <div style="font-size:10px;color:var(--t3);margin-top:2px">Sans viande</div>
     </div>
     <div onclick="go(13)" style="padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);cursor:pointer;transition:transform .2s,background .4s">
@@ -1238,11 +1275,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div onclick="go(13)" style="padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);cursor:pointer;transition:transform .2s,background .4s">
       <div style="font-size:20px;margin-bottom:6px">&#x1F389;</div>
       <div style="font-family:'Playfair Display',serif;font-size:14px;color:var(--t1);transition:color .4s">Recevoir</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:2px">Impressionner vos invites</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:2px">Impressionner vos invit&eacute;s</div>
     </div>
   </div>
   <div style="text-align:center;padding:12px 24px 20px">
-    <div style="font-size:11px;color:var(--t3);transition:color .4s">1 484 101 recettes de 303 pays</div>
+    <div style="font-size:11px;color:var(--t3);transition:color .4s">Plus de 1,4 million de recettes du monde entier</div>
   </div>
 </div>
 </div>
@@ -1254,10 +1291,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="det-nav"><button class="nb" onclick="goBack()"><span class="ms">arrow_back</span></button><div class="nb-r"><button class="nb"><span class="ms">share</span></button><button class="nb" id="likeBtn" onclick="toggleLike()"><span class="ms" id="likeIcon">favorite_border</span></button></div></div>
   </div>
   <div class="det-body">
-    <div class="det-cat">&#127467;&#127479; Plat &middot; Francais</div>
-    <div class="det-t">Gratin de gnocchis<br>creme d'ail</div>
-    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=70" alt=""></div>par la communaute &middot; 98/100</div>
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">U</span>n gratin genereux ou de petits gnocchis maison se melent a des champignons poeles et une creme a l'ail parfumee au vin blanc. Le tout gratine au four sous une couche de fromage fondant.</p>
+    <div class="det-cat">&#127467;&#127479; Plat &middot; Fran&ccedil;ais</div>
+    <div class="det-t">Gratin de gnocchis<br>cr&egrave;me d'ail</div>
+    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=70" alt=""></div>par la communaut&eacute; &middot; 98/100</div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:16px;display:flex;align-items:center;gap:6px"><span class="ms" style="font-size:14px;color:var(--t4)">verified</span>Source : Marmiton &middot; V&eacute;rifi&eacute;e par la communaut&eacute;</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">U</span>n gratin g&eacute;n&eacute;reux ou de petits gnocchis maison se m&ecirc;lent a des champignons po&ecirc;l&eacute;s et une cr&egrave;me a l'ail parfum&eacute;e au vin blanc. Le tout gratin&eacute; au four sous une couche de fromage fondant.</p>
     <div class="det-stats">
       <div class="ds"><span class="ms">restaurant</span><div class="ds-v">45</div><div class="ds-l">min prep</div></div>
       <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">20</div><div class="ds-l">min cuisson</div></div>
@@ -1265,14 +1303,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div class="ds"><span class="ms">signal_cellular_alt</span><div class="ds-v">3/5</div><div class="ds-l">moyen</div></div>
     </div>
     <div class="det-tabs">
-      <button class="det-tab on" onclick="switchDetTab(this,0)">Apercu</button>
-      <button class="det-tab" onclick="switchDetTab(this,1)">Ingredients</button>
-      <button class="det-tab" onclick="switchDetTab(this,2)">Preparation</button>
+      <button class="det-tab on" onclick="switchDetTab(this,0)">Aper&ccedil;u</button>
+      <button class="det-tab" onclick="switchDetTab(this,1)">Ingr&eacute;dients</button>
+      <button class="det-tab" onclick="switchDetTab(this,2)">Pr&eacute;paration</button>
     </div>
     <div class="det-panel" data-panel="0">
     <div class="por-l">Portions</div>
     <div class="por-pills"><button class="pill" onclick="pickP(this)">1x</button><button class="pill" onclick="pickP(this)">2x</button><button class="pill on" onclick="pickP(this)">4x</button><button class="pill" onclick="pickP(this)">6x</button><button class="pill" onclick="pickP(this)">8x</button></div>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Cout estime : <strong style="color:var(--t1);transition:color .4s">2,80 EUR</strong> par personne</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Co&ucirc;t estim&eacute; : <strong style="color:var(--t1);transition:color .4s">2,80 EUR</strong> par personne</div>
     <div style="display:flex;justify-content:center;gap:16px;padding:14px 0 20px;font-family:'Playfair Display',serif;font-size:13px;color:var(--t3);transition:color .4s">
       <span>600 cal</span><span style="color:var(--t4)">&middot;</span>
       <span>20g prot.</span><span style="color:var(--t4)">&middot;</span>
@@ -1281,21 +1319,21 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px">
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Sans porc</span>
-      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en proteines</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en prot&eacute;ines</span>
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(109,160,109,.1);color:var(--sage);font-weight:500">Sans gluten</span>
     </div>
     <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(109,160,109,.06);border:1px solid rgba(109,160,109,.12);border-radius:14px;margin-bottom:20px">
       <div style="width:40px;height:40px;border-radius:12px;background:rgba(109,160,109,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px">&#x1F331;</div>
       <div>
         <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Impact environnemental : <span style="color:#7aad7a">B</span></div>
-        <div style="font-size:11px;color:var(--t3);margin-top:2px">1.8 kg CO&#x2082; par portion &middot; <span style="color:var(--terra);cursor:pointer;text-decoration:underline">Ameliorer avec des substituts</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">1.8 kg CO&#x2082; par portion &middot; <span style="color:var(--terra);cursor:pointer;text-decoration:underline">Am&eacute;liorer avec des substituts</span></div>
       </div>
     </div>
     </div><!-- /panel 0 -->
     <div class="det-panel" data-panel="1" style="display:none">
     <div style="display:flex;align-items:center;gap:12px;margin:28px 0 20px">
       <div style="flex:1;height:1px;background:var(--sep)"></div>
-      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Ingredients</span>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Ingr&eacute;dients</span>
       <div style="flex:1;height:1px;background:var(--sep)"></div>
     </div>
     <div class="ing" style="display:flex;align-items:center"><div class="ing-l"><span class="ing-n">&#x1F344; Champignons de Paris</span></div><span class="ing-dots"></span><span class="ing-a">500 g</span><button style="width:28px;height:28px;border-radius:50%;background:rgba(109,160,109,.1);border:1px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:8px"><span class="ms" style="font-size:14px;color:#7aad7a">swap_horiz</span></button></div>
@@ -1303,28 +1341,28 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="ing" style="display:flex;align-items:center"><div class="ing-l"><span class="ing-n">&#x1F33F; Persil</span></div><span class="ing-dots"></span><span class="ing-a">1 c.a.s.</span><button style="width:28px;height:28px;border-radius:50%;background:rgba(109,160,109,.1);border:1px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:8px"><span class="ms" style="font-size:14px;color:#7aad7a">swap_horiz</span></button></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F9C8; Beurre</span></div><span class="ing-dots"></span><span class="ing-a">10 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F377; Vin blanc (Riesling)</span></div><span class="ing-dots"></span><span class="ing-a">10 cl</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95B; Creme liquide</span></div><span class="ing-dots"></span><span class="ing-a">25 cl</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F9C0; Fromage rape</span></div><span class="ing-dots"></span><span class="ing-a">150 g</span></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95B; Cr&egrave;me liquide</span></div><span class="ing-dots"></span><span class="ing-a">25 cl</span></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F9C0; Fromage r&acirc;p&eacute;</span></div><span class="ing-dots"></span><span class="ing-a">150 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F954; Puree de pommes de terre</span></div><span class="ing-dots"></span><span class="ing-a">400 g</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95A; Oeuf</span></div><span class="ing-dots"></span><span class="ing-a">1</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F33E; Farine de ble</span></div><span class="ing-dots"></span><span class="ing-a">200 g</span></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95A; &OElig;uf</span></div><span class="ing-dots"></span><span class="ing-a">1</span></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F33E; Farine de bl&eacute;</span></div><span class="ing-dots"></span><span class="ing-a">200 g</span></div>
     </div><!-- /panel 1 -->
     <div class="det-panel" data-panel="2" style="display:none">
     <div style="display:flex;align-items:center;gap:12px;margin:28px 0 20px">
       <div style="flex:1;height:1px;background:var(--sep)"></div>
-      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Preparation</span>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Pr&eacute;paration</span>
       <div style="flex:1;height:1px;background:var(--sep)"></div>
     </div>
-    <div class="step"><div class="step-n">1</div><div class="step-t">Melangez la puree froide avec la farine, l'oeuf, sel et poivre jusqu'a obtenir une pate qui ne colle plus.</div></div>
-    <div class="step"><div class="step-n">2</div><div class="step-t">Formez de petits boudins de pate sur un plan farine.</div></div>
-    <div class="step"><div class="step-n">3</div><div class="step-t">Plongez les gnocchis dans l'eau bouillante salee. Quand ils remontent, prolongez 2-3 minutes.</div></div>
-    <div class="step"><div class="step-n">4</div><div class="step-t">Faites sauter les champignons eminces avec l'ail et le beurre, 5 minutes a feu vif.</div></div>
-    <div class="step"><div class="step-n">5</div><div class="step-t">Faites revenir l'ail hache, deglacez au vin blanc, ajoutez la creme et laissez epaissir.</div></div>
-    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 5 etapes</button></div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">M&eacute;langez la pur&eacute;e froide avec la farine, l'&oelig;uf, sel et poivre jusqu'&agrave; obtenir une p&acirc;te qui ne colle plus.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Formez de petits boudins de p&acirc;te sur un plan farin&eacute;.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Plongez les gnocchis dans l'eau bouillante sal&eacute;e. Quand ils remontent, prolongez 2-3 minutes.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Faites sauter les champignons &eacute;minc&eacute;s avec l'ail et le beurre, 5 minutes &agrave; feu vif.</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">Faites revenir l'ail hach&eacute;, d&eacute;glacez au vin blanc, ajoutez la cr&egrave;me et laissez &eacute;paissir.</div></div>
+    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 5 &eacute;tapes</button></div>
     </div><!-- /panel 2 -->
     <div style="margin:24px 0;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
       <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
-      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">La recette peut aussi se faire avec un reste de pates a la place des gnocchis maison.</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">La recette peut aussi se faire avec un reste de p&acirc;tes &agrave; la place des gnocchis maison.</div>
     </div>
     <div style="margin-top:28px">
       <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:var(--t1);margin-bottom:14px;transition:color .4s">Vous pourriez aussi aimer</div>
@@ -1346,7 +1384,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
     <div style="text-align:center;padding:20px 0 8px">
-      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Suggerer une correction</button>
+      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Sugg&eacute;rer une correction</button>
     </div>
   </div>
 </div>
@@ -1355,7 +1393,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S4: COOKING MODE -->
 <div class="scr" id="s4" data-s="off">
 <div class="cook">
-  <div class="cook-hdr"><button class="cook-cl" onclick="goBack()"><span class="ms">close</span></button><div class="cook-tt">Gratin de gnocchis</div><div class="cook-sn" id="cookStepLabel">Etape 1 / 3</div></div>
+  <div class="cook-hdr"><button class="cook-cl" onclick="goBack()"><span class="ms">close</span></button><div class="cook-tt">Gratin de gnocchis</div><div style="display:flex;align-items:center;gap:8px"><div class="cook-sn" id="cookStepLabel">&Eacute;tape 1 / 3</div><button class="cook-cl" onclick="toggleCookSize()" id="cookSizeBtn" style="width:34px;height:34px;position:relative"><span class="ms" style="font-size:16px">text_increase</span><span id="cookSizeDot" style="position:absolute;bottom:2px;right:2px;width:6px;height:6px;border-radius:50%;background:var(--terra);display:none"></span></button></div></div>
   <div style="padding:0 24px;margin-bottom:18px">
     <div style="height:3px;background:var(--t4);border-radius:2px;overflow:hidden;transition:background .4s">
       <div id="cookProgress" style="height:100%;background:var(--terra);border-radius:2px;width:33.3%;transition:width .5s cubic-bezier(.16,1,.3,1)"></div>
@@ -1363,14 +1401,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div class="cook-body">
     <div class="cook-img"><img id="cookImg" src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div>
-    <div id="cookStepHint" style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:8px">PREPARATION</div>
-    <div class="cook-inst" id="cookInst">Melangez la puree froide avec la farine, l'oeuf battu, sel et poivre. Ajoutez la farine progressivement jusqu'a obtenir une pate qui ne colle plus.</div>
+    <div id="cookStepHint" style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:8px">PR&Eacute;PARATION</div>
+    <div class="cook-inst" id="cookInst">M&eacute;langez la pur&eacute;e froide avec la farine, l'&oelig;uf battu, sel et poivre. Ajoutez la farine progressivement jusqu'&agrave; obtenir une p&acirc;te qui ne colle plus.</div>
     <div class="cook-timer"><span class="ms">timer</span><div class="cook-timer-t" id="timerD">10:00</div><div class="cook-timer-l" id="timerLabel">repos</div><button class="timer-btn" onclick="toggleTimer()"><span class="ms" id="timerI">play_arrow</span></button></div>
     <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px">
       <div style="width:28px;height:28px;border-radius:50%;background:rgba(196,101,74,.08);border:1px solid rgba(196,101,74,.12);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:14px;color:var(--terra)">mic</span></div>
-      <span style="font-size:11px;color:var(--t3)">Dites "OK Chef, etape suivante"</span>
+      <span style="font-size:11px;color:var(--t3)">Dites "OK Chef, &eacute;tape suivante"</span>
     </div>
-    <div class="cook-nav"><button class="cook-prev" id="cookPrevBtn" onclick="prevStep()" disabled style="opacity:.4"><span class="ms">arrow_back</span> Precedent</button><button class="cook-next" id="cookNextBtn" onclick="nextStep()">Suivant <span class="ms">arrow_forward</span></button></div>
+    <div class="cook-nav"><button class="cook-prev" id="cookPrevBtn" onclick="prevStep()" disabled style="opacity:.4"><span class="ms">arrow_back</span> Pr&eacute;c&eacute;dent</button><button class="cook-next" id="cookNextBtn" onclick="nextStep()">Suivant <span class="ms">arrow_forward</span></button></div>
   </div>
 </div>
 </div>
@@ -1379,32 +1417,32 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s5" data-s="off">
 <div class="shop">
   <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div><div class="hdr-side r"><div class="hdr-btn"><span class="ms">share</span></div></div></div>
-  <div class="shop-sum"><div><div class="shop-sum-l">Total estime</div><div class="shop-sum-v">28.50 &#8364;</div></div><div class="shop-sum-r">13 articles</div></div>
+  <div class="shop-sum"><div><div class="shop-sum-l">Total estim&eacute;</div><div class="shop-sum-v">28.50 &#8364;</div></div><div class="shop-sum-r">13 articles</div></div>
   <div style="padding:8px 24px 16px">
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--t2);transition:color .4s">Tout ce qu'il vous faut</div>
   </div>
   <div style="padding:0 24px;margin:14px 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra)">Pour Gratin de gnocchis</div>
-  <div class="shop-cat"><span class="ms">eco</span> &#x1F96C; Fruits &amp; Legumes</div>
+  <div class="shop-cat"><span class="ms">eco</span> &#x1F96C; Fruits &amp; L&eacute;gumes</div>
   <div class="si ck" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Champignons de Paris</div><div class="si-a">500g</div></div>
   <div class="si ck" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Ail</div><div class="si-a">3 gousses</div></div>
   <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Persil</div><div class="si-a">1 botte</div></div>
-  <div class="shop-cat"><span class="ms">kitchen</span> &#x1F9C0; Cremerie</div>
-  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Fromage rape</div><div class="si-a">150g</div></div>
-  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Creme liquide</div><div class="si-a">25cl</div></div>
+  <div class="shop-cat"><span class="ms">kitchen</span> &#x1F9C0; Cr&eacute;merie</div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Fromage r&acirc;p&eacute;</div><div class="si-a">150g</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Cr&egrave;me liquide</div><div class="si-a">25cl</div></div>
   <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Beurre</div><div class="si-a">10g</div></div>
   <div style="padding:0 24px;margin:18px 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra)">Pour Poulet tikka</div>
   <div class="shop-cat"><span class="ms">restaurant</span> &#x1F969; Viandes &amp; Poissons</div>
   <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Poulet</div><div class="si-a">600g</div></div>
-  <div class="shop-cat"><span class="ms">kitchen</span> &#x1F9C0; Cremerie</div>
+  <div class="shop-cat"><span class="ms">kitchen</span> &#x1F9C0; Cr&eacute;merie</div>
   <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Yaourt nature</div><div class="si-a">240g</div></div>
-  <div class="shop-cat"><span class="ms">local_grocery_store</span> &#x1FAD9; Epicerie</div>
+  <div class="shop-cat"><span class="ms">local_grocery_store</span> &#x1FAD9; &Eacute;picerie</div>
   <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Nouilles soba</div><div class="si-a">200g</div></div>
   <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Sauce soja</div><div class="si-a">1 bouteille</div></div>
-  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Farine de ble</div><div class="si-a">200g</div></div>
+  <div class="si" onclick="checkI(this)"><div class="si-ch"><span class="ms">check</span></div><div class="si-n">Farine de bl&eacute;</div><div class="si-a">200g</div></div>
   <div style="display:flex;align-items:center;gap:10px;padding:12px 24px">
     <div style="flex:1;height:42px;border-radius:21px;border:1px solid var(--card-b);padding:0 16px;display:flex;align-items:center;font-size:13px;color:var(--t3);transition:border-color .4s;background:var(--card)"><span class="ms" style="font-size:18px;margin-right:8px;color:var(--t4)">add</span>Ajouter un article...</div>
   </div>
-  <div style="text-align:center;padding:24px 24px 16px;font-size:14px;color:var(--t2);font-weight:500;transition:color .4s">Total estime &#8364;28.50 &middot; 13 articles</div>
+  <div style="text-align:center;padding:24px 24px 16px;font-size:14px;color:var(--t2);font-weight:500;transition:color .4s">Total estim&eacute; &#8364;28.50 &middot; 13 articles</div>
 </div>
 </div>
 
@@ -1424,12 +1462,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--terra)"><img src="nicolas.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
     <div>
       <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Nicolas B.</div>
-      <div style="font-size:11px;color:var(--terra);font-weight:500">Sous-Chef &middot; Niveau 4 &middot; 12 jours de serie</div>
+      <div style="font-size:11px;color:var(--terra);font-weight:500">Sous-Chef &middot; Niveau 4 &middot; 12 jours de s&eacute;rie</div>
     </div>
   </div>
 
   <!-- My Collections -->
-  <div class="sh"><div class="sh-t">Mes collections</div><button class="sh-link">Creer</button></div>
+  <div class="sh"><div class="sh-t">Mes collections</div><button class="sh-link">Cr&eacute;er</button></div>
   <div class="hs">
     <div onclick="go(3)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
       <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
@@ -1441,14 +1479,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div onclick="go(11)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
       <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
-        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Diners rapides</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> D&icirc;ners rapides</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">23 recettes</div>
       </div>
     </div>
     <div onclick="go(12)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
       <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=300&q=75" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
-        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Classiques francais</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Classiques fran&ccedil;ais</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">12 recettes</div>
       </div>
     </div>
@@ -1462,10 +1500,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- Recently Cooked -->
-  <div class="sh"><div class="sh-t">Cuisines recemment</div><button class="sh-link" onclick="go(10)">Historique</button></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Gratin de gnocchis</div><div class="rr-d">Hier &middot; Note 5 etoiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h 05</div></div></div></div>
-  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Poulet tikka aux epices</div><div class="rr-d">Il y a 3 jours &middot; Note 5 etoiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 45 min</div></div></div></div>
-  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Nouilles soba au poulet</div><div class="rr-d">Il y a 5 jours &middot; Note 5 etoiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
+  <div class="sh"><div class="sh-t">Cuisin&eacute;es r&eacute;cemment</div><button class="sh-link" onclick="go(10)">Historique</button></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Gratin de gnocchis</div><div class="rr-d">Hier &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h 05</div></div></div></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Poulet tikka aux &eacute;pices</div><div class="rr-d">Il y a 3 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 45 min</div></div></div></div>
+  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Nouilles soba au poulet</div><div class="rr-d">Il y a 5 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
 
   <!-- Badges -->
   <div style="padding:0 24px 20px">
@@ -1477,22 +1515,22 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
       <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
         <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">47</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:2px">recettes cuisinees</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:2px">recettes cuisin&eacute;es</div>
       </div>
       <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
         <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">7</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:2px">pays explores</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:2px">pays explor&eacute;s</div>
       </div>
     </div>
   </div>
 
   <!-- Imported Recipes -->
-  <div class="sh"><div class="sh-t">Recettes importees</div><button class="sh-link" onclick="go(9)">Importer</button></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">Buddha Bowl via Instagram</div><div class="rr-d">Importe il y a 2 jours</div><div class="rr-m"><div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px"><span class="ms" style="font-size:14px">link</span> instagram.com</div></div></div></div>
+  <div class="sh"><div class="sh-t">Recettes import&eacute;es</div><button class="sh-link" onclick="go(9)">Importer</button></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=160&q=75" alt=""></div><div class="rr-info"><div class="rr-n">Buddha Bowl via Instagram</div><div class="rr-d">Import&eacute; il y a 2 jours</div><div class="rr-m"><div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px"><span class="ms" style="font-size:14px">link</span> instagram.com</div></div></div></div>
 
   <!-- Settings shortcut -->
   <div style="margin:16px 24px 0">
-    <div class="set-row" onclick="go(14)"><div class="set-l"><span class="ms">settings</span><div class="set-label">Reglages &amp; Preferences</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
+    <div class="set-row" onclick="go(14)"><div class="set-l"><span class="ms">settings</span><div class="set-label">R&eacute;glages &amp; Preferences</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
   </div>
 </div>
 </div>
@@ -1503,11 +1541,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
   <!-- Warm personal intro -->
   <div style="padding:0 24px 16px">
-    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">"Bien manger, c'est le debut de tout."</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">"Bien manger, c'est le d&eacute;but de tout."</div>
     <div style="font-size:11px;color:var(--t3);margin-top:4px">Votre semaine, vos recettes, votre rythme.</div>
   </div>
   <div style="display:flex;justify-content:center;gap:16px;padding:0 24px 14px;font-size:11px;color:var(--t3)">
-    <span>9 repas planifies</span>
+    <span>9 repas planifi&eacute;s</span>
     <span style="color:var(--t4)">&middot;</span>
     <span>3 suggestions IA</span>
     <span style="color:var(--t4)">&middot;</span>
@@ -1522,9 +1560,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="meal-day">
       <div class="meal-day-h"><div class="meal-day-name">Lundi 24 mars</div><div class="meal-day-cal">1 420 cal</div></div>
       <div class="meal-slots">
-        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name">Toast avocat & oeufs</div></div></div>
-        <div class="meal-slot" onclick="go(11)"><div class="meal-slot-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name">Poulet tikka</div></div></div>
-        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name">Gratin de gnocchis</div></div></div>
+        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-D&Eacute;JEUNER</div><div class="meal-slot-name">Toast avocat & oeufs</div></div></div>
+        <div class="meal-slot" onclick="go(11)"><div class="meal-slot-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">D&Eacute;JEUNER</div><div class="meal-slot-name">Poulet tikka</div></div></div>
+        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">D&Icirc;NER</div><div class="meal-slot-name">Gratin de gnocchis</div></div></div>
       </div>
       <div class="meal-macros">
         <div class="meal-macro"><div class="meal-macro-v">86g</div><div class="meal-macro-l">Proteines</div></div>
@@ -1536,17 +1574,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="meal-day">
       <div class="meal-day-h"><div class="meal-day-name">Mardi 25 mars</div><div class="meal-day-cal">~1 580 cal</div></div>
       <div class="meal-slots">
-        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name">Oeufs Benedict</div></div></div>
-        <div class="meal-slot" onclick="go(3)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://optirecipe.com/uploads/recipe-img-1773885615961-mnzt7g1d.jpg" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name">Suggestion : Salade legere</div></div></div>
-        <div class="meal-slot" onclick="go(12)"><div class="meal-slot-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name">Nouilles soba</div></div></div>
+        <div class="meal-slot" onclick="go(3)"><div class="meal-slot-img"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=120&q=70" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-D&Eacute;JEUNER</div><div class="meal-slot-name">&OElig;ufs Benedict</div></div></div>
+        <div class="meal-slot" onclick="go(3)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://optirecipe.com/uploads/recipe-img-1773885615961-mnzt7g1d.jpg" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">D&Eacute;JEUNER</div><div class="meal-slot-name">Suggestion : Salade l&eacute;g&egrave;re</div></div></div>
+        <div class="meal-slot" onclick="go(12)"><div class="meal-slot-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">D&Icirc;NER</div><div class="meal-slot-name">Nouilles soba</div></div></div>
       </div>
     </div>
     <div class="meal-day">
       <div class="meal-day-h"><div class="meal-day-name">Mercredi 26 mars</div><div class="meal-day-cal" style="display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:12px">auto_awesome</span>~1 350 cal</div></div>
       <div class="meal-slots">
-        <div class="meal-slot" onclick="go(3)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-DEJEUNER</div><div class="meal-slot-name">Suggestion : Granola maison</div></div></div>
-        <div class="meal-slot" onclick="go(11)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">DEJEUNER</div><div class="meal-slot-name">Suggestion : Salade nicoise</div></div></div>
-        <div class="meal-slot" onclick="go(12)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">DINER</div><div class="meal-slot-name">Suggestion : Soupe de lentilles</div></div></div>
+        <div class="meal-slot" onclick="go(3)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-D&Eacute;JEUNER</div><div class="meal-slot-name">Suggestion : Granola maison</div></div></div>
+        <div class="meal-slot" onclick="go(11)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">D&Eacute;JEUNER</div><div class="meal-slot-name">Suggestion : Salade nicoise</div></div></div>
+        <div class="meal-slot" onclick="go(12)" style="opacity:.7"><div class="meal-slot-img" style="position:relative"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=120&q=70" alt=""><div style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:10px;color:#fff">auto_awesome</span></div></div><div class="meal-slot-info"><div class="meal-slot-type">D&Icirc;NER</div><div class="meal-slot-name">Suggestion : Soupe de lentilles</div></div></div>
       </div>
     </div>
   </div>
@@ -1563,7 +1601,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="font-size:12px;color:var(--t3);margin-top:4px">On s'occupe du reste</div>
   </div>
   <div class="fridge-or">OU AJOUTEZ MANUELLEMENT</div>
-  <div class="sh"><div class="sh-t">Vos ingredients</div><button class="sh-link">Tout effacer</button></div>
+  <div class="sh"><div class="sh-t">Vos ingr&eacute;dients</div><button class="sh-link">Tout effacer</button></div>
   <div class="fridge-chips">
     <div class="fridge-chip active"><span class="ms">close</span> Tomates</div>
     <div class="fridge-chip active"><span class="ms">close</span> Poulet</div>
@@ -1579,16 +1617,16 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="fridge-rc" onclick="go(3)">
       <div class="fridge-rc-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div>
       <div class="fridge-rc-info">
-        <div class="fridge-rc-n">Gratin de gnocchis creme d'ail</div>
-        <div class="fridge-rc-d">Gnocchis maison, champignons, creme au vin blanc</div>
+        <div class="fridge-rc-n">Gratin de gnocchis cr&egrave;me d'ail</div>
+        <div class="fridge-rc-d">Gnocchis maison, champignons, cr&egrave;me au vin blanc</div>
         <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 98% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 1h 05</div></div>
       </div>
     </div>
     <div class="fridge-rc" onclick="go(11)">
       <div class="fridge-rc-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div>
       <div class="fridge-rc-info">
-        <div class="fridge-rc-n">Poulet tikka aux epices</div>
-        <div class="fridge-rc-d">Marine au yaourt et epices, grille au four</div>
+        <div class="fridge-rc-n">Poulet tikka aux &eacute;pices</div>
+        <div class="fridge-rc-d">Marin&eacute; au yaourt et &eacute;pices, grille au four</div>
         <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 85% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 45 min</div></div>
       </div>
       <div class="fridge-rc-badge">1 ingredient manquant</div>
@@ -1597,10 +1635,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div class="fridge-rc-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div>
       <div class="fridge-rc-info">
         <div class="fridge-rc-n">Nouilles soba au poulet</div>
-        <div class="fridge-rc-d">Vinaigrette gingembre cacahuete</div>
+        <div class="fridge-rc-d">Vinaigrette gingembre cacahu&egrave;te</div>
         <div class="fridge-rc-m"><div class="fridge-rc-match"><span class="ms">check_circle</span> 78% compatible</div><div class="fridge-rc-time"><span class="ms">schedule</span> 40 min</div></div>
       </div>
-      <div class="fridge-rc-badge">2 ingredients manquants</div>
+      <div class="fridge-rc-badge">2 ingr&eacute;dients manquants</div>
     </div>
   </div>
 </div>
@@ -1615,7 +1653,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <button class="import-paste"><span class="ms">content_paste</span> Coller</button>
   </div>
   <div style="text-align:center;padding:0 24px 20px">
-    <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:12px">Plateformes supportees</div>
+    <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:12px">Plateformes support&eacute;es</div>
     <div style="display:flex;justify-content:center;gap:20px">
       <div style="text-align:center">
         <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#E4405F,#C13584);display:flex;align-items:center;justify-content:center;margin:0 auto 4px"><span class="ms" style="font-size:22px;color:#fff">photo_camera</span></div>
@@ -1637,12 +1675,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div class="sh"><div class="sh-t">Progression</div></div>
   <div class="import-progress">
-    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">Recuperation du contenu...</div></div>
-    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">Extraction de la recette...</div></div>
+    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">R&eacute;cup&eacute;ration du contenu...</div></div>
+    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">Extraction de la recette......</div></div>
     <div class="import-step"><div class="import-step-ic active"><span class="ms">sync</span></div><div class="import-step-t">Analyse nutritionnelle...</div></div>
     <div class="import-step"><div class="import-step-ic pending"><span class="ms">hourglass_empty</span></div><div class="import-step-t pending">Enregistrement</div></div>
   </div>
-  <div class="sh"><div class="sh-t">Apercu</div></div>
+  <div class="sh"><div class="sh-t">Aper&ccedil;u</div></div>
   <div class="import-preview">
     <div class="import-preview-img"><img src="https://optirecipe.com/uploads/recipe-img-1773899777659-l87cn3p7.jpg" alt=""></div>
     <div class="import-preview-body">
@@ -1653,7 +1691,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         <div class="import-preview-s"><span class="ms">local_fire_department</span> 320 cal</div>
         <div class="import-preview-s"><span class="ms">group</span> 2 servings</div>
       </div>
-      <button class="import-save"><span class="ms">bookmark_add</span> Enregistrer dans ma bibliotheque</button>
+      <button class="import-save"><span class="ms">bookmark_add</span> Enregistrer dans ma biblioth&egrave;que</button>
     </div>
   </div>
 </div>
@@ -1664,7 +1702,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="academy">
   <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
   <div style="padding:0 24px 16px">
-    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">Progressez a votre rythme, une recette a la fois.</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">Progressez &agrave; votre rythme, une recette &agrave; la fois.</div>
   </div>
   <div class="aca-level">
     <div class="aca-level-row">
@@ -1685,26 +1723,26 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
   </div>
   <div class="aca-daily" onclick="go(3)" style="cursor:pointer">
-    <div class="aca-daily-eyebrow">DEFI DU JOUR</div>
-    <div class="aca-daily-t">Maitriser l'omelette parfaite</div>
+    <div class="aca-daily-eyebrow">D&Eacute;FI DU JOUR</div>
+    <div class="aca-daily-t">Ma&icirc;triser l'omelette parfaite</div>
     <div class="aca-daily-row">
-      <div class="aca-daily-xp">+50 XP recompense</div>
+      <div class="aca-daily-xp">+50 XP r&eacute;compense</div>
       <div class="aca-daily-timer"><span class="ms">schedule</span> 6h 24m restantes</div>
     </div>
   </div>
   <div class="aca-path">
     <div class="aca-path-h">
-      <div class="aca-path-t">Classiques francais</div>
-      <div class="aca-path-prog">3 / 5 termines</div>
+      <div class="aca-path-t">Classiques fran&ccedil;ais</div>
+      <div class="aca-path-prog">3 / 5 termin&eacute;s</div>
     </div>
     <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
       <div class="aca-lesson-num done"><span class="ms" style="font-size:16px;color:#fff">check</span></div>
-      <div class="aca-lesson-info"><div class="aca-lesson-n">Croque Monsieur</div><div class="aca-lesson-skill">Technique : Sauce bechamel</div></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n">Croque Monsieur</div><div class="aca-lesson-skill">Technique : Sauce b&eacute;chamel</div></div>
       <div class="aca-lesson-xp">+30 XP</div>
     </div>
     <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
       <div class="aca-lesson-num done"><span class="ms" style="font-size:16px;color:#fff">check</span></div>
-      <div class="aca-lesson-info"><div class="aca-lesson-n">Ratatouille</div><div class="aca-lesson-skill">Technique : Decoupe</div></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n">Ratatouille</div><div class="aca-lesson-skill">Technique : D&eacute;coupe</div></div>
       <div class="aca-lesson-xp">+40 XP</div>
     </div>
     <div class="aca-lesson" onclick="go(3)" style="cursor:pointer">
@@ -1719,7 +1757,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
     <div class="aca-lesson">
       <div class="aca-lesson-num locked"><span class="ms" style="font-size:16px">lock</span></div>
-      <div class="aca-lesson-info"><div class="aca-lesson-n locked">Tarte Tatin</div><div class="aca-lesson-skill">Technique : Caramelisation</div></div>
+      <div class="aca-lesson-info"><div class="aca-lesson-n locked">Tarte Tatin</div><div class="aca-lesson-skill">Technique : Caram&eacute;lisation</div></div>
       <div class="aca-lesson-xp locked">+60 XP</div>
     </div>
   </div>
@@ -1741,7 +1779,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div class="sh" style="margin-top:8px"><div class="sh-t">Autres parcours</div><button class="sh-link">Voir tout</button></div>
   <div class="hs">
-    <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Japanese Essentials</div><div class="cc-c">8 lessons</div></div></div>
+    <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Japan&eacute;se Essentials</div><div class="cc-c">8 lessons</div></div></div>
     <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Pastry Mastery</div><div class="cc-c">6 lessons</div></div></div>
     <div class="cc" style="min-width:160px;height:200px"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=350&q=75" alt=""><div class="cc-ov"><div class="cc-n">Indian Spice Route</div><div class="cc-c">7 lessons</div></div></div>
   </div>
@@ -1756,9 +1794,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
   <div class="det-body">
     <div class="det-cat">&#x1F1EE;&#x1F1F3; Plat &middot; Indien</div>
-    <div class="det-t">Poulet tikka<br>aux epices</div>
-    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&q=70" alt=""></div>par la communaute &middot; 98/100</div>
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">D</span>ecouvrez ce poulet tikka savoureux, delicatement marine dans un melange d'epices et de yaourt, ideal pour ceux qui veillent a leur sante.</p>
+    <div class="det-t">Poulet tikka<br>aux &eacute;pices</div>
+    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&q=70" alt=""></div>par la communaut&eacute; &middot; 98/100</div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:16px;display:flex;align-items:center;gap:6px"><span class="ms" style="font-size:14px;color:var(--t4)">verified</span>Source : Cuisine AZ &middot; V&eacute;rifi&eacute;e par la communaut&eacute;</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">D</span>&eacute;couvrez ce poulet tikka savoureux, d&eacute;licatement marin&eacute; dans un m&eacute;lange d'&eacute;pices et de yaourt, id&eacute;al pour ceux qui veillent &agrave; leur sant&eacute;.</p>
     <div class="det-stats">
       <div class="ds"><span class="ms">restaurant</span><div class="ds-v">25</div><div class="ds-l">min prep</div></div>
       <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">20</div><div class="ds-l">min cuisson</div></div>
@@ -1767,7 +1806,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
     <div class="por-l">Portions</div>
     <div class="por-pills"><button class="pill" onclick="pickP(this)">1x</button><button class="pill on" onclick="pickP(this)">2x</button><button class="pill" onclick="pickP(this)">4x</button><button class="pill" onclick="pickP(this)">6x</button><button class="pill" onclick="pickP(this)">8x</button></div>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Cout estime : <strong style="color:var(--t1);transition:color .4s">3,50 EUR</strong> par personne</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Co&ucirc;t estim&eacute; : <strong style="color:var(--t1);transition:color .4s">3,50 EUR</strong> par personne</div>
     <div style="display:flex;justify-content:center;gap:16px;padding:14px 0 20px;font-family:'Playfair Display',serif;font-size:13px;color:var(--t3);transition:color .4s">
       <span>277 cal</span><span style="color:var(--t4)">&middot;</span>
       <span>45g prot.</span><span style="color:var(--t4)">&middot;</span>
@@ -1775,7 +1814,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span>28g lip.</span>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px">
-      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en proteines</span>
+      <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:var(--terra-g);color:var(--terra);font-weight:500">Riche en prot&eacute;ines</span>
       <span style="font-size:10px;padding:4px 10px;border-radius:10px;background:rgba(184,152,64,.1);color:var(--gold);font-weight:500">Comfort food</span>
     </div>
     <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(109,160,109,.06);border:1px solid rgba(109,160,109,.12);border-radius:14px;margin-bottom:20px">
@@ -1785,7 +1824,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         <div style="font-size:11px;color:var(--t3);margin-top:2px">0.6 kg CO&#x2082; par portion &middot; Faible impact</div>
       </div>
     </div>
-    <div class="ing-h">Ingredients</div>
+    <div class="ing-h">Ingr&eacute;dients</div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F357; Poulet</span></div><span class="ing-dots"></span><span class="ing-a">600 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1FAD0; Gingembre frais</span></div><span class="ing-dots"></span><span class="ing-a">20 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F9C4; Ail</span></div><span class="ing-dots"></span><span class="ing-a">2 gousses</span></div>
@@ -1794,16 +1833,16 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F9C2; Sel</span></div><span class="ing-dots"></span><span class="ing-a">5 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95B; Yaourt nature</span></div><span class="ing-dots"></span><span class="ing-a">240 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F34B; Jus de citron</span></div><span class="ing-dots"></span><span class="ing-a">30 ml</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F33F; Coriandre fraiche</span></div><span class="ing-dots"></span><span class="ing-a">20 g</span></div>
-    <div class="ing-h" style="margin-top:28px">Preparation</div>
-    <div class="step"><div class="step-n">1</div><div class="step-t">Melangez tous les ingredients sauf le poulet, puis ajoutez le poulet et laissez mariner 2 heures.</div></div>
-    <div class="step"><div class="step-n">2</div><div class="step-t">Tapissez un plat de papier aluminium, vaporisez legerement d'huile.</div></div>
-    <div class="step"><div class="step-n">3</div><div class="step-t">Prechauffez le grill a 180°C.</div></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F33F; Coriandre fra&icirc;che</span></div><span class="ing-dots"></span><span class="ing-a">20 g</span></div>
+    <div class="ing-h" style="margin-top:28px">Pr&eacute;paration</div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">M&eacute;langez tous les ingr&eacute;dients sauf le poulet, puis ajoutez le poulet et laissez mariner 2 heures.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Tapissez un plat de papier aluminium, vaporisez l&eacute;g&egrave;rement d'huile.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Pr&eacute;chauffez le grill a 180°C.</div></div>
     <div class="step"><div class="step-n">4</div><div class="step-t">Grillez le poulet 15 a 20 minutes, en le retournant et l'arrosant plusieurs fois.</div></div>
-    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 4 etapes</button></div>
+    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 4 &eacute;tapes</button></div>
     <div style="margin:24px 0;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
       <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
-      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Pour une marinade encore plus savoureuse, laissez le poulet mariner toute la nuit au refrigerateur.</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Pour une marinade encore plus savoureuse, laissez le poulet mariner toute la nuit au r&eacute;frig&eacute;rateur.</div>
     </div>
     <div style="margin-top:28px">
       <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:var(--t1);margin-bottom:14px;transition:color .4s">Vous pourriez aussi aimer</div>
@@ -1825,7 +1864,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
     <div style="text-align:center;padding:20px 0 8px">
-      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Suggerer une correction</button>
+      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Sugg&eacute;rer une correction</button>
     </div>
   </div>
 </div>
@@ -1840,8 +1879,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="det-body">
     <div class="det-cat">&#x1F1EF;&#x1F1F5; Plat &middot; Japonais</div>
     <div class="det-t">Nouilles soba<br>au poulet</div>
-    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70" alt=""></div>par la communaute &middot; 98/100</div>
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">C</span>ette salade vibrante marie des nouilles soba delicates et du poulet tendre, le tout enrobe d'une vinaigrette au gingembre et cacahuete exquise.</p>
+    <div class="det-au"><div class="det-au-av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70" alt=""></div>par la communaut&eacute; &middot; 98/100</div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:16px;display:flex;align-items:center;gap:6px"><span class="ms" style="font-size:14px;color:var(--t4)">verified</span>Source : Just One Cookbook &middot; V&eacute;rifi&eacute;e par la communaut&eacute;</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;color:var(--t2);margin-bottom:22px;transition:color .4s"><span style="float:left;font-size:42px;line-height:.85;font-weight:400;font-style:normal;color:var(--terra);margin-right:6px;margin-top:4px">C</span>ette salade vibrante marie des nouilles soba d&eacute;licates et du poulet tendre, le tout enrob&eacute; d'une vinaigrette au gingembre et cacahu&egrave;te exquise.</p>
     <div class="det-stats">
       <div class="ds"><span class="ms">restaurant</span><div class="ds-v">30</div><div class="ds-l">min prep</div></div>
       <div class="ds"><span class="ms">local_fire_department</span><div class="ds-v">10</div><div class="ds-l">min cuisson</div></div>
@@ -1850,7 +1890,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
     <div class="por-l">Portions</div>
     <div class="por-pills"><button class="pill" onclick="pickP(this)">1x</button><button class="pill" onclick="pickP(this)">2x</button><button class="pill on" onclick="pickP(this)">4x</button><button class="pill" onclick="pickP(this)">6x</button><button class="pill" onclick="pickP(this)">8x</button></div>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Cout estime : <strong style="color:var(--t1);transition:color .4s">4,20 EUR</strong> par personne</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:12px;color:var(--t3)"><span class="ms" style="font-size:16px;color:var(--terra)">euro</span> Co&ucirc;t estim&eacute; : <strong style="color:var(--t1);transition:color .4s">4,20 EUR</strong> par personne</div>
     <div style="display:flex;justify-content:center;gap:16px;padding:14px 0 20px;font-family:'Playfair Display',serif;font-size:13px;color:var(--t3);transition:color .4s">
       <span>441 cal</span><span style="color:var(--t4)">&middot;</span>
       <span>59g prot.</span><span style="color:var(--t4)">&middot;</span>
@@ -1867,10 +1907,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div style="width:40px;height:40px;border-radius:12px;background:rgba(184,152,64,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px">&#x1F331;</div>
       <div>
         <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Impact environnemental : <span style="color:#c9a84c">C</span></div>
-        <div style="font-size:11px;color:var(--t3);margin-top:2px">3.2 kg CO&#x2082; par portion &middot; <span style="color:var(--terra);cursor:pointer;text-decoration:underline">Ameliorer avec des substituts</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">3.2 kg CO&#x2082; par portion &middot; <span style="color:var(--terra);cursor:pointer;text-decoration:underline">Am&eacute;liorer avec des substituts</span></div>
       </div>
     </div>
-    <div class="ing-h">Ingredients</div>
+    <div class="ing-h">Ingr&eacute;dients</div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F35C; Nouilles soba</span></div><span class="ing-dots"></span><span class="ing-a">200 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F357; Poulet cuit</span></div><span class="ing-dots"></span><span class="ing-a">300 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1FAD1; Poivron rouge</span></div><span class="ing-dots"></span><span class="ing-a">1</span></div>
@@ -1878,20 +1918,20 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F966; Brocoli</span></div><span class="ing-dots"></span><span class="ing-a">150 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F331; Germes de soja</span></div><span class="ing-dots"></span><span class="ing-a">100 g</span></div>
     <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F9C5; Oignons verts</span></div><span class="ing-dots"></span><span class="ing-a">3</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95C; Cacahuetes</span></div><span class="ing-dots"></span><span class="ing-a">50 g</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1FAD8; Graines de sesame</span></div><span class="ing-dots"></span><span class="ing-a">30 g</span></div>
-    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F33F; Coriandre fraiche</span></div><span class="ing-dots"></span><span class="ing-a">30 g</span></div>
-    <div class="ing-h" style="margin-top:28px">Preparation</div>
-    <div class="step"><div class="step-n">1</div><div class="step-t">Porter une grande casserole d'eau salee a ebullition.</div></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F95C; Cacahu&egrave;tes</span></div><span class="ing-dots"></span><span class="ing-a">50 g</span></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1FAD8; Graines de s&eacute;same</span></div><span class="ing-dots"></span><span class="ing-a">30 g</span></div>
+    <div class="ing"><div class="ing-l"><span class="ing-n">&#x1F33F; Coriandre fra&icirc;che</span></div><span class="ing-dots"></span><span class="ing-a">30 g</span></div>
+    <div class="ing-h" style="margin-top:28px">Pr&eacute;paration</div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">Porter une grande casserole d'eau sal&eacute;e &agrave; &eacute;bullition.</div></div>
     <div class="step"><div class="step-n">2</div><div class="step-t">Cuire les nouilles soba selon les instructions du paquet.</div></div>
-    <div class="step"><div class="step-n">3</div><div class="step-t">Egoutter et rincer sous l'eau froide.</div></div>
-    <div class="step"><div class="step-n">4</div><div class="step-t">Preparer la vinaigrette au gingembre et cacahuete au mixeur.</div></div>
-    <div class="step"><div class="step-n">5</div><div class="step-t">Melanger le poulet, les nouilles, les legumes et la vinaigrette.</div></div>
-    <div class="step"><div class="step-n">6</div><div class="step-t">Garnir de cacahuetes, sesame et coriandre fraiche.</div></div>
-    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 6 etapes</button></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">&Eacute;goutter et rincer sous l'eau froide.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">Pr&eacute;parer la vinaigrette au gingembre et cacahu&egrave;te au mixeur.</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">M&eacute;langer le poulet, les nouilles, les l&eacute;gumes et la vinaigrette.</div></div>
+    <div class="step"><div class="step-n">6</div><div class="step-t">Garnir de cacahu&egrave;tes, s&eacute;same et coriandre fra&icirc;che.</div></div>
+    <div style="text-align:center;padding:20px 0"><button class="pill terra" onclick="go(4)"><span class="ms" style="font-size:18px;color:#fff">play_arrow</span> Voir les 6 &eacute;tapes</button></div>
     <div style="margin:24px 0;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
       <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
-      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Pour une salade encore plus croquante, ajoutez des legumes frais comme des radis ou du concombre juste avant de servir.</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Pour une salade encore plus croquante, ajoutez des l&eacute;gumes frais comme des radis ou du concombre juste avant de servir.</div>
     </div>
     <div style="margin-top:28px">
       <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:var(--t1);margin-bottom:14px;transition:color .4s">Vous pourriez aussi aimer</div>
@@ -1913,7 +1953,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
     <div style="text-align:center;padding:20px 0 8px">
-      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Suggerer une correction</button>
+      <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s"><span class="ms" style="font-size:14px">edit_note</span> Sugg&eacute;rer une correction</button>
     </div>
   </div>
 </div>
@@ -1928,11 +1968,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <span style="flex:1;font-size:14px;color:var(--t1);font-family:'Inter',sans-serif;transition:color .4s">poulet</span>
     <div style="width:28px;height:28px;border-radius:50%;background:var(--card-b);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:14px;color:var(--t3)">close</span></div>
   </div>
-  <div style="padding:0 24px 12px;font-size:12px;color:var(--t3)">5 resultats pour &laquo; poulet &raquo;</div>
+  <div style="padding:0 24px 12px;font-size:12px;color:var(--t3)">5 r&eacute;sultats pour &laquo; poulet &raquo;</div>
   <div style="display:flex;gap:6px;padding:0 24px 14px;overflow-x:auto;scrollbar-width:none">
     <span style="padding:6px 14px;border-radius:20px;background:var(--terra);color:#fff;font-size:11px;font-weight:500;white-space:nowrap">Tout</span>
     <span style="padding:6px 14px;border-radius:20px;background:var(--card);border:1px solid var(--card-b);color:var(--t2);font-size:11px;font-weight:500;white-space:nowrap;transition:background .4s">Rapide</span>
-    <span style="padding:6px 14px;border-radius:20px;background:var(--card);border:1px solid var(--card-b);color:var(--t2);font-size:11px;font-weight:500;white-space:nowrap;transition:background .4s">Vegetarien</span>
+    <span style="padding:6px 14px;border-radius:20px;background:var(--card);border:1px solid var(--card-b);color:var(--t2);font-size:11px;font-weight:500;white-space:nowrap;transition:background .4s">V&eacute;g&eacute;tarien</span>
     <span style="padding:6px 14px;border-radius:20px;background:var(--card);border:1px solid var(--card-b);color:var(--t2);font-size:11px;font-weight:500;white-space:nowrap;transition:background .4s">&#x1F1EB;&#x1F1F7; France</span>
     <span style="padding:6px 14px;border-radius:20px;background:var(--card);border:1px solid var(--card-b);color:var(--t2);font-size:11px;font-weight:500;white-space:nowrap;transition:background .4s">&#x1F1EE;&#x1F1F3; Inde</span>
   </div>
@@ -1940,16 +1980,16 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="font-size:11px;color:var(--t3);margin-bottom:8px">Recherches populaires</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">poulet</span>
-      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">vegetarien</span>
+      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">v&eacute;g&eacute;tarien</span>
       <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">rapide</span>
       <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">sans gluten</span>
       <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">dessert</span>
     </div>
   </div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Gratin de gnocchis creme d'ail</div><div class="rr-d">&#x1F1EB;&#x1F1F7; Plat vegetarien reconfortant</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h 05</div></div></div></div>
-  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Poulet tikka leger aux epices</div><div class="rr-d">&#x1F1EE;&#x1F1F3; Marine au yaourt et epices</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 45 min</div></div></div></div>
-  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Nouilles soba au poulet</div><div class="rr-d">&#x1F1EF;&#x1F1F5; Vinaigrette gingembre cacahuete</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
-  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773899601367-dc3cijdq.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Gratin legumes orge perle</div><div class="rr-d">&#x1F1EB;&#x1F1F7; Vegetarien reconfortant</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h 10</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Gratin de gnocchis cr&egrave;me d'ail</div><div class="rr-d">&#x1F1EB;&#x1F1F7; Plat v&eacute;g&eacute;tarien r&eacute;confortant</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h 05</div></div></div></div>
+  <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898630525-8spevvq8.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Poulet tikka l&eacute;ger aux &eacute;pices</div><div class="rr-d">&#x1F1EE;&#x1F1F3; Marin&eacute; au yaourt et &eacute;pices</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 45 min</div></div></div></div>
+  <div class="rr" onclick="go(12)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773898093633-x1vm9lzt.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Nouilles soba au poulet</div><div class="rr-d">&#x1F1EF;&#x1F1F5; Vinaigrette gingembre cacahu&egrave;te</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
+  <div class="rr" onclick="go(3)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773899601367-dc3cijdq.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Gratin l&eacute;gumes orge perle</div><div class="rr-d">&#x1F1EB;&#x1F1F7; V&eacute;g&eacute;tarien r&eacute;confortant</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h 10</div></div></div></div>
   <div class="rr" onclick="go(11)"><div class="rr-img"><img src="https://optirecipe.com/uploads/recipe-img-1773899630049-ky45nopb.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Curry pois chiches butternut</div><div class="rr-d">&#x1F1EE;&#x1F1F3; Reconfortant et nourrissant</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h 15</div></div></div></div>
 </div>
 </div>
@@ -1957,7 +1997,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S14: SETTINGS -->
 <div class="scr" id="s14" data-s="off">
 <div class="prof">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Reglages</div><div class="hdr-side r"></div></div>
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">R&eacute;glages</div><div class="hdr-side r"></div></div>
   <div class="prof-card">
     <div class="prof-av"><img src="nicolas.jpg" alt=""></div>
     <div class="prof-name">Nicolas B.</div>
@@ -1965,27 +2005,27 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="font-size:11px;color:var(--t3);margin-top:4px">Membre depuis mars 2026</div>
     <div class="prof-xp"><div class="prof-xp-bar"><div class="prof-xp-fill" style="width:68%"></div></div><div class="prof-xp-t">340 / 500 XP &middot; 160 XP avant Chef de Partie</div></div>
   </div>
-  <div class="prof-stats"><div class="ps"><div class="ps-v">47</div><div class="ps-l">Recettes</div></div><div class="ps"><div class="ps-v">23h</div><div class="ps-l">Cuisine</div></div><div class="ps"><div class="ps-v">12</div><div class="ps-l">Jours de serie</div></div></div>
-  <div class="sh"><div class="sh-t">Preferences alimentaires</div><button class="sh-link">Modifier</button></div>
+  <div class="prof-stats"><div class="ps"><div class="ps-v">47</div><div class="ps-l">Recettes</div></div><div class="ps"><div class="ps-v">23h</div><div class="ps-l">Cuisine</div></div><div class="ps"><div class="ps-v">12</div><div class="ps-l">Jours de s&eacute;rie</div></div></div>
+  <div class="sh"><div class="sh-t">Pr&eacute;f&eacute;rences alimentaires</div><button class="sh-link">Modifier</button></div>
   <div class="diet-tags">
     <div class="diet-tag">Halal</div>
     <div class="diet-tag">Sans arachides</div>
     <div class="diet-tag">Pauvre en sel</div>
-    <div class="diet-tag">Mediterraneen</div>
+    <div class="diet-tag">M&eacute;diterran&eacute;en</div>
   </div>
-  <div class="sh" style="margin-top:8px"><div class="sh-t">Reglages</div></div>
+  <div class="sh" style="margin-top:8px"><div class="sh-t">R&eacute;glages</div></div>
   <div class="set-row"><div class="set-l"><span class="ms">person</span><div class="set-label">Modifier le profil</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
-  <div class="set-row"><div class="set-l"><span class="ms">restaurant</span><div class="set-label">Preferences alimentaires</div></div><div class="set-val">Halal</div></div>
-  <div class="set-row"><div class="set-l"><span class="ms">kitchen</span><div class="set-label">Mon equipement</div></div><div class="set-val">6 elements</div></div>
-  <div class="set-row"><div class="set-l"><span class="ms">straighten</span><div class="set-label">Mesures</div></div><div class="set-val">Metrique</div></div>
-  <div class="set-row"><div class="set-l"><span class="ms">translate</span><div class="set-label">Langue</div></div><div class="set-val">Francais</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">restaurant</span><div class="set-label">Pr&eacute;f&eacute;rences alimentaires</div></div><div class="set-val">Halal</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">kitchen</span><div class="set-label">Mon &eacute;quipement</div></div><div class="set-val">6 &eacute;l&eacute;ments</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">straighten</span><div class="set-label">Mesures</div></div><div class="set-val">M&eacute;trique</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">translate</span><div class="set-label">Langue</div></div><div class="set-val">Fran&ccedil;ais</div></div>
   <div class="set-row"><div class="set-l"><span class="ms">dark_mode</span><div class="set-label">Mode sombre</div></div><button class="tg" id="darkTg" onclick="event.stopPropagation();toggleTheme()"><div class="tg-k"></div></button></div>
   <div class="set-row"><div class="set-l"><span class="ms">notifications</span><div class="set-label">Notifications</div></div><button class="tg on" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
   <div class="set-row"><div class="set-l"><span class="ms" style="color:var(--terra)">workspace_premium</span><div class="set-label" style="color:var(--terra)">Savora Premium</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
   <div class="set-row"><div class="set-l"><span class="ms">help_outline</span><div class="set-label">Aide &amp; Support</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
-  <div class="set-row"><div class="set-l"><span class="ms">info_outline</span><div class="set-label">A propos de Savora</div></div><div class="set-val">v1.0</div></div>
-  <div style="text-align:center;padding:20px 0 0;cursor:pointer"><span style="font-size:14px;color:var(--t3);font-weight:500">Se deconnecter</span></div>
-  <div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t4);transition:color .4s">Savora v1.0 &middot; Fait avec passion a Paris</div>
+  <div class="set-row"><div class="set-l"><span class="ms">info_outline</span><div class="set-label">&Agrave; propos de Savora</div></div><div class="set-val">v1.0</div></div>
+  <div style="text-align:center;padding:20px 0 0;cursor:pointer"><span style="font-size:14px;color:var(--t3);font-weight:500">Se d&eacute;connecter</span></div>
+  <div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t4);transition:color .4s">Savora v1.0 &middot; Fait avec passion &agrave; Paris</div>
 </div>
 </div>
 
@@ -2017,7 +2057,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span class="ms">kitchen</span>
       <div class="action-row-text">
         <div class="action-row-label">Ouvrir mon frigo</div>
-        <div class="action-row-desc">Photographiez vos ingredients, on trouve la recette</div>
+        <div class="action-row-desc">Photographiez vos ingr&eacute;dients, on trouve la recette</div>
       </div>
       <span class="ms" style="font-size:16px;color:var(--t4)">chevron_right</span>
     </div>
@@ -2219,18 +2259,29 @@ function checkI(el){el.classList.toggle('ck')}
 let timerOn=false,timerV=600,timerInt;
 function toggleTimer(){timerOn=!timerOn;$('#timerI').textContent=timerOn?'pause':'play_arrow';if(timerOn){timerInt=setInterval(()=>{if(timerV<=0){clearInterval(timerInt);timerOn=false;$('#timerI').textContent='play_arrow';return}timerV--;const m=Math.floor(timerV/60),s=timerV%60;$('#timerD').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`},1000)}else clearInterval(timerInt)}
 
+/* Cook text size toggle */
+let cookSizeIdx=0;
+const cookSizes=[24,32,40];
+function toggleCookSize(){
+  cookSizeIdx=(cookSizeIdx+1)%3;
+  document.getElementById('cookInst').style.fontSize=cookSizes[cookSizeIdx]+'px';
+  const dot=document.getElementById('cookSizeDot');
+  dot.style.display=cookSizeIdx>0?'block':'none';
+  dot.style.background=cookSizeIdx===2?'var(--gold)':'var(--terra)';
+}
+
 /* Cooking step navigation */
 let cookStep=0;
 const cookSteps=[
-  {n:1,text:'Melangez la puree froide avec la farine, l\'oeuf battu, sel et poivre. Ajoutez la farine progressivement jusqu\'a obtenir une pate qui ne colle plus.',time:'05:00',timeS:300,img:'https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg'},
-  {n:2,text:'Formez de petits boudins de pate. Plongez-les dans l\'eau bouillante salee. Quand ils remontent a la surface, prolongez la cuisson 2 a 3 minutes.',time:'03:00',timeS:180,img:'https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg'},
-  {n:3,text:'Faites sauter les champignons eminces avec l\'ail et le beurre a feu vif pendant 5 minutes. Deglacez au vin blanc, ajoutez la creme et laissez gratiner au four.',time:'05:00',timeS:300,img:'https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg'}
+  {n:1,text:'M\u00e9langez la pur\u00e9e froide avec la farine, l\'\u0153uf battu, sel et poivre. Ajoutez la farine progressivement jusqu\'\u00e0 obtenir une p\u00e2te qui ne colle plus.',time:'05:00',timeS:300,img:'https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg'},
+  {n:2,text:'Formez de petits boudins de p\u00e2te. Plongez-les dans l\'eau bouillante sal\u00e9e. Quand ils remontent \u00e0 la surface, prolongez la cuisson 2 \u00e0 3 minutes.',time:'03:00',timeS:180,img:'https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg'},
+  {n:3,text:'Faites sauter les champignons \u00e9minc\u00e9s avec l\'ail et le beurre \u00e0 feu vif pendant 5 minutes. D\u00e9glacez au vin blanc, ajoutez la cr\u00e8me et laissez gratiner au four.',time:'05:00',timeS:300,img:'https://optirecipe.com/uploads/recipe-img-1772329526110-8wa1b63x.jpg'}
 ];
 function renderCookStep(){
   const s=cookSteps[cookStep];
-  $('#cookStepLabel').textContent=`Etape ${s.n} / ${cookSteps.length}`;
-  $('#cookInst').textContent=s.text;
-  const hint=s.n===1?'PREPARATION':s.n===2?'CUISSON':s.n===3?'GRATINAGE':'PREPARATION';
+  $('#cookStepLabel').innerHTML=`\u00c9tape ${s.n} / ${cookSteps.length}`;
+  $('#cookInst').innerHTML=s.text;
+  const hint=s.n===1?'PR\u00c9PARATION':s.n===2?'CUISSON':s.n===3?'GRATINAGE':'PR\u00c9PARATION';
   const hintEl=document.getElementById('cookStepHint');if(hintEl)hintEl.textContent=hint;
   $('#cookImg').src=s.img;
   $('#timerD').textContent=s.time;
@@ -2248,10 +2299,10 @@ document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&cur<T-1)go(cur+
 /* Onboarding panels */
 let obPanel=0;
 const obPanels=[
-  {bg:'none',gradient:'radial-gradient(ellipse at 50% 30%, rgba(60,40,25,.95), rgba(18,14,10,.98))',eyebrow:'',title:'',desc:'',isLang:true},
-  {bg:'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',gradient:'',eyebrow:'1,5 million de recettes',title:'Decouvrez les cuisines<br>du monde',desc:'Des classiques francais aux epices indiennes, trouvez votre prochain plat prefere.'},
-  {bg:'https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=800&q=80',gradient:'',eyebrow:'Pas a pas',title:'Cuisinez comme<br>un chef',desc:'Suivez le mode cuisine guide avec minuteurs, astuces et controle vocal.'},
-  {bg:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90',gradient:'',eyebrow:'1 484 101 recettes a portee de main',title:'Cuisinez en toute<br>confiance',desc:'Des recettes creees par les meilleurs chefs, adaptees a vos gouts, votre niveau et votre cuisine.'}
+  {bg:'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',gradient:'',eyebrow:'',title:'',desc:'',isLang:true},
+  {bg:'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',gradient:'',eyebrow:'1,5 million de recettes',title:'D&eacute;couvrez les cuisines<br>du monde',desc:'Des classiques fran&ccedil;ais aux &eacute;pices indiennes, trouvez votre prochain plat pr&eacute;f&eacute;r&eacute;.'},
+  {bg:'https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=800&q=80',gradient:'',eyebrow:'Pas &agrave; pas',title:'Cuisinez comme<br>un chef',desc:'Suivez le mode cuisine guid&eacute; avec minuteurs, astuces et contr&ocirc;le vocal.'},
+  {bg:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90',gradient:'',eyebrow:'Plus de 1,4 million de recettes &agrave; port&eacute;e de main',title:'Cuisinez en toute<br>confiance',desc:'Des recettes cr&eacute;&eacute;es par les meilleurs chefs, adapt&eacute;es &agrave; vos go&ucirc;ts, votre niveau et votre cuisine.'}
 ];
 function setObPanel(idx){
   obPanel=idx;
