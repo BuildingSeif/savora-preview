@@ -2468,8 +2468,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="det">
 
   <!-- 1. HERO PHOTO — 50vh, full-bleed, parallax -->
-  <div style="position:relative;width:100%;height:50vh;overflow:hidden">
-    <div style="position:absolute;inset:0;background:url('https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg') center/cover fixed;will-change:transform"></div>
+  <div class="det-hero" style="position:relative;width:100%;height:50vh;overflow:hidden">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform">
     <!-- Floating nav -->
     <div style="position:absolute;top:54px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10">
       <button onclick="goBack()" style="width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span></button>
@@ -2484,12 +2484,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
   <!-- 2. RECIPE TITLE SECTION -->
   <div style="padding:0 22px;background:var(--bg);position:relative;z-index:2;margin-top:-24px">
-    <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);line-height:1.25;margin:0 0 10px;transition:color .4s">Cassoulet v&eacute;g&eacute;talien</h1>
+    <h1 class="det-t" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);line-height:1.25;margin:0 0 10px;transition:color .4s">Cassoulet v&eacute;g&eacute;talien</h1>
 
     <!-- Meta line: flag + country + difficulty + time + servings -->
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--t2);transition:color .4s">
-      <span style="font-size:16px">&#x1F1EB;&#x1F1F7;</span>
-      <span>France</span>
+      <span class="det-cat"><span style="font-size:16px">&#x1F1EB;&#x1F1F7;</span> France</span>
       <span style="color:var(--t4)">&middot;</span>
       <span style="padding:2px 8px;border-radius:8px;background:var(--terra-g);color:var(--terra);font-size:11px;font-weight:600;letter-spacing:.3px">Interm&eacute;diaire</span>
       <span style="color:var(--t4)">&middot;</span>
@@ -2501,17 +2500,23 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Description -->
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.65;color:var(--t2);margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .4s">Un classique du terroir revisit&eacute; en version v&eacute;g&eacute;tale, riche en saveurs profondes et r&eacute;confortantes.</p>
+    <p class="det-desc" style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.65;color:var(--t2);margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .4s">Un classique du terroir revisit&eacute; en version v&eacute;g&eacute;tale, riche en saveurs profondes et r&eacute;confortantes.</p>
+
+    <!-- Dynamic elements for showRecipe() -->
+    <span class="det-source" style="display:block;font-size:11px;color:var(--t3);margin-bottom:12px"></span>
+    <div class="det-story"></div>
+    <div class="det-cost" style="font-size:13px;color:var(--t2);margin-bottom:12px;display:flex;align-items:center;gap:6px"></div>
+    <div class="det-nutri" style="font-size:13px;color:var(--t2);margin-bottom:16px"></div>
 
     <!-- CTA Button — Cuisiner -->
-    <button style="width:100%;height:52px;border-radius:16px;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 4px 16px rgba(196,101,74,.3);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform='scale(1)'">
+    <button onclick="go(4)" style="width:100%;height:52px;border-radius:16px;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 4px 16px rgba(196,101,74,.3);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform='scale(1)'">
       <span class="ms" style="color:#fff;font-size:20px">play_arrow</span>
       <span style="font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#fff;letter-spacing:.3px">Lancer la pr&eacute;paration</span>
     </button>
   </div>
 
   <!-- 3. INFO CARDS ROW -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:20px 22px 0">
+  <div class="det-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:20px 22px 0">
     <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
       <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">schedule</span>
       <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">1h 30</div>
@@ -2536,13 +2541,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
   <!-- 4. TAB BAR -->
   <div style="display:flex;gap:0;padding:20px 22px 0;border-bottom:1px solid var(--sep)">
-    <button class="v6-det-tab v6-det-tab-active" onclick="v6SwitchTab(this,0)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid var(--terra);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--t1);cursor:pointer;transition:color .3s,border-color .3s">Aper&ccedil;u</button>
-    <button class="v6-det-tab" onclick="v6SwitchTab(this,1)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .3s,border-color .3s">Ingr&eacute;dients</button>
-    <button class="v6-det-tab" onclick="v6SwitchTab(this,2)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .3s,border-color .3s">Pr&eacute;paration</button>
+    <button class="v6-det-tab v6-det-tab-active det-tab on" onclick="v6SwitchTab(this,0);switchDetTab(this,0)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid var(--terra);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--t1);cursor:pointer;transition:color .3s,border-color .3s">Aper&ccedil;u</button>
+    <button class="v6-det-tab det-tab" onclick="v6SwitchTab(this,1);switchDetTab(this,1)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .3s,border-color .3s">Ingr&eacute;dients</button>
+    <button class="v6-det-tab det-tab" onclick="v6SwitchTab(this,2);switchDetTab(this,2)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .3s,border-color .3s">Pr&eacute;paration</button>
   </div>
 
   <!-- 5. APERCU TAB -->
-  <div class="v6-panel" data-v6panel="0" style="padding:20px 22px">
+  <div class="v6-panel det-panel" data-v6panel="0" data-panel="0" style="padding:20px 22px">
 
     <!-- Nutrition breakdown -->
     <div style="margin-bottom:24px">
@@ -2600,7 +2605,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- 6. INGREDIENTS TAB -->
-  <div class="v6-panel" data-v6panel="1" style="padding:20px 22px;display:none">
+  <div class="v6-panel det-panel" data-v6panel="1" data-panel="1" style="padding:20px 22px;display:none">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
       <div style="flex:1;height:1px;background:var(--sep)"></div>
       <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Ingr&eacute;dients</span>
@@ -2608,7 +2613,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Ingredient rows -->
-    <div style="display:flex;flex-direction:column;gap:2px">
+    <div class="det-ingredients" style="display:flex;flex-direction:column;gap:2px">
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
@@ -2670,13 +2675,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- 7. PREPARATION TAB -->
-  <div class="v6-panel" data-v6panel="2" style="padding:20px 22px;display:none">
+  <div class="v6-panel det-panel" data-v6panel="2" data-panel="2" style="padding:20px 22px;display:none">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
       <div style="flex:1;height:1px;background:var(--sep)"></div>
       <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Pr&eacute;paration</span>
       <div style="flex:1;height:1px;background:var(--sep)"></div>
     </div>
 
+    <div class="det-steps">
     <!-- Step 1 -->
     <div style="display:flex;gap:16px;margin-bottom:28px">
       <div style="flex-shrink:0;width:36px;text-align:center">
@@ -2765,7 +2771,18 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
 
+    </div><!-- /det-steps -->
+
   </div>
+
+  <!-- Also like -->
+  <div style="padding:0 22px 8px">
+    <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t1);margin-bottom:12px">Vous aimerez aussi</div>
+    <div class="det-also-like" style="display:flex;gap:12px"></div>
+  </div>
+
+  <!-- CO2 badge (hidden, populated by showRecipe) -->
+  <span class="det-co2-val" style="display:none"></span>
 
   <!-- Chef tip -->
   <div style="margin:4px 22px 24px;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
