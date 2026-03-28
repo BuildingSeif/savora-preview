@@ -1269,14 +1269,18 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* Language selector pills */
 .v6-lang-selector{
   position:absolute;
-  top:130px;
+  top:0;
   left:0;
   right:0;
+  bottom:0;
   z-index:50;
   display:flex;
   justify-content:center;
+  align-items:center;
   gap:8px;
+  pointer-events:none;
 }
+.v6-lang-pill{pointer-events:all;}
 .v6-lang-pill{
   font-family:'Inter',sans-serif;
   font-size:13px;
@@ -2457,7 +2461,6 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="gc2" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Lasagnes aux legumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
   </div>
 
-</div>
 </div>
 
 <!-- S3: RECIPE DETAIL — Heritage Book V6 -->
