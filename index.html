@@ -973,41 +973,22 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 .power-card{
   flex-shrink:0;
-  width:140px;
-  height:100px;
-  border-radius:18px;
+  width:160px;
+  height:110px;
+  border-radius:20px;
   position:relative;
   overflow:hidden;
   scroll-snap-align:start;
   cursor:pointer;
   transition:transform .3s cubic-bezier(.16,1,.3,1);
   will-change:transform;
-}
-.power-card::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:.08;
-  z-index:0;
-  pointer-events:none;
-}
-.power-card::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:var(--glass);
-  backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--glass-b);
-  border-radius:18px;
-  box-shadow:var(--glass-s);
-  z-index:1;
-}
-.power-card>*{
-  position:relative;
-  z-index:2;
+  background:var(--card);
+  border:1.5px solid rgba(196,101,74,.12);
+  box-shadow:0 4px 20px rgba(45,30,15,.06), 0 1px 3px rgba(45,30,15,.04);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 .power-card:active{transform:scale(.96)}
 
@@ -1506,21 +1487,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   position: relative;
   overflow: hidden;
 }
-.power-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg') center/cover;
-  opacity: 0.08;
-  z-index: 0;
-}
-.power-card > * {
-  position: relative;
-  z-index: 1;
-}
-.power-card:active {
-  transform: scale(0.96);
-}
+.power-card .pc-icon {z-index:1;}
+.power-card .pc-title {z-index:1;}
+.power-card .pc-sub {z-index:1;}
 .power-card .pc-icon {
   width: 32px;
   height: 32px;
