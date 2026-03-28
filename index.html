@@ -894,6 +894,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* === PHASE B: Map pulse === */
 @keyframes mapPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+.map-marker circle[style*="mapPulse"]{transform-box:fill-box;transform-origin:center}
 
 /* === PHASE C: Hover/focus states === */
 .hdr-btn:hover{background:var(--glass);transform:scale(1.05)}
