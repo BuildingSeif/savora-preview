@@ -280,7 +280,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* =========================================
    S1: HOME
    ========================================= */
-.home{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.home{background:var(--bg);padding-bottom:120px;min-height:100%;transition:background .5s}
 .greet{padding:0 24px;margin-bottom:12px}
 .greet-hi{font-size:14px;color:var(--t3);font-weight:400;margin-bottom:2px}
 .greet-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s}
@@ -1241,7 +1241,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     rgba(12,10,8,.4) 65%,
     rgba(12,10,8,.8) 85%,
     rgba(12,10,8,.95) 100%
-  );
+  ),radial-gradient(ellipse at center,rgba(196,101,74,.05),transparent 60%);
   z-index:1;
 }
 .v6-onboard-panel .panel-word{
@@ -1257,22 +1257,23 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   color:#f0ebe4;
   letter-spacing:-.5px;
   opacity:0;
-  transform:translateY(16px);
+  transform:translateY(16px) scale(0.95);
   transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);
   -webkit-font-smoothing:antialiased;
 }
 .v6-onboard-panel.active .panel-word{
   opacity:1;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
 }
 
 /* Language selector pills */
 .v6-lang-selector{
   position:absolute;
-  top:0;
+  top:115px;
   left:0;
   right:0;
-  bottom:0;
+  height:auto;
+  bottom:auto;
   z-index:50;
   display:flex;
   justify-content:center;
@@ -1283,15 +1284,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .v6-lang-pill{pointer-events:all;}
 .v6-lang-pill{
   font-family:'Inter',sans-serif;
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
-  color:rgba(240,235,228,.85);
-  background:rgba(0,0,0,.35);
+  color:rgba(240,235,228,.9);
+  background:rgba(0,0,0,.45);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   border:1px solid rgba(255,255,255,.15);
   border-radius:20px;
-  padding:8px 18px;
+  padding:10px 22px;
   cursor:pointer;
   transition:all .3s cubic-bezier(.16,1,.3,1);
   letter-spacing:.3px;
@@ -1315,14 +1316,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   gap:6px;
 }
 .v6-dot{
-  width:6px;
-  height:6px;
-  border-radius:3px;
-  background:rgba(255,255,255,.2);
+  width:8px;
+  height:8px;
+  border-radius:4px;
+  background:rgba(255,255,255,.3);
   transition:all .4s cubic-bezier(.16,1,.3,1);
 }
 .v6-dot.active{
-  width:20px;
+  width:12px;
+  height:8px;
   background:var(--terra);
 }
 
@@ -1351,6 +1353,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   position:relative;
   overflow:hidden;
   -webkit-font-smoothing:antialiased;
+  animation:ctaPulse 2s cubic-bezier(.4,.0,.6,1) 3s infinite;
 }
 .v6-cta-btn::after{
   content:'';
@@ -1367,18 +1370,19 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* Savora mark for V6 onboarding */
 .v6-onboard-mark{
   position:absolute;
-  top:96px;
+  top:70px;
   left:0;
   right:0;
   z-index:10;
   text-align:center;
   font-family:'Playfair Display',serif;
   font-weight:300;
-  font-size:18px;
+  font-size:24px;
   letter-spacing:10px;
   text-transform:uppercase;
   text-indent:10px;
   color:rgba(240,235,228,.85);
+  text-shadow:0 0 20px rgba(196,101,74,.4),0 0 40px rgba(196,101,74,.2);
   opacity:0;
   animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards;
   -webkit-font-smoothing:antialiased;
@@ -1444,7 +1448,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(16,12,8,.85) 0%, rgba(16,12,8,.3) 40%, transparent 70%);
+  background: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(18,14,10,.35) 50%, rgba(18,14,10,.75) 75%, rgba(18,14,10,.92) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1453,7 +1457,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* === WHISPER === */
 .whisper {
-  padding: 20px 24px;
+  padding: 28px 24px 8px;
 }
 .whisper-name {
   font-family: 'Playfair Display', serif;
@@ -1476,7 +1480,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .power-scroll {
   display: flex;
   gap: 12px;
-  padding: 0 24px 24px;
+  padding: 28px 24px 32px;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -1485,8 +1489,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .power-card {
   flex-shrink: 0;
   width: 160px;
-  height: 100px;
+  height: 110px;
   background: var(--glass);
+  background-image: linear-gradient(rgba(255,255,255,.08) 0%, rgba(255,255,255,.04) 100%);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-b);
@@ -1498,6 +1503,20 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   justify-content: space-between;
   transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s;
   will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+.power-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg') center/cover;
+  opacity: 0.08;
+  z-index: 0;
+}
+.power-card > * {
+  position: relative;
+  z-index: 1;
 }
 .power-card:active {
   transform: scale(0.96);
@@ -1532,7 +1551,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* === DISCOVER SECTION === */
 .discover-header {
-  padding: 0 24px 14px;
+  padding: 28px 24px 16px;
 }
 .discover-header h2 {
   font-family: 'Playfair Display', serif;
@@ -1555,7 +1574,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .discover-card {
   flex-shrink: 0;
   width: 160px;
-  height: 240px;
+  height: 260px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
@@ -1635,8 +1654,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* Step Watermark */
 .km-watermark{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
-  font-family:'Playfair Display',serif;font-size:120px;font-weight:400;
-  color:#f0ebe4;opacity:.06;pointer-events:none;user-select:none;
+  font-family:'Playfair Display',serif;font-size:140px;font-weight:400;
+  color:#f0ebe4;opacity:.08;pointer-events:none;user-select:none;
   line-height:1;z-index:1;
 }
 
@@ -1649,8 +1668,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* Step Instruction */
 .km-instruction{
-  font-family:'Inter',sans-serif;font-size:22px;font-weight:400;color:#f0ebe4;
-  text-align:center;line-height:1.6;max-width:320px;
+  font-family:'Inter',sans-serif;font-size:24px;font-weight:400;color:#f0ebe4;
+  text-align:center;line-height:1.7;max-width:320px;
   letter-spacing:.01em;
 }
 .km-step-time{
@@ -1662,8 +1681,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .km-timer-wrap{
   display:flex;flex-direction:column;align-items:center;margin-top:28px;gap:8px;
 }
-.km-timer-ring{position:relative;width:120px;height:120px}
-.km-timer-ring svg{width:120px;height:120px;transform:rotate(-90deg)}
+.km-timer-ring{position:relative;width:160px;height:160px}
+.km-timer-ring svg{width:160px;height:160px;transform:rotate(-90deg)}
 .km-ring-bg{
   fill:none;stroke:rgba(255,255,255,.08);stroke-width:4;
 }
@@ -1691,11 +1710,22 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   background:#1a1714;position:relative;z-index:10;flex-shrink:0;
 }
 .km-nav-btn{
-  display:flex;align-items:center;gap:6px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
   background:none;border:none;cursor:pointer;
   font-family:'Inter',sans-serif;font-size:14px;font-weight:400;
-  padding:12px 16px;min-height:48px;border-radius:12px;
+  padding:12px 16px;min-height:56px;border-radius:12px;
   transition:background .2s;-webkit-tap-highlight-color:transparent;
+  flex:1;
+}
+
+.km-nav-next{
+  flex:2;
+  background:rgba(196,119,68,.12);
+  border-radius:12px;
+}
+
+.km-nav-next:active{
+  background:rgba(196,119,68,.18);
 }
 .km-nav-btn:active{background:rgba(255,255,255,.06)}
 .km-nav-prev{color:#f0ebe4;opacity:.7}
@@ -1806,7 +1836,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .fm-viewfinder{
   position:relative;
   margin:8px 24px 0;
-  height:52vh;
+  height:55vh;
   border-radius:22px;
   background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
   overflow:hidden;
@@ -1823,33 +1853,53 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* Corner brackets — animated scanning effect */
 .fm-corner{
   position:absolute;z-index:3;
-  width:36px;height:36px;
+  width:48px;height:48px;
   border-color:var(--terra);border-style:solid;border-width:0;
-  opacity:.8;
+  opacity:.9;
   animation:fmCornerPulse 2.5s cubic-bezier(.16,1,.3,1) infinite;
 }
-.fm-tl{top:20px;left:20px;border-top-width:2.5px;border-left-width:2.5px;border-radius:6px 0 0 0}
-.fm-tr{top:20px;right:20px;border-top-width:2.5px;border-right-width:2.5px;border-radius:0 6px 0 0}
-.fm-bl{bottom:20px;left:20px;border-bottom-width:2.5px;border-left-width:2.5px;border-radius:0 0 0 6px}
-.fm-br{bottom:20px;right:20px;border-bottom-width:2.5px;border-right-width:2.5px;border-radius:0 0 6px 0}
+.fm-tl{top:16px;left:16px;border-top-width:3.5px;border-left-width:3.5px;border-radius:8px 0 0 0}
+.fm-tr{top:16px;right:16px;border-top-width:3.5px;border-right-width:3.5px;border-radius:0 8px 0 0}
+.fm-bl{bottom:16px;left:16px;border-bottom-width:3.5px;border-left-width:3.5px;border-radius:0 0 0 8px}
+.fm-br{bottom:16px;right:16px;border-bottom-width:3.5px;border-right-width:3.5px;border-radius:0 0 8px 0}
 
 @keyframes fmCornerPulse{
   0%,100%{opacity:.5;transform:scale(1)}
   50%{opacity:1;transform:scale(1.08)}
 }
 
-/* Scanning line */
+/* Scanning line — sophisticated dual animation */
 .fm-scanline{
-  position:absolute;left:24px;right:24px;height:1.5px;z-index:4;
+  position:absolute;left:24px;right:24px;height:2px;z-index:4;
   background:linear-gradient(90deg,transparent 0%,var(--terra) 20%,var(--terra) 80%,transparent 100%);
-  opacity:.6;
+  opacity:.7;
   animation:fmScan 3s cubic-bezier(.45,.05,.55,.95) infinite;
+  box-shadow:0 0 20px rgba(196,101,74,.5);
 }
+
+.fm-scanline::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:100%;
+  background:linear-gradient(90deg,transparent 0%,var(--terra) 50%,transparent 100%);
+  transform:translateY(-50%);
+  animation:fmScanHorizontal 2.5s ease-in-out infinite;
+  opacity:.5;
+}
+
 @keyframes fmScan{
   0%{top:24px;opacity:0}
-  5%{opacity:.6}
-  95%{opacity:.6}
+  5%{opacity:.7}
+  95%{opacity:.7}
   100%{top:calc(100% - 24px);opacity:0}
+}
+
+@keyframes fmScanHorizontal{
+  0%,100%{transform:translateX(-100%) translateY(-50%)}
+  50%{transform:translateX(100%) translateY(-50%)}
 }
 
 /* Center prompt */
@@ -1903,8 +1953,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
   cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 0;
   box-shadow:0 8px 32px rgba(196,101,74,.32);
   transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  margin:0 -24px;
+  width:calc(100% + 48px);
 }
 .fm-cta:active{transform:scale(.96);box-shadow:0 4px 16px rgba(196,101,74,.2)}
 
@@ -1917,6 +1970,259 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 @media(prefers-reduced-motion:reduce){
   .fm-scanline,.fm-corner,.fm-prompt,.fm-pill{animation:none !important;opacity:1 !important}
   .fm-pill{transform:none !important}
+}
+
+
+/* ===== V7: JOURNEY & PROGRESSION ===== */
+.journey{
+  padding:0 24px 20px;
+  background:var(--card);
+  border:1px solid var(--card-b);
+  border-radius:16px;
+  margin:0 24px 24px;
+  transition:background .4s,border-color .4s;
+}
+
+.journey-h{
+  font-family:'Playfair Display',serif;
+  font-size:17px;
+  font-weight:400;
+  color:var(--t1);
+  margin-bottom:14px;
+  padding-top:14px;
+  transition:color .4s;
+}
+
+.journey-map{
+  width:100%;
+  height:80px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(196,101,74,.1) 0%,rgba(196,101,74,.05) 100%);
+  border:1px solid rgba(196,101,74,.15);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.journey-map-label{
+  font-size:12px;
+  color:var(--t2);
+  font-weight:500;
+  text-align:center;
+}
+
+.journey-row{
+  display:flex;
+  gap:14px;
+  margin-bottom:12px;
+}
+
+.journey-stat{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.journey-stat-icon{
+  font-size:20px;
+  display:flex;
+  align-items:center;
+}
+
+.journey-stat-info{
+  flex:1;
+}
+
+.journey-stat-v{
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:300;
+  color:var(--terra);
+}
+
+.journey-stat-l{
+  font-size:9px;
+  color:var(--t3);
+  font-weight:600;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.journey-progress{
+  margin-top:12px;
+}
+
+.journey-progress-bar{
+  width:100%;
+  height:6px;
+  border-radius:3px;
+  background:var(--card-b);
+  overflow:hidden;
+}
+
+.journey-progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--terra),rgba(196,101,74,.6));
+  width:47%;
+  border-radius:3px;
+}
+
+.journey-progress-label{
+  font-size:10px;
+  color:var(--t2);
+  margin-top:6px;
+  font-weight:500;
+}
+
+/* ===== V7: WEEKLY SUMMARY CARD ===== */
+.week-summary{
+  padding:16px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:16px;
+  margin:0 24px 24px;
+  box-shadow:var(--glass-s);
+}
+
+.week-summary-h{
+  font-family:'Playfair Display',serif;
+  font-size:15px;
+  font-weight:400;
+  color:var(--t1);
+  margin-bottom:12px;
+  transition:color .4s;
+}
+
+.week-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.week-stat{
+  text-align:center;
+}
+
+.week-stat-v{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-weight:300;
+  color:var(--terra);
+}
+
+.week-stat-l{
+  font-size:9px;
+  color:var(--t3);
+  margin-top:4px;
+  line-height:1.3;
+}
+
+/* ===== V7: KM WARM GLOW ===== */
+.km::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(196,119,68,.02) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== V7: KM TOP PROGRESS ===== */
+#kmTopProgress{
+  position:fixed;top:0;left:0;
+  height:2px;
+  background:var(--terra);
+  z-index:100;
+  transition:width .3s ease;
+  width:50%;
+}
+
+/* ===== V7: SCROLL REVEAL STAGGER ===== */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== V7: TAP/ACTIVE DEPTH FEEDBACK ===== */
+.gc2:active,
+.rr:active,
+.cc:active,
+.discover-card:active {
+  transform: scale(0.97);
+  transition: transform 0.15s ease;
+}
+
+.gc2,
+.rr,
+.cc,
+.discover-card {
+  transition: transform 0.25s cubic-bezier(.32, .72, .0, 1);
+}
+
+.power-card:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+.pill:active {
+  transform: scale(0.94);
+  transition: transform 0.15s ease;
+}
+
+.pill {
+  transition: transform 0.25s cubic-bezier(.32, .72, .0, 1);
+}
+
+/* ===== V7: TAB CROSSFADE ===== */
+.det-panel,
+.v6-panel {
+  transition: opacity 0.3s ease;
+}
+
+/* ===== V7: CENTER TAB ROTATION ===== */
+.tb-c:active span {
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+/* ===== V7: CTA PULSE ===== */
+@keyframes ctaPulse {
+  0%,100% {
+    transform:scale(1);
+    box-shadow: 0 10px 36px rgba(196, 101, 74, 0.35);
+  }
+  50% {
+    transform:scale(1.02);
+    box-shadow: 0 12px 42px rgba(196, 101, 74, 0.45);
+  }
+}
+
+.v6-cta-btn,
+.cta-main {
+  animation: ctaPulse 3s ease-in-out infinite 3s;
+}
+
+/* ===== V7: SCREEN FADE ===== */
+.screen {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.screen[data-s="off"] {
+  opacity: 0;
 }
 
 </style>
@@ -1991,10 +2297,10 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="hero-home" onclick="showRecipe(6)">
   <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="">
   <div class="hero-overlay">
-    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
-    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:8px">Ragout de poulet aux<br>epices marocaines</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
+    <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:8px">Ragout de poulet aux<br>epices marocaines</div>
     <div style="font-size:12px;color:rgba(240,235,228,.6);margin-bottom:16px">Maroc &middot; 1h &middot; Pour 4 personnes</div>
-    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(196,101,74,.35)">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5), inset 0 1px 0 rgba(255,255,255,.2)">
       <span class="ms" style="font-size:18px">restaurant</span>Cuisiner
     </div>
   </div>
@@ -2004,7 +2310,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="whisper" style="display:flex;align-items:flex-start;justify-content:space-between">
   <div>
     <div class="whisper-name">Bonjour, Nicolas</div>
-    <div class="whisper-ctx">Il fait frais ce soir — une recette r&eacute;confortante ?</div>
+    <div class="whisper-ctx">Samedi soir — le moment id&eacute;al pour un plat g&eacute;n&eacute;reux</div>
   </div>
   <div onclick="go(17)" style="width:40px;height:40px;border-radius:50%;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;position:relative">
     <span class="ms" style="font-size:20px;color:var(--t2)">notifications</span>
@@ -2076,21 +2382,21 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 </div>
 
-<!-- S2: EXPLORE (V6) -->
+<!-- S2: EXPLORE (V7 - Complete) -->
 <div class="scr" id="s2" data-s="off">
 <div class="explore">
 
-  <!-- Header -->
+  <!-- 1. Header -->
   <div class="hdr">
     <div class="hdr-side l"><div class="hdr-btn" onclick="go(0)"><span class="ms">arrow_back</span></div></div>
     <div class="hdr-logo">Explorer</div>
     <div class="hdr-side r"></div>
   </div>
 
-  <!-- 1. Search Bar -->
+  <!-- 2. Search Bar -->
   <div class="sbar-in" style="margin:0 24px 0;position:relative">
     <span class="ms" style="color:var(--t3);font-size:22px">search</span>
-    <input type="text" placeholder="Rechercher une recette, un ingr&eacute;dient...">
+    <input type="text" placeholder="Rechercher une recette...">
     <div class="mic" style="width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0">
       <span class="ms" style="color:#fff;font-size:18px">mic</span>
     </div>
@@ -2100,7 +2406,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div id="searchResults"></div>
   </div>
 
-  <!-- 2. World Map (centerpiece) -->
+  <!-- 3. World Map Section -->
   <div class="scroll-reveal" style="margin:20px 24px 0;padding:20px 16px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);text-align:center">
     <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);margin-bottom:4px;transition:color .4s">Explorez le monde</div>
     <div style="font-size:12px;color:var(--t3);margin-bottom:14px;transition:color .4s">1 300 168 recettes de 100+ pays</div>
@@ -2407,17 +2713,16 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EC;&#x1F1E7; Royaume-Uni &mdash; 25K" onclick="go(29)"><circle cx="345" cy="82" r="7" fill="var(--sage)" opacity="0.12"/><circle cx="345" cy="82" r="4.5" fill="var(--sage)" opacity="0.22"/><circle cx="345" cy="82" r="2.5" fill="var(--sage)" style="animation:mapPulse 2.5s ease-in-out infinite 1.5s"/><text x="330" y="78" text-anchor="end" fill="var(--sage)" font-size="6.5" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.7">25K</text></g>
         <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EC;&#x1F1F7; Gr&egrave;ce &mdash; 17K" onclick="go(29)"><circle cx="415" cy="140" r="7" fill="var(--gold)" opacity="0.12"/><circle cx="415" cy="140" r="4.5" fill="var(--gold)" opacity="0.22"/><circle cx="415" cy="140" r="2.5" fill="var(--gold)" style="animation:mapPulse 2.5s ease-in-out infinite 1.8s"/><text x="428" y="137" text-anchor="start" fill="var(--gold)" font-size="6.5" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.7">17K</text></g>
       </svg>
+
       <div id="mapTooltip" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
     </div>
     <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--t1);margin-bottom:4px;transition:color .4s">100+ pays</div>
     <div style="font-size:12px;color:var(--t3)">1 300 168 recettes index&eacute;es</div>
     <script>(function(){var t=document.getElementById('mapTooltip'),c=t&&t.parentElement;if(!t||!c)return;c.querySelectorAll('.map-marker').forEach(function(m){m.addEventListener('mouseenter',function(){var r=c.getBoundingClientRect(),ci=m.querySelector('circle'),s=c.querySelector('svg'),sr=s.getBoundingClientRect(),cx=parseFloat(ci.getAttribute('cx')),cy=parseFloat(ci.getAttribute('cy')),vb=s.viewBox.baseVal;t.textContent=m.getAttribute('data-tooltip');t.style.display='block';t.style.opacity='1';t.style.left=(cx*sr.width/vb.width)+(sr.left-r.left)+'px';t.style.top=(cy*sr.height/vb.height)+(sr.top-r.top)-28+'px'});m.addEventListener('mouseleave',function(){t.style.opacity='0';setTimeout(function(){t.style.display='none'},200)})})})();</script>
       <div id="mapTooltipExplorer" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
-    </div>
-    <script>(function(){var t=document.getElementById('mapTooltipExplorer'),c=t&&t.parentElement;if(!t||!c)return;c.querySelectorAll('.map-marker').forEach(function(m){m.addEventListener('mouseenter',function(){var r=c.getBoundingClientRect(),ci=m.querySelector('circle'),s=c.querySelector('svg'),sr=s.getBoundingClientRect(),cx=parseFloat(ci.getAttribute('cx')),cy=parseFloat(ci.getAttribute('cy')),vb=s.viewBox.baseVal;t.textContent=m.getAttribute('data-tooltip');t.style.display='block';t.style.opacity='1';t.style.left=(cx*sr.width/vb.width)+(sr.left-r.left)+'px';t.style.top=(cy*sr.height/vb.height)+(sr.top-r.top)-28+'px'});m.addEventListener('mouseleave',function(){t.style.opacity='0';setTimeout(function(){t.style.display='none'},200)})})})();</script>
   </div>
 
-  <!-- 3. Category Pills -->
+  <!-- 4. Category Pills -->
   <div class="cats" style="padding-top:20px">
     <button class="pill on" onclick="pickCat(this)" style="flex-shrink:0">Tout</button>
     <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Rapide</button>
@@ -2430,43 +2735,78 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Keto</button>
   </div>
 
-  <!-- 4. Cuisine Circles (horizontal scroll) -->
+  <!-- 5. Cuisine Circles -->
+  <div class="sh" style="margin-top:4px"><div class="sh-t" style="font-size:17px">Par cuisine</div><button class="sh-link" onclick="go(15)">Voir tout</button></div>
   <div style="display:flex;gap:16px;padding:0 24px 20px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%)">
     <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" style="width:100%;height:100%;object-fit:cover" alt="Francaise"></div>
+      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011548592-cofjiah8.jpg" style="width:100%;height:100%;object-fit:cover" alt="Francaise"></div>
       <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Fran&ccedil;aise</div>
     </div>
     <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--gold)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" style="width:100%;height:100%;object-fit:cover" alt="Italienne"></div>
+      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" style="width:100%;height:100%;object-fit:cover" alt="Italienne"></div>
       <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Italienne</div>
     </div>
     <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" style="width:100%;height:100%;object-fit:cover" alt="Japonaise cuisine"></div>
+      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773945119108-hge3eq0z.jpg" style="width:100%;height:100%;object-fit:cover" alt="Indienne"></div>
       <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Indienne</div>
     </div>
     <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--sage)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" style="width:100%;height:100%;object-fit:cover" alt="Japonaise"></div>
+      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" style="width:100%;height:100%;object-fit:cover" alt="Japonaise"></div>
       <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Japonaise</div>
     </div>
     <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--gold)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg" style="width:100%;height:100%;object-fit:cover" alt="Mexicaine"></div>
+      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774333143659-cni0pt5c.jpg" style="width:100%;height:100%;object-fit:cover" alt="Mexicaine"></div>
       <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Mexicaine</div>
     </div>
     <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2px solid var(--sage)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" style="width:100%;height:100%;object-fit:cover" alt="Marocaine"></div>
+      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" style="width:100%;height:100%;object-fit:cover" alt="Marocaine"></div>
       <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Marocaine</div>
     </div>
   </div>
 
-  <!-- 5. Recipe Grid (2x2) -->
-  <div class="sh"><div class="sh-t">Populaires</div></div>
+  <!-- 6. Trending Section -->
+  <div class="sh"><div class="sh-t">Tendances</div><button class="sh-link">Voir tout</button></div>
+
+  <div class="rr" onclick="showRecipe(0)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt=""></div>
+    <div class="rr-info">
+      <div class="rr-n">&#x1F1EB;&#x1F1F7; Poulet R&ocirc;ti aux Herbes</div>
+      <div class="rr-d">Cuisine fran&ccedil;aise classique</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.8</span><span class="rr-time"><span class="ms">schedule</span> 45 min</span></div>
+    </div>
+  </div>
+
+  <div class="rr" onclick="showRecipe(8)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div>
+    <div class="rr-info">
+      <div class="rr-n">&#x1F1EE;&#x1F1F9; Spaghetti Bolognaise</div>
+      <div class="rr-d">Cuisine italienne traditionnelle</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.7</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
+    </div>
+  </div>
+
+  <div class="rr" onclick="showRecipe(7)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt=""></div>
+    <div class="rr-info">
+      <div class="rr-n">&#x1F1EF;&#x1F1F5; Champignons Farcis</div>
+      <div class="rr-d">Inspiration asiatique</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.6</span><span class="rr-time"><span class="ms">schedule</span> 40 min</span></div>
+    </div>
+  </div>
+
+  <!-- 7. Recipe Grid (2x2) -->
+  <div class="sh"><div class="sh-t">Populaires</div><button class="sh-link">Voir tout</button></div>
   <div class="grid" style="grid-template-columns:1fr 1fr;grid-template-rows:auto auto;padding:0 24px 24px">
     <div class="gc2" onclick="showRecipe(8)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EE;&#x1F1F9; Spaghetti Bolognaise</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
     <div class="gc2" onclick="showRecipe(10)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773855747803-tuzq159y.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EE;&#x1F1F9; Tartes poulet mozzarella</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
     <div class="gc2" onclick="showRecipe(7)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EF;&#x1F1F5; Champignons Farcis Asiatique</div><div class="gc2-m"><span class="ms">schedule</span> 40 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Lasagnes aux legumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
+    <div class="gc2" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Lasagnes aux l&eacute;gumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
   </div>
 
+  <!-- 8. Bottom padding for tab bar -->
+  <div style="height:120px"></div>
+
+</div>
 </div>
 
 <!-- S3: RECIPE DETAIL — Heritage Book V6 -->
@@ -2957,39 +3297,97 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- Mini profile strip -->
-  <div style="display:flex;align-items:center;gap:12px;padding:8px 24px 20px">
-    <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--terra)"><img src="nicolas.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+  <div style="display:flex;align-items:center;gap:14px;padding:8px 24px 24px">
+    <div style="position:relative;width:56px;height:56px;flex-shrink:0">
+      <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;border:2px solid var(--terra)"><img src="nicolas.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+      <div style="position:absolute;bottom:0;right:0;width:20px;height:20px;border-radius:50%;background:var(--terra);border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;transition:background .4s">4</div>
+    </div>
     <div>
-      <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Nicolas B.</div>
-      <div style="font-size:11px;color:var(--terra);font-weight:500">Sous-Chef &middot; Niveau 4 &middot; 12 jours de s&eacute;rie</div>
+      <div style="font-size:16px;font-weight:600;color:var(--t1);transition:color .4s">Nicolas B.</div>
+      <div style="font-size:11px;color:var(--t2);font-weight:400;margin-top:2px">Sous-Chef &middot; Niveau 4</div>
+    </div>
+  </div>
+
+  <!-- JOURNEY & PROGRESSION SECTION -->
+  <div class="journey">
+    <div class="journey-h">Votre parcours culinaire</div>
+    
+    <!-- Mini World Map -->
+    <div class="journey-map">
+      <div class="journey-map-label">5 pays explor&eacute;s sur 100+</div>
+    </div>
+    
+    <!-- Streak + Recipes -->
+    <div class="journey-row">
+      <div class="journey-stat">
+        <div class="journey-stat-icon">🔥</div>
+        <div class="journey-stat-info">
+          <div class="journey-stat-v">12</div>
+          <div class="journey-stat-l">Jours de s&eacute;rie</div>
+        </div>
+      </div>
+      <div class="journey-stat">
+        <div class="journey-stat-icon"><span class="ms" style="color:var(--terra)">restaurant</span></div>
+        <div class="journey-stat-info">
+          <div class="journey-stat-v">47</div>
+          <div class="journey-stat-l">Recettes cuisin&eacute;es</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="journey-progress">
+      <div class="journey-progress-bar">
+        <div class="journey-progress-fill"></div>
+      </div>
+      <div class="journey-progress-label">47 / 100 recettes jusqu'au Chef de Partie</div>
+    </div>
+  </div>
+
+  <!-- WEEKLY SUMMARY CARD -->
+  <div class="week-summary">
+    <div class="week-summary-h">Votre semaine</div>
+    <div class="week-summary-grid">
+      <div class="week-stat">
+        <div class="week-stat-v">7</div>
+        <div class="week-stat-l">Recettes<br>cuisin&eacute;es</div>
+      </div>
+      <div class="week-stat">
+        <div class="week-stat-v">2 450</div>
+        <div class="week-stat-l">Cal/<br>moyenne jour</div>
+      </div>
+      <div class="week-stat">
+        <div class="week-stat-v">3</div>
+        <div class="week-stat-l">Pays<br>diff&eacute;rents</div>
+      </div>
     </div>
   </div>
 
   <!-- My Collections -->
   <div class="sh"><div class="sh-t">Mes collections</div><button class="sh-link">Cr&eacute;er</button></div>
   <div class="hs">
-    <div onclick="go(16)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+    <div onclick="go(16)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
         <div style="font-size:11px;color:var(--terra-l);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;font-variation-settings:'FILL' 1;vertical-align:-2px">favorite</span> Favoris</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">47 recettes</div>
       </div>
     </div>
-    <div onclick="showRecipe(10)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+    <div onclick="showRecipe(10)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
         <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> D&icirc;ners rapides</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">23 recettes</div>
       </div>
     </div>
-    <div onclick="showRecipe(8)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+    <div onclick="showRecipe(8)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
         <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Classiques fran&ccedil;ais</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6)">12 recettes</div>
       </div>
     </div>
-    <div onclick="showRecipe(14)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+    <div onclick="showRecipe(14)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
         <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Healthy</div>
@@ -3000,32 +3398,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
   <!-- Recently Cooked -->
   <div class="sh"><div class="sh-t">Cuisin&eacute;es r&eacute;cemment</div><button class="sh-link" onclick="go(21)">Historique</button></div>
-  <div class="rr" onclick="showRecipe(0)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Hier &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
-  <div class="rr" onclick="showRecipe(6)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Il y a 3 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
-  <div class="rr" onclick="showRecipe(8)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Il y a 5 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
+  <div class="rr" onclick="showRecipe(0)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Hier &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
+  <div class="rr" onclick="showRecipe(6)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Il y a 3 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
+  <div class="rr" onclick="showRecipe(8)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Il y a 5 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
 
-  <!-- Badges -->
-  <div style="padding:0 24px 20px;cursor:pointer" onclick="go(20)">
-    <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:400;color:var(--t1);margin-bottom:12px;transition:color .4s">Votre parcours</div>
-    <div style="display:flex;gap:10px">
-      <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">12</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:2px">jours de suite</div>
-      </div>
-      <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">47</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:2px">recettes cuisin&eacute;es</div>
-      </div>
-      <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">7</div>
-        <div style="font-size:10px;color:var(--t3);margin-top:2px">pays explor&eacute;s</div>
-      </div>
-    </div>
-  </div>
+  <!-- (Removed - replaced by Journey section above) -->
 
   <!-- Imported Recipes -->
   <div class="sh"><div class="sh-t">Recettes import&eacute;es</div><button class="sh-link" onclick="go(9)">Importer</button></div>
-  <div class="rr" onclick="showRecipe(11)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Coquilles Saint-Jacques linguines</div><div class="rr-d">Import&eacute; il y a 2 jours</div><div class="rr-m"><div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px"><span class="ms" style="font-size:14px">link</span> food.com</div></div></div></div>
+  <div class="rr" onclick="showRecipe(11)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Coquilles Saint-Jacques linguines</div><div class="rr-d">Import&eacute; il y a 2 jours</div><div class="rr-m"><div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px"><span class="ms" style="font-size:14px">link</span> food.com</div></div></div></div>
 
   <!-- Settings shortcut -->
   <div style="margin:16px 24px 0">
@@ -3124,7 +3505,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <!-- Center prompt -->
     <div class="fm-prompt">
       <span class="ms" style="font-size:44px;color:rgba(248,243,236,.25);margin-bottom:12px;display:block">photo_camera</span>
-      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#f8f3ec;letter-spacing:.3px">Montrez votre frigo</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:#f8f3ec;letter-spacing:.3px">Montrez votre frigo</div>
       <div style="font-size:12px;color:rgba(248,243,236,.5);margin-top:8px;letter-spacing:.2px">L'IA identifie vos ingr&eacute;dients</div>
     </div>
 
@@ -3151,8 +3532,33 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <!-- Results Teaser -->
   <div class="fm-results">
     <div style="font-size:14px;color:var(--t2);margin-bottom:6px;transition:color .4s">Avec ces <strong style="color:var(--t1)">7 ingr&eacute;dients</strong>, vous pouvez pr&eacute;parer :</div>
-    <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--terra);letter-spacing:-.5px;margin-bottom:20px">23 recettes</div>
-    <button class="fm-cta" onclick="void(0)">
+    <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--terra);letter-spacing:-.5px;margin-bottom:20px;position:relative">
+      <span id="recipeCount">0</span> recettes
+    </div>
+    
+    <!-- Mini Recipe Cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px">
+      <div style="border-radius:14px;overflow:hidden;position:relative;height:100px;cursor:pointer;transition:transform .2s">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.7) 0%,transparent 60%);display:flex;align-items:flex-end;padding:8px;justify-content:center">
+          <div style="font-size:9px;color:#fff;font-weight:500;text-align:center">Brochettes<br>Poulet Grec</div>
+        </div>
+      </div>
+      <div style="border-radius:14px;overflow:hidden;position:relative;height:100px;cursor:pointer;transition:transform .2s">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.7) 0%,transparent 60%);display:flex;align-items:flex-end;padding:8px;justify-content:center">
+          <div style="font-size:9px;color:#fff;font-weight:500;text-align:center">Ragout de<br>Poulet Maro</div>
+        </div>
+      </div>
+      <div style="border-radius:14px;overflow:hidden;position:relative;height:100px;cursor:pointer;transition:transform .2s">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.7) 0%,transparent 60%);display:flex;align-items:flex-end;padding:8px;justify-content:center">
+          <div style="font-size:9px;color:#fff;font-weight:500;text-align:center">Spaghetti<br>Bolognaise</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="fm-cta" onclick="void(0)" style="margin:0">
       <span class="ms" style="font-size:20px">auto_awesome</span>
       Voir les recettes
     </button>
@@ -4124,44 +4530,76 @@ function getCookSteps(){
   return r.steps.map((text,i)=>({n:i+1,text:text,time:'05:00',timeS:300,img:r.img}));
 }
 function renderCookStep(){
-  const steps=getCookSteps();
-  const s=steps[cookStep];
-  const r=RECIPES[currentRecipeIndex];
-  /* V6 km-* classes (primary) with old cook-* fallback */
-  const titleEl=document.querySelector('#s4 .km-title')||document.querySelector('#s4 .cook-tt');
-  if(titleEl)titleEl.textContent=r.title;
-  const stepLabel=document.getElementById('kmStepLabel')||document.getElementById('cookStepLabel');
-  if(stepLabel)stepLabel.innerHTML='\u00c9tape '+s.n+' sur '+steps.length;
-  const watermark=document.getElementById('kmWatermark');
-  if(watermark)watermark.textContent=s.n;
-  const instEl=document.getElementById('kmInstruction')||document.getElementById('cookInst');
-  if(instEl)instEl.innerHTML=s.text;
-  const stepTime=document.getElementById('kmStepTime');
-  if(stepTime)stepTime.textContent=s.time;
-  const hintEl=document.getElementById('cookStepHint');
-  if(hintEl)hintEl.textContent=cookStep===0?'PR\u00c9PARATION':cookStep===steps.length-1?'FINITION':'CUISSON';
-  const cookImg=document.getElementById('cookImg');
-  if(cookImg)cookImg.src=s.img;
-  const timerVal=document.getElementById('kmTimerValue')||document.getElementById('timerD');
-  if(timerVal)timerVal.textContent=s.time;
-  timerV=s.timeS;clearInterval(timerInt);timerOn=false;
-  const timerIcon=document.getElementById('timerI');
-  if(timerIcon)timerIcon.textContent='play_arrow';
-  const cp=document.getElementById('cookProgress');if(cp)cp.style.width=((cookStep+1)/steps.length*100)+'%';
-  const prevBtn=document.getElementById('kmPrevBtn')||document.getElementById('cookPrevBtn');
-  if(prevBtn){prevBtn.disabled=cookStep===0;prevBtn.style.opacity=cookStep===0?'.4':'1'}
-  const nextBtn=document.getElementById('kmNextBtn')||document.getElementById('cookNextBtn');
-  if(nextBtn){
-    if(cookStep===steps.length-1){nextBtn.innerHTML='Terminer <span class="ms">check</span>'}
-    else{nextBtn.innerHTML='Suivant <span class="ms">arrow_forward</span>'}
-  }
-  /* Populate ingredient drawer */
-  const ingList=document.getElementById('kmIngList');
-  if(ingList){
-    ingList.innerHTML='';
-    r.ingredients.forEach(function(ing){
-      ingList.innerHTML+='<div class="km-ing-item" onclick="kmCheckIng(this)"><div class="km-ing-check"><span class="ms">check</span></div><div class="km-ing-name">'+ing.name+'</div><div class="km-ing-qty">'+ing.qty+'</div></div>';
-    });
+  try{
+    const steps=getCookSteps();
+    if(!steps||steps.length===0)return;
+    const s=steps[cookStep];
+    const r=RECIPES[currentRecipeIndex];
+    if(!s||!r)return;
+    
+    const titleEl=document.querySelector('#s4 .km-title')||document.querySelector('#s4 .cook-tt');
+    if(titleEl)titleEl.textContent=r.title;
+    
+    const stepLabel=document.getElementById('kmStepLabel')||document.getElementById('cookStepLabel');
+    if(stepLabel)stepLabel.innerHTML='\u00c9tape '+s.n+' sur '+steps.length;
+    
+    const watermark=document.getElementById('kmWatermark');
+    if(watermark)watermark.textContent=s.n;
+    
+    const instEl=document.getElementById('kmInstruction')||document.getElementById('cookInst');
+    if(instEl)instEl.innerHTML=s.text;
+    
+    const stepTime=document.getElementById('kmStepTime');
+    if(stepTime)stepTime.textContent=s.time;
+    
+    const hintEl=document.getElementById('cookStepHint');
+    if(hintEl)hintEl.textContent=cookStep===0?'PR\u00c9PARATION':cookStep===steps.length-1?'FINITION':'CUISSON';
+    
+    const cookImg=document.getElementById('kmRecipeImg')||document.getElementById('cookImg');
+    if(cookImg)cookImg.src=s.img;
+    
+    const timerVal=document.getElementById('kmTimerValue')||document.getElementById('timerD');
+    if(timerVal)timerVal.textContent=s.time;
+    
+    timerV=s.timeS;
+    clearInterval(timerInt);
+    timerOn=false;
+    
+    const timerIcon=document.getElementById('timerI');
+    if(timerIcon)timerIcon.textContent='play_arrow';
+    
+    const cp=document.getElementById('kmProgress')||document.getElementById('cookProgress');
+    if(cp)cp.style.width=((cookStep+1)/steps.length*100)+'%';
+    
+    const topProg=document.getElementById('kmTopProgress');
+    if(topProg)topProg.style.width=((cookStep+1)/steps.length*100)+'%';
+    
+    const prevBtn=document.getElementById('kmPrevBtn')||document.getElementById('cookPrevBtn');
+    if(prevBtn){
+      prevBtn.disabled=cookStep===0;
+      prevBtn.style.opacity=cookStep===0?'.4':'1';
+    }
+    
+    const nextBtn=document.getElementById('kmNextBtn')||document.getElementById('cookNextBtn');
+    if(nextBtn){
+      if(cookStep===steps.length-1){
+        nextBtn.innerHTML='Terminer <span class="ms">check</span>';
+      }else{
+        nextBtn.innerHTML='Suivant <span class="ms">arrow_forward</span>';
+      }
+    }
+    
+    const ingList=document.getElementById('kmIngList');
+    if(ingList&&r.ingredients){
+      ingList.innerHTML='';
+      r.ingredients.forEach(function(ing){
+        if(ing&&ing.name&&ing.qty){
+          ingList.innerHTML+='<div class="km-ing-item" onclick="kmCheckIng(this)"><div class="km-ing-check"><span class="ms">check</span></div><div class="km-ing-name">'+ing.name+'</div><div class="km-ing-qty">'+ing.qty+'</div></div>';
+        }
+      });
+    }
+  }catch(e){
+    console.warn('renderCookStep error:',e);
   }
 }
 function prevStep(){if(cookStep>0){cookStep--;renderCookStep()}}
@@ -4170,8 +4608,17 @@ function nextStep(){const steps=getCookSteps();if(cookStep<steps.length-1){cookS
 /* Initialize cooking mode when entering S4 */
 const origGo=go;
 go=function(n){
-  if(n===4){cookStep=0;origGo(n);try{renderCookStep()}catch(e){console.warn('Cook render:',e)}}
-  else{origGo(n)}
+  if(n===4){
+    cookStep=0;
+    origGo(n);
+    try{
+      renderCookStep();
+    }catch(e){
+      console.warn('Cook mode render failed:',e);
+    }
+  }else{
+    origGo(n);
+  }
 };
 
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&cur<T-1)go(cur+1);if(e.key==='ArrowLeft'&&cur>0)go(cur-1)});
@@ -4462,6 +4909,64 @@ function v6SwitchTab(btn, idx) {
   if (target) target.style.display = 'block';
 }
 
+
+
+
+/* ===== V7: SCROLL REVEAL OBSERVER ===== */
+const scrollRevealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+      scrollRevealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+function initScrollReveals() {
+  document.querySelectorAll('.scroll-reveal').forEach(el => {
+    scrollRevealObserver.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollReveals();
+});
+
+/* ===== V7: RECIPE COUNT ANIMATION ===== */
+function animateRecipeCount() {
+  const element = document.getElementById('recipeCount');
+  if (!element) return;
+  
+  let current = 0;
+  const target = 23;
+  const duration = 2000;
+  const startTime = Date.now();
+  
+  function animate() {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    current = Math.floor(progress * target);
+    element.textContent = current;
+    
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+  
+  animate();
+}
+
+/* ===== V7: PILL/BUTTON VISUAL FEEDBACK ===== */
+document.addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill, button, [role="button"]');
+  if (pill && !pill.classList.contains('no-feedback')) {
+    // Feedback provided by CSS :active state
+  }
+});
 
 </script>
 </body>
