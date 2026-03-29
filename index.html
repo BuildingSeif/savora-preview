@@ -562,6 +562,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .bdg{width:60px;height:60px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;box-shadow:var(--card-s);transition:transform .2s,background .4s}
 .bdg:active{transform:scale(.9)}.bdg .ms{font-size:22px;color:var(--t3)}.bdg span{font-size:8px;color:var(--t3);font-weight:500}
 .bdg.on .ms{color:var(--terra);font-variation-settings:'FILL' 1}.bdg.on{border-color:rgba(196,101,74,.12);background:var(--terra-g)}
+.sh-t { font-family: 'Playfair Display', serif; font-size: 19px !important; font-weight: 400; }
+.hdr-logo { font-size: 13px !important; letter-spacing: 6px !important; }
 .set-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--sep);cursor:pointer;transition:border-color .4s}
 .set-l{display:flex;align-items:center;gap:14px}.set-l .ms{font-size:22px;color:var(--t3)}
 .set-label{font-size:14px;color:var(--t1);transition:color .4s}.set-val{font-size:13px;color:var(--t3)}
@@ -746,6 +748,19 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
    S10: ACADEMY / PROGRESSION
    ========================================= */
 .academy{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+.academy-progress {
+  height: 4px;
+  background: var(--sep);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.academy-progress-fill {
+  height: 100%;
+  background: var(--terra);
+  border-radius: 2px;
+  transition: width .6s ease-out;
+}
 .aca-level{margin:8px 24px 20px;padding:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);transition:background .4s}
 .aca-level-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
 .aca-level-badge{width:52px;height:52px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(196,101,74,.3)}
@@ -832,6 +847,18 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .saved-card-n{font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:#fff;margin-bottom:2px}
 .saved-card-m{font-size:10px;color:rgba(255,255,255,.6)}
 .diet-tags{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 24px}
+.det-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--glass);
+  border: 1px solid var(--glass-b);
+  color: var(--t2);
+}
 .diet-tag{padding:8px 16px;border-radius:20px;font-size:12px;font-weight:500;background:var(--terra-g);color:var(--terra);border:1px solid rgba(196,101,74,.12)}
 
 /* Detail tabs */
@@ -1357,14 +1384,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   text-align:center;
   font-family:'Playfair Display',serif;
   font-weight:300;
-  font-size:24px;
-  letter-spacing:10px;
+  font-size:28px;
+  letter-spacing:8px;
   text-transform:uppercase;
-  text-indent:10px;
+  text-indent:8px;
   color:rgba(240,235,228,.85);
-  text-shadow:0 0 20px rgba(196,101,74,.4),0 0 40px rgba(196,101,74,.2);
+  text-shadow:0 0 30px rgba(196,101,74,.3),0 0 60px rgba(196,101,74,.15);
   opacity:0;
-  animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+  animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards 1;
   -webkit-font-smoothing:antialiased;
 }
 .v6-onboard-mark::after{
@@ -1813,7 +1840,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   width:48px;height:48px;
   border-color:var(--terra);border-style:solid;border-width:0;
   opacity:.9;
-  animation:fmCornerPulse 2.5s cubic-bezier(.16,1,.3,1) infinite;
+  animation:fmCornerPulse 2s ease-in-out infinite;
 }
 .fm-tl{top:16px;left:16px;border-top-width:3.5px;border-left-width:3.5px;border-radius:8px 0 0 0}
 .fm-tr{top:16px;right:16px;border-top-width:3.5px;border-right-width:3.5px;border-radius:0 8px 0 0}
@@ -1821,11 +1848,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .fm-br{bottom:16px;right:16px;border-bottom-width:3.5px;border-right-width:3.5px;border-radius:0 0 8px 0}
 
 @keyframes fmCornerPulse{
-  0%,100%{opacity:.5;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.08)}
+  0%,100%{opacity:.8}
+  50%{opacity:1;filter:drop-shadow(0 0 4px var(--terra))}
 }
 
-/* Scanning line — sophisticated dual animation */
+/* Scanning line — vertical sweep */
 .fm-scanline{
   position:absolute;left:24px;right:24px;height:2px;z-index:4;
   background:linear-gradient(90deg,transparent 0%,var(--terra) 20%,var(--terra) 80%,transparent 100%);
@@ -1834,17 +1861,20 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   box-shadow:0 0 20px rgba(196,101,74,.5);
 }
 
-.fm-scanline::before{
+/* Horizontal scan line added via ::after */
+.fm-viewfinder::after{
   content:'';
   position:absolute;
-  top:50%;
-  left:0;
-  right:0;
-  height:100%;
-  background:linear-gradient(90deg,transparent 0%,var(--terra) 50%,transparent 100%);
-  transform:translateY(-50%);
-  animation:fmScanHorizontal 2.5s ease-in-out infinite;
-  opacity:.5;
+  top:10%;
+  left:10%;
+  width:3px;
+  height:80%;
+  background:linear-gradient(180deg,transparent,var(--terra),transparent);
+  opacity:0;
+  animation:fmScanH 4s ease-in-out infinite 1.5s;
+  box-shadow:0 0 12px var(--terra);
+  border-radius:2px;
+  z-index:4;
 }
 
 @keyframes fmScan{
@@ -1854,9 +1884,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   100%{top:calc(100% - 24px);opacity:0}
 }
 
-@keyframes fmScanHorizontal{
-  0%,100%{transform:translateX(-100%) translateY(-50%)}
-  50%{transform:translateX(100%) translateY(-50%)}
+@keyframes fmScanH{
+  0%{left:10%;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{left:85%;opacity:0}
 }
 
 /* Center prompt */
@@ -1925,7 +1957,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* ===== REDUCED MOTION ===== */
 @media(prefers-reduced-motion:reduce){
-  .fm-scanline,.fm-corner,.fm-prompt,.fm-pill{animation:none !important;opacity:1 !important}
+  .fm-scanline,.fm-corner,.fm-prompt,.fm-pill,.fm-viewfinder::after{animation:none !important;opacity:1 !important}
   .fm-pill{transform:none !important}
 }
 
@@ -2364,10 +2396,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- 3. World Map Section -->
-  <div class="scroll-reveal" style="margin:20px 24px 0;padding:20px 16px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);text-align:center">
-    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);margin-bottom:4px;transition:color .4s">Explorez le monde</div>
-    <div style="font-size:12px;color:var(--t3);margin-bottom:14px;transition:color .4s">1 300 168 recettes de 100+ pays</div>
-    <div style="position:relative;width:100%;margin:0 auto 0">
+  <div class="scroll-reveal">
+    <div style="padding:0 24px;font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);margin-bottom:4px;transition:color .4s">Explorez le monde</div>
+    <div style="position:relative;width:100%;margin:0 auto 0;padding:0 12px">
       <svg viewBox="0 0 800 400" style="width:100%;display:block" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="mapGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" style="stop-color:var(--terra);stop-opacity:0.06"/><stop offset="100%" style="stop-color:var(--gold);stop-opacity:0.04"/></linearGradient></defs>
         <g opacity="0.04" stroke="var(--t4)" stroke-width="0.3" fill="none"><line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/><line x1="0" y1="300" x2="800" y2="300"/><line x1="200" y1="0" x2="200" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/></g>
@@ -2673,8 +2704,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
       <div id="mapTooltip" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
     </div>
-    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--t1);margin-bottom:4px;transition:color .4s">100+ pays</div>
-    <div style="font-size:12px;color:var(--t3)">1 300 168 recettes index&eacute;es</div>
+    <div style="padding:0 24px;font-size:12px;color:var(--t3);margin-top:14px;transition:color .4s">100+ pays &agrave; explorer</div>
+    <div style="padding:0 24px;font-size:12px;color:var(--t3)">1 300 168 recettes</div>
     <script>(function(){var t=document.getElementById('mapTooltip'),c=t&&t.parentElement;if(!t||!c)return;c.querySelectorAll('.map-marker').forEach(function(m){m.addEventListener('mouseenter',function(){var r=c.getBoundingClientRect(),ci=m.querySelector('circle'),s=c.querySelector('svg'),sr=s.getBoundingClientRect(),cx=parseFloat(ci.getAttribute('cx')),cy=parseFloat(ci.getAttribute('cy')),vb=s.viewBox.baseVal;t.textContent=m.getAttribute('data-tooltip');t.style.display='block';t.style.opacity='1';t.style.left=(cx*sr.width/vb.width)+(sr.left-r.left)+'px';t.style.top=(cy*sr.height/vb.height)+(sr.top-r.top)-28+'px'});m.addEventListener('mouseleave',function(){t.style.opacity='0';setTimeout(function(){t.style.display='none'},200)})})})();</script>
       <div id="mapTooltipExplorer" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
   </div>
@@ -2791,15 +2822,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
     <!-- Meta line: flag + country + difficulty + time + servings -->
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--t2);transition:color .4s">
-      <span class="det-cat"><span style="font-size:16px">&#x1F1EB;&#x1F1F7;</span> France</span>
+      <span class="det-badge"><span style="font-size:16px">&#x1F1EB;&#x1F1F7;</span> France</span>
       <span style="color:var(--t4)">&middot;</span>
-      <span style="padding:2px 8px;border-radius:8px;background:var(--terra-g);color:var(--terra);font-size:11px;font-weight:600;letter-spacing:.3px">Interm&eacute;diaire</span>
+      <span class="det-badge" style="background:var(--terra-g);color:var(--terra)">Interm&eacute;diaire</span>
       <span style="color:var(--t4)">&middot;</span>
-      <span class="ms" style="font-size:14px">schedule</span>
-      <span>1h 30</span>
+      <span class="det-badge"><span class="ms" style="font-size:14px">schedule</span> 1h 30</span>
       <span style="color:var(--t4)">&middot;</span>
-      <span class="ms" style="font-size:14px">group</span>
-      <span>4 portions</span>
+      <span class="det-badge"><span class="ms" style="font-size:14px">group</span> 4 portions</span>
     </div>
 
     <!-- Description -->
@@ -3617,6 +3646,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div class="aca-path-t">Classiques fran&ccedil;ais</div>
       <div class="aca-path-prog">3 / 5 termin&eacute;s</div>
     </div>
+    <div class="academy-progress"><div class="academy-progress-fill" style="width:60%"></div></div>
     <div class="aca-lesson" onclick="showRecipe(0)" style="cursor:pointer">
       <div class="aca-lesson-num done"><span class="ms" style="font-size:16px;color:#fff">check</span></div>
       <div class="aca-lesson-info"><div class="aca-lesson-n">Croque Monsieur</div><div class="aca-lesson-skill">Technique : Sauce b&eacute;chamel</div></div>
@@ -3922,17 +3952,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div style="flex:1;padding:0 24px;overflow-y:auto">
     <div style="display:flex;gap:10px;margin-bottom:16px;align-items:flex-start">
       <div style="width:32px;height:32px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="ms" style="font-size:16px;color:#fff">auto_awesome</span></div>
-      <div style="padding:14px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:0 16px 16px 16px;font-size:14px;color:var(--t1);line-height:1.5;max-width:80%;transition:color .4s,background .4s">Bonjour ! Que souhaitez-vous cuisiner aujourd'hui ?</div>
+      <div style="padding:14px 16px;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-radius:18px 18px 18px 4px;font-size:14px;color:var(--t1);line-height:1.5;max-width:80%;transition:color .4s,background .4s">Bonjour ! Que souhaitez-vous cuisiner aujourd'hui ?</div>
     </div>
     <div style="display:flex;gap:10px;margin-bottom:16px;justify-content:flex-end">
-      <div style="padding:14px 16px;background:var(--terra);border-radius:16px 0 16px 16px;font-size:14px;color:#fff;line-height:1.5;max-width:80%">Un plat rapide avec du poulet</div>
+      <div style="padding:14px 16px;background:rgba(196,101,74,.1);border:1px solid rgba(196,101,74,.15);border-radius:18px 18px 4px 18px;font-size:14px;color:var(--t1);line-height:1.5;max-width:80%">Un plat rapide avec du poulet</div>
     </div>
     <div style="display:flex;gap:10px;margin-bottom:16px;align-items:flex-start">
       <div style="width:32px;height:32px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="ms" style="font-size:16px;color:#fff">auto_awesome</span></div>
-      <div style="max-width:80%">
-        <div style="padding:14px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:0 16px 16px 16px;font-size:14px;color:var(--t1);line-height:1.5;margin-bottom:10px;transition:color .4s,background .4s">Voici 3 suggestions parfaites :</div>
-        <div onclick="showRecipe(0)" style="padding:10px;background:var(--card);border:1px solid var(--card-b);border-radius:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;transition:background .4s,border-color .4s">
-          <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:44px;height:44px;border-radius:10px;object-fit:cover" alt="">
+      <div style="max-width:100%">
+        <div style="padding:14px 16px;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-radius:18px 18px 18px 4px;font-size:14px;color:var(--t1);line-height:1.5;margin-bottom:10px;transition:color .4s,background .4s">Voici 3 suggestions parfaites :</div>
+        <div onclick="showRecipe(0)" style="padding:10px;background:var(--card);border:1px solid var(--card-b);border-radius:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;transition:background .4s,border-color .4s;width:100%;height:auto">
+          <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0" alt="">
           <div><div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">Brochettes Poulet Grec</div><div style="font-size:11px;color:var(--t3)">40 min &middot; Facile</div></div>
         </div>
         <div onclick="showRecipe(2)" style="padding:10px;background:var(--card);border:1px solid var(--card-b);border-radius:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;transition:background .4s,border-color .4s">
