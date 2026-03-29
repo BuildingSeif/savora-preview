@@ -280,7 +280,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* =========================================
    S1: HOME
    ========================================= */
-.home{background:var(--bg);padding-bottom:120px;min-height:100%;transition:background .5s}
+.home{background:var(--bg);padding-bottom:140px;min-height:100%;transition:background .5s}
 .greet{padding:0 24px;margin-bottom:12px}
 .greet-hi{font-size:14px;color:var(--t3);font-weight:400;margin-bottom:2px}
 .greet-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s}
@@ -944,11 +944,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   inset:0;
   background:linear-gradient(
     180deg,
-    transparent 0%,
+    rgba(18,14,10,.15) 0%,
+    rgba(18,14,10,.05) 20%,
     transparent 35%,
-    rgba(18,14,10,.15) 50%,
-    rgba(18,14,10,.55) 70%,
-    rgba(18,14,10,.85) 90%,
+    rgba(18,14,10,.3) 55%,
+    rgba(18,14,10,.7) 72%,
+    rgba(18,14,10,.88) 85%,
     rgba(18,14,10,.95) 100%
   );
   display:flex;
@@ -977,14 +978,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   height:110px;
   border-radius:20px;
   position:relative;
-  overflow:hidden;
   scroll-snap-align:start;
   cursor:pointer;
   transition:transform .3s cubic-bezier(.16,1,.3,1);
-  will-change:transform;
   background:var(--card);
   border:1.5px solid rgba(196,101,74,.12);
-  box-shadow:0 4px 20px rgba(45,30,15,.06), 0 1px 3px rgba(45,30,15,.04);
+  box-shadow:0 4px 20px rgba(45,30,15,.06),0 1px 3px rgba(45,30,15,.04);
   padding:16px;
   display:flex;
   flex-direction:column;
@@ -1426,15 +1425,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   0% { transform: scale(1) translate3d(0, 0, 0); }
   100% { transform: scale(1.08) translate3d(-2%, -1%, 0); }
 }
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(18,14,10,.35) 50%, rgba(18,14,10,.75) 75%, rgba(18,14,10,.92) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 32px 28px;
-}
+/* hero-overlay defined above — no duplicate */
 
 /* === WHISPER === */
 .whisper {
@@ -1471,21 +1462,18 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   flex-shrink: 0;
   width: 160px;
   height: 110px;
-  background: var(--glass);
-  background-image: linear-gradient(rgba(255,255,255,.08) 0%, rgba(255,255,255,.04) 100%);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-b);
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: 20px;
+  position: relative;
+  scroll-snap-align: start;
   cursor: pointer;
+  transition: transform .3s cubic-bezier(.16,1,.3,1);
+  background: var(--card);
+  border: 1.5px solid rgba(196,101,74,.12);
+  box-shadow: 0 4px 20px rgba(45,30,15,.06),0 1px 3px rgba(45,30,15,.04);
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s;
-  will-change: transform;
-  position: relative;
-  overflow: hidden;
 }
 .power-card .pc-icon {z-index:1;}
 .power-card .pc-title {z-index:1;}
@@ -2143,7 +2131,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 }
 
 .power-card:active {
-  transform: scale(0.96) translateY(1px);
+  transform: scale(.96);
 }
 
 .pill:active {
@@ -2266,17 +2254,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="hero-home" onclick="showRecipe(6)">
   <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="">
   <div class="hero-overlay">
-    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
-    <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:8px">Ragout de poulet aux<br>epices marocaines</div>
-    <div style="font-size:12px;color:rgba(240,235,228,.6);margin-bottom:16px">Maroc &middot; 1h &middot; Pour 4 personnes</div>
-    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5), inset 0 1px 0 rgba(255,255,255,.2)">
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:rgba(212,135,111,.9);margin-bottom:6px;text-shadow:0 1px 8px rgba(0,0,0,.3)">Ce soir</div>
+    <div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:400;color:#f0ebe4;line-height:1.1;margin-bottom:8px;text-shadow:0 2px 12px rgba(0,0,0,.4)">Ragout de poulet aux<br>epices marocaines</div>
+    <div style="font-size:13px;color:rgba(240,235,228,.6);margin-bottom:16px">Maroc &middot; 1h &middot; Pour 4 personnes</div>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5), inset 0 1px 0 rgba(255,255,255,.15);text-shadow:0 1px 2px rgba(0,0,0,.2)">
       <span class="ms" style="font-size:18px">restaurant</span>Cuisiner
     </div>
   </div>
 </div>
 
 <!-- ============ ELEMENT 2: WHISPER ============ -->
-<div class="whisper" style="display:flex;align-items:flex-start;justify-content:space-between">
+<div class="whisper" style="display:flex;align-items:flex-start;justify-content:space-between;margin-top:8px">
   <div>
     <div class="whisper-name">Bonjour, Nicolas</div>
     <div class="whisper-ctx">Samedi soir — le moment id&eacute;al pour un plat g&eacute;n&eacute;reux</div>
@@ -2288,7 +2276,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 
 <!-- ============ ELEMENT 3: THREE POWER CARDS ============ -->
-<div class="power-scroll">
+<div class="power-scroll" style="margin-top:24px">
   <div class="power-card" onclick="go(8)">
     <div class="pc-icon"><span class="ms">kitchen</span></div>
     <div>
@@ -2313,7 +2301,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 
 <!-- ============ ELEMENT 4: DISCOVER TONIGHT ============ -->
-<div class="discover-header">
+<div class="discover-header" style="margin-top:28px">
   <h2>D&eacute;couvrez ce soir</h2>
 </div>
 <div class="discover-scroll">
