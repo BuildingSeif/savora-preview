@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Savora — Block E: Culinary Life Memory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root,[data-theme="light"]{
+  --bg:#f8f3ec;--bg2:#f0eae1;
+  --card:#fffefa;--card-b:rgba(0,0,0,.05);--card-s:0 4px 20px rgba(45,30,15,.06);
+  --t1:#33291f;--t2:#6b6058;--t3:#a09690;--t4:#cfc7bf;
+  --terra:#c4654a;--terra-l:#b55a42;--terra-g:rgba(196,101,74,.10);
+  --sage:#6da06d;--gold:#b89840;
+  --tab-bg:rgba(255,255,255,.55);--tab-b:rgba(0,0,0,.06);
+  --glass:rgba(255,255,255,.45);--glass-b:rgba(0,0,0,.05);--glass-s:0 2px 12px rgba(45,30,15,.04);
+  --grad-up:linear-gradient(0deg,rgba(248,243,236,1) 0%,rgba(248,243,236,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(248,243,236,1) 0%,rgba(248,243,236,0) 100%);
+  --sep:rgba(0,0,0,.05);--input-bg:rgba(0,0,0,.03);
+  --sbar-c:#2a231d;
+  --hdr-bg:rgba(248,243,236,.65);
+  --sbar-glass:rgba(248,243,236,.55);
+}
+[data-theme="dark"]{
+  --bg:#151311;--bg2:#1d1a17;
+  --card:rgba(255,255,255,.04);--card-b:rgba(255,255,255,.06);--card-s:0 4px 20px rgba(0,0,0,.25);
+  --t1:#f0ebe4;--t2:#b5ab9f;--t3:#7a7168;--t4:#3a3530;
+  --terra:#c4654a;--terra-l:#d4876f;--terra-g:rgba(196,101,74,.12);
+  --sage:#7aad7a;--gold:#c9a84c;
+  --tab-bg:rgba(255,255,255,.06);--tab-b:rgba(255,255,255,.08);
+  --glass:rgba(255,255,255,.05);--glass-b:rgba(255,255,255,.07);--glass-s:0 2px 12px rgba(0,0,0,.15);
+  --grad-up:linear-gradient(0deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --sep:rgba(255,255,255,.04);--input-bg:rgba(255,255,255,.04);
+  --sbar-c:#f0ebe4;
+  --hdr-bg:rgba(21,19,17,.65);
+  --sbar-glass:rgba(21,19,17,.55);
+}
+
+html,body{height:100%;overflow:hidden;background:#0a0908}
+[data-theme="light"] body{background:#c5bdb4}
+body{display:flex;justify-content:center;align-items:center;font-family:'Inter',system-ui,sans-serif;transition:background .5s}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;-webkit-font-smoothing:antialiased}
+
+.ph{
+  width:390px;height:844px;position:relative;
+  background:var(--bg);border-radius:54px;overflow:hidden;
+  box-shadow:0 0 0 11px #1a1816,0 0 0 13px #3a3632,0 50px 100px rgba(0,0,0,.5);
+  contain:layout style paint;transition:background .5s;
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:34px;background:#000;border-radius:0 0 20px 20px;z-index:300}
+
+.sbar{
+  position:absolute;top:0;left:0;right:0;height:54px;z-index:250;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 34px 8px;font-size:15px;font-weight:600;
+  color:var(--sbar-c);transition:color .4s;
+}
+.sbar-r{display:flex;gap:5px;align-items:center;font-size:12px}
+
+.scr{
+  position:absolute;inset:0;will-change:transform,opacity;
+  transition:transform .35s cubic-bezier(.34,1.2,.64,1),opacity .3s ease-out;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  overscroll-behavior-y:contain;scrollbar-width:none;
+}
+.scr::-webkit-scrollbar{display:none}
+.scr[data-s="on"]{transform:none;opacity:1;pointer-events:all;z-index:10}
+.scr[data-s="off"]{transform:translateX(60px) scale(.95);opacity:0;pointer-events:none;z-index:1}
+
+.hdr{
+  position:sticky;top:0;z-index:100;
+  height:96px;display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:14px;
+  background:var(--hdr-bg);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+  transition:background .4s;
+}
+.hdr-logo{
+  font-family:'Playfair Display',serif;font-weight:300;
+  font-size:16px;letter-spacing:7px;text-transform:uppercase;
+  color:var(--terra);user-select:none;
+}
+.hdr-side{position:absolute;bottom:14px;display:flex;gap:10px}
+.hdr-side.l{left:24px}.hdr-side.r{right:24px}
+.hdr-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.hdr-btn:active{transform:scale(.9)}
+.hdr-btn .ms{font-size:20px;color:var(--t2);transition:color .4s}
+
+.sh{display:flex;justify-content:space-between;align-items:baseline;padding:0 24px;margin-top:32px;margin-bottom:16px}
+.sh-t{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;letter-spacing:-.2px;color:var(--t1);transition:color .4s}
+
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+}
+
+.rr{
+  display:flex;gap:12px;align-items:center;padding:10px;margin:0 24px 10px;
+  background:var(--card);border:1px solid var(--card-b);border-radius:16px;
+  cursor:pointer;box-shadow:0 2px 12px rgba(45,30,15,.06);position:relative;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.rr:active{transform:scale(.98)}
+.rr-img{width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.rr-img img{width:100%;height:100%;object-fit:cover;display:block}
+.rr-info{flex:1;min-width:0}
+.rr-n{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .4s}
+.rr-d{font-size:12px;color:var(--t3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rr-m{display:flex;gap:10px;margin-top:6px;align-items:center}
+.rr-star{font-size:12px;color:var(--terra);font-weight:600;display:flex;align-items:center;gap:3px}
+.rr-star .ms{font-size:14px;font-variation-settings:'FILL' 1}
+.rr-time{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px}
+.rr-time .ms{font-size:14px}
+
+[onclick]:active{transform:scale(.97);transition:transform .2s cubic-bezier(.16,1,.3,1)}
+
+/* ========== PULSE PIN ========== */
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(196,101,74,.5)}
+  70%{box-shadow:0 0 0 10px rgba(196,101,74,0)}
+  100%{box-shadow:0 0 0 0 rgba(196,101,74,0)}
+}
+.map-pin{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--terra);position:absolute;
+  cursor:pointer;animation:pulse 2s infinite;
+  border:2px solid #fff;
+  box-shadow:0 2px 8px rgba(196,101,74,.3);
+}
+.map-pin::after{
+  content:attr(data-count);
+  position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:600;color:var(--terra);
+  background:var(--card);padding:2px 6px;border-radius:8px;
+  box-shadow:0 2px 8px rgba(45,30,15,.1);white-space:nowrap;
+}
+
+/* ========== RESTAURANT CARD ========== */
+.resto-card{
+  display:flex;gap:12px;align-items:center;padding:12px;margin:0 24px 12px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:18px;cursor:pointer;
+  box-shadow:var(--glass-s);
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.resto-card:active{transform:scale(.98)}
+.resto-img{width:56px;height:56px;border-radius:14px;overflow:hidden;flex-shrink:0}
+.resto-img img{width:100%;height:100%;object-fit:cover;display:block}
+.resto-info{flex:1;min-width:0}
+.resto-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--t1);margin-bottom:2px;transition:color .4s}
+.resto-loc{font-size:11px;color:var(--terra);font-weight:500;margin-bottom:4px}
+.resto-meta{font-size:11px;color:var(--t3)}
+.resto-stars{display:flex;align-items:center;gap:2px;margin-top:4px}
+.resto-stars .ms{font-size:14px;color:var(--gold);font-variation-settings:'FILL' 1}
+.resto-stars .ms.half{font-variation-settings:'FILL' 0}
+
+/* ========== DISH CARD ========== */
+.dish-card{
+  min-width:140px;width:140px;height:180px;border-radius:18px;overflow:hidden;
+  position:relative;cursor:pointer;scroll-snap-align:start;flex-shrink:0;
+  box-shadow:0 6px 24px rgba(45,30,15,.1);
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.dish-card:active{transform:scale(.95)}
+.dish-card img{width:100%;height:100%;object-fit:cover;display:block}
+.dish-card-ov{
+  position:absolute;bottom:0;left:0;right:0;padding:12px;
+  background:linear-gradient(0deg,rgba(16,12,8,.82),transparent);
+}
+.dish-card-ov span{font-size:12px;font-weight:400;color:#fff;line-height:1.3;display:block}
+
+/* ========== MAP EMBED SIM ========== */
+.map-embed{
+  margin:0 24px 20px;border-radius:18px;overflow:hidden;
+  background:var(--bg2);padding:32px 20px;text-align:center;
+  border:1px solid var(--card-b);
+}
+.map-embed .ms{font-size:40px;color:var(--terra);margin-bottom:8px;display:block}
+.map-embed-addr{font-size:14px;color:var(--t1);font-weight:500;margin-bottom:4px}
+.map-embed-date{font-size:12px;color:var(--t3)}
+
+/* ========== NOTES CARD ========== */
+.notes-card{
+  margin:0 24px 20px;padding:20px;border-radius:18px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+}
+.notes-card p{
+  font-size:14px;color:var(--t2);line-height:1.6;
+  font-style:italic;font-family:'Playfair Display',serif;
+}
+
+/* ========== BOOKMARK BTN ========== */
+.bookmark-btn{
+  margin:8px 24px 40px;height:52px;border-radius:26px;border:none;
+  background:var(--terra);color:#fff;width:calc(100% - 48px);
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 8px 28px rgba(196,101,74,.3);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.bookmark-btn:active{transform:scale(.96);box-shadow:0 4px 16px rgba(196,101,74,.2)}
+
+/* ========== TIMELINE ========== */
+.timeline{position:relative;padding:0 24px 40px 48px}
+.timeline::before{
+  content:'';position:absolute;left:38px;top:0;bottom:0;width:2px;
+  background:var(--terra);opacity:.3;border-radius:1px;
+}
+.tl-month{position:relative;margin-bottom:32px}
+.tl-month:last-child{margin-bottom:0}
+.tl-dot{
+  position:absolute;left:-18px;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--terra);border:2.5px solid var(--bg);
+  box-shadow:0 0 0 3px var(--terra-g);
+}
+.tl-label{
+  font-family:'Playfair Display',serif;font-size:17px;font-weight:400;
+  color:var(--terra);margin-bottom:12px;
+}
+.tl-card{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:18px;padding:16px;margin-bottom:12px;
+  box-shadow:var(--glass-s);
+}
+.tl-stat{font-size:13px;color:var(--t2);line-height:1.7}
+.tl-stat b{color:var(--t1);font-weight:600}
+.tl-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:12px;
+  background:var(--terra-g);margin-top:8px;
+}
+.tl-badge .ms{font-size:18px;color:var(--terra)}
+.tl-badge span{font-size:12px;font-weight:600;color:var(--terra)}
+.tl-fav{
+  display:flex;align-items:center;gap:8px;margin-top:10px;
+  font-size:12px;color:var(--t2);
+}
+.tl-fav .ms{font-size:16px;color:var(--gold);font-variation-settings:'FILL' 1}
+.tl-img{
+  width:100%;height:140px;border-radius:14px;overflow:hidden;margin-top:10px;
+}
+.tl-img img{width:100%;height:100%;object-fit:cover;display:block}
+.tl-flags{display:flex;gap:6px;margin-top:8px;font-size:20px}
+
+/* ========== HORIZONTAL SCROLL ========== */
+.hs{display:flex;gap:14px;padding:0 24px 24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-padding:0 24px}
+.hs::-webkit-scrollbar{display:none}
+
+/* ========== SCREEN BG ========== */
+.s-bg{background:var(--bg);padding-bottom:60px;min-height:100%}
+
+/* ========== NAV SELECTOR ========== */
+.nav-sel{
+  position:absolute;bottom:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:center;gap:4px;padding:12px 24px 34px;
+  background:var(--hdr-bg);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+}
+.nav-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--t4);cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.nav-dot.on{width:28px;border-radius:5px;background:var(--terra)}
+</style>
+</head>
+<body>
+<div class="ph">
+  <div class="notch"></div>
+  <div class="sbar"><span>9:41</span><div class="sbar-r"><span class="ms" style="font-size:16px">signal_cellular_alt</span><span class="ms" style="font-size:16px">wifi</span><span class="ms" style="font-size:16px">battery_full</span></div></div>
+
+  <!-- ═══════════════════════════════════════
+       S23: RESTAURANT MEMORY — Your culinary map
+       ═══════════════════════════════════════ -->
+  <div class="scr s-bg" id="s23" data-s="on">
+    <div class="hdr">
+      <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+      <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--t1)">Mes restaurants</span>
+    </div>
+
+    <!-- Map area -->
+    <div style="margin:0 24px 8px;height:40vh;border-radius:22px;overflow:hidden;position:relative;background:var(--bg2);border:1px solid var(--card-b)">
+      <svg viewBox="0 0 400 420" style="width:100%;height:100%;opacity:.18" preserveAspectRatio="xMidYMid meet">
+        <path d="M200 30 C120 40,60 80,50 140 C38 210,45 260,80 310 C100 340,140 370,180 390 C200 400,220 400,240 390 C280 370,320 340,340 310 C375 260,382 210,370 140 C360 80,300 40,200 30Z" fill="none" stroke="var(--t4)" stroke-width="2.5"/>
+        <!-- Corsica -->
+        <ellipse cx="340" cy="350" rx="12" ry="22" fill="none" stroke="var(--t4)" stroke-width="2"/>
+      </svg>
+      <!-- Pins -->
+      <div class="map-pin" data-count="2" style="top:28%;left:52%"></div>
+      <div class="map-pin" data-count="1" style="top:50%;left:54%;animation-delay:.4s"></div>
+      <div class="map-pin" data-count="1" style="top:85%;left:48%;animation-delay:.8s"></div>
+      <!-- Marrakech pin — outside France outline, bottom-left -->
+      <div class="map-pin" data-count="1" style="top:88%;left:20%;animation-delay:1.2s"></div>
+    </div>
+
+    <div style="text-align:center;padding:0 24px 20px">
+      <span style="font-size:14px;color:var(--t3)">4 restaurants, 12 plats decouverts</span>
+    </div>
+
+    <!-- Restaurant cards -->
+    <div class="resto-card" onclick="go(24)">
+      <div class="resto-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Le Jardin des Saveurs"></div>
+      <div class="resto-info">
+        <div class="resto-name">Le Jardin des Saveurs</div>
+        <div class="resto-loc">Paris</div>
+        <div class="resto-meta">3 plats | Visite le 15 mars 2026</div>
+        <div class="resto-stars">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms half">star_half</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="resto-card" onclick="go(24)">
+      <div class="resto-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="Riad Zitoun"></div>
+      <div class="resto-info">
+        <div class="resto-name">Riad Zitoun</div>
+        <div class="resto-loc">Marrakech</div>
+        <div class="resto-meta">5 plats | Visite le 8 mars 2026</div>
+        <div class="resto-stars">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="resto-card" onclick="go(24)">
+      <div class="resto-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774023028463-5ykrwqqn.jpg" alt="Trattoria Bella"></div>
+      <div class="resto-info">
+        <div class="resto-name">Trattoria Bella</div>
+        <div class="resto-loc">Lyon</div>
+        <div class="resto-meta">4 plats | Visite le 22 fevrier 2026</div>
+        <div class="resto-stars">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms half">star_half</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:40px"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       S24: RESTAURANT CARD DETAIL
+       ═══════════════════════════════════════ -->
+  <div class="scr s-bg" id="s24" data-s="off">
+    <div class="hdr">
+      <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+      <span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:var(--t1)">Le Jardin des Saveurs</span>
+    </div>
+
+    <!-- Map embed simulation -->
+    <div class="map-embed">
+      <span class="ms">location_on</span>
+      <div class="map-embed-addr">12 Rue de la Paix, 75002 Paris</div>
+      <div class="map-embed-date">Visite le 15 mars 2026</div>
+    </div>
+
+    <!-- Plats decouverts -->
+    <div class="sh"><span class="sh-t">Plats decouverts</span></div>
+    <div class="hs">
+      <div class="dish-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Roti de boeuf">
+        <div class="dish-card-ov"><span>Roti de boeuf sauce bearnaise</span></div>
+      </div>
+      <div class="dish-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774129542351-tgrdtip4.jpg" alt="Ratatouille">
+        <div class="dish-card-ov"><span>Ratatouille en bouchees feuilletees</span></div>
+      </div>
+      <div class="dish-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774206403771-wpw29x6m.jpg" alt="Tarte cacao">
+        <div class="dish-card-ov"><span>Tarte cacao meringue</span></div>
+      </div>
+    </div>
+
+    <!-- Recettes inspirees -->
+    <div class="sh"><span class="sh-t">Recettes inspirees</span></div>
+    <div style="padding:0 0 8px">
+      <p style="font-size:12px;color:var(--t3);padding:0 24px 12px">Recreez ces plats chez vous</p>
+      <div class="rr" onclick="showRecipe()">
+        <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Roti"></div>
+        <div class="rr-info">
+          <div class="rr-n">Roti de boeuf maison</div>
+          <div class="rr-d">Sauce bearnaise onctueuse</div>
+          <div class="rr-m">
+            <span class="rr-star"><span class="ms">star</span>4.8</span>
+            <span class="rr-time"><span class="ms">schedule</span>1h30</span>
+          </div>
+        </div>
+      </div>
+      <div class="rr" onclick="showRecipe()">
+        <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774129542351-tgrdtip4.jpg" alt="Ratatouille"></div>
+        <div class="rr-info">
+          <div class="rr-n">Ratatouille feuilletee</div>
+          <div class="rr-d">Version bistrot chic</div>
+          <div class="rr-m">
+            <span class="rr-star"><span class="ms">star</span>4.6</span>
+            <span class="rr-time"><span class="ms">schedule</span>55min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes personnelles -->
+    <div class="sh"><span class="sh-t">Notes personnelles</span></div>
+    <div class="notes-card">
+      <p>Ambiance incroyable, terrasse avec vue. Le roti etait parfait — demander la sauce a part.</p>
+    </div>
+
+    <!-- Y retourner button -->
+    <button class="bookmark-btn" onclick="void(0)">
+      <span class="ms" style="font-size:20px">bookmark_add</span>
+      Y retourner
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       S25: CULINARY TIMELINE
+       ═══════════════════════════════════════ -->
+  <div class="scr s-bg" id="s25" data-s="off">
+    <div class="hdr">
+      <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+      <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--t1)">Mon parcours</span>
+    </div>
+
+    <div class="timeline">
+      <!-- Mars 2026 -->
+      <div class="tl-month">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Mars 2026</div>
+        <div class="tl-card">
+          <div class="tl-stat">
+            <b>47</b> recettes capturees<br>
+            <b>12</b> cuisinees<br>
+            <b>3</b> restaurants visites
+          </div>
+          <div class="tl-flags">
+            <span>&#127467;&#127479;</span>
+            <span>&#127470;&#127481;</span>
+            <span>&#127474;&#127462;</span>
+            <span>&#127471;&#127477;</span>
+            <span>&#127481;&#127469;</span>
+          </div>
+          <div class="tl-badge">
+            <span class="ms">public</span>
+            <span>Globe-trotteur — 10 pays explores</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fevrier 2026 -->
+      <div class="tl-month">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Fevrier 2026</div>
+        <div class="tl-card">
+          <div class="tl-stat">
+            <b>32</b> recettes capturees<br>
+            <b>8</b> cuisinees
+          </div>
+          <div class="tl-badge">
+            <span class="ms">cake</span>
+            <span>Premier dessert reussi</span>
+          </div>
+          <div class="tl-fav">
+            <span class="ms">star</span>
+            Risotto aux cepes — cuisine 4 fois
+          </div>
+        </div>
+      </div>
+
+      <!-- Janvier 2026 -->
+      <div class="tl-month">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Janvier 2026</div>
+        <div class="tl-card">
+          <div class="tl-stat">
+            <b>Debut de l'aventure</b>
+          </div>
+          <div class="tl-badge">
+            <span class="ms">photo_camera</span>
+            <span>Premiere recette capturee</span>
+          </div>
+          <div class="tl-img">
+            <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="Premiere recette">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom nav selector -->
+  <div class="nav-sel">
+    <div class="nav-dot on" onclick="showScreen(23)"></div>
+    <div class="nav-dot" onclick="showScreen(24)"></div>
+    <div class="nav-dot" onclick="showScreen(25)"></div>
+  </div>
+</div>
+
+<script>
+let cur=23;
+const navHistory=[];
+
+function $(s){return document.querySelector(s)}
+function $$(s){return document.querySelectorAll(s)}
+
+function go(n){
+  if(n===cur)return;
+  navHistory.push(cur);
+  $(`#s${cur}`).dataset.s='off';
+  const nx=$(`#s${n}`);
+  nx.style.transition='none';nx.dataset.s='off';nx.scrollTop=0;
+  nx.offsetHeight;nx.style.transition='';
+  requestAnimationFrame(()=>{nx.dataset.s='on'});
+  cur=n;
+  updateNav(n);
+}
+
+function goBack(){
+  if(navHistory.length>0){
+    const prev=navHistory.pop();
+    $(`#s${cur}`).dataset.s='off';
+    const nx=$(`#s${prev}`);
+    nx.style.transition='none';nx.dataset.s='off';nx.scrollTop=0;
+    nx.offsetHeight;nx.style.transition='';
+    requestAnimationFrame(()=>{nx.dataset.s='on'});
+    cur=prev;
+    updateNav(prev);
+  }
+}
+
+function showScreen(n){
+  if(n===cur)return;
+  navHistory.push(cur);
+  $(`#s${cur}`).dataset.s='off';
+  const nx=$(`#s${n}`);
+  nx.style.transition='none';nx.dataset.s='off';nx.scrollTop=0;
+  nx.offsetHeight;nx.style.transition='';
+  requestAnimationFrame(()=>{nx.dataset.s='on'});
+  cur=n;
+  updateNav(n);
+}
+
+function updateNav(n){
+  $$('.nav-dot').forEach((d,i)=>{
+    d.classList.toggle('on',[23,24,25][i]===n);
+  });
+}
+
+function showRecipe(){/* stub */}
+</script>
+</body>
+</html>

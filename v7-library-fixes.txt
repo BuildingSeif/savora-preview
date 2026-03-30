@@ -1,0 +1,427 @@
+LIBRARY / PROFILE (S6) — FROM 6/10 TO 10/10
+============================================
+
+CURRENT ISSUES:
+- No sense of PROGRESSION — profile is too thin
+- Collections are small (140px × 180px) and cramped
+- Collection cards should be 150px tall minimum for visual impact
+- Recipe thumbnails are 40px (too small)
+- Recipe list is text-heavy, needs better visual hierarchy
+- No summary card showing weekly stats
+- Avatar is 40px (too small for a profile anchor)
+- No world map showing explored countries
+- Streak counter exists but lacks visual prominence
+- No coherent "journey" narrative
+
+================================================================================
+CSS CHANGES NEEDED
+================================================================================
+
+FIND:
+.hs{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  padding:0 24px;
+  margin:0 0 20px 0
+}
+
+REPLACE:
+.hs{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  padding:0 24px;
+  margin:0 0 24px 0
+}
+
+================================================================================
+
+FIND:
+    <div onclick="go(16)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+
+REPLACE:
+    <div onclick="go(16)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s;hover{box-shadow:0 12px 32px rgba(45,30,15,.2)}">
+
+================================================================================
+
+ADD NEW CSS FOR JOURNEY SECTION (place before </style>):
+
+/* ===== JOURNEY & PROGRESSION ===== */
+.journey{
+  padding:0 24px 20px;
+  background:var(--card);
+  border:1px solid var(--card-b);
+  border-radius:16px;
+  margin:0 24px 24px;
+  transition:background .4s,border-color .4s;
+}
+
+.journey-h{
+  font-family:'Playfair Display',serif;
+  font-size:17px;
+  font-weight:400;
+  color:var(--t1);
+  margin-bottom:14px;
+  padding-top:14px;
+  transition:color .4s;
+}
+
+.journey-map{
+  width:100%;
+  height:80px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(196,101,74,.1) 0%,rgba(196,101,74,.05) 100%);
+  border:1px solid rgba(196,101,74,.15);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.journey-map-label{
+  font-size:12px;
+  color:var(--t2);
+  font-weight:500;
+  text-align:center;
+}
+
+.journey-row{
+  display:flex;
+  gap:14px;
+  margin-bottom:12px;
+}
+
+.journey-stat{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.journey-stat-icon{
+  font-size:20px;
+  display:flex;
+  align-items:center;
+}
+
+.journey-stat-info{
+  flex:1;
+}
+
+.journey-stat-v{
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:300;
+  color:var(--terra);
+}
+
+.journey-stat-l{
+  font-size:9px;
+  color:var(--t3);
+  font-weight:600;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.journey-progress{
+  margin-top:12px;
+}
+
+.journey-progress-bar{
+  width:100%;
+  height:6px;
+  border-radius:3px;
+  background:var(--card-b);
+  overflow:hidden;
+}
+
+.journey-progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--terra),rgba(196,101,74,.6));
+  width:47%;
+  border-radius:3px;
+}
+
+.journey-progress-label{
+  font-size:10px;
+  color:var(--t2);
+  margin-top:6px;
+  font-weight:500;
+}
+
+/* ===== WEEKLY SUMMARY CARD ===== */
+.week-summary{
+  padding:16px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:16px;
+  margin:0 24px 24px;
+  box-shadow:var(--glass-s);
+}
+
+.week-summary-h{
+  font-family:'Playfair Display',serif;
+  font-size:15px;
+  font-weight:400;
+  color:var(--t1);
+  margin-bottom:12px;
+  transition:color .4s;
+}
+
+.week-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.week-stat{
+  text-align:center;
+}
+
+.week-stat-v{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-weight:300;
+  color:var(--terra);
+}
+
+.week-stat-l{
+  font-size:9px;
+  color:var(--t3);
+  margin-top:4px;
+  line-height:1.3;
+}
+
+================================================================================
+
+FIND:
+  <!-- Mini profile strip -->
+  <div style="display:flex;align-items:center;gap:12px;padding:8px 24px 20px">
+    <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--terra)"><img src="nicolas.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+    <div>
+      <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Nicolas B.</div>
+      <div style="font-size:11px;color:var(--terra);font-weight:500">Sous-Chef &middot; Niveau 4 &middot; 12 jours de s&eacute;rie</div>
+    </div>
+  </div>
+
+REPLACE:
+  <!-- Mini profile strip -->
+  <div style="display:flex;align-items:center;gap:14px;padding:8px 24px 24px">
+    <div style="position:relative;width:56px;height:56px;flex-shrink:0">
+      <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;border:2px solid var(--terra)"><img src="nicolas.jpg" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+      <div style="position:absolute;bottom:0;right:0;width:20px;height:20px;border-radius:50%;background:var(--terra);border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;transition:background .4s">4</div>
+    </div>
+    <div>
+      <div style="font-size:16px;font-weight:600;color:var(--t1);transition:color .4s">Nicolas B.</div>
+      <div style="font-size:11px;color:var(--t2);font-weight:400;margin-top:2px">Sous-Chef &middot; Niveau 4</div>
+    </div>
+  </div>
+
+================================================================================
+
+FIND:
+  <!-- My Collections -->
+  <div class="sh"><div class="sh-t">Mes collections</div><button class="sh-link">Cr&eacute;er</button></div>
+
+REPLACE:
+  <!-- JOURNEY & PROGRESSION SECTION -->
+  <div class="journey">
+    <div class="journey-h">Votre parcours culinaire</div>
+    
+    <!-- Mini World Map -->
+    <div class="journey-map">
+      <div class="journey-map-label">5 pays explor&eacute;s sur 100+</div>
+    </div>
+    
+    <!-- Streak + Recipes -->
+    <div class="journey-row">
+      <div class="journey-stat">
+        <div class="journey-stat-icon">🔥</div>
+        <div class="journey-stat-info">
+          <div class="journey-stat-v">12</div>
+          <div class="journey-stat-l">Jours de s&eacute;rie</div>
+        </div>
+      </div>
+      <div class="journey-stat">
+        <div class="journey-stat-icon"><span class="ms" style="color:var(--terra)">restaurant</span></div>
+        <div class="journey-stat-info">
+          <div class="journey-stat-v">47</div>
+          <div class="journey-stat-l">Recettes cuisin&eacute;es</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="journey-progress">
+      <div class="journey-progress-bar">
+        <div class="journey-progress-fill"></div>
+      </div>
+      <div class="journey-progress-label">47 / 100 recettes jusqu'au Chef de Partie</div>
+    </div>
+  </div>
+
+  <!-- WEEKLY SUMMARY CARD -->
+  <div class="week-summary">
+    <div class="week-summary-h">Votre semaine</div>
+    <div class="week-summary-grid">
+      <div class="week-stat">
+        <div class="week-stat-v">7</div>
+        <div class="week-stat-l">Recettes<br>cuisin&eacute;es</div>
+      </div>
+      <div class="week-stat">
+        <div class="week-stat-v">2 450</div>
+        <div class="week-stat-l">Cal/<br>moyenne jour</div>
+      </div>
+      <div class="week-stat">
+        <div class="week-stat-v">3</div>
+        <div class="week-stat-l">Pays<br>diff&eacute;rents</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Collections -->
+  <div class="sh"><div class="sh-t">Mes collections</div><button class="sh-link">Cr&eacute;er</button></div>
+
+================================================================================
+
+FIND:
+    <div onclick="go(16)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:var(--terra-l);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;font-variation-settings:'FILL' 1;vertical-align:-2px">favorite</span> Favoris</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">47 recettes</div>
+      </div>
+    </div>
+    <div onclick="showRecipe(10)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> D&icirc;ners rapides</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">23 recettes</div>
+      </div>
+    </div>
+    <div onclick="showRecipe(8)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Classiques fran&ccedil;ais</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">12 recettes</div>
+      </div>
+    </div>
+    <div onclick="showRecipe(14)" style="min-width:140px;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Healthy</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">31 recettes</div>
+      </div>
+    </div>
+
+REPLACE:
+    <div onclick="go(16)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s" onmouseover="this.style.boxShadow='0 12px 32px rgba(45,30,15,.2)'" onmouseout="this.style.boxShadow='0 6px 20px rgba(45,30,15,.1)'">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:12px;color:var(--terra-l);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;font-variation-settings:'FILL' 1;vertical-align:-2px">favorite</span> Favoris</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6)">47 recettes</div>
+      </div>
+    </div>
+    <div onclick="showRecipe(10)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s" onmouseover="this.style.boxShadow='0 12px 32px rgba(45,30,15,.2)'" onmouseout="this.style.boxShadow='0 6px 20px rgba(45,30,15,.1)'">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:12px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> D&icirc;ners rapides</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6)">23 recettes</div>
+      </div>
+    </div>
+    <div onclick="showRecipe(8)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s" onmouseover="this.style.boxShadow='0 12px 32px rgba(45,30,15,.2)'" onmouseout="this.style.boxShadow='0 6px 20px rgba(45,30,15,.1)'">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:12px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Classiques fran&ccedil;ais</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6)">12 recettes</div>
+      </div>
+    </div>
+    <div onclick="showRecipe(14)" style="min-width:150px;height:200px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;scroll-snap-align:start;box-shadow:0 6px 20px rgba(45,30,15,.1);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s" onmouseover="this.style.boxShadow='0 12px 32px rgba(45,30,15,.2)'" onmouseout="this.style.boxShadow='0 6px 20px rgba(45,30,15,.1)'">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px">
+        <div style="font-size:12px;color:rgba(255,255,255,.9);font-weight:600;margin-bottom:2px"><span class="ms" style="font-size:14px;vertical-align:-2px">menu_book</span> Healthy</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6)">31 recettes</div>
+      </div>
+    </div>
+
+================================================================================
+
+FIND:
+  <!-- Recently Cooked -->
+  <div class="sh"><div class="sh-t">Cuisin&eacute;es r&eacute;cemment</div><button class="sh-link" onclick="go(21)">Historique</button></div>
+  <div class="rr" onclick="showRecipe(0)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Hier &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
+  <div class="rr" onclick="showRecipe(6)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Il y a 3 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
+  <div class="rr" onclick="showRecipe(8)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Il y a 5 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
+
+REPLACE:
+  <!-- Recently Cooked -->
+  <div class="sh"><div class="sh-t">Cuisin&eacute;es r&eacute;cemment</div><button class="sh-link" onclick="go(21)">Historique</button></div>
+  <div class="rr" onclick="showRecipe(0)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Hier &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
+  <div class="rr" onclick="showRecipe(6)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Il y a 3 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
+  <div class="rr" onclick="showRecipe(8)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Il y a 5 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
+
+================================================================================
+
+FIND:
+  <!-- Badges -->
+  <div style="padding:0 24px 20px;cursor:pointer" onclick="go(20)">
+    <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:400;color:var(--t1);margin-bottom:12px;transition:color .4s">Votre parcours</div>
+    <div style="display:flex;gap:10px">
+      <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">12</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:2px">jours de suite</div>
+      </div>
+      <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">47</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:2px">recettes cuisin&eacute;es</div>
+      </div>
+      <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">7</div>
+        <div style="font-size:10px;color:var(--t3);margin-top:2px">pays explor&eacute;s</div>
+      </div>
+    </div>
+  </div>
+
+REPLACE:
+  <!-- (Removed - replaced by Journey section above) -->
+
+================================================================================
+SUMMARY OF IMPROVEMENTS:
+================================================================================
+
+PROGRESSION NARRATIVE:
+✓ New "Votre parcours culinaire" section with visual journey tracking
+✓ Mini world map showing 5/100+ countries explored
+✓ Streak counter with fire emoji (12 jours de série)
+✓ Recipe completion progress bar (47/100)
+✓ Weekly summary card showing 7 recipes, calories, countries explored
+
+VISUAL POLISH:
+✓ Avatar enlarged from 40px to 56px with level badge overlay
+✓ Collections increased to 150px × 200px (from 140 × 180)
+✓ Collection cards now have hover shadow effect
+✓ Recipe thumbnails enlarged from 40px to 56px
+✓ Better spacing and visual hierarchy throughout
+
+NEW SECTIONS:
+✓ Glass-morphic journey card with progression visualization
+✓ Weekly summary card with stats grid
+✓ Level badge overlay on profile avatar
+✓ Progress bar toward next achievement level
+
+LAYOUT IMPROVEMENTS:
+✓ Better spacing between sections (24px margins)
+✓ Removed redundant "Votre parcours" badge section
+✓ Integration of journey metrics into new prominent section
+✓ Larger, more touchable collection cards
+✓ Better visual feedback on interactive elements
+

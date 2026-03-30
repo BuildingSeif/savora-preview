@@ -1,0 +1,273 @@
+================================================================================
+SAVORA v7 — ANIMATION & MICRO-INTERACTION ADDITIONS
+================================================================================
+This file contains CSS and JavaScript additions to bring the app to life with
+stagger reveals, tap feedback, hover depth, and smooth transitions.
+
+Apply these to index.html in order:
+
+================================================================================
+1. CSS ADDITIONS — INSERT BEFORE </style> TAG (around line 2410)
+================================================================================
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL REVEAL STAGGER — Fade in + slide up on viewport entry
+   ═══════════════════════════════════════════════════════════════════ */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TAP/ACTIVE DEPTH FEEDBACK — All interactive cards
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Recipe cards (gc2, rr, cc, discover-card) */
+.gc2:active,
+.rr:active,
+.cc:active,
+.discover-card:active {
+  transform: scale(0.97);
+  transition: transform 0.15s ease;
+}
+
+.gc2,
+.rr,
+.cc,
+.discover-card {
+  transition: transform 0.25s cubic-bezier(.32, .72, .0, 1);
+}
+
+/* Power cards (detailed screens) */
+.power-card:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+/* Pill buttons */
+.pill:active {
+  transform: scale(0.94);
+  transition: transform 0.15s ease;
+}
+
+.pill {
+  transition: transform 0.25s cubic-bezier(.32, .72, .0, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TAB CONTENT CROSSFADE — Smooth opacity transition between tabs
+   ═══════════════════════════════════════════════════════════════════ */
+.det-panel,
+.v6-panel {
+  transition: opacity 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CENTER TAB ROTATION — Plus icon to X on tap
+   ═══════════════════════════════════════════════════════════════════ */
+.tb-c:active span {
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CUISINE CIRCLE GLOW — Active state glow for cuisine selection
+   ═══════════════════════════════════════════════════════════════════ */
+[onclick*="go(15)"]:active img,
+[onclick*="go(13)"]:active img {
+  box-shadow: 0 0 0 3px var(--terra);
+  transition: box-shadow 0.15s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CTA BUTTON PULSE ANIMATION — Gentle breathing for CTAs
+   ═══════════════════════════════════════════════════════════════════ */
+@keyframes ctaPulse {
+  0%,100% {
+    box-shadow: 0 6px 20px rgba(196, 101, 74, 0.35);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba(196, 101, 74, 0.5);
+  }
+}
+
+.v6-cta-btn,
+.cta-main {
+  animation: ctaPulse 3s ease-in-out infinite 3s;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCREEN TRANSITION OPACITY — Fade between screens
+   ═══════════════════════════════════════════════════════════════════ */
+.screen {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.screen[data-s="off"] {
+  opacity: 0;
+}
+
+================================================================================
+2. JAVASCRIPT ADDITIONS — INSERT BEFORE </script> TAG (around line 4149)
+================================================================================
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL REVEAL OBSERVER — Stagger fade-in on viewport entry
+   ═══════════════════════════════════════════════════════════════════ */
+
+// Create observer instance for scroll reveals
+const scrollRevealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Stagger animation by 80ms per item
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+      // Don't observe again after it becomes visible
+      scrollRevealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1  // Trigger when 10% of element is visible
+});
+
+// Initialize scroll reveals on all current elements
+function initScrollReveals() {
+  document.querySelectorAll('.scroll-reveal').forEach(el => {
+    scrollRevealObserver.observe(el);
+  });
+}
+
+// Run on initial page load
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollReveals();
+});
+
+/* ═══════════════════════════════════════════════════════════════════
+   RE-OBSERVE SCROLL REVEALS ON SCREEN CHANGE
+   Integrate into go() function after screen becomes visible
+   ═══════════════════════════════════════════════════════════════════ */
+
+// PATCH: Modify the existing go() function to re-observe scroll reveals
+// After line 4019 (requestAnimationFrame(()=>{nx.dataset.s='on'})), add:
+
+const originalGo = go;
+go = function(n) {
+  originalGo.call(this, n);
+  
+  // After screen transition, re-observe all scroll-reveals in new screen
+  setTimeout(() => {
+    const screen = document.querySelector('#s' + n);
+    if (screen) {
+      screen.querySelectorAll('.scroll-reveal').forEach(el => {
+        // Reset visibility state
+        el.classList.remove('visible');
+        // Re-observe
+        scrollRevealObserver.observe(el);
+      });
+    }
+  }, 100);
+};
+
+/* ═══════════════════════════════════════════════════════════════════
+   PILL/BUTTON VISUAL FEEDBACK — Add hover/focus states
+   ═══════════════════════════════════════════════════════════════════ */
+
+// Ensure all pills and buttons have smooth transitions
+document.addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill, button, [role="button"]');
+  if (pill && !pill.classList.contains('no-feedback')) {
+    // Feedback already provided by CSS :active state
+    // This event handler is here for future enhancements
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════════
+   APPLY SCROLL REVEAL CLASS TO KEY ELEMENTS (OPTIONAL)
+   Uncomment to auto-apply to common sections
+   ═══════════════════════════════════════════════════════════════════ */
+
+// Uncomment this section to auto-apply scroll-reveal to cards in feed screens:
+/*
+document.addEventListener('DOMContentLoaded', () => {
+  // Add to recipe cards in screens 1, 2, 6, 7
+  const feedScreens = ['#s1', '#s2', '#s6', '#s7'];
+  feedScreens.forEach(screenId => {
+    const screen = document.querySelector(screenId);
+    if (screen) {
+      screen.querySelectorAll('.gc2, .rr, .cc, .discover-card').forEach(card => {
+        card.classList.add('scroll-reveal');
+      });
+    }
+  });
+  initScrollReveals();
+});
+*/
+
+================================================================================
+3. INTEGRATION CHECKLIST
+================================================================================
+
+CSS Integration:
+✓ Copy all 8 CSS blocks into <style> before </style>
+✓ Ensure custom properties (--terra, --t4, --t2, --t1, --glass, etc.) exist
+✓ Test in light & dark themes
+✓ Verify @keyframes ctaPulse renders without conflicts
+
+JavaScript Integration:
+✓ Copy scroll reveal observer code into main <script>
+✓ CRITICAL: Wrap originalGo patch in conditional to prevent double-wrapping
+✓ Call initScrollReveals() after DOMContentLoaded
+✓ Test screen navigation (go() function calls)
+✓ Test scroll reveal on feed screens (S1, S2, S6, S7)
+✓ Test CTA pulse animation delay (3s before first pulse)
+
+Performance Notes:
+• IntersectionObserver is native & efficient
+• Animations use GPU-accelerated properties (transform, opacity)
+• Stagger delay (80ms) prevents animation "bunching"
+• Scroll reveals auto-unobserve after visibility to save memory
+
+Browser Support:
+• IntersectionObserver: All modern browsers (IE 11 needs polyfill)
+• CSS animations: All modern browsers
+• Backdrop-filter: Chrome, Safari; Firefox partial
+• CSS Grid: Full support
+
+================================================================================
+4. OPTIONAL ENHANCEMENTS (Post-launch)
+================================================================================
+
+A. Add scroll-reveal class to more elements:
+   - Detail screen hero images
+   - Ingredient lists
+   - Recipe step cards
+   - "Also like" recommendation cards
+
+B. Add haptic feedback (iOS):
+   ```javascript
+   function haptic(type = 'impact') {
+     if (navigator.vibrate) navigator.vibrate(10);
+   }
+   pill.addEventListener('click', () => haptic());
+   ```
+
+C. Add parallax scroll to hero images:
+   ```javascript
+   window.addEventListener('scroll', () => {
+     const hero = document.querySelector('.det-hero img');
+     if (hero) hero.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+   });
+   ```
+
+D. Add magnetic button effect (on hover, button follows cursor slightly)
+
+E. Add spring easing to more elements using cubic-bezier(.32, .72, .0, 1)
+
+================================================================================

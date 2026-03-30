@@ -1,0 +1,253 @@
+  <div class="scroll-reveal" style="margin:0 0 20px;padding:20px 16px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-b);border-radius:22px;box-shadow:var(--glass-s);text-align:center">
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:12px">CUISINES DU MONDE</div>
+    <div style="position:relative;width:100%;margin:0 auto 14px">
+      <svg viewBox="0 0 800 400" style="width:100%;display:block" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="mapGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" style="stop-color:var(--terra);stop-opacity:0.06"/>
+            <stop offset="100%" style="stop-color:var(--gold);stop-opacity:0.04"/>
+          </linearGradient>
+          <filter id="mapGlow">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Graticule lines for premium feel -->
+        <g opacity="0.04" stroke="var(--t4)" stroke-width="0.3" fill="none">
+          <line x1="0" y1="100" x2="800" y2="100"/>
+          <line x1="0" y1="200" x2="800" y2="200"/>
+          <line x1="0" y1="300" x2="800" y2="300"/>
+          <line x1="200" y1="0" x2="200" y2="400"/>
+          <line x1="400" y1="0" x2="400" y2="400"/>
+          <line x1="600" y1="0" x2="600" y2="400"/>
+        </g>
+
+        <!-- NORTH AMERICA -->
+        <path d="M 50,50 L 70,42 95,38 120,35 145,40 170,38 195,42 205,55 210,70 215,85 218,100
+                 225,108 230,115 232,125 228,138 220,148 210,155 205,165 195,172 188,178 180,185
+                 172,188 165,192 155,195 148,200 142,210 138,218 132,222 125,218 118,212 112,208
+                 108,198 100,192 95,188 88,182 80,178 72,170 65,165 58,158 52,148 48,138 42,125
+                 38,112 35,100 38,88 42,75 45,62 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.7"/>
+        <!-- Alaska -->
+        <path d="M 32,48 L 45,42 58,38 65,42 60,50 52,55 42,52 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.6"/>
+        <!-- Greenland -->
+        <path d="M 260,28 L 280,22 300,25 310,35 305,48 295,55 280,52 268,45 262,38 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.5"/>
+
+        <!-- CENTRAL AMERICA + CARIBBEAN -->
+        <path d="M 125,218 L 130,225 135,232 138,240 142,248 140,255 135,260 128,258 122,252 118,245 120,235 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.6"/>
+
+        <!-- SOUTH AMERICA -->
+        <path d="M 155,260 L 168,255 180,258 192,262 200,270 208,280 215,292 218,305 220,318
+                 218,332 215,345 210,355 202,362 195,368 188,372 178,375 170,372 162,365
+                 155,355 148,342 145,328 142,315 140,300 138,288 140,275 145,265 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.7"/>
+
+        <!-- EUROPE -->
+        <path d="M 350,60 L 365,55 378,58 390,62 400,68 408,75 412,85 415,95 418,105 420,115
+                 418,125 415,132 410,138 405,142 398,145 390,148 382,150 375,148 368,145
+                 362,140 355,135 348,128 345,120 342,110 340,100 342,90 345,78 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.7"/>
+        <!-- Iberian Peninsula -->
+        <path d="M 335,135 L 345,128 355,132 360,140 358,150 352,158 345,162 338,158 332,150 330,142 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.6"/>
+        <!-- Italy -->
+        <path d="M 392,130 L 398,135 402,142 405,152 408,162 405,170 400,172 395,168 392,160 390,150 388,140 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.65"/>
+        <!-- Scandinavia -->
+        <path d="M 370,25 L 378,22 385,28 390,38 392,50 388,58 382,62 375,58 370,48 368,38 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.5"/>
+        <!-- UK + Ireland -->
+        <path d="M 338,72 L 345,68 350,72 352,80 350,88 345,92 338,90 335,82 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.6"/>
+        <path d="M 328,78 L 333,75 336,80 335,86 330,88 327,84 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.5"/>
+
+        <!-- AFRICA -->
+        <path d="M 355,172 L 370,168 385,170 400,175 415,180 425,188 432,198 438,210 442,225
+                 445,240 445,258 442,275 438,290 432,305 425,315 418,325 410,332 400,338
+                 390,340 380,338 370,332 362,322 358,310 355,298 352,285 350,270 348,255
+                 348,240 350,225 352,210 352,195 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.65"/>
+        <!-- Madagascar -->
+        <path d="M 455,300 L 460,295 465,300 465,312 462,320 458,318 455,310 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.5"/>
+
+        <!-- MIDDLE EAST -->
+        <path d="M 430,145 L 445,140 458,142 468,148 475,158 478,168 475,178 468,182 458,180 448,175 440,168 435,158 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.6"/>
+
+        <!-- RUSSIA / NORTHERN ASIA -->
+        <path d="M 420,28 L 450,22 480,20 520,18 560,20 600,22 640,25 670,30 690,38 700,48
+                 698,58 690,65 675,70 660,72 640,70 620,68 600,65 580,62 560,60 540,58
+                 520,55 500,52 480,50 460,48 440,45 425,42 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.5"/>
+
+        <!-- INDIA + SOUTH ASIA -->
+        <path d="M 530,145 L 545,140 558,145 568,155 575,168 578,182 575,198 570,210 562,220
+                 555,228 545,232 535,228 528,220 522,210 518,198 515,185 515,170 518,158 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.7"/>
+        <!-- Sri Lanka -->
+        <path d="M 548,238 L 552,235 556,238 555,245 550,248 547,244 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.2" opacity="0.4"/>
+
+        <!-- CHINA + EAST ASIA -->
+        <path d="M 575,80 L 600,75 625,78 648,82 665,90 675,100 680,112 682,125 680,138
+                 675,148 668,155 658,160 648,162 638,158 628,152 618,148 610,140 605,132
+                 598,125 592,118 585,112 578,105 575,95 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.7"/>
+
+        <!-- KOREAN PENINSULA -->
+        <path d="M 672,100 L 678,95 682,100 682,112 680,118 675,115 672,108 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.5"/>
+
+        <!-- JAPAN -->
+        <path d="M 695,88 L 700,82 705,85 708,92 710,102 708,112 705,120 700,125 695,122 692,115 690,105 692,95 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.65"/>
+
+        <!-- SOUTHEAST ASIA -->
+        <path d="M 600,168 L 612,165 622,170 630,178 635,188 632,198 625,205 618,208 610,205 605,198 600,188 598,178 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.6"/>
+        <!-- Philippines -->
+        <path d="M 658,178 L 662,175 666,180 665,190 662,195 658,190 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.2" opacity="0.45"/>
+
+        <!-- INDONESIA + MALAYSIA -->
+        <path d="M 608,225 L 625,220 642,222 658,225 672,228 680,235 678,242 670,248 655,250 638,248 622,245 612,240 608,232 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.3" opacity="0.55"/>
+
+        <!-- AUSTRALIA -->
+        <path d="M 640,290 L 665,282 690,280 712,285 728,292 738,305 742,320 738,335 730,348
+                 718,358 705,362 690,365 675,362 660,355 650,345 642,332 638,318 636,305 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.4" opacity="0.6"/>
+        <!-- New Zealand -->
+        <path d="M 755,342 L 760,338 764,342 765,352 762,360 758,358 755,350 Z"
+              fill="url(#mapGrad)" stroke="var(--t4)" stroke-width="0.2" opacity="0.45"/>
+
+        <!-- ===== COUNTRY MARKERS ===== -->
+
+        <!-- USA — 513K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1FA;&#x1F1F8; &Eacute;tats-Unis &mdash; 513K recettes">
+          <circle cx="140" cy="130" r="12" fill="var(--terra)" opacity="0.12"/>
+          <circle cx="140" cy="130" r="7" fill="var(--terra)" opacity="0.25"/>
+          <circle cx="140" cy="130" r="4" fill="var(--terra)" style="animation:mapPulse 2s ease-in-out infinite"/>
+          <text x="140" y="118" text-anchor="middle" fill="var(--terra)" font-size="8" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.85">513K</text>
+        </g>
+
+        <!-- France — 241K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EB;&#x1F1F7; France &mdash; 241K recettes">
+          <circle cx="368" cy="115" r="11" fill="var(--terra)" opacity="0.12"/>
+          <circle cx="368" cy="115" r="6.5" fill="var(--terra)" opacity="0.25"/>
+          <circle cx="368" cy="115" r="3.5" fill="var(--terra)" style="animation:mapPulse 2s ease-in-out infinite .3s"/>
+          <text x="368" y="103" text-anchor="middle" fill="var(--terra)" font-size="8" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.85">241K</text>
+        </g>
+
+        <!-- Italy — 151K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EE;&#x1F1F9; Italie &mdash; 151K recettes">
+          <circle cx="398" cy="148" r="10" fill="var(--gold)" opacity="0.12"/>
+          <circle cx="398" cy="148" r="6" fill="var(--gold)" opacity="0.22"/>
+          <circle cx="398" cy="148" r="3.2" fill="var(--gold)" style="animation:mapPulse 2s ease-in-out infinite .6s"/>
+          <text x="412" y="145" text-anchor="start" fill="var(--gold)" font-size="7.5" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.8">151K</text>
+        </g>
+
+        <!-- Brazil — 64K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1E7;&#x1F1F7; Br&eacute;sil &mdash; 64K recettes">
+          <circle cx="195" cy="305" r="9" fill="var(--sage)" opacity="0.12"/>
+          <circle cx="195" cy="305" r="5.5" fill="var(--sage)" opacity="0.22"/>
+          <circle cx="195" cy="305" r="3" fill="var(--sage)" style="animation:mapPulse 2.5s ease-in-out infinite .4s"/>
+          <text x="195" y="295" text-anchor="middle" fill="var(--sage)" font-size="7" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.75">64K</text>
+        </g>
+
+        <!-- Mexico — 64K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1F2;&#x1F1FD; Mexique &mdash; 64K recettes">
+          <circle cx="108" cy="195" r="9" fill="var(--sage)" opacity="0.12"/>
+          <circle cx="108" cy="195" r="5.5" fill="var(--sage)" opacity="0.22"/>
+          <circle cx="108" cy="195" r="3" fill="var(--sage)" style="animation:mapPulse 2.5s ease-in-out infinite .7s"/>
+          <text x="108" y="185" text-anchor="middle" fill="var(--sage)" font-size="7" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.75">64K</text>
+        </g>
+
+        <!-- India — 37K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EE;&#x1F1F3; Inde &mdash; 37K recettes">
+          <circle cx="548" cy="188" r="9" fill="var(--terra)" opacity="0.12"/>
+          <circle cx="548" cy="188" r="5.5" fill="var(--terra)" opacity="0.22"/>
+          <circle cx="548" cy="188" r="3" fill="var(--terra)" style="animation:mapPulse 2s ease-in-out infinite 1s"/>
+          <text x="548" y="178" text-anchor="middle" fill="var(--terra)" font-size="7" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.8">37K</text>
+        </g>
+
+        <!-- Japan — 31K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EF;&#x1F1F5; Japon &mdash; 31K recettes">
+          <circle cx="700" cy="105" r="8" fill="var(--gold)" opacity="0.12"/>
+          <circle cx="700" cy="105" r="5" fill="var(--gold)" opacity="0.22"/>
+          <circle cx="700" cy="105" r="2.8" fill="var(--gold)" style="animation:mapPulse 2.2s ease-in-out infinite .8s"/>
+          <text x="715" y="102" text-anchor="start" fill="var(--gold)" font-size="7" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.75">31K</text>
+        </g>
+
+        <!-- China — 26K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1E8;&#x1F1F3; Chine &mdash; 26K recettes">
+          <circle cx="635" cy="120" r="8" fill="var(--gold)" opacity="0.12"/>
+          <circle cx="635" cy="120" r="5" fill="var(--gold)" opacity="0.22"/>
+          <circle cx="635" cy="120" r="2.8" fill="var(--gold)" style="animation:mapPulse 2.2s ease-in-out infinite 1.2s"/>
+          <text x="635" y="110" text-anchor="middle" fill="var(--gold)" font-size="7" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.75">26K</text>
+        </g>
+
+        <!-- UK — 25K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EC;&#x1F1E7; Royaume-Uni &mdash; 25K recettes">
+          <circle cx="345" cy="82" r="7" fill="var(--sage)" opacity="0.12"/>
+          <circle cx="345" cy="82" r="4.5" fill="var(--sage)" opacity="0.22"/>
+          <circle cx="345" cy="82" r="2.5" fill="var(--sage)" style="animation:mapPulse 2.5s ease-in-out infinite 1.5s"/>
+          <text x="330" y="78" text-anchor="end" fill="var(--sage)" font-size="6.5" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.7">25K</text>
+        </g>
+
+        <!-- Greece — 17K -->
+        <g class="map-marker" style="cursor:pointer" data-tooltip="&#x1F1EC;&#x1F1F7; Gr&egrave;ce &mdash; 17K recettes">
+          <circle cx="415" cy="140" r="7" fill="var(--gold)" opacity="0.12"/>
+          <circle cx="415" cy="140" r="4.5" fill="var(--gold)" opacity="0.22"/>
+          <circle cx="415" cy="140" r="2.5" fill="var(--gold)" style="animation:mapPulse 2.5s ease-in-out infinite 1.8s"/>
+          <text x="428" y="137" text-anchor="start" fill="var(--gold)" font-size="6.5" font-weight="600" font-family="Inter,system-ui,sans-serif" opacity="0.7">17K</text>
+        </g>
+
+      </svg>
+
+      <!-- Tooltip element (shown on hover via JS) -->
+      <div id="mapTooltip" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--t1);margin-bottom:4px;transition:color .4s">100+ pays</div>
+    <div style="font-size:12px;color:var(--t3)">1 300 168 recettes index&eacute;es</div>
+
+    <script>
+    // Map marker tooltips
+    (function(){
+      const tip = document.getElementById('mapTooltip');
+      const container = tip?.parentElement;
+      if (!tip || !container) return;
+      container.querySelectorAll('.map-marker').forEach(function(m){
+        m.addEventListener('mouseenter', function(e){
+          const rect = container.getBoundingClientRect();
+          const circle = m.querySelector('circle');
+          const svg = container.querySelector('svg');
+          const svgRect = svg.getBoundingClientRect();
+          const cx = parseFloat(circle.getAttribute('cx'));
+          const cy = parseFloat(circle.getAttribute('cy'));
+          const viewBox = svg.viewBox.baseVal;
+          const scaleX = svgRect.width / viewBox.width;
+          const scaleY = svgRect.height / viewBox.height;
+          const left = (cx * scaleX) + (svgRect.left - rect.left);
+          const top = (cy * scaleY) + (svgRect.top - rect.top) - 28;
+          tip.textContent = m.getAttribute('data-tooltip');
+          tip.style.display = 'block';
+          tip.style.opacity = '1';
+          tip.style.left = left + 'px';
+          tip.style.top = top + 'px';
+        });
+        m.addEventListener('mouseleave', function(){
+          tip.style.opacity = '0';
+          setTimeout(function(){ tip.style.display = 'none'; }, 200);
+        });
+      });
+    })();
+    </script>
+  </div>

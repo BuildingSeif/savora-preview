@@ -1,0 +1,93 @@
+V6 CONSISTENCY FIXES — Screens S5, S6, S7, S9, S10, S14
+=========================================================
+
+--- S5: SHOPPING LIST (lines 1700-1728) ---
+
+Line 1702: Header title uses inline style instead of consistent pattern.
+  Change: <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div>
+  Note: This is actually fine and matches S14 Settings header style. Consistent exception for sub-screens that don't use the "Savora" logo.
+
+Line 1940: S9 Import URL input has English placeholder text.
+  Change: placeholder="Paste recipe URL here..."
+  To:     placeholder="Collez le lien de la recette..."
+
+--- S6: LIBRARY (lines 1731-1817) ---
+
+Line 1732: Library wrapper div uses inline style instead of a named class.
+  Change: <div style="background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s">
+  To:     <div class="library"> (and add .library CSS matching .fridge/.shop/.academy pattern)
+  Reason: Every other screen wrapper has a named class for the bg-paper texture (line 50 only lists: .home,.explore,.shop,.prof,.det,.fridge,.import,.academy,.meal). Library is missing.
+
+Line 1791: "Votre parcours" heading uses inline Playfair at 17px instead of the standard .sh-t at 19px.
+  Change: font-size:17px
+  To:     font-size:19px (or use <div class="sh"><div class="sh-t">Votre parcours</div></div> pattern)
+
+--- S7: MEAL PLAN (lines 1819-1880) ---
+
+No major inconsistencies found. Uses var() references, Playfair for headings, Inter for body. Passes consistency check.
+
+--- S8: FRIDGE MAGIC (lines 1882-1933) — REPLACED BY v6-fridge.html ---
+
+Line 1885: Header uses .hdr-logo "Savora" instead of the screen-specific title pattern used in S5/S14.
+  Fixed in v6: Now shows "Frigo Magique" + wand icon, matching the titled-header pattern.
+
+--- S9: IMPORT RECIPE (lines 1935-1986) ---
+
+Line 1940: English placeholder "Paste recipe URL here..."
+  Change: "Paste recipe URL here..."
+  To:     "Collez le lien de la recette..."
+
+Line 1947: Instagram icon uses hardcoded gradient colors (not CSS vars). Acceptable — these are brand colors.
+  Note: #E4405F, #C13584 (Instagram), #000 (TikTok), #FF0000 (YouTube) are intentional brand colors, not inconsistencies.
+
+Line 1980: English text "2 servings"
+  Change: "2 servings"
+  To:     "2 portions"
+
+Line 1975: English text "Healthy" in category label
+  Change: "Healthy &middot; Bowl"
+  To:     "Sain &middot; Bowl"
+  Note: If "Healthy" is intentional as a trendy label, keep as-is. Flag for Nicolas.
+
+--- S10: ACADEMY (lines 1988-2075) ---
+
+Line 2053: "Skills Tree" heading is in English, not French.
+  Change: "Skills Tree"
+  To:     "Arbre de comp&eacute;tences"
+
+Line 2070: Course cards use English text.
+  Change: "Japan&eacute;se Essentials" / "8 lessons"
+  To:     "Essentiels japonais" / "8 le&ccedil;ons"
+
+Line 2071:
+  Change: "Pastry Mastery" / "6 lessons"
+  To:     "Ma&icirc;trise p&acirc;tissi&egrave;re" / "6 le&ccedil;ons"
+
+Line 2072:
+  Change: "Indian Spice Route" / "7 lessons"
+  To:     "Route des &eacute;pices indiennes" / "7 le&ccedil;ons"
+
+Line 2010: "Serie en cours" missing accent.
+  Change: "Serie en cours"
+  To:     "S&eacute;rie en cours"
+
+--- S14: SETTINGS (lines 2124-2157) ---
+
+No major inconsistencies. Uses var() colors, Playfair for headings, .sh-t for section headers. Clean.
+
+=========================================================
+SUMMARY OF REQUIRED CHANGES (by priority):
+
+HIGH (language consistency):
+1. Line 1940: English placeholder -> French
+2. Line 1980: "2 servings" -> "2 portions"
+3. Line 2053: "Skills Tree" -> "Arbre de comp&eacute;tences"
+4. Lines 2070-2072: English course names -> French
+5. Line 2010: "Serie" -> "S&eacute;rie" (accent)
+
+MEDIUM (structural consistency):
+6. Line 1732: Add .library class to S6 wrapper (missing from bg-paper list on line 50)
+7. Line 1791: "Votre parcours" heading 17px -> 19px (match .sh-t)
+
+LOW (debatable):
+8. Line 1975: "Healthy" -> "Sain" (may be intentional anglicism)

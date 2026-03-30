@@ -1,0 +1,308 @@
+=== SAVORA S0 ONBOARDING CSS REFINEMENTS (V7) ===
+Target: 10/10 quality onboarding screen
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 1: Savora Logo - Increase Size & Add Glow
+
+FIND: .v6-onboard-mark{
+  position:absolute;
+  top:96px;
+  left:0;
+  right:0;
+  z-index:10;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:300;
+  font-size:18px;
+  letter-spacing:10px;
+  text-transform:uppercase;
+  text-indent:10px;
+  color:rgba(240,235,228,.85);
+  opacity:0;
+  animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+  -webkit-font-smoothing:antialiased;
+}
+
+REPLACE: .v6-onboard-mark{
+  position:absolute;
+  top:70px;
+  left:0;
+  right:0;
+  z-index:10;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:300;
+  font-size:24px;
+  letter-spacing:10px;
+  text-transform:uppercase;
+  text-indent:10px;
+  color:rgba(240,235,228,.85);
+  text-shadow:0 0 20px rgba(196,101,74,.4),0 0 40px rgba(196,101,74,.2);
+  opacity:0;
+  animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+  -webkit-font-smoothing:antialiased;
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 2: Language Selector - Reposition to Proper Spacing
+
+FIND: .v6-lang-selector{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:50;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  pointer-events:none;
+}
+
+REPLACE: .v6-lang-selector{
+  position:absolute;
+  top:115px;
+  left:0;
+  right:0;
+  height:auto;
+  bottom:auto;
+  z-index:50;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  pointer-events:none;
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 3: Language Pills - Larger, More Visible
+
+FIND: .v6-lang-pill{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:rgba(240,235,228,.85);
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  padding:8px 18px;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  letter-spacing:.3px;
+  -webkit-font-smoothing:antialiased;
+}
+
+REPLACE: .v6-lang-pill{
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:rgba(240,235,228,.9);
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  padding:10px 22px;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  letter-spacing:.3px;
+  -webkit-font-smoothing:antialiased;
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 4: Panel Words - Typewriter Scale Animation Entry
+
+FIND: .v6-onboard-panel .panel-word{
+  position:absolute;
+  bottom:220px;
+  left:0;
+  right:0;
+  z-index:2;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:300;
+  font-size:42px;
+  color:#f0ebe4;
+  letter-spacing:-.5px;
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);
+  -webkit-font-smoothing:antialiased;
+}
+
+REPLACE: .v6-onboard-panel .panel-word{
+  position:absolute;
+  bottom:220px;
+  left:0;
+  right:0;
+  z-index:2;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:300;
+  font-size:42px;
+  color:#f0ebe4;
+  letter-spacing:-.5px;
+  opacity:0;
+  transform:translateY(16px) scale(0.95);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);
+  -webkit-font-smoothing:antialiased;
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 5: Active Panel Word - Complete Scale Animation
+
+FIND: .v6-onboard-panel.active .panel-word{
+  opacity:1;
+  transform:translateY(0);
+}
+
+REPLACE: .v6-onboard-panel.active .panel-word{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 6: Panel Gradient - Add Warm Terracotta Glow (5% Opacity)
+
+FIND: .v6-onboard-panel .panel-grad{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(12,10,8,.1) 0%,
+    transparent 25%,
+    transparent 40%,
+    rgba(12,10,8,.4) 65%,
+    rgba(12,10,8,.8) 85%,
+    rgba(12,10,8,.95) 100%
+  );
+  z-index:1;
+}
+
+REPLACE: .v6-onboard-panel .panel-grad{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(12,10,8,.1) 0%,
+    transparent 25%,
+    transparent 40%,
+    rgba(12,10,8,.4) 65%,
+    rgba(12,10,8,.8) 85%,
+    rgba(12,10,8,.95) 100%
+  ),radial-gradient(ellipse at center,rgba(196,101,74,.05),transparent 60%);
+  z-index:1;
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 7: Dots Indicator - Bigger, More Visible (8px/12px)
+
+FIND: .v6-dot{
+  width:6px;
+  height:6px;
+  border-radius:3px;
+  background:rgba(255,255,255,.2);
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.v6-dot.active{
+  width:20px;
+  background:var(--terra);
+}
+
+REPLACE: .v6-dot{
+  width:8px;
+  height:8px;
+  border-radius:4px;
+  background:rgba(255,255,255,.3);
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.v6-dot.active{
+  width:12px;
+  height:8px;
+  background:var(--terra);
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 8: Commencer Button - Add Subtle Pulse Animation (3s Delay)
+
+FIND: .v6-cta-btn{
+  width:100%;
+  height:58px;
+  border-radius:29px;
+  border:none;
+  background:var(--terra);
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  letter-spacing:.4px;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  position:relative;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+REPLACE: .v6-cta-btn{
+  width:100%;
+  height:58px;
+  border-radius:29px;
+  border:none;
+  background:var(--terra);
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  letter-spacing:.4px;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  position:relative;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  animation:ctaPulse 2s cubic-bezier(.4,.0,.6,1) 3s infinite;
+}
+
+════════════════════════════════════════════════════════════════
+
+CHANGE 9: ADD NEW ANIMATION KEYFRAMES (at end of CSS)
+
+ADD BEFORE CLOSING </style>:
+
+@keyframes ctaPulse{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:0 10px 36px rgba(196,101,74,.35);
+  }
+  50%{
+    transform:scale(1.02);
+    box-shadow:0 12px 42px rgba(196,101,74,.45);
+  }
+}
+
+════════════════════════════════════════════════════════════════
+
+SUMMARY:
+✓ Logo: 18px → 24px, top:96px → 70px, added text-shadow glow
+✓ Pills: padding 8px 18px → 10px 22px, font-size 13px → 14px, background darker
+✓ Words: Added scale animation 0.95→1.0 on entry
+✓ Gradient: Added warm terracotta radial overlay (5% opacity)
+✓ Dots: 6px → 8px, active width 20px → 12px
+✓ Button: Added 3s-delayed pulse animation (2s cycle)
+✓ Spacing: Logo at 70px, pills at 115px = 45px gap
+
+RESULT: Premium, warm, attention-drawing onboarding → 10/10 quality
+
+════════════════════════════════════════════════════════════════

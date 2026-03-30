@@ -1,0 +1,334 @@
+<!-- S3: RECIPE DETAIL — Heritage Book V6 -->
+<div class="scr" id="s3" data-s="off">
+<div class="det">
+
+  <!-- 1. HERO PHOTO — 50vh, full-bleed, parallax -->
+  <div style="position:relative;width:100%;height:50vh;overflow:hidden">
+    <div style="position:absolute;inset:0;background:url('https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120888897-dne7a5ht.jpg') center/cover fixed;will-change:transform"></div>
+    <!-- Floating nav -->
+    <div style="position:absolute;top:54px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10">
+      <button onclick="goBack()" style="width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span></button>
+      <div style="display:flex;gap:10px">
+        <button style="width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="ms" style="color:#fff;font-size:20px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">share</span></button>
+        <button style="width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="ms" style="color:#fff;font-size:20px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">bookmark_border</span></button>
+      </div>
+    </div>
+    <!-- Bottom gradient fade to cream -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg) 0%,transparent 100%)"></div>
+  </div>
+
+  <!-- 2. RECIPE TITLE SECTION -->
+  <div style="padding:0 22px;background:var(--bg);position:relative;z-index:2;margin-top:-24px">
+    <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);line-height:1.25;margin:0 0 10px;transition:color .4s">Cassoulet v&eacute;g&eacute;talien</h1>
+
+    <!-- Meta line: flag + country + difficulty + time + servings -->
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--t2);transition:color .4s">
+      <span style="font-size:16px">&#x1F1EB;&#x1F1F7;</span>
+      <span>France</span>
+      <span style="color:var(--t4)">&middot;</span>
+      <span style="padding:2px 8px;border-radius:8px;background:var(--terra-g);color:var(--terra);font-size:11px;font-weight:600;letter-spacing:.3px">Interm&eacute;diaire</span>
+      <span style="color:var(--t4)">&middot;</span>
+      <span class="ms" style="font-size:14px">schedule</span>
+      <span>1h 30</span>
+      <span style="color:var(--t4)">&middot;</span>
+      <span class="ms" style="font-size:14px">group</span>
+      <span>4 portions</span>
+    </div>
+
+    <!-- Description -->
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.65;color:var(--t2);margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .4s">Un classique du terroir revisit&eacute; en version v&eacute;g&eacute;tale, riche en saveurs profondes et r&eacute;confortantes.</p>
+
+    <!-- CTA Button — Cuisiner -->
+    <button style="width:100%;height:52px;border-radius:16px;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 4px 16px rgba(196,101,74,.3);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform='scale(1)'">
+      <span class="ms" style="color:#fff;font-size:20px">play_arrow</span>
+      <span style="font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#fff;letter-spacing:.3px">Lancer la pr&eacute;paration</span>
+    </button>
+  </div>
+
+  <!-- 3. INFO CARDS ROW -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:20px 22px 0">
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">schedule</span>
+      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">1h 30</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">Temps</div>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">group</span>
+      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">4</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">Portions</div>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">local_fire_department</span>
+      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">470</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">kcal</div>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">star</span>
+      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">98</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">/100</div>
+    </div>
+  </div>
+
+  <!-- 4. TAB BAR -->
+  <div style="display:flex;gap:0;padding:20px 22px 0;border-bottom:1px solid var(--sep)">
+    <button class="v6-det-tab v6-det-tab-active" onclick="v6SwitchTab(this,0)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid var(--terra);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--t1);cursor:pointer;transition:color .3s,border-color .3s">Aper&ccedil;u</button>
+    <button class="v6-det-tab" onclick="v6SwitchTab(this,1)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .3s,border-color .3s">Ingr&eacute;dients</button>
+    <button class="v6-det-tab" onclick="v6SwitchTab(this,2)" style="flex:1;padding:12px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--t3);cursor:pointer;transition:color .3s,border-color .3s">Pr&eacute;paration</button>
+  </div>
+
+  <!-- 5. APERCU TAB -->
+  <div class="v6-panel" data-v6panel="0" style="padding:20px 22px">
+
+    <!-- Nutrition breakdown -->
+    <div style="margin-bottom:24px">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t1);margin-bottom:14px;transition:color .4s">Valeurs nutritionnelles</div>
+      <!-- Calories -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:13px;color:var(--t2);transition:color .4s">Calories</span>
+        <span style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">470 kcal</span>
+      </div>
+      <div style="height:4px;border-radius:2px;background:var(--input-bg);margin-bottom:14px;overflow:hidden"><div style="width:58%;height:100%;border-radius:2px;background:var(--terra);transition:width .6s cubic-bezier(.16,1,.3,1)"></div></div>
+      <!-- Proteines -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:13px;color:var(--t2);transition:color .4s">Prot&eacute;ines</span>
+        <span style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">22g</span>
+      </div>
+      <div style="height:4px;border-radius:2px;background:var(--input-bg);margin-bottom:14px;overflow:hidden"><div style="width:34%;height:100%;border-radius:2px;background:var(--sage);transition:width .6s cubic-bezier(.16,1,.3,1)"></div></div>
+      <!-- Glucides -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:13px;color:var(--t2);transition:color .4s">Glucides</span>
+        <span style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">58g</span>
+      </div>
+      <div style="height:4px;border-radius:2px;background:var(--input-bg);margin-bottom:14px;overflow:hidden"><div style="width:48%;height:100%;border-radius:2px;background:var(--gold);transition:width .6s cubic-bezier(.16,1,.3,1)"></div></div>
+      <!-- Lipides -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:13px;color:var(--t2);transition:color .4s">Lipides</span>
+        <span style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">14g</span>
+      </div>
+      <div style="height:4px;border-radius:2px;background:var(--input-bg);margin-bottom:14px;overflow:hidden"><div style="width:22%;height:100%;border-radius:2px;background:var(--terra-l);transition:width .6s cubic-bezier(.16,1,.3,1)"></div></div>
+    </div>
+
+    <!-- Environmental score -->
+    <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(109,160,109,.06);border:1px solid rgba(109,160,109,.12);border-radius:14px;margin-bottom:20px">
+      <div style="width:44px;height:44px;border-radius:12px;background:rgba(109,160,109,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <span style="font-size:22px">&#x1F331;</span>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">Impact environnemental : <span style="color:var(--sage)">A</span></div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">0.8 kg CO2 par portion &middot; Conforme GEMRCN</div>
+      </div>
+    </div>
+
+    <!-- Dietary tags -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+      <span style="padding:5px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-b);font-size:12px;color:var(--t2);transition:color .4s,background .4s">&#x1F33F; V&eacute;g&eacute;talien</span>
+      <span style="padding:5px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-b);font-size:12px;color:var(--t2);transition:color .4s,background .4s">&#x1F33E; Sans gluten</span>
+      <span style="padding:5px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-b);font-size:12px;color:var(--t2);transition:color .4s,background .4s">&#x2764;&#xFE0F; Riche en fibres</span>
+      <span style="padding:5px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-b);font-size:12px;color:var(--t2);transition:color .4s,background .4s">&#x1F4AA; Prot&eacute;in&eacute;</span>
+    </div>
+
+    <!-- About this recipe -->
+    <div style="margin-bottom:8px">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t1);margin-bottom:10px;transition:color .4s">&Agrave; propos de cette recette</div>
+      <p style="font-size:14px;line-height:1.7;color:var(--t2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .4s">Le cassoulet v&eacute;g&eacute;talien r&eacute;invente le grand classique du Sud-Ouest avec des haricots blancs fondants, des saucisses v&eacute;g&eacute;tales et une croute dor&eacute;e gratinee au four.</p>
+    </div>
+  </div>
+
+  <!-- 6. INGREDIENTS TAB -->
+  <div class="v6-panel" data-v6panel="1" style="padding:20px 22px;display:none">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Ingr&eacute;dients</span>
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+    </div>
+
+    <!-- Ingredient rows -->
+    <div style="display:flex;flex-direction:column;gap:2px">
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1506807803488-8eafc15316c7?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Haricots blancs secs</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">400g</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Chapelure dor&eacute;e</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">80g</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Saucisses v&eacute;g&eacute;tales</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">4 pcs</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1580910051074-3eb694886f4b?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Tomates concass&eacute;es</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">400g</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Oignon jaune</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">2 pcs</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1615477550927-6ec8445b6325?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Carottes</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">3 pcs</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1501420193726-1f65cfb8e8f0?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Bouillon de l&eacute;gumes</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">500ml</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
+        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
+        <img src="https://images.unsplash.com/photo-1599909533003-1f3e79e3a4e0?w=100&q=80" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
+        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Thym et laurier</span>
+        <span style="font-size:14px;color:var(--t2);transition:color .4s">3 branches</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. PREPARATION TAB -->
+  <div class="v6-panel" data-v6panel="2" style="padding:20px 22px;display:none">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Pr&eacute;paration</span>
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">1</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Faire tremper les haricots blancs dans un grand volume d'eau froide pendant une nuit enti&egrave;re, puis les &eacute;goutter et rincer.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 8h (trempage)</span>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">2</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">&Eacute;mincer finement les oignons et couper les carottes en petits d&eacute;s r&eacute;guliers.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 10 min</span>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">3</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Faire revenir les oignons dans un filet d'huile d'olive &agrave; feu moyen jusqu'&agrave; ce qu'ils soient translucides et l&eacute;g&egrave;rement dor&eacute;s.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 8 min</span>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">4</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Ajouter les carottes, les tomates concass&eacute;es, le bouillon de l&eacute;gumes, le thym et le laurier. Porter &agrave; &eacute;bullition.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 5 min</span>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">5</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Incorporer les haricots &eacute;goutt&eacute;s, baisser le feu et laisser mijoter &agrave; couvert pendant 45 minutes en remuant de temps en temps.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 45 min</span>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">6</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Couper les saucisses v&eacute;g&eacute;tales en rondelles &eacute;paisses et les faire dorer &agrave; la po&ecirc;le s&eacute;par&eacute;ment.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 6 min</span>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div style="display:flex;gap:16px;margin-bottom:28px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">7</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Transf&eacute;rer le m&eacute;lange dans un plat en terre cuite, disposer les saucisses par-dessus et saupoudrer g&eacute;n&eacute;reusement de chapelure.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 5 min</span>
+      </div>
+    </div>
+
+    <!-- Step 8 -->
+    <div style="display:flex;gap:16px;margin-bottom:12px">
+      <div style="flex-shrink:0;width:36px;text-align:center">
+        <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--terra)">8</span>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.7;color:var(--t1);margin-bottom:4px;transition:color .4s">Enfourner &agrave; 180&deg;C pendant 25 minutes jusqu'&agrave; obtenir une cro&ucirc;te dor&eacute;e et croustillante. Laisser reposer 5 minutes avant de servir.</p>
+        <span style="font-size:11px;color:var(--t3);transition:color .4s">&#x23F1; 30 min</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Chef tip -->
+  <div style="margin:4px 22px 24px;padding:16px 18px;border-left:3px solid var(--terra);background:var(--terra-g);border-radius:0 14px 14px 0">
+    <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.6;color:var(--t2);transition:color .4s">Pour un cassoulet encore plus savoureux, cassez la cro&ucirc;te de chapelure &agrave; mi-cuisson et laissez-en reformer une nouvelle.</div>
+  </div>
+
+  <!-- Bottom padding for scroll -->
+  <div style="height:40px"></div>
+
+</div>
+</div>
+
+<!-- Tab switching logic for V6 recipe detail -->
+<script>
+function v6SwitchTab(btn, idx) {
+  document.querySelectorAll('.v6-det-tab').forEach(function(t) {
+    t.style.borderBottomColor = 'transparent';
+    t.style.fontWeight = '400';
+    t.style.color = 'var(--t3)';
+  });
+  btn.style.borderBottomColor = 'var(--terra)';
+  btn.style.fontWeight = '600';
+  btn.style.color = 'var(--t1)';
+  document.querySelectorAll('.v6-panel').forEach(function(p) {
+    p.style.display = 'none';
+  });
+  var target = document.querySelector('[data-v6panel="' + idx + '"]');
+  if (target) target.style.display = 'block';
+}
+</script>

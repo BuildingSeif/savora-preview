@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Savora — Block C: Camera Capture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root,[data-theme="light"]{
+  --bg:#f8f3ec;--bg2:#f0eae1;
+  --card:#fffefa;--card-b:rgba(0,0,0,.05);--card-s:0 4px 20px rgba(45,30,15,.06);
+  --t1:#33291f;--t2:#6b6058;--t3:#a09690;--t4:#cfc7bf;
+  --terra:#c4654a;--terra-l:#b55a42;--terra-g:rgba(196,101,74,.10);
+  --sage:#6da06d;--gold:#b89840;
+  --tab-bg:rgba(255,255,255,.55);--tab-b:rgba(0,0,0,.06);
+  --glass:rgba(255,255,255,.45);--glass-b:rgba(0,0,0,.05);--glass-s:0 2px 12px rgba(45,30,15,.04);
+  --grad-up:linear-gradient(0deg,rgba(248,243,236,1) 0%,rgba(248,243,236,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(248,243,236,1) 0%,rgba(248,243,236,0) 100%);
+  --sep:rgba(0,0,0,.05);--input-bg:rgba(0,0,0,.03);
+  --sbar-c:#2a231d;
+  --hdr-bg:rgba(248,243,236,.65);
+  --sbar-glass:rgba(248,243,236,.55);
+}
+[data-theme="dark"]{
+  --bg:#151311;--bg2:#1d1a17;
+  --card:rgba(255,255,255,.04);--card-b:rgba(255,255,255,.06);--card-s:0 4px 20px rgba(0,0,0,.25);
+  --t1:#f0ebe4;--t2:#b5ab9f;--t3:#7a7168;--t4:#3a3530;
+  --terra:#c4654a;--terra-l:#d4876f;--terra-g:rgba(196,101,74,.12);
+  --sage:#7aad7a;--gold:#c9a84c;
+  --tab-bg:rgba(255,255,255,.06);--tab-b:rgba(255,255,255,.08);
+  --glass:rgba(255,255,255,.05);--glass-b:rgba(255,255,255,.07);--glass-s:0 2px 12px rgba(0,0,0,.15);
+  --grad-up:linear-gradient(0deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --sep:rgba(255,255,255,.04);--input-bg:rgba(255,255,255,.04);
+  --sbar-c:#f0ebe4;
+  --hdr-bg:rgba(21,19,17,.65);
+  --sbar-glass:rgba(21,19,17,.55);
+}
+
+html,body{height:100%;overflow:hidden;background:#0a0908}
+[data-theme="light"] body{background:#c5bdb4}
+body{display:flex;justify-content:center;align-items:center;font-family:'Inter',system-ui,sans-serif;transition:background .5s}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;-webkit-font-smoothing:antialiased}
+
+/* === PHONE === */
+.ph{
+  width:390px;height:844px;position:relative;
+  background:var(--bg);border-radius:54px;overflow:hidden;
+  box-shadow:0 0 0 11px #1a1816,0 0 0 13px #3a3632,0 50px 100px rgba(0,0,0,.5);
+  contain:layout style paint;transition:background .5s;
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:34px;background:#000;border-radius:0 0 20px 20px;z-index:300}
+.sbar{
+  position:absolute;top:0;left:0;right:0;height:54px;z-index:250;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 34px 8px;font-size:15px;font-weight:600;
+  color:#fff;transition:color .4s;
+}
+.sbar-r{display:flex;gap:5px;align-items:center;font-size:12px}
+
+/* === SCREENS === */
+.scr{
+  position:absolute;inset:0;will-change:transform,opacity;
+  transition:transform .35s cubic-bezier(.34,1.2,.64,1),opacity .3s ease-out;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  overscroll-behavior-y:contain;scrollbar-width:none;
+}
+.scr::-webkit-scrollbar{display:none}
+.scr[data-s="on"]{transform:none;opacity:1;pointer-events:all;z-index:10}
+.scr[data-s="l"]{transform:translateX(-40px) scale(.97);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="r"]{transform:translateX(40px) scale(.97);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="off"]{transform:translateX(60px) scale(.95);opacity:0;pointer-events:none;z-index:1}
+
+/* === HEADER === */
+.hdr{
+  position:sticky;top:0;z-index:100;
+  height:96px;display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:14px;
+  background:var(--hdr-bg);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+  transition:background .4s;
+}
+.hdr-side{position:absolute;bottom:14px;display:flex;gap:10px}
+.hdr-side.l{left:24px}.hdr-side.r{right:24px}
+.hdr-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .4s,border-color .4s,box-shadow .4s;
+}
+.hdr-btn:active{transform:scale(.9)}
+.hdr-btn .ms{font-size:20px;color:var(--t2);transition:color .4s}
+
+/* === SHARED CAMERA STYLES === */
+.cam-back{
+  position:absolute;top:60px;left:24px;z-index:50;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+}
+.cam-back:active{transform:scale(.9)}
+
+/* Corner brackets */
+.fm-corner{
+  position:absolute;z-index:3;
+  width:48px;height:48px;
+  border-color:var(--terra);border-style:solid;border-width:0;
+  opacity:.9;
+  animation:fmCornerPulse 2s ease-in-out infinite;
+}
+.fm-tl{top:16px;left:16px;border-top-width:3.5px;border-left-width:3.5px;border-radius:8px 0 0 0}
+.fm-tr{top:16px;right:16px;border-top-width:3.5px;border-right-width:3.5px;border-radius:0 8px 0 0}
+.fm-bl{bottom:16px;left:16px;border-bottom-width:3.5px;border-left-width:3.5px;border-radius:0 0 0 8px}
+.fm-br{bottom:16px;right:16px;border-bottom-width:3.5px;border-right-width:3.5px;border-radius:0 0 8px 0}
+
+@keyframes fmCornerPulse{
+  0%,100%{opacity:.8}
+  50%{opacity:1;filter:drop-shadow(0 0 4px var(--terra))}
+}
+
+/* Scanning line */
+.fm-scanline{
+  position:absolute;left:24px;right:24px;height:2px;z-index:4;
+  background:linear-gradient(90deg,transparent 0%,var(--terra) 20%,var(--terra) 80%,transparent 100%);
+  opacity:.7;
+  animation:fmScan 3s cubic-bezier(.45,.05,.55,.95) infinite;
+  box-shadow:0 0 20px rgba(196,101,74,.5);
+}
+
+@keyframes fmScan{
+  0%{top:24px;opacity:0}
+  5%{opacity:.7}
+  95%{opacity:.7}
+  100%{top:calc(100% - 24px);opacity:0}
+}
+
+/* CTA Button */
+.fm-cta{
+  width:100%;height:56px;
+  border-radius:16px;border:none;
+  background:var(--terra);color:#fff;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 0;
+  box-shadow:0 8px 32px rgba(196,101,74,.32);
+  transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.fm-cta:active{transform:scale(.96);box-shadow:0 4px 16px rgba(196,101,74,.2)}
+
+/* Pulse animation */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .fm-scanline,.fm-corner,.fm-cta,.cam-back{animation:none !important;opacity:1 !important}
+}
+
+/* =========================================
+   S17: CAMERA CAPTURE (Book / Manuscript)
+   ========================================= */
+.s17-cam{
+  background:#0c0a08;height:100%;display:flex;flex-direction:column;position:relative;
+}
+.s17-viewfinder{
+  position:relative;flex:1;margin:0;
+  background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.s17-viewfinder .fm-corner{width:56px;height:56px}
+.s17-viewfinder .fm-tl{top:24px;left:24px}
+.s17-viewfinder .fm-tr{top:24px;right:24px}
+.s17-viewfinder .fm-bl{bottom:24px;left:24px}
+.s17-viewfinder .fm-br{bottom:24px;right:24px}
+
+.s17-prompt{
+  position:relative;z-index:5;text-align:center;
+  animation:s17Float 4s ease-in-out infinite;
+}
+@keyframes s17Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+.s17-bottom{
+  height:120px;
+  background:linear-gradient(0deg,#0c0a08 60%,rgba(12,10,8,.9) 100%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  position:relative;z-index:10;
+}
+.s17-gallery{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .2s;
+}
+.s17-gallery:active{transform:scale(.9)}
+
+.s17-capture{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--terra);
+  border:4px solid rgba(255,255,255,.85);
+  cursor:pointer;
+  box-shadow:0 0 24px rgba(196,101,74,.35);
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+.s17-capture:active{transform:scale(.88)}
+.s17-capture::after{
+  content:'';position:absolute;inset:4px;border-radius:50%;
+  background:var(--terra);
+}
+
+.s17-flash{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .2s;
+}
+.s17-flash:active{transform:scale(.9)}
+
+/* =========================================
+   S19: RESTAURANT MENU SCAN
+   ========================================= */
+.s19-cam{
+  background:#0c0a08;height:100%;display:flex;flex-direction:column;position:relative;
+}
+.s19-viewfinder{
+  position:relative;height:60%;flex-shrink:0;
+  background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+/* Menu card overlay */
+.s19-menu-card{
+  position:relative;z-index:5;
+  width:280px;
+  background:linear-gradient(180deg,#f8f3ec 0%,#f0eae1 100%);
+  border-radius:6px;
+  padding:28px 24px;
+  box-shadow:0 8px 40px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2);
+  font-family:'Playfair Display',serif;
+  color:#33291f;
+  transform:perspective(600px) rotateX(2deg) rotateY(-1deg);
+}
+.s19-menu-title{
+  text-align:center;font-size:14px;font-weight:500;letter-spacing:1.5px;
+  color:#6b6058;margin-bottom:16px;
+  border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:12px;
+}
+.s19-menu-section{
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:var(--terra);margin:14px 0 8px;
+}
+.s19-menu-item{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:'Inter',sans-serif;font-size:12px;color:#33291f;
+  margin-bottom:6px;line-height:1.5;
+}
+.s19-menu-item .name{
+  position:relative;
+}
+.s19-menu-item .name.detected::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:2px;background:var(--terra);border-radius:1px;
+  animation:s19Underline .4s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes s19Underline{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
+
+.s19-menu-item .dots{
+  flex:1;margin:0 6px;
+  border-bottom:1px dotted rgba(0,0,0,.15);
+  position:relative;top:-3px;
+}
+.s19-menu-item .price{font-weight:500;white-space:nowrap}
+
+/* Detection counter */
+.s19-counter{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 24px 8px;
+}
+.s19-counter-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:20px;
+  background:var(--terra-g);
+  font-size:14px;font-weight:600;color:var(--terra);
+  animation:pulseBadge 2s ease-in-out infinite;
+}
+
+/* Restaurant detected */
+.s19-restaurant{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:8px 24px 16px;
+  font-size:13px;color:var(--t2);
+}
+.s19-restaurant .ms{font-size:16px;color:var(--terra)}
+
+/* Bottom area */
+.s19-bottom{
+  flex:1;background:var(--bg);
+  padding:0 24px 32px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  transition:background .4s;
+}
+
+/* =========================================
+   S9: PACKAGE SCAN
+   ========================================= */
+.s9-scan{
+  background:var(--bg);height:100%;display:flex;flex-direction:column;
+  transition:background .4s;
+}
+.s9-viewfinder{
+  position:relative;height:45%;flex-shrink:0;
+  margin:0 24px;border-radius:22px;
+  background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;margin-top:8px;
+}
+.s9-viewfinder .fm-corner{width:40px;height:40px}
+.s9-viewfinder .fm-tl{top:12px;left:12px}
+.s9-viewfinder .fm-tr{top:12px;right:12px}
+.s9-viewfinder .fm-bl{bottom:12px;left:12px}
+.s9-viewfinder .fm-br{bottom:12px;right:12px}
+
+.s9-product-card{
+  margin:16px 24px 0;padding:20px;
+  background:var(--card);border:1px solid var(--card-b);
+  border-radius:22px;box-shadow:var(--card-s);
+  transition:background .4s;
+}
+.s9-product-label{
+  font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--terra);margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.s9-product-name{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:400;
+  color:var(--t1);margin-bottom:16px;transition:color .4s;
+}
+.s9-nutrition{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.s9-nutri-item{
+  text-align:center;padding:10px 4px;
+  background:var(--input-bg);border-radius:12px;
+  transition:background .4s;
+}
+.s9-nutri-val{font-size:16px;font-weight:600;color:var(--t1);transition:color .4s}
+.s9-nutri-label{font-size:10px;color:var(--t3);margin-top:2px;transition:color .4s}
+
+.s9-recipes-section{
+  padding:20px 24px 0;
+}
+.s9-recipes-count{
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:400;
+  color:var(--terra);margin-bottom:16px;
+}
+.s9-recipes-strip{
+  display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;
+  scrollbar-width:none;scroll-snap-type:x mandatory;
+}
+.s9-recipes-strip::-webkit-scrollbar{display:none}
+.s9-recipe-card{
+  flex-shrink:0;width:140px;border-radius:16px;overflow:hidden;
+  background:var(--card);border:1px solid var(--card-b);
+  box-shadow:var(--card-s);cursor:pointer;scroll-snap-align:start;
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.s9-recipe-card:active{transform:scale(.96)}
+.s9-recipe-card img{width:100%;height:100px;object-fit:cover;display:block}
+.s9-recipe-card .label{
+  padding:10px 12px;font-size:12px;font-weight:500;color:var(--t1);
+  line-height:1.3;transition:color .4s;
+}
+
+.s9-see-all{
+  margin:8px 24px 32px;height:48px;border-radius:14px;
+  border:1.5px solid var(--terra);background:transparent;
+  color:var(--terra);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .3s;
+}
+.s9-see-all:active{transform:scale(.96);background:var(--terra-g)}
+
+/* === NAV TABS (for context) === */
+.tabs{position:absolute;bottom:0;left:0;right:0;z-index:200;padding:0 16px 10px;pointer-events:none}
+.tabs-in{
+  display:flex;height:56px;border-radius:28px;
+  background:var(--tab-bg);
+  backdrop-filter:blur(32px) saturate(200%);-webkit-backdrop-filter:blur(32px) saturate(200%);
+  border:1px solid var(--tab-b);
+  box-shadow:0 4px 24px rgba(0,0,0,.06);pointer-events:all;
+  transition:background .4s,border-color .4s,box-shadow .4s;
+}
+.tb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;cursor:pointer;position:relative;padding:0}
+.tb .ms{font-size:24px;color:var(--t3);transition:color .3s cubic-bezier(.16,1,.3,1)}
+.tb .ms.fill{font-variation-settings:'FILL' 1}
+.tb-l{font-size:10px;color:var(--t3);font-weight:500;transition:color .3s cubic-bezier(.16,1,.3,1)}
+.tb.on .ms{color:var(--terra)}.tb.on .tb-l{color:var(--terra)}
+</style>
+</head>
+<body>
+
+<div class="ph">
+<div class="notch"></div>
+<div class="sbar"><span>9:41</span><div class="sbar-r"><span class="ms" style="font-size:17px">signal_cellular_alt</span><span class="ms" style="font-size:17px">wifi</span><span class="ms" style="font-size:17px">battery_full</span></div></div>
+
+<!-- =========================================
+     S17: CAMERA CAPTURE (Book / Manuscript)
+     ========================================= -->
+<div class="scr" id="s17" data-s="on">
+<div class="s17-cam">
+
+  <!-- Back button -->
+  <div class="cam-back" onclick="goBack()">
+    <span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span>
+  </div>
+
+  <!-- Full-screen viewfinder -->
+  <div class="s17-viewfinder">
+    <!-- Scanning line -->
+    <div class="fm-scanline"></div>
+
+    <!-- Corner brackets -->
+    <div class="fm-corner fm-tl"></div>
+    <div class="fm-corner fm-tr"></div>
+    <div class="fm-corner fm-bl"></div>
+    <div class="fm-corner fm-br"></div>
+
+    <!-- Center prompt -->
+    <div class="s17-prompt">
+      <span class="ms" style="font-size:48px;color:rgba(248,243,236,.2);margin-bottom:14px;display:block">photo_camera</span>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#f8f3ec;letter-spacing:.3px">Photographiez une recette</div>
+      <div style="font-size:12px;color:rgba(248,243,236,.6);margin-top:10px;letter-spacing:.2px">Livre, manuscrit, magazine, ecran...</div>
+    </div>
+
+    <!-- Vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:2"></div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="s17-bottom">
+    <div class="s17-gallery">
+      <span class="ms" style="color:rgba(255,255,255,.6);font-size:22px">photo_library</span>
+    </div>
+    <div class="s17-capture"></div>
+    <div class="s17-flash">
+      <span class="ms" style="color:rgba(255,255,255,.6);font-size:22px">flash_off</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- =========================================
+     S19: RESTAURANT MENU SCAN
+     ========================================= -->
+<div class="scr" id="s19" data-s="off">
+<div class="s19-cam">
+
+  <!-- Back button -->
+  <div class="cam-back" onclick="goBack()">
+    <span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span>
+  </div>
+
+  <!-- Camera viewfinder with menu card -->
+  <div class="s19-viewfinder">
+    <!-- Corner brackets -->
+    <div class="fm-corner fm-tl" style="top:20px;left:20px"></div>
+    <div class="fm-corner fm-tr" style="top:20px;right:20px"></div>
+    <div class="fm-corner fm-bl" style="bottom:20px;left:20px"></div>
+    <div class="fm-corner fm-br" style="bottom:20px;right:20px"></div>
+
+    <!-- Scanning line -->
+    <div class="fm-scanline"></div>
+
+    <!-- Simulated menu card -->
+    <div class="s19-menu-card">
+      <div class="s19-menu-title">&mdash; Le Jardin des Saveurs &mdash;</div>
+
+      <div class="s19-menu-section">Entrees</div>
+      <div class="s19-menu-item">
+        <span class="name detected">Salade nicoise</span>
+        <span class="dots"></span>
+        <span class="price">14&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Soupe a l'oignon</span>
+        <span class="dots"></span>
+        <span class="price">12&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Tartare de saumon</span>
+        <span class="dots"></span>
+        <span class="price">16&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Veloute de champignons</span>
+        <span class="dots"></span>
+        <span class="price">11&euro;</span>
+      </div>
+
+      <div class="s19-menu-section">Plats</div>
+      <div class="s19-menu-item">
+        <span class="name detected">Filet de boeuf sauce bearnaise</span>
+        <span class="dots"></span>
+        <span class="price">28&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Risotto aux cepes</span>
+        <span class="dots"></span>
+        <span class="price">22&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Magret de canard</span>
+        <span class="dots"></span>
+        <span class="price">26&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Loup de mer grille</span>
+        <span class="dots"></span>
+        <span class="price">24&euro;</span>
+      </div>
+    </div>
+
+    <!-- Vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:2"></div>
+  </div>
+
+  <!-- Detection results -->
+  <div class="s19-bottom">
+    <div class="s19-counter">
+      <div class="s19-counter-badge">
+        <span class="ms" style="font-size:16px">restaurant_menu</span>
+        8 plats detectes
+      </div>
+    </div>
+
+    <div class="s19-restaurant">
+      <span class="ms">location_on</span>
+      <span style="font-weight:500;color:var(--t1);transition:color .4s">Le Jardin des Saveurs</span>
+      <span style="font-size:11px;color:var(--t3);transition:color .4s">&mdash; detecte</span>
+    </div>
+
+    <button class="fm-cta" onclick="void(0)" style="margin:0 0 0 0">
+      <span class="ms" style="font-size:20px">add_business</span>
+      Creer la fiche restaurant
+    </button>
+  </div>
+
+</div>
+</div>
+
+<!-- =========================================
+     S9: PACKAGE SCAN
+     ========================================= -->
+<div class="scr" id="s9" data-s="off">
+<div class="s9-scan">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+    <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Scanner un produit</div>
+    <div class="hdr-side r"></div>
+  </div>
+
+  <!-- Camera viewfinder -->
+  <div class="s9-viewfinder">
+    <div class="fm-scanline"></div>
+    <div class="fm-corner fm-tl"></div>
+    <div class="fm-corner fm-tr"></div>
+    <div class="fm-corner fm-bl"></div>
+    <div class="fm-corner fm-br"></div>
+
+    <!-- Center barcode icon -->
+    <div style="position:relative;z-index:5;text-align:center">
+      <span class="ms" style="font-size:44px;color:rgba(248,243,236,.2)">barcode_scanner</span>
+      <div style="font-size:12px;color:rgba(248,243,236,.5);margin-top:8px;letter-spacing:.2px">Scannez un code-barres ou emballage</div>
+    </div>
+
+    <!-- Vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:2"></div>
+  </div>
+
+  <!-- Product detected card -->
+  <div class="s9-product-card">
+    <div class="s9-product-label">
+      <span class="ms" style="font-size:14px">verified</span> Produit detecte
+    </div>
+    <div class="s9-product-name">Pois chiches bio &mdash; 400g</div>
+    <div class="s9-nutrition">
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">120</div>
+        <div class="s9-nutri-label">Calories</div>
+      </div>
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">7g</div>
+        <div class="s9-nutri-label">Proteines</div>
+      </div>
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">18g</div>
+        <div class="s9-nutri-label">Glucides</div>
+      </div>
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">2g</div>
+        <div class="s9-nutri-label">Lipides</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recipe suggestions -->
+  <div class="s9-recipes-section">
+    <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;transition:color .4s">Avec ce produit</div>
+    <div class="s9-recipes-count">47 recettes possibles</div>
+    <div class="s9-recipes-strip">
+      <div class="s9-recipe-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123410102-vrf1wskc.jpg" alt="">
+        <div class="label">Ragout aux pois chiches</div>
+      </div>
+      <div class="s9-recipe-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121658437-80ldpc1o.jpg" alt="">
+        <div class="label">Chili vegetarien</div>
+      </div>
+      <div class="s9-recipe-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774106290139-5c1spsrh.jpg" alt="">
+        <div class="label">Salade fraiche</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- See all button -->
+  <button class="s9-see-all" onclick="void(0)">
+    <span class="ms" style="font-size:18px">auto_awesome</span>
+    Voir toutes les recettes
+  </button>
+
+</div>
+</div>
+
+<!-- Tab bar (for visual context, non-functional here) -->
+<div class="tabs"><div class="tabs-in">
+  <button class="tb" onclick="go(17)"><span class="ms">home</span><span class="tb-l">Accueil</span></button>
+  <button class="tb" onclick="go(19)"><span class="ms">explore</span><span class="tb-l">Explorer</span></button>
+  <button class="tb" onclick="go(9)"><span class="ms">qr_code_scanner</span><span class="tb-l">Scanner</span></button>
+  <button class="tb"><span class="ms">person</span><span class="tb-l">Profil</span></button>
+</div></div>
+
+</div><!-- .ph -->
+
+<script>
+const T=30;
+let cur=17;
+const navHistory=[];
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+
+function go(n){
+  if(n===cur)return;
+  navHistory.push(cur);
+  const d=n>cur?1:-1;
+  $(`#s${cur}`).dataset.s=d>0?'l':'r';
+  const nx=$(`#s${n}`);
+  nx.style.transition='none';nx.dataset.s=d>0?'r':'l';nx.scrollTop=0;
+  nx.offsetHeight;nx.style.transition='';
+  requestAnimationFrame(()=>{nx.dataset.s='on'});
+  for(let i=0;i<T;i++){const el=document.getElementById(`s${i}`);if(el&&i!==cur&&i!==n)el.dataset.s='off'}
+  cur=n;
+}
+
+function goBack(){
+  if(navHistory.length>0){
+    const prev=navHistory.pop();
+    const d=prev<cur?-1:1;
+    $(`#s${cur}`).dataset.s=d>0?'l':'r';
+    const nx=$(`#s${prev}`);
+    nx.style.transition='none';nx.dataset.s=d>0?'r':'l';nx.scrollTop=0;
+    nx.offsetHeight;nx.style.transition='';
+    requestAnimationFrame(()=>{nx.dataset.s='on'});
+    for(let i=0;i<T;i++){const el=document.getElementById(`s${i}`);if(el&&i!==cur&&i!==prev)el.dataset.s='off'}
+    cur=prev;
+  }
+}
+</script>
+</body>
+</html>

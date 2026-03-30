@@ -1,0 +1,136 @@
+<!-- S0: ONBOARDING — V6 Magazine Cover Sequence -->
+<div class="scr" id="s0" data-s="on">
+<div class="v6-onboard" id="onboardContainer">
+
+  <!-- Savora watermark -->
+  <div class="v6-onboard-mark">Savora</div>
+
+  <!-- Language selector -->
+  <div class="v6-lang-selector">
+    <button class="v6-lang-pill active" data-lang="fr">FR</button>
+    <button class="v6-lang-pill" data-lang="en">EN</button>
+    <button class="v6-lang-pill" data-lang="es">ES</button>
+  </div>
+
+  <!-- Panel 1: Risotto — "Cuisinez." -->
+  <div class="v6-onboard-panel active" data-panel="0">
+    <img src="https://optirecipe.com/uploads/recipe-img-1774283793509-3zdysja2.jpg" alt="Risotto" loading="eager">
+    <div class="panel-grad"></div>
+    <div class="panel-word">Cuisinez.</div>
+  </div>
+
+  <!-- Panel 2: Muffins — "Explorez." -->
+  <div class="v6-onboard-panel" data-panel="1">
+    <img src="https://optirecipe.com/uploads/recipe-img-1774283826037-pt9l56dv.jpg" alt="Muffins" loading="eager">
+    <div class="panel-grad"></div>
+    <div class="panel-word">Explorez.</div>
+  </div>
+
+  <!-- Panel 3: Pasta Gratin — "Savourez." -->
+  <div class="v6-onboard-panel" data-panel="2">
+    <img src="https://optirecipe.com/uploads/recipe-img-1774283815484-6yknfjkp.jpg" alt="Gratin de p&acirc;tes" loading="eager">
+    <div class="panel-grad"></div>
+    <div class="panel-word">Savourez.</div>
+  </div>
+
+  <!-- Dots indicator -->
+  <div class="v6-dots" id="v6Dots">
+    <div class="v6-dot active" data-dot="0"></div>
+    <div class="v6-dot" data-dot="1"></div>
+    <div class="v6-dot" data-dot="2"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="v6-cta-area">
+    <button class="v6-cta-btn" onclick="go(1)">Commencer</button>
+  </div>
+
+  <!-- Login link -->
+  <div class="v6-login">
+    <a href="#">D&eacute;j&agrave; un compte&nbsp;? Se connecter</a>
+  </div>
+
+  <script>
+  (function(){
+    var panels=document.querySelectorAll('.v6-onboard-panel');
+    var dots=document.querySelectorAll('.v6-dot');
+    var pills=document.querySelectorAll('.v6-lang-pill');
+    var current=0;
+    var total=panels.length;
+    var interval=4000;
+    var timer=null;
+
+    function showPanel(idx){
+      panels.forEach(function(p){p.classList.remove('active')});
+      dots.forEach(function(d){d.classList.remove('active')});
+      panels[idx].classList.add('active');
+      dots[idx].classList.add('active');
+      current=idx;
+    }
+
+    function advance(){
+      var next=(current+1)%total;
+      showPanel(next);
+    }
+
+    function startAuto(){
+      if(timer)clearInterval(timer);
+      timer=setInterval(advance,interval);
+    }
+
+    // Language pill selection
+    pills.forEach(function(pill){
+      pill.addEventListener('click',function(){
+        pills.forEach(function(p){p.classList.remove('active')});
+        pill.classList.add('active');
+      });
+    });
+
+    // Dot click navigation
+    dots.forEach(function(dot,i){
+      dot.addEventListener('click',function(){
+        showPanel(i);
+        startAuto();
+      });
+    });
+
+    // Touch swipe support
+    var startX=0;
+    var container=document.getElementById('onboardContainer');
+    container.addEventListener('touchstart',function(e){
+      startX=e.touches[0].clientX;
+    },{passive:true});
+    container.addEventListener('touchend',function(e){
+      var diff=e.changedTouches[0].clientX-startX;
+      if(Math.abs(diff)>50){
+        if(diff<0){
+          showPanel((current+1)%total);
+        }else{
+          showPanel((current-1+total)%total);
+        }
+        startAuto();
+      }
+    },{passive:true});
+
+    // Initialize
+    startAuto();
+
+    // IntersectionObserver for scroll-reveal elements
+    if('IntersectionObserver' in window){
+      var revealObserver=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.scroll-reveal').forEach(function(el){
+        revealObserver.observe(el);
+      });
+    }
+  })();
+  </script>
+
+</div>
+</div>

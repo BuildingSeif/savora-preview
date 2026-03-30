@@ -1,0 +1,282 @@
+# S4 COOK MODE FIXES — Null-Safety + UI Improvements
+
+## SECTION 1: JavaScript Fixes
+
+### JS FIND: function renderCookStep(){
+function renderCookStep(){
+  const steps=getCookSteps();
+  const s=steps[cookStep];
+  const r=RECIPES[currentRecipeIndex];
+  /* V6 km-* classes (primary) with old cook-* fallback */
+  const titleEl=document.querySelector('#s4 .km-title')||document.querySelector('#s4 .cook-tt');
+  if(titleEl)titleEl.textContent=r.title;
+  const stepLabel=document.getElementById('kmStepLabel')||document.getElementById('cookStepLabel');
+  if(stepLabel)stepLabel.innerHTML='\u00c9tape '+s.n+' sur '+steps.length;
+  const watermark=document.getElementById('kmWatermark');
+  if(watermark)watermark.textContent=s.n;
+  const instEl=document.getElementById('kmInstruction')||document.getElementById('cookInst');
+  if(instEl)instEl.innerHTML=s.text;
+  const stepTime=document.getElementById('kmStepTime');
+  if(stepTime)stepTime.textContent=s.time;
+  const hintEl=document.getElementById('cookStepHint');
+  if(hintEl)hintEl.textContent=cookStep===0?'PR\u00c9PARATION':cookStep===steps.length-1?'FINITION':'CUISSON';
+  const cookImg=document.getElementById('cookImg');
+  if(cookImg)cookImg.src=s.img;
+  const timerVal=document.getElementById('kmTimerValue')||document.getElementById('timerD');
+  if(timerVal)timerVal.textContent=s.time;
+  timerV=s.timeS;clearInterval(timerInt);timerOn=false;
+  const timerIcon=document.getElementById('timerI');
+  if(timerIcon)timerIcon.textContent='play_arrow';
+  const cp=document.getElementById('cookProgress');if(cp)cp.style.width=((cookStep+1)/steps.length*100)+'%';
+  const prevBtn=document.getElementById('kmPrevBtn')||document.getElementById('cookPrevBtn');
+  if(prevBtn){prevBtn.disabled=cookStep===0;prevBtn.style.opacity=cookStep===0?'.4':'1'}
+  const nextBtn=document.getElementById('kmNextBtn')||document.getElementById('cookNextBtn');
+  if(nextBtn){
+    if(cookStep===steps.length-1){nextBtn.innerHTML='Terminer <span class="ms">check</span>'}
+    else{nextBtn.innerHTML='Suivant <span class="ms">arrow_forward</span>'}
+  }
+  /* Populate ingredient drawer */
+  const ingList=document.getElementById('kmIngList');
+  if(ingList){
+    ingList.innerHTML='';
+    r.ingredients.forEach(function(ing){
+      ingList.innerHTML+='<div class="km-ing-item" onclick="kmCheckIng(this)"><div class="km-ing-check"><span class="ms">check</span></div><div class="km-ing-name">'+ing.name+'</div><div class="km-ing-qty">'+ing.qty+'</div></div>';
+    });
+  }
+}
+
+### JS REPLACE: function renderCookStep(){
+function renderCookStep(){
+  try{
+    const steps=getCookSteps();
+    if(!steps||steps.length===0)return;
+    const s=steps[cookStep];
+    const r=RECIPES[currentRecipeIndex];
+    if(!s||!r)return;
+    
+    /* Recipe title: .km-title OR .cook-tt */
+    const titleEl=document.querySelector('#s4 .km-title')||document.querySelector('#s4 .cook-tt');
+    if(titleEl)titleEl.textContent=r.title;
+    
+    /* Step label: #kmStepLabel OR #cookStepLabel */
+    const stepLabel=document.getElementById('kmStepLabel')||document.getElementById('cookStepLabel');
+    if(stepLabel)stepLabel.innerHTML='Étape '+s.n+' sur '+steps.length;
+    
+    /* Step number watermark: #kmWatermark */
+    const watermark=document.getElementById('kmWatermark');
+    if(watermark)watermark.textContent=s.n;
+    
+    /* Instruction text: #kmInstruction OR #cookInst */
+    const instEl=document.getElementById('kmInstruction')||document.getElementById('cookInst');
+    if(instEl)instEl.innerHTML=s.text;
+    
+    /* Step time badge: #kmStepTime */
+    const stepTime=document.getElementById('kmStepTime');
+    if(stepTime)stepTime.textContent=s.time;
+    
+    /* Hint/Phase: #cookStepHint (legacy) */
+    const hintEl=document.getElementById('cookStepHint');
+    if(hintEl)hintEl.textContent=cookStep===0?'PRÉPARATION':cookStep===steps.length-1?'FINITION':'CUISSON';
+    
+    /* Recipe image: #kmRecipeImg OR #cookImg */
+    const cookImg=document.getElementById('kmRecipeImg')||document.getElementById('cookImg');
+    if(cookImg)cookImg.src=s.img;
+    
+    /* Timer value: #kmTimerValue OR #timerD */
+    const timerVal=document.getElementById('kmTimerValue')||document.getElementById('timerD');
+    if(timerVal)timerVal.textContent=s.time;
+    
+    /* Initialize timer state */
+    timerV=s.timeS;
+    clearInterval(timerInt);
+    timerOn=false;
+    
+    /* Timer icon: #timerI (legacy) */
+    const timerIcon=document.getElementById('timerI');
+    if(timerIcon)timerIcon.textContent='play_arrow';
+    
+    /* Progress bar: #kmProgress OR #cookProgress */
+    const cp=document.getElementById('kmProgress')||document.getElementById('cookProgress');
+    if(cp)cp.style.width=((cookStep+1)/steps.length*100)+'%';
+    
+    /* Previous button: #kmPrevBtn OR #cookPrevBtn */
+    const prevBtn=document.getElementById('kmPrevBtn')||document.getElementById('cookPrevBtn');
+    if(prevBtn){
+      prevBtn.disabled=cookStep===0;
+      prevBtn.style.opacity=cookStep===0?'.4':'1';
+    }
+    
+    /* Next button: #kmNextBtn OR #cookNextBtn */
+    const nextBtn=document.getElementById('kmNextBtn')||document.getElementById('cookNextBtn');
+    if(nextBtn){
+      if(cookStep===steps.length-1){
+        nextBtn.innerHTML='Terminer <span class="ms">check</span>';
+      }else{
+        nextBtn.innerHTML='Suivant <span class="ms">arrow_forward</span>';
+      }
+    }
+    
+    /* Populate ingredient drawer */
+    const ingList=document.getElementById('kmIngList');
+    if(ingList&&r.ingredients){
+      ingList.innerHTML='';
+      r.ingredients.forEach(function(ing){
+        if(ing&&ing.name&&ing.qty){
+          ingList.innerHTML+='<div class="km-ing-item" onclick="kmCheckIng(this)"><div class="km-ing-check"><span class="ms">check</span></div><div class="km-ing-name">'+ing.name+'</div><div class="km-ing-qty">'+ing.qty+'</div></div>';
+        }
+      });
+    }
+  }catch(e){
+    console.warn('renderCookStep error:',e);
+  }
+}
+
+### JS FIND: const origGo=go;
+const origGo=go;
+go=function(n){
+  if(n===4){cookStep=0;origGo(n);try{renderCookStep()}catch(e){console.warn('Cook render:',e)}}
+  else{origGo(n)}
+};
+
+### JS REPLACE: const origGo=go;
+const origGo=go;
+go=function(n){
+  if(n===4){
+    cookStep=0;
+    origGo(n);
+    try{
+      renderCookStep();
+    }catch(e){
+      console.warn('Cook mode render failed:',e);
+    }
+  }else{
+    origGo(n);
+  }
+};
+
+
+## SECTION 2: CSS Improvements
+
+### CSS FIND: .km-instruction{
+.km-instruction{
+  font-family:'Inter',sans-serif;font-size:22px;font-weight:400;color:#f0ebe4;
+  text-align:center;line-height:1.6;max-width:320px;
+  letter-spacing:.01em;
+}
+
+### CSS REPLACE: .km-instruction{
+.km-instruction{
+  font-family:'Inter',sans-serif;font-size:24px;font-weight:400;color:#f0ebe4;
+  text-align:center;line-height:1.7;max-width:320px;
+  letter-spacing:.01em;
+}
+
+### CSS FIND: .km-timer-ring{position:relative;width:120px;height:120px}
+.km-timer-ring{position:relative;width:120px;height:120px}
+.km-timer-ring svg{width:120px;height:120px;transform:rotate(-90deg)}
+
+### CSS REPLACE: .km-timer-ring{position:relative;width:160px;height:160px}
+.km-timer-ring{position:relative;width:160px;height:160px}
+.km-timer-ring svg{width:160px;height:160px;transform:rotate(-90deg)}
+
+NOTE: Also update SVG stroke-dasharray and stroke-dashoffset for 160px ring:
+- New stroke-dasharray: ~452.389 (circumference of r=72)
+- Update transition: stroke-dashoffset 1s cubic-bezier(.16,1,.3,1)
+
+### CSS FIND: .km-watermark{
+.km-watermark{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
+  font-family:'Playfair Display',serif;font-size:120px;font-weight:400;
+  color:#f0ebe4;opacity:.06;pointer-events:none;user-select:none;
+  line-height:1;z-index:1;
+}
+
+### CSS REPLACE: .km-watermark{
+.km-watermark{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
+  font-family:'Playfair Display',serif;font-size:140px;font-weight:400;
+  color:#f0ebe4;opacity:.08;pointer-events:none;user-select:none;
+  line-height:1;z-index:1;
+}
+
+### CSS FIND: .km{
+Find the main .km container rule and verify background:
+
+### CSS REPLACE: .km{
+Add/update .km styles to include warm radial glow:
+
+.km{
+  display:flex;flex-direction:column;height:100%;
+  background:linear-gradient(135deg, #1a1714 0%, #1a1714 100%);
+  background-color:#1a1714;
+  position:relative;
+  overflow:hidden;
+}
+
+.km::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(196,119,68,.02) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+### CSS FIND: .km-nav-btn{
+.km-nav-btn{
+  display:flex;align-items:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:400;
+  padding:12px 16px;min-height:48px;border-radius:12px;
+  transition:background .2s;-webkit-tap-highlight-color:transparent;
+}
+
+### CSS REPLACE: .km-nav-btn{
+.km-nav-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:400;
+  padding:12px 16px;min-height:56px;border-radius:12px;
+  transition:background .2s;-webkit-tap-highlight-color:transparent;
+  flex:1;
+}
+
+.km-nav-next{
+  flex:2;
+  background:rgba(196,119,68,.12);
+  border-radius:12px;
+}
+
+.km-nav-next:active{
+  background:rgba(196,119,68,.18);
+}
+
+### CSS ADD: Progress bar at top
+Add new CSS rule for top progress bar:
+
+.km::after{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--terra);
+  z-index:100;
+  transition:width .3s ease;
+}
+
+Alternatively, use a dedicated progress element in HTML with ID #kmTopProgress:
+
+#kmTopProgress{
+  position:fixed;top:0;left:0;
+  height:2px;
+  background:var(--terra);
+  z-index:100;
+  transition:width .3s ease;
+  width:50%;
+}
+
+Update renderCookStep() to set width:
+const topProg=document.getElementById('kmTopProgress');
+if(topProg)topProg.style.width=((cookStep+1)/steps.length*100)+'%';

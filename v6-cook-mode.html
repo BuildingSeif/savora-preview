@@ -1,0 +1,334 @@
+<!-- S4: COOKING MODE — Kitchen Companion V6 -->
+<div class="scr" id="s4" data-s="off">
+<style>
+/* ===== COOK MODE V6 — KITCHEN COMPANION ===== */
+.km{
+  position:relative;background:#1a1714;height:100%;display:flex;flex-direction:column;
+  overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+
+/* Top Bar */
+.km-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:60px 24px 16px;background:#1a1714;position:relative;z-index:10;
+  flex-shrink:0;
+}
+.km-close{
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s;-webkit-tap-highlight-color:transparent;
+}
+.km-close:active{background:rgba(255,255,255,.1)}
+.km-close .ms{font-size:18px;color:#f0ebe4}
+.km-title{
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:#f0ebe4;
+  text-align:center;letter-spacing:.02em;opacity:.85;
+}
+.km-progress-label{
+  font-family:'Inter',sans-serif;font-size:12px;color:rgba(240,235,228,.35);
+  white-space:nowrap;min-width:80px;text-align:right;
+}
+
+/* Step Watermark */
+.km-watermark{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
+  font-family:'Playfair Display',serif;font-size:120px;font-weight:400;
+  color:#f0ebe4;opacity:.06;pointer-events:none;user-select:none;
+  line-height:1;z-index:1;
+}
+
+/* Centered Content Area */
+.km-body{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:0 36px;position:relative;z-index:2;gap:8px;
+  margin-top:-20px;
+}
+
+/* Step Instruction */
+.km-instruction{
+  font-family:'Inter',sans-serif;font-size:22px;font-weight:400;color:#f0ebe4;
+  text-align:center;line-height:1.6;max-width:320px;
+  letter-spacing:.01em;
+}
+.km-step-time{
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  color:var(--terra);margin-top:4px;letter-spacing:.02em;
+}
+
+/* Circular Timer */
+.km-timer-wrap{
+  display:flex;flex-direction:column;align-items:center;margin-top:28px;gap:8px;
+}
+.km-timer-ring{position:relative;width:120px;height:120px}
+.km-timer-ring svg{width:120px;height:120px;transform:rotate(-90deg)}
+.km-ring-bg{
+  fill:none;stroke:rgba(255,255,255,.08);stroke-width:4;
+}
+.km-ring-progress{
+  fill:none;stroke:var(--terra);stroke-width:4;
+  stroke-linecap:round;
+  stroke-dasharray:339.292;
+  stroke-dashoffset:84.823;
+  transition:stroke-dashoffset 1s cubic-bezier(.16,1,.3,1);
+}
+.km-timer-value{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:400;
+  color:#f0ebe4;font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+.km-timer-label{
+  font-family:'Inter',sans-serif;font-size:11px;color:rgba(240,235,228,.35);
+  letter-spacing:.04em;
+}
+
+/* Bottom Navigation */
+.km-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px calc(20px + env(safe-area-inset-bottom, 12px));
+  background:#1a1714;position:relative;z-index:10;flex-shrink:0;
+}
+.km-nav-btn{
+  display:flex;align-items:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:400;
+  padding:12px 16px;min-height:48px;border-radius:12px;
+  transition:background .2s;-webkit-tap-highlight-color:transparent;
+}
+.km-nav-btn:active{background:rgba(255,255,255,.06)}
+.km-nav-prev{color:#f0ebe4;opacity:.7}
+.km-nav-prev .ms{font-size:18px;color:#f0ebe4;opacity:.7}
+.km-nav-prev[disabled]{opacity:.25;pointer-events:none}
+.km-nav-next{color:var(--terra)}
+.km-nav-next .ms{font-size:18px;color:var(--terra)}
+
+/* Ingredient Toggle Button */
+.km-ing-toggle{
+  display:flex;align-items:center;gap:4px;
+  background:none;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
+  color:rgba(240,235,228,.5);padding:12px 16px;min-height:48px;
+  border-radius:12px;transition:background .2s,color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.km-ing-toggle:active{background:rgba(255,255,255,.06)}
+.km-ing-toggle .ms{font-size:18px;color:rgba(240,235,228,.5);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.km-ing-toggle.open .ms{transform:rotate(180deg)}
+
+/* Ingredient Drawer */
+.km-drawer-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:20;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.km-drawer-overlay.visible{opacity:1;pointer-events:auto}
+
+.km-drawer{
+  position:absolute;bottom:0;left:0;right:0;z-index:25;
+  height:60%;transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+  background:rgba(26,23,20,.92);
+  backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+  border-top:1px solid rgba(255,255,255,.06);
+  border-radius:24px 24px 0 0;
+  display:flex;flex-direction:column;
+}
+.km-drawer.open{transform:translateY(0)}
+
+.km-drawer-handle{
+  width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);
+  margin:12px auto 0;flex-shrink:0;
+}
+.km-drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px 12px;flex-shrink:0;
+}
+.km-drawer-title{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:400;
+  color:#f0ebe4;
+}
+.km-drawer-close{
+  width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.km-drawer-close .ms{font-size:16px;color:rgba(240,235,228,.6)}
+
+.km-drawer-list{
+  flex:1;overflow-y:auto;padding:0 24px 24px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.km-drawer-list::-webkit-scrollbar{display:none}
+
+.km-ing-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.km-ing-item:last-child{border-bottom:none}
+
+.km-ing-check{
+  width:22px;height:22px;border-radius:6px;border:1.5px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:background .2s,border-color .2s;
+}
+.km-ing-item.checked .km-ing-check{
+  background:var(--terra);border-color:var(--terra);
+}
+.km-ing-check .ms{font-size:14px;color:#fff;opacity:0;transition:opacity .2s}
+.km-ing-item.checked .km-ing-check .ms{opacity:1}
+
+.km-ing-name{
+  font-family:'Inter',sans-serif;font-size:15px;color:#f0ebe4;
+  transition:opacity .2s,text-decoration-color .2s;
+}
+.km-ing-item.checked .km-ing-name{
+  opacity:.4;text-decoration:line-through;text-decoration-color:rgba(240,235,228,.3);
+}
+.km-ing-qty{
+  font-family:'Inter',sans-serif;font-size:13px;color:rgba(240,235,228,.35);
+  margin-left:auto;white-space:nowrap;
+}
+
+/* Timer pulse animation */
+@keyframes kmTimerPulse{
+  0%,100%{opacity:1}
+  50%{opacity:.7}
+}
+.km-timer-ring.pulsing .km-ring-progress{
+  animation:kmTimerPulse 2s ease-in-out infinite;
+}
+</style>
+
+<div class="km">
+  <!-- Top Bar -->
+  <div class="km-bar">
+    <button class="km-close" onclick="goBack()" aria-label="Fermer">
+      <span class="ms">close</span>
+    </button>
+    <div class="km-title" id="kmRecipeName">Cassoulet v&eacute;g&eacute;talien</div>
+    <div class="km-progress-label" id="kmStepLabel">&Eacute;tape 4 sur 8</div>
+  </div>
+
+  <!-- Step Watermark -->
+  <div class="km-watermark" id="kmWatermark">4</div>
+
+  <!-- Centered Body -->
+  <div class="km-body">
+    <div class="km-instruction" id="kmInstruction">
+      Faites revenir les oignons &eacute;minc&eacute;s dans l'huile d'olive &agrave; feu moyen pendant 5 minutes, jusqu'&agrave; ce qu'ils soient translucides.
+    </div>
+    <div class="km-step-time" id="kmStepTime">5 min</div>
+
+    <!-- Circular Timer -->
+    <div class="km-timer-wrap" id="kmTimerWrap">
+      <div class="km-timer-ring pulsing" id="kmTimerRing">
+        <svg viewBox="0 0 120 120">
+          <circle class="km-ring-bg" cx="60" cy="60" r="54"/>
+          <circle class="km-ring-progress" id="kmRingProgress" cx="60" cy="60" r="54"/>
+        </svg>
+        <div class="km-timer-value" id="kmTimerValue">3:24</div>
+      </div>
+      <div class="km-timer-label" id="kmTimerLabel">Cuisson en cours</div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="km-nav">
+    <button class="km-nav-btn km-nav-prev" id="kmPrevBtn" onclick="kmPrevStep()" disabled>
+      <span class="ms">arrow_back</span> Pr&eacute;c&eacute;dent
+    </button>
+    <button class="km-ing-toggle" id="kmIngToggle" onclick="kmToggleDrawer()">
+      <span class="ms">expand_less</span> Ingr&eacute;dients
+    </button>
+    <button class="km-nav-btn km-nav-next" id="kmNextBtn" onclick="kmNextStep()">
+      Suivant <span class="ms">arrow_forward</span>
+    </button>
+  </div>
+
+  <!-- Ingredient Drawer Overlay -->
+  <div class="km-drawer-overlay" id="kmOverlay" onclick="kmToggleDrawer()"></div>
+
+  <!-- Ingredient Drawer -->
+  <div class="km-drawer" id="kmDrawer">
+    <div class="km-drawer-handle"></div>
+    <div class="km-drawer-header">
+      <div class="km-drawer-title">Ingr&eacute;dients</div>
+      <button class="km-drawer-close" onclick="kmToggleDrawer()" aria-label="Fermer">
+        <span class="ms">close</span>
+      </button>
+    </div>
+    <div class="km-drawer-list" id="kmIngList">
+      <div class="km-ing-item" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Oignon</div>
+        <div class="km-ing-qty">2, &eacute;minc&eacute;s</div>
+      </div>
+      <div class="km-ing-item" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Carotte</div>
+        <div class="km-ing-qty">2, en rondelles</div>
+      </div>
+      <div class="km-ing-item" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">C&eacute;leri</div>
+        <div class="km-ing-qty">1 branche</div>
+      </div>
+      <div class="km-ing-item checked" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Haricots cannellini</div>
+        <div class="km-ing-qty">400 g, &eacute;goutt&eacute;s</div>
+      </div>
+      <div class="km-ing-item checked" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Tomates en d&eacute;s</div>
+        <div class="km-ing-qty">400 g</div>
+      </div>
+      <div class="km-ing-item" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Bouillon de l&eacute;gumes</div>
+        <div class="km-ing-qty">500 ml</div>
+      </div>
+      <div class="km-ing-item" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Herbes de Provence</div>
+        <div class="km-ing-qty">1 c.s.</div>
+      </div>
+      <div class="km-ing-item" onclick="kmCheckIng(this)">
+        <div class="km-ing-check"><span class="ms">check</span></div>
+        <div class="km-ing-name">Huile d'olive</div>
+        <div class="km-ing-qty">2 c.s.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Kitchen Companion — Cook Mode V6 */
+function kmToggleDrawer(){
+  const drawer=document.getElementById('kmDrawer');
+  const overlay=document.getElementById('kmOverlay');
+  const toggle=document.getElementById('kmIngToggle');
+  const isOpen=drawer.classList.contains('open');
+  if(isOpen){
+    drawer.classList.remove('open');
+    overlay.classList.remove('visible');
+    toggle.classList.remove('open');
+  }else{
+    drawer.classList.add('open');
+    overlay.classList.add('visible');
+    toggle.classList.add('open');
+  }
+}
+
+function kmCheckIng(el){
+  el.classList.toggle('checked');
+}
+
+function kmPrevStep(){
+  /* Placeholder — wire to step data in main app */
+}
+
+function kmNextStep(){
+  /* Placeholder — wire to step data in main app */
+}
+</script>
+</div>

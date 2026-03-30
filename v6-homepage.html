@@ -1,0 +1,264 @@
+<!-- V6 HOMEPAGE — Radical Simplification -->
+<!-- Replace the contents of #s1 .home (after .hdr, before tab bar) with this -->
+
+<style>
+/* === HERO HOME === */
+.hero-home {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  cursor: pointer;
+}
+.hero-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: kenBurns 20s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+  will-change: transform;
+}
+@keyframes kenBurns {
+  0% { transform: scale(1) translate3d(0, 0, 0); }
+  100% { transform: scale(1.08) translate3d(-2%, -1%, 0); }
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(16,12,8,.85) 0%, rgba(16,12,8,.3) 40%, transparent 70%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 28px;
+}
+
+/* === WHISPER === */
+.whisper {
+  padding: 20px 24px;
+}
+.whisper-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--t1);
+  transition: color .4s;
+}
+.whisper-ctx {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--t3);
+  margin-top: 4px;
+  line-height: 1.4;
+  transition: color .4s;
+}
+
+/* === POWER CARDS === */
+.power-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.power-scroll::-webkit-scrollbar { display: none; }
+.power-card {
+  flex-shrink: 0;
+  width: 160px;
+  height: 100px;
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-b);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s;
+  will-change: transform;
+}
+.power-card:active {
+  transform: scale(0.96);
+}
+.power-card .pc-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--terra-g);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.power-card .pc-icon .ms {
+  font-size: 18px;
+  color: var(--terra);
+}
+.power-card .pc-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+  transition: color .4s;
+}
+.power-card .pc-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--t3);
+  margin-top: 1px;
+  transition: color .4s;
+}
+
+/* === DISCOVER SECTION === */
+.discover-header {
+  padding: 0 24px 14px;
+}
+.discover-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--t1);
+  transition: color .4s;
+}
+.discover-scroll {
+  display: flex;
+  gap: 14px;
+  padding: 0 24px 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
+}
+.discover-scroll::-webkit-scrollbar { display: none; }
+.discover-card {
+  flex-shrink: 0;
+  width: 160px;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(45,30,15,.1);
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.discover-card:active {
+  transform: scale(0.96);
+}
+.discover-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.discover-card .dc-info {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(16,12,8,.82) 0%, rgba(16,12,8,.15) 45%, transparent 65%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+}
+.discover-card .dc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.discover-card .dc-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-home img { animation: none; }
+  .power-card, .discover-card { transition: none; }
+}
+</style>
+
+<!-- ============ ELEMENT 1: HERO ============ -->
+<div class="hero-home" onclick="showRecipe(0)">
+  <img src="https://optirecipe.com/uploads/recipe-img-1774120888897-dne7a5ht.jpg" alt="">
+  <div class="hero-overlay">
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
+    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:8px">Tagine d'agneau<br>aux abricots</div>
+    <div style="font-size:12px;color:rgba(240,235,228,.6);margin-bottom:16px">Maroc &middot; 1h 30 &middot; Pour 4 personnes</div>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(196,101,74,.35)">
+      <span class="ms" style="font-size:18px">restaurant</span>Cuisiner
+    </div>
+  </div>
+</div>
+
+<!-- ============ ELEMENT 2: WHISPER ============ -->
+<div class="whisper">
+  <div class="whisper-name">Bonjour, Nicolas</div>
+  <div class="whisper-ctx">Il fait frais ce soir — une recette r&eacute;confortante ?</div>
+</div>
+
+<!-- ============ ELEMENT 3: THREE POWER CARDS ============ -->
+<div class="power-scroll">
+  <div class="power-card" onclick="go(8)">
+    <div class="pc-icon"><span class="ms">kitchen</span></div>
+    <div>
+      <div class="pc-title">Frigo Magique</div>
+      <div class="pc-sub">Qu'avez-vous chez vous ?</div>
+    </div>
+  </div>
+  <div class="power-card" onclick="go(7)">
+    <div class="pc-icon"><span class="ms">calendar_month</span></div>
+    <div>
+      <div class="pc-title">Planifier</div>
+      <div class="pc-sub">7 jours en 30 secondes</div>
+    </div>
+  </div>
+  <div class="power-card" onclick="go(2)">
+    <div class="pc-icon"><span class="ms">public</span></div>
+    <div>
+      <div class="pc-title">Voyager</div>
+      <div class="pc-sub">100+ pays &agrave; explorer</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ELEMENT 4: DISCOVER TONIGHT ============ -->
+<div class="discover-header">
+  <h2>D&eacute;couvrez ce soir</h2>
+</div>
+<div class="discover-scroll">
+  <div class="discover-card" onclick="showRecipe(6)">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121044040-4g10tfm6.jpg" alt="">
+    <div class="dc-info">
+      <div class="dc-title">Soupe de lentilles au curry</div>
+      <div class="dc-meta">&#x1F1EE;&#x1F1F3; &middot; 80 min</div>
+    </div>
+  </div>
+  <div class="discover-card" onclick="showRecipe(3)">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121075602-nroqkq9e.jpg" alt="">
+    <div class="dc-info">
+      <div class="dc-title">Roul&eacute;s d'aubergines</div>
+      <div class="dc-meta">&#x1F1EE;&#x1F1F9; &middot; 120 min</div>
+    </div>
+  </div>
+  <div class="discover-card" onclick="showRecipe(5)">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121042347-vmjt89zi.jpg" alt="">
+    <div class="dc-info">
+      <div class="dc-title">Curry quinoa coco</div>
+      <div class="dc-meta">&#x1F1EE;&#x1F1F3; &middot; 80 min</div>
+    </div>
+  </div>
+  <div class="discover-card" onclick="showRecipe(7)">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121123663-0y7y0tow.jpg" alt="">
+    <div class="dc-info">
+      <div class="dc-title">Curry haricots champignons</div>
+      <div class="dc-meta">&#x1F1EE;&#x1F1F3; &middot; 45 min</div>
+    </div>
+  </div>
+</div>

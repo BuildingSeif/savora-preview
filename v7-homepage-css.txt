@@ -1,0 +1,194 @@
+=== SAVORA S1 HOMEPAGE QUALITY FIX (v7) ===
+Read-only analysis: DO NOT EDIT index.html directly. Use these exact find/replace blocks.
+
+PROBLEM 1: Hero gradient is too subtle — needs much darker overlay
+CSS FIND: .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(16,12,8,.85) 0%, rgba(16,12,8,.3) 40%, transparent 70%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 28px;
+}
+
+CSS REPLACE: .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(18,14,10,.35) 50%, rgba(18,14,10,.75) 75%, rgba(18,14,10,.92) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 28px;
+}
+
+---
+
+PROBLEM 2: Recipe title font is too small (28px). Needs 32px minimum for readability
+HTML FIND: <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:8px">Ragout de poulet aux<br>epices marocaines</div>
+
+HTML REPLACE: <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4;line-height:1.1;margin-bottom:8px">Ragout de poulet aux<br>epices marocaines</div>
+
+---
+
+PROBLEM 3: "Ce soir" label too small (13px). Needs 14px
+HTML FIND: <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
+
+HTML REPLACE: <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:rgba(212,135,111,.9);margin-bottom:6px">Ce soir</div>
+
+---
+
+PROBLEM 4: Cuisiner button needs stronger glow/shadow for prominence
+HTML FIND: <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(196,101,74,.35)">
+
+HTML REPLACE: <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5), inset 0 1px 0 rgba(255,255,255,.2)">
+
+---
+
+PROBLEM 5: Whisper context text needs to include day context for personalization
+HTML FIND: <div class="whisper-ctx">Il fait frais ce soir — une recette r&eacute;confortante ?</div>
+
+HTML REPLACE: <div class="whisper-ctx">Samedi soir — le moment id&eacute;al pour un plat g&eacute;n&eacute;reux</div>
+
+---
+
+PROBLEM 6: Power cards need to be taller (110px) and have food photography background
+CSS FIND: .power-card {
+  flex-shrink: 0;
+  width: 160px;
+  height: 100px;
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-b);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s;
+  will-change: transform;
+}
+
+CSS REPLACE: .power-card {
+  flex-shrink: 0;
+  width: 160px;
+  height: 110px;
+  background: var(--glass);
+  background-image: linear-gradient(rgba(255,255,255,.08) 0%, rgba(255,255,255,.04) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-b);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s;
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+.power-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg') center/cover;
+  opacity: 0.08;
+  z-index: 0;
+}
+.power-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+---
+
+PROBLEM 7: Discover cards need to be taller (260px minimum) for better proportions
+CSS FIND: .discover-card {
+  flex-shrink: 0;
+  width: 160px;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(45,30,15,.1);
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+CSS REPLACE: .discover-card {
+  flex-shrink: 0;
+  width: 160px;
+  height: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(45,30,15,.1);
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+---
+
+PROBLEM 8: Need MORE SPACE between sections — increase gaps to 28px minimum
+CSS FIND: .whisper {
+  padding: 20px 24px;
+}
+
+CSS REPLACE: .whisper {
+  padding: 28px 24px 8px;
+}
+
+---
+
+CSS FIND: .power-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+CSS REPLACE: .power-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 28px 24px 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+---
+
+CSS FIND: .discover-header {
+  padding: 0 24px 14px;
+}
+
+CSS REPLACE: .discover-header {
+  padding: 28px 24px 16px;
+}
+
+---
+
+PROBLEM 9: Home container needs more scroll room at bottom (padding-bottom:120px)
+CSS FIND: .home{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s}
+
+CSS REPLACE: .home{background:var(--bg);padding-bottom:120px;min-height:100%;transition:background .5s}
+
+---
+
+NOTES:
+- All gaps and padding increased from 12-20px to 28px for breathing room
+- Hero gradient now starts transparent at top, builds to 92% opacity at bottom
+- Recipe title enlarged to 32px for better legibility
+- Discover cards increased to 260px height for more balanced proportions
+- Power cards taller (110px) with subtle food photo background opacity 8%
+- Cuisiner button has enhanced glow with inset highlight
+- Whisper text personalized with day context (Samedi soir)
+- Bottom padding increased to 120px for scroll comfort

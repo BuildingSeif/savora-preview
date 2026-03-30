@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Savora - Social Capture Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root,[data-theme="dark"]{
+  --bg:#151311;--bg2:#1d1a17;
+  --card:rgba(255,255,255,.04);--card-b:rgba(255,255,255,.06);--card-s:0 4px 20px rgba(0,0,0,.25);
+  --t1:#f0ebe4;--t2:#b5ab9f;--t3:#7a7168;--t4:#3a3530;
+  --terra:#c4654a;--terra-l:#d4876f;--terra-g:rgba(196,101,74,.12);
+  --sage:#7aad7a;--gold:#c9a84c;
+  --tab-bg:rgba(255,255,255,.06);--tab-b:rgba(255,255,255,.08);
+  --glass:rgba(255,255,255,.05);--glass-b:rgba(255,255,255,.07);--glass-s:0 2px 12px rgba(0,0,0,.15);
+  --grad-up:linear-gradient(0deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --grad-dn:linear-gradient(180deg,rgba(21,19,17,1) 0%,rgba(21,19,17,0) 100%);
+  --sep:rgba(255,255,255,.04);--input-bg:rgba(255,255,255,.04);
+  --sbar-c:#f0ebe4;
+  --hdr-bg:rgba(21,19,17,.65);
+  --sbar-glass:rgba(21,19,17,.55);
+  --bg-paper:none;
+}
+
+html,body{height:100%;overflow:hidden;background:#0a0908}
+body{display:flex;justify-content:center;align-items:center;font-family:'Inter',system-ui,sans-serif}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;-webkit-font-smoothing:antialiased}
+
+/* === PHONE === */
+.ph{
+  width:390px;height:844px;position:relative;
+  background:var(--bg);border-radius:54px;overflow:hidden;
+  box-shadow:0 0 0 11px #1a1816,0 0 0 13px #3a3632,0 50px 100px rgba(0,0,0,.5);
+  contain:layout style paint;
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:34px;background:#000;border-radius:0 0 20px 20px;z-index:300}
+
+/* Status bar */
+.sbar{
+  position:absolute;top:0;left:0;right:0;height:54px;z-index:250;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 34px 8px;font-size:15px;font-weight:600;
+  color:var(--sbar-c);
+}
+.sbar-r{display:flex;gap:5px;align-items:center;font-size:12px}
+
+/* === SCREENS === */
+.scr{
+  position:absolute;inset:0;will-change:transform,opacity;
+  transition:transform .35s cubic-bezier(.34,1.2,.64,1),opacity .3s ease-out;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  overscroll-behavior-y:contain;scrollbar-width:none;
+}
+.scr::-webkit-scrollbar{display:none}
+.scr[data-s="on"]{transform:none;opacity:1;pointer-events:all;z-index:10}
+.scr[data-s="l"]{transform:translateX(-40px) scale(.97);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="r"]{transform:translateX(40px) scale(.97);opacity:0;pointer-events:none;z-index:5}
+.scr[data-s="off"]{transform:translateX(60px) scale(.95);opacity:0;pointer-events:none;z-index:1}
+
+/* === HEADER === */
+.hdr{
+  position:sticky;top:0;z-index:100;
+  height:96px;display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:14px;
+  background:var(--hdr-bg);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+}
+.hdr-side{position:absolute;bottom:14px;display:flex;gap:10px}
+.hdr-side.l{left:24px}.hdr-side.r{right:24px}
+.hdr-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+}
+.hdr-btn:active{transform:scale(.9)}
+.hdr-btn .ms{font-size:20px;color:var(--t2)}
+
+/* Pill */
+.pill{
+  height:40px;min-width:fit-content;padding:0 20px;border-radius:20px;border:1.5px solid var(--t4);
+  background:transparent;color:var(--t2);font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;
+  white-space:nowrap;flex-shrink:0;transition:all .35s cubic-bezier(.16,1,.3,1);
+}
+.pill.on,.pill.terra{background:var(--terra);color:#fff;border-color:var(--terra);box-shadow:0 4px 16px rgba(196,101,74,.25)}
+
+/* Glass utility */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+}
+
+/* Active states */
+[onclick]:active{transform:scale(.97);transition:transform .2s cubic-bezier(.16,1,.3,1)}
+
+/* =========================================
+   S15: SHARE SHEET SIMULATION
+   ========================================= */
+.share-sim{
+  height:100%;display:flex;flex-direction:column;
+  background:#0c0b0a;position:relative;
+}
+
+/* Instagram post simulation */
+.ig-post{
+  flex:1;display:flex;flex-direction:column;
+  padding-top:96px;
+}
+.ig-header{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;
+}
+.ig-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.ig-avatar-inner{
+  width:32px;height:32px;border-radius:50%;
+  background:#1a1816;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:600;color:#f0ebe4;
+}
+.ig-user{font-size:13px;font-weight:600;color:#f0ebe4;flex:1}
+.ig-more{font-size:18px;color:#7a7168;letter-spacing:2px}
+
+.ig-image{
+  width:100%;aspect-ratio:1/1;max-height:320px;
+  overflow:hidden;
+}
+.ig-image img{width:100%;height:100%;object-fit:cover;display:block}
+
+.ig-actions{
+  display:flex;align-items:center;gap:16px;
+  padding:12px 16px;
+}
+.ig-actions .ms{font-size:26px;color:#f0ebe4;cursor:pointer}
+.ig-actions .ms:last-child{margin-left:auto}
+
+.ig-caption{
+  padding:0 16px 12px;
+  font-size:13px;color:#b5ab9f;line-height:1.5;
+}
+.ig-caption b{color:#f0ebe4;font-weight:600}
+
+/* Share sheet */
+.share-sheet{
+  background:#1d1a17;
+  border-radius:20px 20px 0 0;
+  padding:16px 0 40px;
+  animation:sheetUp .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes sheetUp{
+  from{transform:translateY(100%);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.sheet-handle{
+  width:40px;height:4px;border-radius:2px;
+  background:rgba(255,255,255,.15);
+  margin:0 auto 20px;
+}
+.sheet-apps{
+  display:flex;gap:0;padding:0 20px;
+  justify-content:space-around;
+}
+.sheet-app{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  width:72px;cursor:pointer;
+}
+.sheet-app-icon{
+  width:56px;height:56px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+}
+.sheet-app-icon.messages{background:#34c759}
+.sheet-app-icon.whatsapp{background:#25d366}
+.sheet-app-icon.mail{background:#5e9cef}
+.sheet-app-icon.opticook{
+  background:var(--terra);
+  box-shadow:0 0 24px rgba(196,101,74,.5),0 0 48px rgba(196,101,74,.25);
+  animation:cookGlow 2s ease-in-out infinite alternate;
+}
+@keyframes cookGlow{
+  from{box-shadow:0 0 20px rgba(196,101,74,.4),0 0 40px rgba(196,101,74,.2)}
+  to{box-shadow:0 0 30px rgba(196,101,74,.6),0 0 60px rgba(196,101,74,.35)}
+}
+.sheet-app-label{
+  font-size:10px;color:#b5ab9f;text-align:center;
+  white-space:nowrap;
+}
+.sheet-app.highlight .sheet-app-label{color:#f0ebe4;font-weight:600}
+
+.sheet-tagline{
+  text-align:center;padding:18px 24px 16px;
+  font-family:'Playfair Display',serif;font-weight:300;font-style:italic;
+  font-size:13px;color:rgba(180,170,159,.6);
+}
+
+.sheet-secondary{
+  display:flex;gap:0;padding:0 16px;
+}
+.sheet-sec-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:12px 8px;
+  cursor:pointer;opacity:.35;
+}
+.sheet-sec-icon{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+}
+.sheet-sec-icon .ms{font-size:20px;color:#7a7168}
+.sheet-sec-label{font-size:10px;color:#7a7168;text-align:center}
+
+/* Back button overlay for share sheet */
+.share-back{
+  position:absolute;top:50px;left:24px;z-index:110;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.share-back:active{transform:scale(.9)}
+.share-back .ms{font-size:20px;color:rgba(240,235,228,.8)}
+
+/* =========================================
+   S16: URL IMPORT
+   ========================================= */
+.url-import{
+  background:var(--bg);min-height:100%;padding-bottom:60px;
+}
+.url-input-wrap{
+  margin:20px 24px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:16px;
+  padding:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.url-input-wrap .ms{font-size:22px;color:var(--t3)}
+.url-input{
+  flex:1;background:none;border:none;outline:none;
+  font-family:inherit;font-size:14px;color:var(--t1);
+}
+.url-input::placeholder{color:var(--t3)}
+
+.sources-label{
+  padding:0 24px;margin-bottom:14px;
+  font-size:12px;font-weight:500;color:var(--t3);
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.sources-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;padding:0 24px;margin-bottom:28px;
+}
+.source-item{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:16px 8px;cursor:pointer;
+  border-radius:16px;
+  transition:background .2s;
+}
+.source-item:active{background:rgba(255,255,255,.04)}
+.source-icon{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.06);
+}
+.source-name{font-size:11px;color:var(--t2);font-weight:500;text-align:center}
+
+/* Source brand colors at 30% opacity */
+.src-instagram{background:rgba(225,48,108,.15);color:#e1306c}
+.src-tiktok{background:rgba(255,0,80,.15);color:#ff0050}
+.src-youtube{background:rgba(255,0,0,.15);color:#ff0000}
+.src-marmiton{background:rgba(242,145,0,.15);color:#f29100}
+.src-750g{background:rgba(232,119,34,.15);color:#e87722}
+.src-allrecipes{background:rgba(246,141,46,.15);color:#f68d2e}
+.src-bbc{background:rgba(187,0,0,.15);color:#bb0000}
+.src-pinterest{background:rgba(189,8,28,.15);color:#bd081c}
+.src-blog{background:rgba(180,170,159,.12);color:#b4aa9f}
+
+.import-btn{
+  margin:0 24px;width:calc(100% - 48px);
+  padding:16px;border:none;border-radius:980px;
+  background:var(--t4);color:var(--t3);
+  font-family:inherit;font-size:15px;font-weight:600;
+  cursor:not-allowed;opacity:.5;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.import-btn.active{
+  background:var(--terra);color:#fff;
+  cursor:pointer;opacity:1;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+}
+
+.scan-link{
+  text-align:center;margin-top:20px;
+  font-size:13px;color:var(--terra);
+  cursor:pointer;font-weight:500;
+}
+.scan-link:active{opacity:.7}
+
+/* =========================================
+   S18: VIDEO RECIPE IMPORT
+   ========================================= */
+.video-import{
+  background:var(--bg);min-height:100%;padding-bottom:60px;
+}
+.video-frame{
+  margin:16px 24px;border-radius:20px;overflow:hidden;
+  position:relative;aspect-ratio:9/16;max-height:50vh;
+  background:#0c0b0a;
+}
+.video-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.video-play{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.3);
+}
+.video-play-btn{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.video-play-btn .ms{font-size:36px;color:#fff}
+
+.video-source{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 24px 0;
+}
+.video-source-icon{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(255,0,80,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#ff0050;
+}
+.video-source-user{font-size:13px;color:var(--t2);font-weight:500}
+
+.extraction-list{
+  padding:20px 24px 0;
+  display:flex;flex-direction:column;gap:0;
+}
+.extract-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid var(--sep);
+}
+.extract-item:last-child{border-bottom:none}
+.extract-check{
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.extract-check.done{background:var(--terra-g)}
+.extract-check.done .ms{font-size:16px;color:var(--terra);font-variation-settings:'FILL' 1}
+.extract-check.loading{
+  width:24px;height:24px;border-radius:50%;
+  border:2px solid var(--t4);
+  border-top-color:var(--terra);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.extract-text{flex:1;font-size:13px;color:var(--t2)}
+.extract-text b{color:var(--t1);font-weight:500}
+.extract-value{font-size:12px;color:var(--t3);font-weight:500}
+
+.add-book-btn{
+  margin:24px;width:calc(100% - 48px);
+  padding:16px;border:none;border-radius:980px;
+  background:var(--terra);color:#fff;
+  font-family:inherit;font-size:15px;font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.add-book-btn::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 50%);
+  pointer-events:none;
+}
+.add-book-btn:active{transform:scale(.96);box-shadow:0 6px 20px rgba(196,101,74,.25)}
+</style>
+</head>
+<body>
+
+<div class="ph">
+  <div class="notch"></div>
+  <div class="sbar">
+    <span>9:41</span>
+    <div class="sbar-r">
+      <span class="ms" style="font-size:17px">signal_cellular_alt</span>
+      <span class="ms" style="font-size:17px">wifi</span>
+      <span class="ms" style="font-size:17px">battery_full</span>
+    </div>
+  </div>
+
+  <!-- =========================================
+       S15: SHARE SHEET SIMULATION
+       ========================================= -->
+  <div class="scr" id="s15" data-s="on">
+    <div class="share-sim">
+      <!-- Back button -->
+      <div class="share-back" onclick="goBack()">
+        <span class="ms">arrow_back</span>
+      </div>
+
+      <!-- Instagram post -->
+      <div class="ig-post">
+        <div class="ig-header">
+          <div class="ig-avatar"><div class="ig-avatar-inner">CI</div></div>
+          <div class="ig-user">chefitaliano</div>
+          <div class="ig-more">...</div>
+        </div>
+        <div class="ig-image">
+          <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774325522245-rxen3lel.jpg" alt="Casserole fruits de mer">
+        </div>
+        <div class="ig-actions">
+          <span class="ms" style="font-variation-settings:'FILL' 0">favorite</span>
+          <span class="ms">chat_bubble_outline</span>
+          <span class="ms">send</span>
+          <span class="ms">bookmark_border</span>
+        </div>
+        <div class="ig-caption">
+          <b>chefitaliano</b> La meilleure casserole de fruits de mer &#127754;
+        </div>
+      </div>
+
+      <!-- Share Sheet -->
+      <div class="share-sheet">
+        <div class="sheet-handle"></div>
+
+        <!-- App row -->
+        <div class="sheet-apps">
+          <div class="sheet-app">
+            <div class="sheet-app-icon messages">
+              <span class="ms" style="font-size:28px;color:#fff">chat</span>
+            </div>
+            <div class="sheet-app-label">Messages</div>
+          </div>
+          <div class="sheet-app">
+            <div class="sheet-app-icon whatsapp">
+              <span style="font-size:24px;color:#fff;font-weight:700">W</span>
+            </div>
+            <div class="sheet-app-label">WhatsApp</div>
+          </div>
+          <div class="sheet-app">
+            <div class="sheet-app-icon mail">
+              <span class="ms" style="font-size:26px;color:#fff">mail</span>
+            </div>
+            <div class="sheet-app-label">Mail</div>
+          </div>
+          <div class="sheet-app highlight" onclick="go(16)">
+            <div class="sheet-app-icon opticook">
+              <span class="ms" style="font-size:26px;color:#fff">restaurant</span>
+            </div>
+            <div class="sheet-app-label">OptiCook</div>
+          </div>
+        </div>
+
+        <div class="sheet-tagline">Un tap. La recette est a vous.</div>
+
+        <!-- Secondary actions -->
+        <div class="sheet-secondary">
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">link</span></div>
+            <div class="sheet-sec-label">Copier</div>
+          </div>
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">save_alt</span></div>
+            <div class="sheet-sec-label">Enregistrer</div>
+          </div>
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">qr_code</span></div>
+            <div class="sheet-sec-label">QR Code</div>
+          </div>
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">more_horiz</span></div>
+            <div class="sheet-sec-label">Plus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================
+       S16: URL IMPORT
+       ========================================= -->
+  <div class="scr" id="s16" data-s="off">
+    <div class="url-import">
+      <div class="hdr">
+        <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+        <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1)">Importer une recette</div>
+        <div class="hdr-side r"></div>
+      </div>
+
+      <!-- URL input -->
+      <div class="url-input-wrap">
+        <span class="ms">link</span>
+        <input type="text" class="url-input" placeholder="Collez un lien de recette..." readonly>
+      </div>
+
+      <!-- Compatible sources -->
+      <div class="sources-label">Sources compatibles</div>
+      <div class="sources-grid">
+        <div class="source-item">
+          <div class="source-icon src-instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="source-name">Instagram</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-tiktok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.18 8.18 0 004.76 1.52V6.84a4.83 4.83 0 01-1-.15z"/></svg>
+          </div>
+          <div class="source-name">TikTok</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-youtube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <div class="source-name">YouTube</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-marmiton">
+            <span style="font-size:16px;font-weight:800">M</span>
+          </div>
+          <div class="source-name">Marmiton</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-750g">
+            <span style="font-size:13px;font-weight:800">750</span>
+          </div>
+          <div class="source-name">750g</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-allrecipes">
+            <span style="font-size:14px;font-weight:800">AR</span>
+          </div>
+          <div class="source-name">AllRecipes</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-bbc">
+            <span style="font-size:12px;font-weight:800">BBC</span>
+          </div>
+          <div class="source-name">BBC Food</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/></svg>
+          </div>
+          <div class="source-name">Pinterest</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-blog">
+            <span class="ms" style="font-size:20px">rss_feed</span>
+          </div>
+          <div class="source-name">Blog</div>
+        </div>
+      </div>
+
+      <!-- Import button -->
+      <button class="import-btn">Importer</button>
+
+      <!-- Scan link -->
+      <div class="scan-link" onclick="go(18)">Ou scannez une photo</div>
+    </div>
+  </div>
+
+  <!-- =========================================
+       S18: VIDEO RECIPE IMPORT
+       ========================================= -->
+  <div class="scr" id="s18" data-s="off">
+    <div class="video-import">
+      <div class="hdr">
+        <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+        <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1)">Video detectee</div>
+        <div class="hdr-side r"></div>
+      </div>
+
+      <!-- Video frame -->
+      <div class="video-frame">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773983450794-08w3yhk5.jpg" alt="Video recette">
+        <div class="video-play">
+          <div class="video-play-btn">
+            <span class="ms">play_arrow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Source badge -->
+      <div class="video-source">
+        <div class="video-source-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.18 8.18 0 004.76 1.52V6.84a4.83 4.83 0 01-1-.15z"/></svg>
+        </div>
+        <div class="video-source-user">@cuisinerapide</div>
+      </div>
+
+      <!-- Extraction progress -->
+      <div class="extraction-list">
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>Titre detecte</b></div>
+          <div class="extract-value">Nachos cremeux au fromage fondant</div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>8 ingredients identifies</b></div>
+          <div class="extract-value"></div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>5 etapes extraites</b></div>
+          <div class="extract-value"></div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>Nutrition calculee</b></div>
+          <div class="extract-value">480 kcal</div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>Traduction francaise</b></div>
+          <div class="extract-value"></div>
+        </div>
+      </div>
+
+      <!-- Add to book button -->
+      <button class="add-book-btn">Ajouter a mon book</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* Minimal nav for standalone preview */
+let cur=15;
+const navHistory=[];
+const screens=[15,16,18];
+
+function $(s){return document.querySelector(s)}
+function go(n){
+  if(n===cur)return;
+  navHistory.push(cur);
+  const dir=n>cur?1:-1;
+  $(`#s${cur}`).dataset.s=dir>0?'l':'r';
+  const nx=$(`#s${n}`);
+  nx.style.transition='none';nx.dataset.s=dir>0?'r':'l';nx.scrollTop=0;
+  nx.offsetHeight;nx.style.transition='';
+  requestAnimationFrame(()=>{nx.dataset.s='on'});
+  screens.forEach(i=>{if(i!==cur&&i!==n)$(`#s${i}`).dataset.s='off'});
+  cur=n;
+}
+function goBack(){
+  if(navHistory.length>0){
+    const prev=navHistory.pop();
+    const dir=prev<cur?-1:1;
+    $(`#s${cur}`).dataset.s=dir>0?'l':'r';
+    const nx=$(`#s${prev}`);
+    nx.style.transition='none';nx.dataset.s=dir>0?'r':'l';nx.scrollTop=0;
+    nx.offsetHeight;nx.style.transition='';
+    requestAnimationFrame(()=>{nx.dataset.s='on'});
+    screens.forEach(i=>{if(i!==cur&&i!==prev)$(`#s${i}`).dataset.s='off'});
+    cur=prev;
+  }
+}
+</script>
+</body>
+</html>
