@@ -1,0 +1,10 @@
+{
+  "name": "savora-preview",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . -l ${PORT:-3000} -s --no-clipboard"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
