@@ -6713,8 +6713,7 @@ function go(n){
   clearTimeout(tabTimer);
   lastScrollY[n]=0;
   if(alwaysHide.includes(n)){setTabVisible(false)}
-  else if(detailScreens.includes(n)){setTabVisible(false)}
-  else{setTimeout(()=>setTabVisible(true),200)}
+  else{setTabVisible(true)}
   $('#dcta').classList.toggle('hide',!detailScreens.includes(n));
   const sb=$('#sbar');sb.classList.toggle('on-hero',n===0||n===4||detailScreens.includes(n));
   updateTabHighlight(n);
@@ -6747,8 +6746,7 @@ function goBack(){
     clearTimeout(tabTimer);
     lastScrollY[prev]=0;
     if(alwaysHide.includes(prev)){setTabVisible(false)}
-    else if(detailScreens.includes(prev)){setTabVisible(false)}
-    else{setTimeout(()=>setTabVisible(true),200)}
+    else{setTabVisible(true)}
     $('#dcta').classList.toggle('hide',!detailScreens.includes(prev));
     const sb=$('#sbar');sb.classList.toggle('on-hero',prev===0||prev===4||detailScreens.includes(prev));
     updateTabHighlight(prev);
@@ -6780,10 +6778,9 @@ for(let i=0;i<T;i++){
       if(cur!==idx)return;
       if(alwaysHide.includes(cur))return;
       const y=scr.scrollTop;const delta=y-prevY;prevY=y;
-      if(detailScreens.includes(cur)&&y<300){return}
-      if(y<60){setTabVisible(true);clearTimeout(tabTimer)}
-      else if(delta>6){setTabVisible(false);clearTimeout(tabTimer);tabTimer=setTimeout(()=>setTabVisible(true),1800)}
-      else if(delta<-3){setTabVisible(true);clearTimeout(tabTimer)}
+      if(y<10){setTabVisible(true);return}
+      if(delta>4){setTabVisible(false)}
+      else if(delta<-2){setTabVisible(true)}
     },{passive:true});
   })(i);
 }
