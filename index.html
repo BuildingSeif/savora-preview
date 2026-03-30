@@ -391,6 +391,194 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
    S2: EXPLORE
    ========================================= */
 .explore{background:var(--bg);padding-bottom:100px;min-height:100%;transition:background .5s;position:relative}
+
+/* ═══ EXPLORER V2: Hero Map + Premium Search ═══ */
+.exp-map-hero{
+  position:relative;width:100%;overflow:hidden;
+  background:linear-gradient(180deg,rgba(196,101,74,.04) 0%,var(--bg) 100%);
+  padding:0 0 12px;margin-bottom:0;
+}
+[data-theme="dark"] .exp-map-hero{
+  background:linear-gradient(180deg,rgba(196,101,74,.06) 0%,var(--bg) 100%);
+}
+.exp-map-title{
+  padding:12px 24px 4px;
+  font-family:'Playfair Display',serif;font-size:24px;font-weight:400;
+  color:var(--t1);letter-spacing:-.3px;line-height:1.1;
+  transition:color .4s;
+}
+.exp-map-sub{
+  padding:0 24px 8px;font-size:12px;color:var(--t3);transition:color .4s;
+}
+.exp-map-wrap{
+  position:relative;width:100%;padding:0 8px;
+}
+.exp-map-wrap svg{
+  width:100%;display:block;
+  filter:drop-shadow(0 2px 8px rgba(45,30,15,.04));
+}
+/* Region coloring */
+.exp-map-wrap .map-region-europe{fill:rgba(196,101,74,.10);stroke:rgba(196,101,74,.18)}
+.exp-map-wrap .map-region-asia{fill:rgba(184,152,64,.10);stroke:rgba(184,152,64,.18)}
+.exp-map-wrap .map-region-americas{fill:rgba(109,160,109,.10);stroke:rgba(109,160,109,.18)}
+.exp-map-wrap .map-region-africa{fill:rgba(196,140,74,.10);stroke:rgba(196,140,74,.18)}
+.exp-map-wrap .map-region-oceania{fill:rgba(100,160,180,.10);stroke:rgba(100,160,180,.18)}
+[data-theme="dark"] .exp-map-wrap .map-region-europe{fill:rgba(196,101,74,.14);stroke:rgba(196,101,74,.22)}
+[data-theme="dark"] .exp-map-wrap .map-region-asia{fill:rgba(184,152,64,.14);stroke:rgba(184,152,64,.22)}
+[data-theme="dark"] .exp-map-wrap .map-region-americas{fill:rgba(109,160,109,.14);stroke:rgba(109,160,109,.22)}
+[data-theme="dark"] .exp-map-wrap .map-region-africa{fill:rgba(196,140,74,.14);stroke:rgba(196,140,74,.22)}
+[data-theme="dark"] .exp-map-wrap .map-region-oceania{fill:rgba(100,160,180,.14);stroke:rgba(100,160,180,.22)}
+/* Active country glow */
+.exp-map-wrap path.map-active{
+  fill:rgba(196,101,74,.25)!important;stroke:var(--terra)!important;stroke-width:1!important;
+  filter:drop-shadow(0 0 6px rgba(196,101,74,.3));
+  transition:fill .4s,stroke .4s,filter .4s;
+}
+/* Floating stats bar on map */
+.exp-map-stats{
+  display:flex;justify-content:center;gap:16px;
+  padding:8px 0 0;
+}
+.exp-map-stat{
+  display:flex;align-items:center;gap:5px;
+  padding:6px 14px;
+  background:var(--glass);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--t1);
+  box-shadow:0 2px 10px rgba(45,30,15,.06);
+  transition:background .4s,border-color .4s,color .4s;
+}
+.exp-map-stat .ms{font-size:14px;color:var(--terra)}
+
+/* Marker entrance animation */
+@keyframes markerIn{
+  from{transform:scale(0);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.exp-map-wrap .map-marker{
+  transform-origin:center;
+  animation:markerIn .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+.exp-map-wrap .map-marker:nth-child(1){animation-delay:.1s}
+.exp-map-wrap .map-marker:nth-child(2){animation-delay:.2s}
+.exp-map-wrap .map-marker:nth-child(3){animation-delay:.3s}
+.exp-map-wrap .map-marker:nth-child(4){animation-delay:.4s}
+.exp-map-wrap .map-marker:nth-child(5){animation-delay:.5s}
+.exp-map-wrap .map-marker:nth-child(6){animation-delay:.6s}
+.exp-map-wrap .map-marker:nth-child(7){animation-delay:.7s}
+.exp-map-wrap .map-marker:nth-child(8){animation-delay:.8s}
+.exp-map-wrap .map-marker:nth-child(9){animation-delay:.9s}
+.exp-map-wrap .map-marker:nth-child(10){animation-delay:1s}
+
+/* Marker tooltip on tap */
+.exp-marker-tip{
+  position:absolute;z-index:20;
+  padding:8px 14px;
+  background:var(--card);
+  border:1px solid var(--card-b);
+  border-radius:14px;
+  box-shadow:0 8px 28px rgba(45,30,15,.14);
+  display:none;flex-direction:column;align-items:center;gap:4px;
+  transform:translateX(-50%) translateY(-100%);
+  pointer-events:auto;
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  transition:opacity .25s,transform .25s cubic-bezier(.34,1.56,.64,1);
+  white-space:nowrap;
+}
+.exp-marker-tip.show{display:flex;animation:markerIn .3s cubic-bezier(.34,1.56,.64,1)}
+.exp-marker-tip-name{font-size:13px;font-weight:600;color:var(--t1)}
+.exp-marker-tip-count{font-size:11px;color:var(--t3)}
+.exp-marker-tip-cta{
+  margin-top:2px;padding:4px 12px;border-radius:10px;
+  background:var(--terra);color:#fff;font-size:10px;font-weight:600;
+  letter-spacing:.3px;cursor:pointer;border:none;
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+}
+.exp-marker-tip-cta:active{transform:scale(.92)}
+
+/* Premium search - sticky on scroll */
+.exp-search-sticky{
+  position:sticky;top:96px;z-index:120;
+  padding:0 20px 12px;
+  background:linear-gradient(180deg,var(--bg) 60%,rgba(248,243,236,0) 100%);
+  transition:background .4s;
+}
+[data-theme="dark"] .exp-search-sticky{
+  background:linear-gradient(180deg,var(--bg) 60%,rgba(21,19,17,0) 100%);
+}
+
+/* Cuisine carousel V2 */
+.exp-cuisines{
+  display:flex;gap:14px;padding:0 24px 6px;overflow-x:auto;
+  scrollbar-width:none;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  mask-image:linear-gradient(90deg,#000 0%,#000 86%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 86%,transparent 100%);
+}
+.exp-cuisines::-webkit-scrollbar{display:none}
+.exp-cuisine{
+  flex-shrink:0;text-align:center;cursor:pointer;
+  scroll-snap-align:start;
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.exp-cuisine:active{transform:scale(.92)}
+.exp-cuisine-img{
+  width:72px;height:72px;border-radius:50%;overflow:hidden;
+  margin:0 auto 6px;
+  border:2.5px solid var(--card-b);
+  box-shadow:0 3px 12px rgba(45,30,15,.08);
+  transition:border-color .3s,box-shadow .3s,transform .3s cubic-bezier(.16,1,.3,1);
+}
+.exp-cuisine.active .exp-cuisine-img{
+  border-color:var(--terra);
+  box-shadow:0 3px 16px rgba(196,101,74,.2);
+  transform:scale(1.05);
+}
+.exp-cuisine-img img{width:100%;height:100%;object-fit:cover;display:block}
+.exp-cuisine-name{font-size:11px;font-weight:500;color:var(--t2);transition:color .3s}
+.exp-cuisine.active .exp-cuisine-name{color:var(--terra);font-weight:600}
+.exp-cuisine-count{font-size:9px;color:var(--t3);margin-top:1px;transition:color .3s}
+
+/* Variable card layout */
+.exp-hero-card{
+  margin:0 20px 14px;border-radius:20px;overflow:hidden;
+  position:relative;height:180px;cursor:pointer;
+  box-shadow:0 10px 36px rgba(45,30,15,.12);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.exp-hero-card:active{transform:scale(.985);box-shadow:0 6px 20px rgba(45,30,15,.08)}
+.exp-hero-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.exp-hero-card:active img{transform:scale(1.03)}
+.exp-hero-card-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(12,8,4,.82) 0%,rgba(12,8,4,.1) 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px 20px;
+}
+.exp-hero-card-cat{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px}
+.exp-hero-card-t{font-family:'Playfair Display',serif;font-size:20px;font-weight:300;color:#fff;line-height:1.15;margin-bottom:6px}
+.exp-hero-card-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,.6)}
+.exp-hero-card-meta .ms{font-size:14px;color:var(--terra-l)}
+
+.exp-duo{display:flex;gap:12px;padding:0 20px 14px}
+.exp-duo-card{
+  flex:1;border-radius:16px;overflow:hidden;position:relative;
+  height:150px;cursor:pointer;
+  box-shadow:0 6px 20px rgba(45,30,15,.10);
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+}
+.exp-duo-card:active{transform:scale(.96)}
+.exp-duo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.exp-duo-card-ov{
+  position:absolute;bottom:0;left:0;right:0;padding:12px 14px;
+  background:linear-gradient(0deg,rgba(12,8,4,.78),transparent);
+}
+.exp-duo-card-t{font-family:'Playfair Display',serif;font-size:14px;color:#fff;line-height:1.2;margin-bottom:3px}
+.exp-duo-card-m{font-size:10px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:3px}
+.exp-duo-card-m .ms{font-size:12px}
 .sbar-in{
   margin:8px 24px 20px;display:flex;align-items:center;gap:10px;
   background:var(--sbar-glass);
@@ -3956,34 +4144,35 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 </div>
 
-<!-- S2: EXPLORE (V7 - Complete) -->
+<!-- S2: EXPLORER -- V2 Hero Map -->
 <div class="scr" id="s2" data-s="off">
 <div class="explore">
 
-  <!-- 1. Header -->
+  <!-- Header -->
   <div class="hdr">
-    <div class="hdr-side l"><div class="hdr-btn" onclick="go(0)"><span class="ms">arrow_back</span></div></div>
+    <div class="hdr-side l"><div class="hdr-btn" onclick="go(1)"><span class="ms">arrow_back</span></div></div>
     <div class="hdr-logo">Explorer</div>
     <div class="hdr-side r"></div>
   </div>
 
-  <!-- 2. Search Bar -->
-  <div class="sbar-in" style="margin:0 24px 0;position:relative">
-    <span class="ms" style="color:var(--t3);font-size:22px">search</span>
-    <input type="text" placeholder="Rechercher une recette...">
-    <div class="mic" style="width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <span class="ms" style="color:#fff;font-size:18px">mic</span>
+  <!-- Sticky Search -->
+  <div class="exp-search-sticky">
+    <div class="sbar-in" style="margin:0;position:relative">
+      <span class="ms" style="color:var(--t3);font-size:22px">search</span>
+      <input type="text" placeholder="Rechercher une recette, un pays...">
+      <div class="mic"><span class="ms" style="color:#fff;font-size:18px">mic</span></div>
+    </div>
+    <div id="searchOverlay" style="display:none;position:absolute;left:20px;right:20px;top:52px;z-index:200;background:var(--card);border:1px solid var(--card-b);border-radius:18px;box-shadow:0 12px 40px rgba(45,30,15,.12);padding:12px;max-height:400px;overflow-y:auto;transition:background .4s,border-color .4s">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:600;padding:8px 8px 12px">R&Eacute;SULTATS</div>
+      <div id="searchResults"></div>
     </div>
   </div>
-  <div id="searchOverlay" style="display:none;position:absolute;left:24px;right:24px;top:160px;z-index:200;background:var(--card);border:1px solid var(--card-b);border-radius:18px;box-shadow:0 12px 40px rgba(45,30,15,.12);padding:12px;max-height:400px;overflow-y:auto;transition:background .4s,border-color .4s">
-    <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:600;padding:8px 8px 12px">R&Eacute;SULTATS</div>
-    <div id="searchResults"></div>
-  </div>
 
-  <!-- 3. World Map Section -->
-  <div class="scroll-reveal">
-    <div style="padding:0 24px;font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);margin-bottom:4px;transition:color .4s">Explorez le monde</div>
-    <div style="position:relative;width:100%;margin:0 auto 0;padding:0 12px">
+  <!-- HERO MAP SECTION -->
+  <div class="exp-map-hero scroll-reveal">
+    <div class="exp-map-title">Explorez le monde</div>
+    <div class="exp-map-sub">Cuisines de 100+ pays, 1.3M+ recettes</div>
+    <div class="exp-map-wrap" id="expMapWrap">
       <svg viewBox="0 0 800 400" style="width:100%;display:block" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="mapGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" style="stop-color:var(--terra);stop-opacity:0.06"/><stop offset="100%" style="stop-color:var(--gold);stop-opacity:0.04"/></linearGradient></defs>
         <g opacity="0.04" stroke="var(--t4)" stroke-width="0.3" fill="none"><line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/><line x1="0" y1="300" x2="800" y2="300"/><line x1="200" y1="0" x2="200" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/></g>
@@ -4289,14 +4478,24 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
       <div id="mapTooltip" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
     </div>
-    <div style="padding:0 24px;font-size:12px;color:var(--t3);margin-top:14px;transition:color .4s">100+ pays &agrave; explorer</div>
-    <div style="padding:0 24px;font-size:12px;color:var(--t3)">1 300 168 recettes</div>
     <script>(function(){var t=document.getElementById('mapTooltip'),c=t&&t.parentElement;if(!t||!c)return;c.querySelectorAll('.map-marker').forEach(function(m){m.addEventListener('mouseenter',function(){var r=c.getBoundingClientRect(),ci=m.querySelector('circle'),s=c.querySelector('svg'),sr=s.getBoundingClientRect(),cx=parseFloat(ci.getAttribute('cx')),cy=parseFloat(ci.getAttribute('cy')),vb=s.viewBox.baseVal;t.textContent=m.getAttribute('data-tooltip');t.style.display='block';t.style.opacity='1';t.style.left=(cx*sr.width/vb.width)+(sr.left-r.left)+'px';t.style.top=(cy*sr.height/vb.height)+(sr.top-r.top)-28+'px'});m.addEventListener('mouseleave',function(){t.style.opacity='0';setTimeout(function(){t.style.display='none'},200)})})})();</script>
       <div id="mapTooltipExplorer" style="display:none;position:absolute;padding:6px 10px;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--glass-b);border-radius:10px;font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;pointer-events:none;z-index:10;box-shadow:0 4px 16px rgba(45,30,15,.1);transform:translateX(-50%);transition:opacity .2s,top .15s,left .15s"></div>
+    </div>
+    <!-- Floating stat pills -->
+    <div class="exp-map-stats">
+      <div class="exp-map-stat"><span class="ms">public</span> 100+ pays</div>
+      <div class="exp-map-stat"><span class="ms">restaurant</span> 1.3M+ recettes</div>
+    </div>
+    <!-- Marker tooltip container -->
+    <div class="exp-marker-tip" id="expMarkerTip">
+      <div class="exp-marker-tip-name" id="expTipName"></div>
+      <div class="exp-marker-tip-count" id="expTipCount"></div>
+      <button class="exp-marker-tip-cta" id="expTipCta">Explorer</button>
+    </div>
   </div>
 
-  <!-- 4. Category Pills -->
-  <div class="cats" style="padding-top:20px">
+  <!-- Category Pills -->
+  <div class="cats" style="padding-top:16px">
     <button class="pill on" onclick="pickCat(this)" style="flex-shrink:0">Tout</button>
     <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Rapide</button>
     <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Budget</button>
@@ -4308,77 +4507,149 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Keto</button>
   </div>
 
-  <!-- 5. Cuisine Circles -->
-  <div class="sh" style="margin-top:4px"><div class="sh-t" style="font-size:17px">Par cuisine</div><button class="sh-link" onclick="go(15)">Voir tout</button></div>
-  <div style="display:flex;gap:16px;padding:0 24px 20px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 88%,transparent 100%)">
-    <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774196479453-voqkup8k.jpg" style="width:100%;height:100%;object-fit:cover" alt="Francaise"></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Fran&ccedil;aise</div>
+  <!-- Cuisine Carousel V2 -->
+  <div class="sh" style="margin-top:8px"><div class="sh-t" style="font-size:17px">Par cuisine</div><button class="sh-link">Voir tout</button></div>
+  <div class="exp-cuisines">
+    <div class="exp-cuisine active" onclick="pickExpCuisine(this)">
+      <div class="exp-cuisine-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774196479453-voqkup8k.jpg" alt="Fran&ccedil;aise"></div>
+      <div class="exp-cuisine-name">Fran&ccedil;aise</div>
+      <div class="exp-cuisine-count">241K</div>
     </div>
-    <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" style="width:100%;height:100%;object-fit:cover" alt="Italienne"></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Italienne</div>
+    <div class="exp-cuisine" onclick="pickExpCuisine(this)">
+      <div class="exp-cuisine-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="Italienne"></div>
+      <div class="exp-cuisine-name">Italienne</div>
+      <div class="exp-cuisine-count">151K</div>
     </div>
-    <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121446514-4rn8c6ed.jpg" style="width:100%;height:100%;object-fit:cover" alt="Indienne"></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Indienne</div>
+    <div class="exp-cuisine" onclick="pickExpCuisine(this)">
+      <div class="exp-cuisine-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121446514-4rn8c6ed.jpg" alt="Indienne"></div>
+      <div class="exp-cuisine-name">Indienne</div>
+      <div class="exp-cuisine-count">37K</div>
     </div>
-    <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" style="width:100%;height:100%;object-fit:cover" alt="Japonaise"></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Japonaise</div>
+    <div class="exp-cuisine" onclick="pickExpCuisine(this)">
+      <div class="exp-cuisine-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" alt="Japonaise"></div>
+      <div class="exp-cuisine-name">Japonaise</div>
+      <div class="exp-cuisine-count">31K</div>
     </div>
-    <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123840123-hcuglgpc.jpg" style="width:100%;height:100%;object-fit:cover" alt="Mexicaine"></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Mexicaine</div>
+    <div class="exp-cuisine" onclick="pickExpCuisine(this)">
+      <div class="exp-cuisine-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123840123-hcuglgpc.jpg" alt="Mexicaine"></div>
+      <div class="exp-cuisine-name">Mexicaine</div>
+      <div class="exp-cuisine-count">64K</div>
     </div>
-    <div onclick="go(15)" style="text-align:center;cursor:pointer;flex-shrink:0">
-      <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 6px;border:2.5px solid var(--terra)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" style="width:100%;height:100%;object-fit:cover" alt="Marocaine"></div>
-      <div style="font-size:11px;color:var(--t1);font-weight:500;transition:color .4s">Marocaine</div>
+    <div class="exp-cuisine" onclick="pickExpCuisine(this)">
+      <div class="exp-cuisine-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="Marocaine"></div>
+      <div class="exp-cuisine-name">Marocaine</div>
+      <div class="exp-cuisine-count">22K</div>
     </div>
   </div>
 
-  <!-- 6. Trending Section -->
-  <div class="sh"><div class="sh-t">Tendances</div><button class="sh-link">Voir tout</button></div>
+  <!-- Tendances: Hero Card -->
+  <div class="sh" style="margin-top:20px"><div class="sh-t">Tendances</div><button class="sh-link">Voir tout</button></div>
+  <div class="exp-hero-card scroll-reveal" onclick="showRecipe(11)">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt="">
+    <div class="exp-hero-card-ov">
+      <div class="exp-hero-card-cat">Cuisine fran&ccedil;aise</div>
+      <div class="exp-hero-card-t">Coquilles Saint-Jacques aux linguines</div>
+      <div class="exp-hero-card-meta">
+        <span style="display:flex;align-items:center;gap:3px"><span class="ms">star</span> 4.9</span>
+        <span style="display:flex;align-items:center;gap:3px"><span class="ms">schedule</span> 15 min</span>
+        <span style="display:flex;align-items:center;gap:3px"><span class="ms">signal_cellular_alt</span> Moyen</span>
+      </div>
+    </div>
+  </div>
 
-  <div class="rr" onclick="showRecipe(0)">
-    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt=""></div>
+  <!-- Duo Cards -->
+  <div class="exp-duo scroll-reveal">
+    <div class="exp-duo-card" onclick="showRecipe(8)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt="">
+      <div class="exp-duo-card-ov">
+        <div class="exp-duo-card-t">Spaghetti Bolognaise</div>
+        <div class="exp-duo-card-m"><span class="ms">schedule</span> 15 min</div>
+      </div>
+    </div>
+    <div class="exp-duo-card" onclick="showRecipe(7)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt="">
+      <div class="exp-duo-card-ov">
+        <div class="exp-duo-card-t">Champignons farcis</div>
+        <div class="exp-duo-card-m"><span class="ms">schedule</span> 40 min</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard recipe rows -->
+  <div class="rr scroll-reveal" onclick="showRecipe(0)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div>
     <div class="rr-info">
-      <div class="rr-n">&#x1F1EB;&#x1F1F7; Poulet R&ocirc;ti aux Herbes</div>
-      <div class="rr-d">Cuisine fran&ccedil;aise classique</div>
-      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.8</span><span class="rr-time"><span class="ms">schedule</span> 45 min</span></div>
+      <div class="rr-n">&#x1F1EC;&#x1F1F7; Brochettes de poulet grecques</div>
+      <div class="rr-d">Tendres, dorees, Mediterranee</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.8</span><span class="rr-time"><span class="ms">schedule</span> 40 min</span></div>
     </div>
   </div>
-
-  <div class="rr" onclick="showRecipe(8)">
-    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div>
+  <div class="rr scroll-reveal" onclick="showRecipe(6)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div>
     <div class="rr-info">
-      <div class="rr-n">&#x1F1EE;&#x1F1F9; Spaghetti Bolognaise</div>
-      <div class="rr-d">Cuisine italienne traditionnelle</div>
-      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.7</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
+      <div class="rr-n">&#x1F1F2;&#x1F1E6; Ragout poulet aux epices marocaines</div>
+      <div class="rr-d">Epices, couscous dore</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.7</span><span class="rr-time"><span class="ms">schedule</span> 60 min</span></div>
     </div>
   </div>
 
-  <div class="rr" onclick="showRecipe(7)">
-    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt=""></div>
+  <!-- Second Hero -->
+  <div class="sh" style="margin-top:12px"><div class="sh-t">Populaires</div><button class="sh-link">Voir tout</button></div>
+  <div class="exp-hero-card scroll-reveal" onclick="showRecipe(3)">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg" alt="">
+    <div class="exp-hero-card-ov">
+      <div class="exp-hero-card-cat">Cuisine italienne</div>
+      <div class="exp-hero-card-t">Scampi de champignons aux pates fraiches</div>
+      <div class="exp-hero-card-meta">
+        <span style="display:flex;align-items:center;gap:3px"><span class="ms">star</span> 4.8</span>
+        <span style="display:flex;align-items:center;gap:3px"><span class="ms">schedule</span> 30 min</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Duo -->
+  <div class="exp-duo scroll-reveal">
+    <div class="exp-duo-card" onclick="showRecipe(9)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774310261789-3dr9tfoi.jpg" alt="">
+      <div class="exp-duo-card-ov">
+        <div class="exp-duo-card-t">Tarte vanillee fondante</div>
+        <div class="exp-duo-card-m"><span class="ms">schedule</span> 15 min</div>
+      </div>
+    </div>
+    <div class="exp-duo-card" onclick="showRecipe(4)">
+      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" alt="">
+      <div class="exp-duo-card-ov">
+        <div class="exp-duo-card-t">Pates legumes du marche</div>
+        <div class="exp-duo-card-m"><span class="ms">schedule</span> 15 min</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- More rows -->
+  <div class="rr scroll-reveal" onclick="showRecipe(12)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg" alt=""></div>
     <div class="rr-info">
-      <div class="rr-n">&#x1F1EF;&#x1F1F5; Champignons Farcis</div>
-      <div class="rr-d">Inspiration asiatique</div>
-      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.6</span><span class="rr-time"><span class="ms">schedule</span> 40 min</span></div>
+      <div class="rr-n">&#x1F1F2;&#x1F1FD; Mole de Fruits et Legumes</div>
+      <div class="rr-d">Cacao, epices, legumes de saison</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.6</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
+    </div>
+  </div>
+  <div class="rr scroll-reveal" onclick="showRecipe(14)">
+    <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" alt=""></div>
+    <div class="rr-info">
+      <div class="rr-n">&#x1F1EB;&#x1F1F7; Gateau moelleux a la rhubarbe</div>
+      <div class="rr-d">Fondant, acidule, gouter parfait</div>
+      <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.5</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
     </div>
   </div>
 
-  <!-- 7. Recipe Grid (2x2) -->
-  <div class="sh"><div class="sh-t">Populaires</div><button class="sh-link">Voir tout</button></div>
-  <div class="grid" style="grid-template-columns:1fr 1fr;grid-template-rows:auto auto;padding:0 24px 24px">
-    <div class="gc2" onclick="showRecipe(8)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123744196-p1o89a7c.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Burgers vegetariens</div><div class="gc2-m"><span class="ms">schedule</span> 35 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(10)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774106290139-5c1spsrh.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Salade fraiche aux fraises</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(7)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774133033541-kgjfhin3.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Brownies aux courgettes</div><div class="gc2-m"><span class="ms">schedule</span> 90 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125425883-kkfieva0.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Tacos vegetariens aux noix</div><div class="gc2-m"><span class="ms">schedule</span> 20 min</div></div></div>
+  <!-- Bottom Grid -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 20px 24px">
+    <div class="gc2 scroll-reveal" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Lasagnes aux legumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
+    <div class="gc2 scroll-reveal" onclick="showRecipe(10)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773855747803-tuzq159y.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Tartes poulet mozzarella</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
   </div>
 
-  <!-- 8. Bottom padding for tab bar -->
-  <div style="height:120px"></div>
-
+  <div style="height:100px"></div>
 </div>
 </div>
 
@@ -7231,6 +7502,57 @@ function enterCookMode(){
 }
 
 
+
+/* ═══ Explorer V2: Cuisine picker + Map marker interaction ═══ */
+function pickExpCuisine(el){
+  document.querySelectorAll('.exp-cuisine').forEach(function(c){c.classList.remove('active')});
+  el.classList.add('active');
+}
+
+/* Map marker tap → show tooltip */
+(function(){
+  var tip=document.getElementById('expMarkerTip');
+  var tipName=document.getElementById('expTipName');
+  var tipCount=document.getElementById('expTipCount');
+  var tipCta=document.getElementById('expTipCta');
+  var wrap=document.getElementById('expMapWrap');
+  if(!tip||!wrap)return;
+  var markers=wrap.querySelectorAll('.map-marker');
+  var activeTip=null;
+
+  markers.forEach(function(m){
+    m.addEventListener('click',function(e){
+      e.stopPropagation();
+      if(activeTip===m){tip.classList.remove('show');activeTip=null;return}
+      activeTip=m;
+      var data=m.getAttribute('data-tooltip')||'';
+      var parts=data.split(' — ');
+      tipName.textContent=parts[0]||'';
+      tipCount.textContent=(parts[1]||'')+' recettes';
+      tip.classList.add('show');
+      var svg=wrap.querySelector('svg');
+      var sr=svg.getBoundingClientRect();
+      var wr=wrap.getBoundingClientRect();
+      var ci=m.querySelector('circle');
+      var vb=svg.viewBox.baseVal;
+      var cx=parseFloat(ci.getAttribute('cx'));
+      var cy=parseFloat(ci.getAttribute('cy'));
+      tip.style.left=((cx/vb.width)*sr.width+(sr.left-wr.left))+'px';
+      tip.style.top=((cy/vb.height)*sr.height+(sr.top-wr.top)-12)+'px';
+    });
+  });
+
+  document.addEventListener('click',function(){
+    tip.classList.remove('show');activeTip=null;
+  });
+
+  if(tipCta){tipCta.addEventListener('click',function(e){
+    e.stopPropagation();tip.classList.remove('show');activeTip=null;
+    /* scroll to cuisine section */
+    var cuisines=document.querySelector('.exp-cuisines');
+    if(cuisines)cuisines.scrollIntoView({behavior:'smooth',block:'center'});
+  })}
+})();
 
 /* ═══ V11 NAVIGATION WIRING — see second script block ═══ */
 </script>
