@@ -2246,6 +2246,1550 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .explore .sh{margin-top:28px}
 .library .sh{margin-top:24px}
 
+
+/* ═══ V11 Block A: Onboarding+Home ═══ */
+/* ========== LIGHT (default) ========== */
+/* ========== DARK ========== */
+
+
+/* === PHONE === */
+
+/* Status bar */
+
+/* === SCREENS === */
+
+/* === HEADER === */
+
+/* === SECTION === */
+
+/* === TAB BAR === */
+.tb-c .ms{font-size:24px;color:#fff}
+
+/* =========================================
+   S0: ONBOARDING V11 — Capture-First
+   ========================================= */
+.v6-onboard{
+  height:100%;
+  position:relative;
+  overflow:hidden;
+  background:#0c0a08;
+}
+.v6-onboard-panel{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 1.2s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+  will-change:opacity;
+}
+.v6-onboard-panel.active{
+  opacity:1;
+  pointer-events:all;
+}
+.v6-onboard-panel img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  will-change:transform;
+  animation:kenBurns 8s ease-in-out infinite alternate;
+}
+.v6-onboard-panel .panel-grad{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(12,10,8,.1) 0%,
+    transparent 25%,
+    transparent 40%,
+    rgba(12,10,8,.4) 65%,
+    rgba(12,10,8,.8) 85%,
+    rgba(12,10,8,.95) 100%
+  ),radial-gradient(ellipse at center,rgba(196,101,74,.05),transparent 60%);
+  z-index:1;
+}
+.v6-onboard-panel .panel-word{
+  position:absolute;
+  bottom:220px;
+  left:0;
+  right:0;
+  z-index:2;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:300;
+  font-size:42px;
+  color:#f0ebe4;
+  letter-spacing:-.5px;
+  opacity:0;
+  transform:translateY(16px) scale(0.95);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);
+  -webkit-font-smoothing:antialiased;
+}
+.v6-onboard-panel.active .panel-word{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Panel overlays */
+.panel-overlay-capture{
+  position:absolute;
+  bottom:280px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  opacity:0;
+  transition:opacity .8s cubic-bezier(.16,1,.3,1) .3s;
+  pointer-events:none;
+}
+.v6-onboard-panel.active .panel-overlay-capture{
+  opacity:1;
+}
+.capture-gesture{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  animation:capturePulse 2.5s ease-in-out infinite;
+}
+@keyframes capturePulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,.15)}
+  50%{transform:scale(1.08);box-shadow:0 0 0 16px rgba(255,255,255,0)}
+}
+.capture-gesture .ms{font-size:28px;color:rgba(255,255,255,.85)}
+
+/* Source icons floating overlay */
+.panel-overlay-sources{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .8s cubic-bezier(.16,1,.3,1) .3s;
+}
+.v6-onboard-panel.active .panel-overlay-sources{
+  opacity:1;
+}
+.source-icon{
+  position:absolute;
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:rgba(255,255,255,.5);
+  animation:sourceFloat 6s ease-in-out infinite;
+}
+.source-icon:nth-child(1){top:18%;left:12%;animation-delay:0s}
+.source-icon:nth-child(2){top:22%;right:15%;animation-delay:1.2s}
+.source-icon:nth-child(3){top:35%;left:22%;animation-delay:0.6s}
+.source-icon:nth-child(4){top:30%;right:25%;animation-delay:1.8s}
+.source-icon:nth-child(5){top:42%;right:10%;animation-delay:0.3s}
+@keyframes sourceFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-6px) rotate(2deg)}
+  66%{transform:translateY(4px) rotate(-1deg)}
+}
+
+/* Language selector pills */
+.v6-lang-selector{
+  position:absolute;
+  top:115px;
+  left:0;right:0;
+  z-index:50;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  pointer-events:none;
+}
+.v6-lang-pill{
+  pointer-events:all;
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:rgba(240,235,228,.9);
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  padding:10px 22px;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  letter-spacing:.3px;
+  -webkit-font-smoothing:antialiased;
+}
+.v6-lang-pill:hover,.v6-lang-pill.active{
+  color:#f0ebe4;
+  background:rgba(196,101,74,.25);
+  border-color:rgba(196,101,74,.4);
+}
+
+/* Dots indicator */
+.v6-dots{
+  position:absolute;
+  bottom:140px;
+  left:0;right:0;
+  z-index:10;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
+.v6-dot{
+  width:8px;height:8px;border-radius:4px;
+  background:rgba(255,255,255,.3);
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+  cursor:pointer;
+}
+.v6-dot.active{
+  width:12px;height:8px;
+  background:var(--terra);
+}
+
+/* Commencer button */
+.v6-cta-area{
+  position:absolute;
+  bottom:56px;
+  left:32px;right:32px;
+  z-index:10;
+}
+.v6-cta-btn{
+  width:100%;
+  height:58px;
+  border-radius:29px;
+  border:none;
+  background:var(--terra);
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  letter-spacing:.4px;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  position:relative;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  animation:ctaPulse 3s ease-in-out infinite 2s;
+}
+.v6-cta-btn::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 50%);
+  pointer-events:none;
+}
+.v6-cta-btn:active{
+  transform:scale(.96);
+  box-shadow:0 6px 20px rgba(196,101,74,.25);
+}
+@keyframes ctaPulse{
+  0%,100%{transform:scale(1);box-shadow:0 10px 36px rgba(196,101,74,.35)}
+  50%{transform:scale(1.02);box-shadow:0 12px 42px rgba(196,101,74,.45)}
+}
+
+/* Savora mark */
+.v6-onboard-mark{
+  position:absolute;
+  top:70px;
+  left:0;right:0;
+  z-index:10;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:300;
+  font-size:28px;
+  letter-spacing:8px;
+  text-transform:uppercase;
+  text-indent:8px;
+  color:rgba(240,235,228,.85);
+  text-shadow:0 0 30px rgba(196,101,74,.3),0 0 60px rgba(196,101,74,.15);
+  opacity:0;
+  animation:obIn .8s cubic-bezier(.16,1,.3,1) .2s forwards 1;
+  -webkit-font-smoothing:antialiased;
+}
+.v6-onboard-mark::after{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:200px;height:60px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(196,101,74,.15),transparent 70%);
+  animation:markGlow 4s ease-in-out infinite alternate;
+  pointer-events:none;z-index:-1;
+}
+@keyframes obIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes markGlow{from{opacity:.4;transform:translate(-50%,-50%) scale(.9)}to{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
+
+/* =========================================
+   S1: HOME V11 — Capture-first
+   ========================================= */
+
+/* Quick Capture Bar */
+.capture-bar{
+  display:flex;
+  gap:10px;
+  padding:12px 16px 0;
+  margin-top:0;
+}
+.capture-btn{
+  flex:1;
+  height:100px;
+  border-radius:20px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  cursor:pointer;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .4s,border-color .4s;
+}
+.capture-btn:active{transform:scale(.94)}
+.capture-btn .ms{
+  font-size:28px;
+  color:var(--terra);
+  transition:color .4s;
+}
+.capture-btn-label{
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  color:var(--t1);
+  letter-spacing:.3px;
+  transition:color .4s;
+}
+
+/* Hero home */
+.hero-home{
+  position:relative;
+  width:calc(100% - 32px);
+  margin:16px auto 0;
+  height:240px;
+  overflow:hidden;
+  border-radius:24px;
+  cursor:pointer;
+  box-shadow:0 8px 32px rgba(45,30,15,.12);
+}
+.hero-home img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  will-change:transform;
+  animation:kenBurns 20s cubic-bezier(.16,1,.3,1) infinite alternate;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(18,14,10,.15) 0%,rgba(18,14,10,.05) 20%,transparent 35%,rgba(18,14,10,.3) 55%,rgba(18,14,10,.7) 72%,rgba(18,14,10,.88) 85%,rgba(18,14,10,.95) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 20px 20px;z-index:1;
+}
+.hero-source-badge{
+  position:absolute;top:14px;left:14px;z-index:2;
+  width:32px;height:32px;border-radius:10px;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-source-badge .ms{font-size:16px;color:rgba(255,255,255,.8)}
+
+/* Whisper */
+.whisper{padding:20px 24px 8px}
+.whisper-name{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-style:italic;font-weight:400;
+  color:var(--t2);transition:color .4s;
+}
+.whisper-ctx{
+  font-family:'Inter',sans-serif;
+  font-size:13px;color:var(--t3);
+  margin-top:2px;line-height:1.4;
+  transition:color .4s;
+}
+
+/* Recent captures scroll */
+.recent-header{
+  padding:28px 24px 14px;
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.recent-header h2{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:400;
+  color:var(--t1);transition:color .4s;
+}
+.recent-scroll{
+  display:flex;
+  gap:12px;
+  padding:0 24px 32px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(to right,black 0%,black 85%,transparent 100%);
+  mask-image:linear-gradient(to right,black 0%,black 85%,transparent 100%);
+}
+.recent-scroll::-webkit-scrollbar{display:none}
+.recent-card{
+  flex-shrink:0;
+  width:120px;height:160px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(45,30,15,.1);
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.recent-card:active{transform:scale(.95)}
+.recent-card img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.recent-card .rc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(16,12,8,.82) 0%,rgba(16,12,8,.15) 50%,transparent 70%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:10px;
+}
+.recent-card .rc-source{
+  position:absolute;top:8px;left:8px;
+  width:24px;height:24px;border-radius:7px;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+}
+.recent-card .rc-source .ms{font-size:13px;color:rgba(255,255,255,.7)}
+.recent-card .rc-title{
+  font-family:'Playfair Display',serif;
+  font-size:12px;font-weight:400;
+  color:#fff;line-height:1.15;
+}
+
+/* Entrance animations */
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero-home img{animation:none}
+  .capture-gesture{animation:none}
+  .source-icon{animation:none}
+  .v6-cta-btn{animation:none}
+  .v6-onboard-panel img{animation:none}
+}
+
+/* ═══ V11 Block B: Capture ═══ */
+/* === PHONE === */
+
+/* Status bar */
+
+/* === SCREENS === */
+
+/* === HEADER === */
+
+/* Pill */
+.pill{
+  height:40px;min-width:fit-content;padding:0 20px;border-radius:20px;border:1.5px solid var(--t4);
+  background:transparent;color:var(--t2);font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;
+  white-space:nowrap;flex-shrink:0;transition:all .35s cubic-bezier(.16,1,.3,1);
+}
+.pill.on,.pill.terra{background:var(--terra);color:#fff;border-color:var(--terra);box-shadow:0 4px 16px rgba(196,101,74,.25)}
+
+/* Glass utility */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+}
+
+/* Active states */
+
+/* =========================================
+   S15: SHARE SHEET SIMULATION
+   ========================================= */
+.share-sim{
+  height:100%;display:flex;flex-direction:column;
+  background:#0c0b0a;position:relative;
+}
+
+/* Instagram post simulation */
+.ig-post{
+  flex:1;display:flex;flex-direction:column;
+  padding-top:96px;
+}
+.ig-header{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;
+}
+.ig-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.ig-avatar-inner{
+  width:32px;height:32px;border-radius:50%;
+  background:#1a1816;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:600;color:#f0ebe4;
+}
+.ig-user{font-size:13px;font-weight:600;color:#f0ebe4;flex:1}
+.ig-more{font-size:18px;color:#7a7168;letter-spacing:2px}
+
+.ig-image{
+  width:100%;aspect-ratio:1/1;max-height:320px;
+  overflow:hidden;
+}
+.ig-image img{width:100%;height:100%;object-fit:cover;display:block}
+
+.ig-actions{
+  display:flex;align-items:center;gap:16px;
+  padding:12px 16px;
+}
+.ig-actions .ms{font-size:26px;color:#f0ebe4;cursor:pointer}
+.ig-actions .ms:last-child{margin-left:auto}
+
+.ig-caption{
+  padding:0 16px 12px;
+  font-size:13px;color:#b5ab9f;line-height:1.5;
+}
+.ig-caption b{color:#f0ebe4;font-weight:600}
+
+/* Share sheet */
+.share-sheet{
+  background:#1d1a17;
+  border-radius:20px 20px 0 0;
+  padding:16px 0 40px;
+  animation:sheetUp .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes sheetUp{
+  from{transform:translateY(100%);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.sheet-handle{
+  width:40px;height:4px;border-radius:2px;
+  background:rgba(255,255,255,.15);
+  margin:0 auto 20px;
+}
+.sheet-apps{
+  display:flex;gap:0;padding:0 20px;
+  justify-content:space-around;
+}
+.sheet-app{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  width:72px;cursor:pointer;
+}
+.sheet-app-icon{
+  width:56px;height:56px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+}
+.sheet-app-icon.messages{background:#34c759}
+.sheet-app-icon.whatsapp{background:#25d366}
+.sheet-app-icon.mail{background:#5e9cef}
+.sheet-app-icon.opticook{
+  background:var(--terra);
+  box-shadow:0 0 24px rgba(196,101,74,.5),0 0 48px rgba(196,101,74,.25);
+  animation:cookGlow 2s ease-in-out infinite alternate;
+}
+@keyframes cookGlow{
+  from{box-shadow:0 0 20px rgba(196,101,74,.4),0 0 40px rgba(196,101,74,.2)}
+  to{box-shadow:0 0 30px rgba(196,101,74,.6),0 0 60px rgba(196,101,74,.35)}
+}
+.sheet-app-label{
+  font-size:10px;color:#b5ab9f;text-align:center;
+  white-space:nowrap;
+}
+.sheet-app.highlight .sheet-app-label{color:#f0ebe4;font-weight:600}
+
+.sheet-tagline{
+  text-align:center;padding:18px 24px 16px;
+  font-family:'Playfair Display',serif;font-weight:300;font-style:italic;
+  font-size:13px;color:rgba(180,170,159,.6);
+}
+
+.sheet-secondary{
+  display:flex;gap:0;padding:0 16px;
+}
+.sheet-sec-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:12px 8px;
+  cursor:pointer;opacity:.35;
+}
+.sheet-sec-icon{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+}
+.sheet-sec-icon .ms{font-size:20px;color:#7a7168}
+.sheet-sec-label{font-size:10px;color:#7a7168;text-align:center}
+
+/* Back button overlay for share sheet */
+.share-back{
+  position:absolute;top:50px;left:24px;z-index:110;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.share-back:active{transform:scale(.9)}
+.share-back .ms{font-size:20px;color:rgba(240,235,228,.8)}
+
+/* =========================================
+   S16: URL IMPORT
+   ========================================= */
+.url-import{
+  background:var(--bg);min-height:100%;padding-bottom:60px;
+}
+.url-input-wrap{
+  margin:20px 24px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:16px;
+  padding:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.url-input-wrap .ms{font-size:22px;color:var(--t3)}
+.url-input{
+  flex:1;background:none;border:none;outline:none;
+  font-family:inherit;font-size:14px;color:var(--t1);
+}
+.url-input::placeholder{color:var(--t3)}
+
+.sources-label{
+  padding:0 24px;margin-bottom:14px;
+  font-size:12px;font-weight:500;color:var(--t3);
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.sources-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;padding:0 24px;margin-bottom:28px;
+}
+.source-item{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:16px 8px;cursor:pointer;
+  border-radius:16px;
+  transition:background .2s;
+}
+.source-item:active{background:rgba(255,255,255,.04)}
+.source-icon{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.06);
+}
+.source-name{font-size:11px;color:var(--t2);font-weight:500;text-align:center}
+
+/* Source brand colors at 30% opacity */
+.src-instagram{background:rgba(225,48,108,.15);color:#e1306c}
+.src-tiktok{background:rgba(255,0,80,.15);color:#ff0050}
+.src-youtube{background:rgba(255,0,0,.15);color:#ff0000}
+.src-marmiton{background:rgba(242,145,0,.15);color:#f29100}
+.src-750g{background:rgba(232,119,34,.15);color:#e87722}
+.src-allrecipes{background:rgba(246,141,46,.15);color:#f68d2e}
+.src-bbc{background:rgba(187,0,0,.15);color:#bb0000}
+.src-pinterest{background:rgba(189,8,28,.15);color:#bd081c}
+.src-blog{background:rgba(180,170,159,.12);color:#b4aa9f}
+
+.import-btn{
+  margin:0 24px;width:calc(100% - 48px);
+  padding:16px;border:none;border-radius:980px;
+  background:var(--t4);color:var(--t3);
+  font-family:inherit;font-size:15px;font-weight:600;
+  cursor:not-allowed;opacity:.5;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.import-btn.active{
+  background:var(--terra);color:#fff;
+  cursor:pointer;opacity:1;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+}
+
+.scan-link{
+  text-align:center;margin-top:20px;
+  font-size:13px;color:var(--terra);
+  cursor:pointer;font-weight:500;
+}
+.scan-link:active{opacity:.7}
+
+/* =========================================
+   S18: VIDEO RECIPE IMPORT
+   ========================================= */
+.video-import{
+  background:var(--bg);min-height:100%;padding-bottom:60px;
+}
+.video-frame{
+  margin:16px 24px;border-radius:20px;overflow:hidden;
+  position:relative;aspect-ratio:9/16;max-height:50vh;
+  background:#0c0b0a;
+}
+.video-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.video-play{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.3);
+}
+.video-play-btn{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.video-play-btn .ms{font-size:36px;color:#fff}
+
+.video-source{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 24px 0;
+}
+.video-source-icon{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(255,0,80,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#ff0050;
+}
+.video-source-user{font-size:13px;color:var(--t2);font-weight:500}
+
+.extraction-list{
+  padding:20px 24px 0;
+  display:flex;flex-direction:column;gap:0;
+}
+.extract-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid var(--sep);
+}
+.extract-item:last-child{border-bottom:none}
+.extract-check{
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.extract-check.done{background:var(--terra-g)}
+.extract-check.done .ms{font-size:16px;color:var(--terra);font-variation-settings:'FILL' 1}
+.extract-check.loading{
+  width:24px;height:24px;border-radius:50%;
+  border:2px solid var(--t4);
+  border-top-color:var(--terra);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.extract-text{flex:1;font-size:13px;color:var(--t2)}
+.extract-text b{color:var(--t1);font-weight:500}
+.extract-value{font-size:12px;color:var(--t3);font-weight:500}
+
+.add-book-btn{
+  margin:24px;width:calc(100% - 48px);
+  padding:16px;border:none;border-radius:980px;
+  background:var(--terra);color:#fff;
+  font-family:inherit;font-size:15px;font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 36px rgba(196,101,74,.35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.add-book-btn::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 50%);
+  pointer-events:none;
+}
+.add-book-btn:active{transform:scale(.96);box-shadow:0 6px 20px rgba(196,101,74,.25)}
+
+/* ═══ V11 Block C: Camera+Menu ═══ */
+/* === PHONE === */
+
+/* === SCREENS === */
+
+/* === HEADER === */
+
+/* === SHARED CAMERA STYLES === */
+.cam-back{
+  position:absolute;top:60px;left:24px;z-index:50;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+}
+.cam-back:active{transform:scale(.9)}
+
+/* Corner brackets */
+.fm-corner{
+  position:absolute;z-index:3;
+  width:48px;height:48px;
+  border-color:var(--terra);border-style:solid;border-width:0;
+  opacity:.9;
+  animation:fmCornerPulse 2s ease-in-out infinite;
+}
+.fm-tl{top:16px;left:16px;border-top-width:3.5px;border-left-width:3.5px;border-radius:8px 0 0 0}
+.fm-tr{top:16px;right:16px;border-top-width:3.5px;border-right-width:3.5px;border-radius:0 8px 0 0}
+.fm-bl{bottom:16px;left:16px;border-bottom-width:3.5px;border-left-width:3.5px;border-radius:0 0 0 8px}
+.fm-br{bottom:16px;right:16px;border-bottom-width:3.5px;border-right-width:3.5px;border-radius:0 0 8px 0}
+
+@keyframes fmCornerPulse{
+  0%,100%{opacity:.8}
+  50%{opacity:1;filter:drop-shadow(0 0 4px var(--terra))}
+}
+
+/* Scanning line */
+.fm-scanline{
+  position:absolute;left:24px;right:24px;height:2px;z-index:4;
+  background:linear-gradient(90deg,transparent 0%,var(--terra) 20%,var(--terra) 80%,transparent 100%);
+  opacity:.7;
+  animation:fmScan 3s cubic-bezier(.45,.05,.55,.95) infinite;
+  box-shadow:0 0 20px rgba(196,101,74,.5);
+}
+
+@keyframes fmScan{
+  0%{top:24px;opacity:0}
+  5%{opacity:.7}
+  95%{opacity:.7}
+  100%{top:calc(100% - 24px);opacity:0}
+}
+
+/* CTA Button */
+.fm-cta{
+  width:100%;height:56px;
+  border-radius:16px;border:none;
+  background:var(--terra);color:#fff;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 0;
+  box-shadow:0 8px 32px rgba(196,101,74,.32);
+  transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.fm-cta:active{transform:scale(.96);box-shadow:0 4px 16px rgba(196,101,74,.2)}
+
+/* Pulse animation */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .fm-scanline,.fm-corner,.fm-cta,.cam-back{animation:none !important;opacity:1 !important}
+}
+
+/* =========================================
+   S17: CAMERA CAPTURE (Book / Manuscript)
+   ========================================= */
+.s17-cam{
+  background:#0c0a08;height:100%;display:flex;flex-direction:column;position:relative;
+}
+.s17-viewfinder{
+  position:relative;flex:1;margin:0;
+  background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.s17-viewfinder .fm-corner{width:56px;height:56px}
+.s17-viewfinder .fm-tl{top:24px;left:24px}
+.s17-viewfinder .fm-tr{top:24px;right:24px}
+.s17-viewfinder .fm-bl{bottom:24px;left:24px}
+.s17-viewfinder .fm-br{bottom:24px;right:24px}
+
+.s17-prompt{
+  position:relative;z-index:5;text-align:center;
+  animation:s17Float 4s ease-in-out infinite;
+}
+@keyframes s17Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+.s17-bottom{
+  height:120px;
+  background:linear-gradient(0deg,#0c0a08 60%,rgba(12,10,8,.9) 100%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  position:relative;z-index:10;
+}
+.s17-gallery{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .2s;
+}
+.s17-gallery:active{transform:scale(.9)}
+
+.s17-capture{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--terra);
+  border:4px solid rgba(255,255,255,.85);
+  cursor:pointer;
+  box-shadow:0 0 24px rgba(196,101,74,.35);
+  transition:transform .2s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+.s17-capture:active{transform:scale(.88)}
+.s17-capture::after{
+  content:'';position:absolute;inset:4px;border-radius:50%;
+  background:var(--terra);
+}
+
+.s17-flash{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:transform .2s;
+}
+.s17-flash:active{transform:scale(.9)}
+
+/* =========================================
+   S19: RESTAURANT MENU SCAN
+   ========================================= */
+.s19-cam{
+  background:#0c0a08;height:100%;display:flex;flex-direction:column;position:relative;
+}
+.s19-viewfinder{
+  position:relative;height:60%;flex-shrink:0;
+  background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+/* Menu card overlay */
+.s19-menu-card{
+  position:relative;z-index:5;
+  width:280px;
+  background:linear-gradient(180deg,#f8f3ec 0%,#f0eae1 100%);
+  border-radius:6px;
+  padding:28px 24px;
+  box-shadow:0 8px 40px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2);
+  font-family:'Playfair Display',serif;
+  color:#33291f;
+  transform:perspective(600px) rotateX(2deg) rotateY(-1deg);
+}
+.s19-menu-title{
+  text-align:center;font-size:14px;font-weight:500;letter-spacing:1.5px;
+  color:#6b6058;margin-bottom:16px;
+  border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:12px;
+}
+.s19-menu-section{
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:var(--terra);margin:14px 0 8px;
+}
+.s19-menu-item{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:'Inter',sans-serif;font-size:12px;color:#33291f;
+  margin-bottom:6px;line-height:1.5;
+}
+.s19-menu-item .name{
+  position:relative;
+}
+.s19-menu-item .name.detected::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:2px;background:var(--terra);border-radius:1px;
+  animation:s19Underline .4s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes s19Underline{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
+
+.s19-menu-item .dots{
+  flex:1;margin:0 6px;
+  border-bottom:1px dotted rgba(0,0,0,.15);
+  position:relative;top:-3px;
+}
+.s19-menu-item .price{font-weight:500;white-space:nowrap}
+
+/* Detection counter */
+.s19-counter{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 24px 8px;
+}
+.s19-counter-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:20px;
+  background:var(--terra-g);
+  font-size:14px;font-weight:600;color:var(--terra);
+  animation:pulseBadge 2s ease-in-out infinite;
+}
+
+/* Restaurant detected */
+.s19-restaurant{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:8px 24px 16px;
+  font-size:13px;color:var(--t2);
+}
+.s19-restaurant .ms{font-size:16px;color:var(--terra)}
+
+/* Bottom area */
+.s19-bottom{
+  flex:1;background:var(--bg);
+  padding:0 24px 32px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  transition:background .4s;
+}
+
+/* =========================================
+   S9: PACKAGE SCAN
+   ========================================= */
+.s9-scan{
+  background:var(--bg);height:100%;display:flex;flex-direction:column;
+  transition:background .4s;
+}
+.s9-viewfinder{
+  position:relative;height:45%;flex-shrink:0;
+  margin:0 24px;border-radius:22px;
+  background:radial-gradient(ellipse at center,#1a1816 0%,#0e0d0c 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;margin-top:8px;
+}
+.s9-viewfinder .fm-corner{width:40px;height:40px}
+.s9-viewfinder .fm-tl{top:12px;left:12px}
+.s9-viewfinder .fm-tr{top:12px;right:12px}
+.s9-viewfinder .fm-bl{bottom:12px;left:12px}
+.s9-viewfinder .fm-br{bottom:12px;right:12px}
+
+.s9-product-card{
+  margin:16px 24px 0;padding:20px;
+  background:var(--card);border:1px solid var(--card-b);
+  border-radius:22px;box-shadow:var(--card-s);
+  transition:background .4s;
+}
+.s9-product-label{
+  font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--terra);margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.s9-product-name{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:400;
+  color:var(--t1);margin-bottom:16px;transition:color .4s;
+}
+.s9-nutrition{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.s9-nutri-item{
+  text-align:center;padding:10px 4px;
+  background:var(--input-bg);border-radius:12px;
+  transition:background .4s;
+}
+.s9-nutri-val{font-size:16px;font-weight:600;color:var(--t1);transition:color .4s}
+.s9-nutri-label{font-size:10px;color:var(--t3);margin-top:2px;transition:color .4s}
+
+.s9-recipes-section{
+  padding:20px 24px 0;
+}
+.s9-recipes-count{
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:400;
+  color:var(--terra);margin-bottom:16px;
+}
+.s9-recipes-strip{
+  display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;
+  scrollbar-width:none;scroll-snap-type:x mandatory;
+}
+.s9-recipes-strip::-webkit-scrollbar{display:none}
+.s9-recipe-card{
+  flex-shrink:0;width:140px;border-radius:16px;overflow:hidden;
+  background:var(--card);border:1px solid var(--card-b);
+  box-shadow:var(--card-s);cursor:pointer;scroll-snap-align:start;
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.s9-recipe-card:active{transform:scale(.96)}
+.s9-recipe-card img{width:100%;height:100px;object-fit:cover;display:block}
+.s9-recipe-card .label{
+  padding:10px 12px;font-size:12px;font-weight:500;color:var(--t1);
+  line-height:1.3;transition:color .4s;
+}
+
+.s9-see-all{
+  margin:8px 24px 32px;height:48px;border-radius:14px;
+  border:1.5px solid var(--terra);background:transparent;
+  color:var(--terra);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:transform .2s cubic-bezier(.16,1,.3,1),background .3s;
+}
+.s9-see-all:active{transform:scale(.96);background:var(--terra-g)}
+
+/* === NAV TABS (for context) === */
+.tb-l{font-size:10px;color:var(--t3);font-weight:500;transition:color .3s cubic-bezier(.16,1,.3,1)}
+
+/* ═══ V11 Block D: AI ═══ */
+/* === PHONE === */
+
+/* Status bar */
+
+/* === SCREENS === */
+
+/* === HEADER === */
+.hdr-t{font-size:17px;font-weight:500;color:var(--cream);letter-spacing:.2px}
+
+/* Glass card */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+}
+
+/* =========================================
+   S20: AI PROCESSING -- The Magic Moment
+   ========================================= */
+.s20-wrap{
+  height:100%;display:flex;flex-direction:column;align-items:center;
+  background:#1a1714;
+  background-image:radial-gradient(ellipse at 50% 45%,rgba(196,101,74,.03) 0%,transparent 70%);
+  padding-top:96px;
+  position:relative;
+}
+
+/* Source badge */
+.source-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  margin-bottom:28px;
+}
+.source-badge svg{width:14px;height:14px;fill:var(--cream);opacity:.6}
+.source-badge span{font-size:12px;color:var(--cream);opacity:.6;font-weight:400}
+
+/* Recipe image assembling */
+.magic-img-wrap{
+  width:200px;height:200px;border-radius:24px;overflow:hidden;
+  margin-bottom:20px;position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.magic-img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  opacity:0;transform:scale(.92);
+  animation:imgAssemble .8s cubic-bezier(.16,1,.3,1) .3s forwards;
+}
+@keyframes imgAssemble{
+  to{opacity:1;transform:scale(1)}
+}
+/* Glow ring around image */
+.magic-img-wrap::after{
+  content:'';position:absolute;inset:-2px;border-radius:26px;
+  background:conic-gradient(from 0deg,transparent,var(--terra),transparent,var(--terra),transparent);
+  opacity:.15;animation:glowSpin 3s linear infinite;z-index:-1;
+}
+@keyframes glowSpin{to{transform:rotate(360deg)}}
+
+/* Title typing */
+.magic-title{
+  font-family:'Playfair Display',serif;font-weight:400;
+  font-size:18px;color:var(--cream);text-align:center;
+  max-width:320px;line-height:1.35;margin-bottom:32px;
+  padding:0 24px;
+  overflow:hidden;
+  border-right:2px solid var(--terra);
+  white-space:nowrap;
+  animation:typeTitle 2.5s steps(48,end) .8s forwards,blinkCaret .6s step-end infinite;
+  width:0;
+}
+@keyframes typeTitle{
+  to{width:100%}
+}
+@keyframes blinkCaret{
+  50%{border-color:transparent}
+}
+/* Fallback: show full title wrapped after animation */
+.magic-title.done{
+  white-space:normal;border-right:none;width:100%;
+  animation:none;opacity:1;
+}
+
+/* Extraction checklist */
+.extract-list{
+  width:100%;padding:0 32px;display:flex;flex-direction:column;gap:10px;
+  margin-bottom:32px;
+}
+.extract-step{
+  display:flex;align-items:center;gap:12px;
+  opacity:0;transform:translateY(8px);
+  animation:extractReveal .4s ease-out forwards;
+}
+.extract-step:nth-child(1){animation-delay:.2s}
+.extract-step:nth-child(2){animation-delay:.5s}
+.extract-step:nth-child(3){animation-delay:.8s}
+.extract-step:nth-child(4){animation-delay:1.1s}
+.extract-step:nth-child(5){animation-delay:1.4s}
+.extract-step:nth-child(6){animation-delay:1.7s}
+.extract-step:nth-child(7){animation-delay:2.0s}
+@keyframes extractReveal{
+  to{opacity:1;transform:translateY(0)}
+}
+
+.extract-check{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;
+}
+.extract-check.done{background:var(--terra);color:#fff}
+.extract-check.pending{
+  border:2px solid var(--t4);background:transparent;
+  position:relative;
+}
+.extract-check.pending::after{
+  content:'';width:12px;height:12px;border-radius:50%;
+  border:2px solid transparent;border-top:2px solid var(--terra);
+  animation:spinLoader .8s linear infinite;
+}
+@keyframes spinLoader{to{transform:rotate(360deg)}}
+
+.extract-label{font-size:13px;color:var(--cream);font-weight:400;letter-spacing:.1px}
+.extract-label .hl{color:var(--terra-l);font-weight:500}
+
+/* Progress bar */
+.progress-wrap{
+  width:calc(100% - 64px);margin:0 auto 16px;
+}
+.progress-track{
+  width:100%;height:2px;background:rgba(255,255,255,.06);border-radius:1px;
+  overflow:hidden;
+}
+.progress-fill{
+  width:85%;height:100%;background:var(--terra);border-radius:1px;
+  animation:progressGrow 2.5s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes progressGrow{
+  from{width:0%}to{width:85%}
+}
+
+.patience-text{
+  font-size:13px;color:var(--cream);opacity:.5;
+  font-style:italic;text-align:center;
+}
+
+
+/* =========================================
+   S21: REVIEW & CONFIRM
+   ========================================= */
+.s21-wrap{
+  min-height:100%;background:var(--bg);
+  padding-bottom:120px;
+}
+
+/* Recipe header card */
+.review-hero{
+  display:flex;gap:16px;align-items:center;
+  padding:16px 24px 20px;
+}
+.review-img{
+  width:80px;height:80px;border-radius:16px;object-fit:cover;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);flex-shrink:0;
+}
+.review-info{flex:1;min-width:0}
+.review-title{
+  font-family:'Playfair Display',serif;font-weight:400;
+  font-size:20px;color:var(--cream);line-height:1.2;margin-bottom:8px;
+}
+.review-badges{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge-src{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:12px;
+  background:rgba(255,255,255,.06);
+  font-size:11px;color:var(--t2);font-weight:500;
+}
+.badge-src svg{width:12px;height:12px;fill:var(--t2)}
+.badge-conf{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:12px;
+  background:rgba(109,160,109,.12);
+  font-size:11px;color:var(--sage);font-weight:600;
+}
+
+/* Glass field cards */
+.field-card{
+  margin:0 16px 12px;border-radius:18px;padding:16px 18px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.05);
+}
+.field-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;
+}
+.field-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3)}
+.field-edit{
+  width:28px;height:28px;border-radius:8px;border:none;
+  background:rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .2s;
+}
+.field-edit:active{background:rgba(255,255,255,.08)}
+.field-edit .ms{font-size:16px;color:var(--t3)}
+
+.field-value{font-size:15px;color:var(--cream);font-weight:400;line-height:1.5}
+
+/* Ingredient list */
+.ingr-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.03);
+}
+.ingr-item:last-child{border-bottom:none}
+.ingr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ingr-dot.high{background:var(--sage)}
+.ingr-dot.medium{background:var(--amber)}
+.ingr-name{font-size:14px;color:var(--cream);flex:1}
+.ingr-qty{font-size:13px;color:var(--t3);font-weight:500}
+
+.ingr-more{
+  padding:10px 0;font-size:13px;color:var(--terra);
+  font-weight:500;cursor:pointer;
+  display:flex;align-items:center;gap:4px;
+}
+.ingr-more .ms{font-size:16px}
+
+/* Collapsed section */
+.field-collapsed{
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;
+}
+.field-collapsed .ms{font-size:20px;color:var(--t3)}
+
+/* Nutrition row */
+.nutri-text{font-size:13px;color:var(--t2);font-weight:400;letter-spacing:.1px}
+
+/* Auto-suggested tags */
+.tags-section{padding:0 24px;margin:20px 0 24px}
+.tags-title{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.tags-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag-pill{
+  padding:8px 16px;border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  font-size:13px;color:var(--cream);font-weight:400;
+  cursor:pointer;transition:all .2s cubic-bezier(.16,1,.3,1);
+}
+.tag-pill:active{transform:scale(.95);border-color:var(--terra);color:var(--terra)}
+
+/* Bottom CTA */
+.review-bottom{
+  padding:0 24px;margin-top:8px;
+}
+.btn-primary{
+  width:100%;height:56px;border-radius:28px;border:none;
+  background:var(--terra);color:#fff;
+  font-family:'Inter',sans-serif;font-size:16px;font-weight:500;
+  cursor:pointer;letter-spacing:.3px;
+  box-shadow:0 10px 36px rgba(196,101,74,.3);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),transparent 50%);
+  pointer-events:none;
+}
+.btn-primary:active{transform:scale(.97);box-shadow:0 6px 20px rgba(196,101,74,.2)}
+
+.btn-secondary{
+  display:block;width:fit-content;margin:14px auto 0;
+  font-size:14px;color:var(--terra);font-weight:500;
+  background:none;border:none;cursor:pointer;
+  letter-spacing:.2px;
+  transition:opacity .2s;
+}
+.btn-secondary:active{opacity:.6}
+
+/* === NAV SWITCH === */
+.nav-switch{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;z-index:200;
+}
+.nav-dot{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s cubic-bezier(.16,1,.3,1);
+  font-size:13px;font-weight:600;color:var(--cream);opacity:.5;
+}
+.nav-dot.on{background:var(--terra);border-color:var(--terra);opacity:1;box-shadow:0 4px 16px rgba(196,101,74,.3)}
+.nav-dot:active{transform:scale(.9)}
+
+/* ═══ V11 Block E: Memory ═══ */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  box-shadow:var(--glass-s);
+}
+
+.rr{
+  display:flex;gap:12px;align-items:center;padding:10px;margin:0 24px 10px;
+  background:var(--card);border:1px solid var(--card-b);border-radius:16px;
+  cursor:pointer;box-shadow:0 2px 12px rgba(45,30,15,.06);position:relative;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),background .4s;
+}
+.rr:active{transform:scale(.98)}
+.rr-img{width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.rr-img img{width:100%;height:100%;object-fit:cover;display:block}
+.rr-info{flex:1;min-width:0}
+.rr-n{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .4s}
+.rr-d{font-size:12px;color:var(--t3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rr-m{display:flex;gap:10px;margin-top:6px;align-items:center}
+.rr-star{font-size:12px;color:var(--terra);font-weight:600;display:flex;align-items:center;gap:3px}
+.rr-star .ms{font-size:14px;font-variation-settings:'FILL' 1}
+.rr-time{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px}
+.rr-time .ms{font-size:14px}
+
+
+/* ========== PULSE PIN ========== */
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(196,101,74,.5)}
+  70%{box-shadow:0 0 0 10px rgba(196,101,74,0)}
+  100%{box-shadow:0 0 0 0 rgba(196,101,74,0)}
+}
+.map-pin{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--terra);position:absolute;
+  cursor:pointer;animation:pulse 2s infinite;
+  border:2px solid #fff;
+  box-shadow:0 2px 8px rgba(196,101,74,.3);
+}
+.map-pin::after{
+  content:attr(data-count);
+  position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:600;color:var(--terra);
+  background:var(--card);padding:2px 6px;border-radius:8px;
+  box-shadow:0 2px 8px rgba(45,30,15,.1);white-space:nowrap;
+}
+
+/* ========== RESTAURANT CARD ========== */
+.resto-card{
+  display:flex;gap:12px;align-items:center;padding:12px;margin:0 24px 12px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:18px;cursor:pointer;
+  box-shadow:var(--glass-s);
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.resto-card:active{transform:scale(.98)}
+.resto-img{width:56px;height:56px;border-radius:14px;overflow:hidden;flex-shrink:0}
+.resto-img img{width:100%;height:100%;object-fit:cover;display:block}
+.resto-info{flex:1;min-width:0}
+.resto-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--t1);margin-bottom:2px;transition:color .4s}
+.resto-loc{font-size:11px;color:var(--terra);font-weight:500;margin-bottom:4px}
+.resto-meta{font-size:11px;color:var(--t3)}
+.resto-stars{display:flex;align-items:center;gap:2px;margin-top:4px}
+.resto-stars .ms{font-size:14px;color:var(--gold);font-variation-settings:'FILL' 1}
+.resto-stars .ms.half{font-variation-settings:'FILL' 0}
+
+/* ========== DISH CARD ========== */
+.dish-card{
+  min-width:140px;width:140px;height:180px;border-radius:18px;overflow:hidden;
+  position:relative;cursor:pointer;scroll-snap-align:start;flex-shrink:0;
+  box-shadow:0 6px 24px rgba(45,30,15,.1);
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.dish-card:active{transform:scale(.95)}
+.dish-card img{width:100%;height:100%;object-fit:cover;display:block}
+.dish-card-ov{
+  position:absolute;bottom:0;left:0;right:0;padding:12px;
+  background:linear-gradient(0deg,rgba(16,12,8,.82),transparent);
+}
+.dish-card-ov span{font-size:12px;font-weight:400;color:#fff;line-height:1.3;display:block}
+
+/* ========== MAP EMBED SIM ========== */
+.map-embed{
+  margin:0 24px 20px;border-radius:18px;overflow:hidden;
+  background:var(--bg2);padding:32px 20px;text-align:center;
+  border:1px solid var(--card-b);
+}
+.map-embed .ms{font-size:40px;color:var(--terra);margin-bottom:8px;display:block}
+.map-embed-addr{font-size:14px;color:var(--t1);font-weight:500;margin-bottom:4px}
+.map-embed-date{font-size:12px;color:var(--t3)}
+
+/* ========== NOTES CARD ========== */
+.notes-card{
+  margin:0 24px 20px;padding:20px;border-radius:18px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+}
+.notes-card p{
+  font-size:14px;color:var(--t2);line-height:1.6;
+  font-style:italic;font-family:'Playfair Display',serif;
+}
+
+/* ========== BOOKMARK BTN ========== */
+.bookmark-btn{
+  margin:8px 24px 40px;height:52px;border-radius:26px;border:none;
+  background:var(--terra);color:#fff;width:calc(100% - 48px);
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 8px 28px rgba(196,101,74,.3);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.bookmark-btn:active{transform:scale(.96);box-shadow:0 4px 16px rgba(196,101,74,.2)}
+
+/* ========== TIMELINE ========== */
+.timeline{position:relative;padding:0 24px 40px 48px}
+.timeline::before{
+  content:'';position:absolute;left:38px;top:0;bottom:0;width:2px;
+  background:var(--terra);opacity:.3;border-radius:1px;
+}
+.tl-month{position:relative;margin-bottom:32px}
+.tl-month:last-child{margin-bottom:0}
+.tl-dot{
+  position:absolute;left:-18px;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--terra);border:2.5px solid var(--bg);
+  box-shadow:0 0 0 3px var(--terra-g);
+}
+.tl-label{
+  font-family:'Playfair Display',serif;font-size:17px;font-weight:400;
+  color:var(--terra);margin-bottom:12px;
+}
+.tl-card{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-b);
+  border-radius:18px;padding:16px;margin-bottom:12px;
+  box-shadow:var(--glass-s);
+}
+.tl-stat{font-size:13px;color:var(--t2);line-height:1.7}
+.tl-stat b{color:var(--t1);font-weight:600}
+.tl-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:12px;
+  background:var(--terra-g);margin-top:8px;
+}
+.tl-badge .ms{font-size:18px;color:var(--terra)}
+.tl-badge span{font-size:12px;font-weight:600;color:var(--terra)}
+.tl-fav{
+  display:flex;align-items:center;gap:8px;margin-top:10px;
+  font-size:12px;color:var(--t2);
+}
+.tl-fav .ms{font-size:16px;color:var(--gold);font-variation-settings:'FILL' 1}
+.tl-img{
+  width:100%;height:140px;border-radius:14px;overflow:hidden;margin-top:10px;
+}
+.tl-img img{width:100%;height:100%;object-fit:cover;display:block}
+.tl-flags{display:flex;gap:6px;margin-top:8px;font-size:20px}
+
+/* ========== HORIZONTAL SCROLL ========== */
+.hs{display:flex;gap:14px;padding:0 24px 24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-padding:0 24px}
+.hs::-webkit-scrollbar{display:none}
+
+/* ========== SCREEN BG ========== */
+.s-bg{background:var(--bg);padding-bottom:60px;min-height:100%}
+
+/* ========== NAV SELECTOR ========== */
+.nav-sel{
+  position:absolute;bottom:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:center;gap:4px;padding:12px 24px 34px;
+  background:var(--hdr-bg);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+}
+.nav-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--t4);cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.nav-dot.on{width:28px;border-radius:5px;background:var(--terra)}
 </style>
 </head>
 <body>
@@ -2253,7 +3797,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="notch"></div>
 <div class="sbar" id="sbar"><span>9:41</span><div class="sbar-r"><span style="font-size:11px">5G</span><span style="font-size:11px">78%</span></div></div>
 
-<!-- S0: ONBOARDING — V6 Magazine Cover Sequence -->
+<!-- S0: ONBOARDING -- V11 Capture-First -->
 <div class="scr" id="s0" data-s="on">
 <div class="v6-onboard" id="onboardContainer">
 
@@ -2267,25 +3811,37 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <button class="v6-lang-pill" data-lang="es">ES</button>
   </div>
 
-  <!-- Panel 1: Risotto — "Cuisinez." -->
+  <!-- Panel 1: "Capturez." — phone gesture overlay -->
   <div class="v6-onboard-panel active" data-panel="0">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="Pates Primavera" loading="eager">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="Capturez une recette" loading="eager">
+    <div class="panel-grad"></div>
+    <div class="panel-overlay-capture">
+      <div class="capture-gesture">
+        <span class="ms">photo_camera</span>
+      </div>
+    </div>
+    <div class="panel-word">Capturez.</div>
+  </div>
+
+  <!-- Panel 2: "Partout." — source icons floating -->
+  <div class="v6-onboard-panel" data-panel="1">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="Partout" loading="eager">
+    <div class="panel-grad"></div>
+    <div class="panel-overlay-sources">
+      <div class="source-icon" style="font-family:'Inter',sans-serif;font-weight:700;font-size:14px">IG</div>
+      <div class="source-icon"><span class="ms" style="font-size:18px">play_arrow</span></div>
+      <div class="source-icon"><span class="ms" style="font-size:18px">menu_book</span></div>
+      <div class="source-icon" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px">TT</div>
+      <div class="source-icon"><span class="ms" style="font-size:18px">photo_camera</span></div>
+    </div>
+    <div class="panel-word">Partout.</div>
+  </div>
+
+  <!-- Panel 3: "Cuisinez." — clean, no overlay -->
+  <div class="v6-onboard-panel" data-panel="2">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774033621145-ljnzx7mu.jpg" alt="Cuisinez" loading="eager">
     <div class="panel-grad"></div>
     <div class="panel-word">Cuisinez.</div>
-  </div>
-
-  <!-- Panel 2: Muffins — "Explorez." -->
-  <div class="v6-onboard-panel" data-panel="1">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123840123-hcuglgpc.jpg" alt="Posole mexicain" loading="eager">
-    <div class="panel-grad"></div>
-    <div class="panel-word">Explorez.</div>
-  </div>
-
-  <!-- Panel 3: Pasta Gratin — "Savourez." -->
-  <div class="v6-onboard-panel" data-panel="2">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774131760747-9z75526e.jpg" alt="Gateau fondant chocolat" loading="eager">
-    <div class="panel-grad"></div>
-    <div class="panel-word">Savourez.</div>
   </div>
 
   <!-- Dots indicator -->
@@ -2300,98 +3856,97 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <button class="v6-cta-btn" onclick="go(1)">Commencer</button>
   </div>
 
-  <!-- Login link removed for cleaner first impression -->
-
-  
-
 </div>
 </div>
 
-<!-- S1: HOME -->
+<!-- S1: HOME -- V11 -->
 <div class="scr" id="s1" data-s="off">
 <div class="home">
 
-<!-- ============ ELEMENT 1: HERO ============ -->
-<div class="hero-home" onclick="showRecipe(6)">
-  <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774033621145-ljnzx7mu.jpg" alt="">
+<!-- Header -->
+<div class="hdr">
+  <div class="hdr-logo">Savora</div>
+  <div class="hdr-side r">
+    <div class="hdr-btn" onclick="alert('Notifications')">
+      <span class="ms">notifications</span>
+      <div style="position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--terra)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ELEMENT 1: Quick Capture Bar -->
+<div class="capture-bar">
+  <div class="capture-btn" onclick="go(17)">
+    <span class="ms">photo_camera</span>
+    <span class="capture-btn-label">Scanner</span>
+  </div>
+  <div class="capture-btn" onclick="go(16)">
+    <span class="ms">link</span>
+    <span class="capture-btn-label">Importer</span>
+  </div>
+  <div class="capture-btn" onclick="go(8)">
+    <span class="ms">auto_fix_high</span>
+    <span class="capture-btn-label">Frigo</span>
+  </div>
+</div>
+
+<!-- ELEMENT 2: Hero — last captured recipe -->
+<div class="hero-home" onclick="go(3)">
+  <div class="hero-source-badge">
+    <span class="ms">photo_camera</span>
+  </div>
+  <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774023028463-5ykrwqqn.jpg" alt="Penne au poulet et creme de pesto">
   <div class="hero-overlay">
-    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:rgba(212,135,111,.9);margin-bottom:6px;text-shadow:0 1px 8px rgba(0,0,0,.3)">Ce soir</div>
-    <div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:400;color:#f0ebe4;line-height:1.1;margin-bottom:8px;text-shadow:0 2px 12px rgba(0,0,0,.4)">Pates au poulet, epinards<br>et tomates fondantes</div>
-    <div style="font-size:13px;color:rgba(240,235,228,.6);margin-bottom:16px">Italie &middot; 35 min &middot; Pour 4 personnes</div>
-    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:12px 28px;border-radius:980px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5), inset 0 1px 0 rgba(255,255,255,.15);text-shadow:0 1px 2px rgba(0,0,0,.2)">
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(212,135,111,.9);margin-bottom:4px;text-shadow:0 1px 8px rgba(0,0,0,.3)">Capture il y a 2 heures</div>
+    <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:#f0ebe4;line-height:1.1;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.4)">Penne au poulet et<br>creme de pesto</div>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:11px 24px;border-radius:980px;font-size:13px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5),inset 0 1px 0 rgba(255,255,255,.15);text-shadow:0 1px 2px rgba(0,0,0,.2);width:fit-content">
       <span class="ms" style="font-size:18px">restaurant</span>Cuisiner
     </div>
   </div>
 </div>
 
-<!-- ============ ELEMENT 2: WHISPER ============ -->
-<div class="whisper" style="display:flex;align-items:flex-start;justify-content:space-between;margin-top:8px">
-  <div>
-    <div class="whisper-name">Bonjour, Nicolas</div>
-    <div class="whisper-ctx">Le genre de plat qui embaume toute la cuisine.</div>
-  </div>
-  <div onclick="go(17)" style="width:40px;height:40px;border-radius:50%;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;position:relative">
-    <span class="ms" style="font-size:20px;color:var(--t2)">notifications</span>
-    <div style="position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--terra)"></div>
-  </div>
+<!-- ELEMENT 3: Whisper -->
+<div class="whisper">
+  <div class="whisper-name">3 recettes capturees cette semaine</div>
+  <div class="whisper-ctx">Votre book grandit — continuez a explorer.</div>
 </div>
 
-<!-- ============ ELEMENT 3: THREE POWER CARDS ============ -->
-<div class="power-scroll" style="margin-top:24px">
-  <div class="power-card" onclick="go(8)">
-    <div class="pc-icon"><span class="ms">kitchen</span></div>
-    <div>
-      <div class="pc-title">Frigo Magique</div>
-      <div class="pc-sub">Qu'avez-vous chez vous ?</div>
-    </div>
-  </div>
-  <div class="power-card" onclick="go(7)">
-    <div class="pc-icon"><span class="ms">calendar_month</span></div>
-    <div>
-      <div class="pc-title">Planifier</div>
-      <div class="pc-sub">7 jours en 30 secondes</div>
-    </div>
-  </div>
-  <div class="power-card" onclick="go(2)">
-    <div class="pc-icon"><span class="ms">public</span></div>
-    <div>
-      <div class="pc-title">Voyager</div>
-      <div class="pc-sub">100+ pays &agrave; explorer</div>
-    </div>
-  </div>
+<!-- ELEMENT 4: Recent captures scroll -->
+<div class="recent-header">
+  <h2>Captures recentes</h2>
+  <button style="font-size:12px;color:var(--terra);font-weight:500;background:none;border:none;cursor:pointer;letter-spacing:.3px">Tout voir</button>
 </div>
-
-<!-- ============ ELEMENT 4: DISCOVER TONIGHT ============ -->
-<div class="discover-header" style="margin-top:28px">
-  <h2>D&eacute;couvrez ce soir</h2>
-</div>
-<div class="discover-scroll">
-  <div class="discover-card" onclick="showRecipe(0)">
+<div class="recent-scroll">
+  <!-- Card 1 — from Instagram -->
+  <div class="recent-card" onclick="go(3)">
+    <div class="rc-source"><span class="ms">photo_camera</span></div>
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="">
+    <div class="rc-overlay">
+      <div class="rc-title">Pates primavera</div>
+    </div>
+  </div>
+  <!-- Card 2 — from web link -->
+  <div class="recent-card" onclick="go(3)">
+    <div class="rc-source"><span class="ms">link</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" alt="">
-    <div class="dc-info">
-      <div class="dc-title">Thon glace au wasabi</div>
-      <div class="dc-meta">Japon &middot; 17 min</div>
+    <div class="rc-overlay">
+      <div class="rc-title">Thon glace wasabi</div>
     </div>
   </div>
-  <div class="discover-card" onclick="showRecipe(3)">
+  <!-- Card 3 — from camera -->
+  <div class="recent-card" onclick="go(3)">
+    <div class="rc-source"><span class="ms">photo_camera</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" alt="">
-    <div class="dc-info">
-      <div class="dc-title">Ragout de legumes reconfortant</div>
-      <div class="dc-meta">France &middot; 45 min</div>
+    <div class="rc-overlay">
+      <div class="rc-title">Ragout reconfortant</div>
     </div>
   </div>
-  <div class="discover-card" onclick="showRecipe(5)">
+  <!-- Card 4 — from web -->
+  <div class="recent-card" onclick="go(3)">
+    <div class="rc-source"><span class="ms">language</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" alt="">
-    <div class="dc-info">
-      <div class="dc-title">Gateau renverse a la banane</div>
-      <div class="dc-meta">France &middot; 70 min</div>
-    </div>
-  </div>
-  <div class="discover-card" onclick="showRecipe(6)">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121446514-4rn8c6ed.jpg" alt="">
-    <div class="dc-info">
-      <div class="dc-title">Masala de legumes epicee</div>
-      <div class="dc-meta">Inde &middot; 30 min</div>
+    <div class="rc-overlay">
+      <div class="rc-title">Gateau banane</div>
     </div>
   </div>
 </div>
@@ -3584,56 +5139,87 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 <!-- V6 Fridge Magic Styles -->
 
-<!-- S9: IMPORT RECIPE -->
+<!-- S9: IMPORT RECIPE -- V11 Package Import -->
 <div class="scr" id="s9" data-s="off">
-<div class="import">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
-  <div class="import-url">
-    <input type="text" placeholder="Collez le lien de la recette..." value="instagram.com/p/Cx8k2mL...">
-    <button class="import-paste"><span class="ms">content_paste</span> Coller</button>
+<div class="s9-scan">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+    <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Scanner un produit</div>
+    <div class="hdr-side r"></div>
   </div>
-  <div style="text-align:center;padding:0 24px 20px">
-    <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:12px">Plateformes support&eacute;es</div>
-    <div style="display:flex;justify-content:center;gap:20px">
-      <div style="text-align:center">
-        <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#E4405F,#C13584);display:flex;align-items:center;justify-content:center;margin:0 auto 4px"><span class="ms" style="font-size:22px;color:#fff">photo_camera</span></div>
-        <div style="font-size:9px;color:var(--t3)">Instagram</div>
+
+  <!-- Camera viewfinder -->
+  <div class="s9-viewfinder">
+    <div class="fm-scanline"></div>
+    <div class="fm-corner fm-tl"></div>
+    <div class="fm-corner fm-tr"></div>
+    <div class="fm-corner fm-bl"></div>
+    <div class="fm-corner fm-br"></div>
+
+    <!-- Center barcode icon -->
+    <div style="position:relative;z-index:5;text-align:center">
+      <span class="ms" style="font-size:44px;color:rgba(248,243,236,.2)">barcode_scanner</span>
+      <div style="font-size:12px;color:rgba(248,243,236,.5);margin-top:8px;letter-spacing:.2px">Scannez un code-barres ou emballage</div>
+    </div>
+
+    <!-- Vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:2"></div>
+  </div>
+
+  <!-- Product detected card -->
+  <div class="s9-product-card">
+    <div class="s9-product-label">
+      <span class="ms" style="font-size:14px">verified</span> Produit detecte
+    </div>
+    <div class="s9-product-name">Pois chiches bio &mdash; 400g</div>
+    <div class="s9-nutrition">
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">120</div>
+        <div class="s9-nutri-label">Calories</div>
       </div>
-      <div style="text-align:center">
-        <div style="width:44px;height:44px;border-radius:14px;background:#000;display:flex;align-items:center;justify-content:center;margin:0 auto 4px"><span class="ms" style="font-size:22px;color:#fff">music_note</span></div>
-        <div style="font-size:9px;color:var(--t3)">TikTok</div>
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">7g</div>
+        <div class="s9-nutri-label">Proteines</div>
       </div>
-      <div style="text-align:center">
-        <div style="width:44px;height:44px;border-radius:14px;background:#FF0000;display:flex;align-items:center;justify-content:center;margin:0 auto 4px"><span class="ms" style="font-size:22px;color:#fff">play_arrow</span></div>
-        <div style="font-size:9px;color:var(--t3)">YouTube</div>
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">18g</div>
+        <div class="s9-nutri-label">Glucides</div>
       </div>
-      <div style="text-align:center">
-        <div style="width:44px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--card-b);display:flex;align-items:center;justify-content:center;margin:0 auto 4px;transition:background .4s"><span class="ms" style="font-size:22px;color:var(--t2)">language</span></div>
-        <div style="font-size:9px;color:var(--t3)">Site web</div>
+      <div class="s9-nutri-item">
+        <div class="s9-nutri-val">2g</div>
+        <div class="s9-nutri-label">Lipides</div>
       </div>
     </div>
   </div>
-  <div class="sh"><div class="sh-t">Progression</div></div>
-  <div class="import-progress">
-    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">R&eacute;cup&eacute;ration du contenu...</div></div>
-    <div class="import-step"><div class="import-step-ic done"><span class="ms">check</span></div><div class="import-step-t">Extraction de la recette......</div></div>
-    <div class="import-step"><div class="import-step-ic active"><span class="ms">sync</span></div><div class="import-step-t">Analyse nutritionnelle...</div></div>
-    <div class="import-step"><div class="import-step-ic pending"><span class="ms">hourglass_empty</span></div><div class="import-step-t pending">Enregistrement</div></div>
-  </div>
-  <div class="sh"><div class="sh-t">Aper&ccedil;u</div></div>
-  <div class="import-preview">
-    <div class="import-preview-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" alt=""></div>
-    <div class="import-preview-body">
-      <div class="import-preview-cat">Sain &middot; Bowl</div>
-      <div class="import-preview-t">Rainbow Buddha Bowl</div>
-      <div class="import-preview-meta">
-        <div class="import-preview-s"><span class="ms">schedule</span> 15 min</div>
-        <div class="import-preview-s"><span class="ms">local_fire_department</span> 320 cal</div>
-        <div class="import-preview-s"><span class="ms">group</span> 2 portions</div>
+
+  <!-- Recipe suggestions -->
+  <div class="s9-recipes-section">
+    <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;transition:color .4s">Avec ce produit</div>
+    <div class="s9-recipes-count">47 recettes possibles</div>
+    <div class="s9-recipes-strip">
+      <div class="s9-recipe-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123410102-vrf1wskc.jpg" alt="">
+        <div class="label">Ragout aux pois chiches</div>
       </div>
-      <button class="import-save"><span class="ms">bookmark_add</span> Enregistrer dans ma biblioth&egrave;que</button>
+      <div class="s9-recipe-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121658437-80ldpc1o.jpg" alt="">
+        <div class="label">Chili vegetarien</div>
+      </div>
+      <div class="s9-recipe-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774106290139-5c1spsrh.jpg" alt="">
+        <div class="label">Salade fraiche</div>
+      </div>
     </div>
   </div>
+
+  <!-- See all button -->
+  <button class="s9-see-all" onclick="void(0)">
+    <span class="ms" style="font-size:18px">auto_awesome</span>
+    Voir toutes les recettes
+  </button>
+
 </div>
 </div>
 
@@ -3809,170 +5395,549 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 </div>
 
-<!-- S15: CUISINE DETAIL (French) -->
+<!-- S15: SHARE SHEET -- V11 Capture Entry -->
 <div class="scr" id="s15" data-s="off">
-<div class="explore" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);display:flex;align-items:center;gap:8px;transition:color .4s">&#x1F1EB;&#x1F1F7; Cuisine Fran&ccedil;aise</div><div class="hdr-side r"></div></div>
-  <div style="text-align:center;padding:8px 24px 16px">
-    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:300;color:var(--terra)">241 133</div>
-    <div style="font-size:12px;color:var(--t3)">recettes</div>
-  </div>
-  <div class="cats" style="padding-top:0">
-    <button class="pill on" onclick="pickCat(this)" style="flex-shrink:0">Tout</button>
-    <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Plat</button>
-    <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Dessert</button>
-    <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Entr&eacute;e</button>
-    <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Soupe</button>
-  </div>
-  <div class="grid" style="grid-template-columns:1fr 1fr;padding:0 24px 24px">
-    <div class="gc2" onclick="showRecipe(5)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774310261789-3dr9tfoi.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Tarte vanille</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(9)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Gateau Citron</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(11)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Saint-Jacques linguines</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Lasagnes legumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(14)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1EB;&#x1F1F7; Gateau rhubarbe</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(6)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#x1F1F2;&#x1F1E6; Ragout marocain</div><div class="gc2-m"><span class="ms">schedule</span> 1h</div></div></div>
-  </div>
-</div>
-</div>
+    <div class="share-sim">
+      <!-- Back button -->
+      <div class="share-back" onclick="goBack()">
+        <span class="ms">arrow_back</span>
+      </div>
 
-<!-- S16: COLLECTION DETAIL -->
+      <!-- Instagram post -->
+      <div class="ig-post">
+        <div class="ig-header">
+          <div class="ig-avatar"><div class="ig-avatar-inner">CI</div></div>
+          <div class="ig-user">chefitaliano</div>
+          <div class="ig-more">...</div>
+        </div>
+        <div class="ig-image">
+          <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774325522245-rxen3lel.jpg" alt="Casserole fruits de mer">
+        </div>
+        <div class="ig-actions">
+          <span class="ms" style="font-variation-settings:'FILL' 0">favorite</span>
+          <span class="ms">chat_bubble_outline</span>
+          <span class="ms">send</span>
+          <span class="ms">bookmark_border</span>
+        </div>
+        <div class="ig-caption">
+          <b>chefitaliano</b> La meilleure casserole de fruits de mer &#127754;
+        </div>
+      </div>
+
+      <!-- Share Sheet -->
+      <div class="share-sheet">
+        <div class="sheet-handle"></div>
+
+        <!-- App row -->
+        <div class="sheet-apps">
+          <div class="sheet-app">
+            <div class="sheet-app-icon messages">
+              <span class="ms" style="font-size:28px;color:#fff">chat</span>
+            </div>
+            <div class="sheet-app-label">Messages</div>
+          </div>
+          <div class="sheet-app">
+            <div class="sheet-app-icon whatsapp">
+              <span style="font-size:24px;color:#fff;font-weight:700">W</span>
+            </div>
+            <div class="sheet-app-label">WhatsApp</div>
+          </div>
+          <div class="sheet-app">
+            <div class="sheet-app-icon mail">
+              <span class="ms" style="font-size:26px;color:#fff">mail</span>
+            </div>
+            <div class="sheet-app-label">Mail</div>
+          </div>
+          <div class="sheet-app highlight" onclick="go(16)">
+            <div class="sheet-app-icon opticook">
+              <span class="ms" style="font-size:26px;color:#fff">restaurant</span>
+            </div>
+            <div class="sheet-app-label">OptiCook</div>
+          </div>
+        </div>
+
+        <div class="sheet-tagline">Un tap. La recette est a vous.</div>
+
+        <!-- Secondary actions -->
+        <div class="sheet-secondary">
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">link</span></div>
+            <div class="sheet-sec-label">Copier</div>
+          </div>
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">save_alt</span></div>
+            <div class="sheet-sec-label">Enregistrer</div>
+          </div>
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">qr_code</span></div>
+            <div class="sheet-sec-label">QR Code</div>
+          </div>
+          <div class="sheet-sec-item">
+            <div class="sheet-sec-icon"><span class="ms">more_horiz</span></div>
+            <div class="sheet-sec-label">Plus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- S16: URL IMPORT -- V11 -->
 <div class="scr" id="s16" data-s="off">
-<div class="library" style="padding-bottom:100px;min-height:100%;transition:background .5s">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);display:flex;align-items:center;gap:8px;transition:color .4s"><span class="ms" style="font-size:20px;color:var(--terra)">favorite</span> Favoris</div><div class="hdr-side r"></div></div>
-  <div style="text-align:center;padding:8px 24px 20px;font-size:12px;color:var(--t3)">47 recettes</div>
-  <div class="rr" onclick="showRecipe(0)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Ajout&eacute; hier</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
-  <div class="rr" onclick="showRecipe(8)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Ajout&eacute; il y a 3 jours</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
-  <div class="rr" onclick="showRecipe(6)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Ajout&eacute; il y a 5 jours</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
-  <div class="rr" onclick="showRecipe(5)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774310261789-3dr9tfoi.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Tarte legere a la vanille</div><div class="rr-d">Ajout&eacute; il y a 1 semaine</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
-</div>
-</div>
+    <div class="url-import">
+      <div class="hdr">
+        <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+        <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1)">Importer une recette</div>
+        <div class="hdr-side r"></div>
+      </div>
 
-<!-- S17: NOTIFICATIONS -->
+      <!-- URL input -->
+      <div class="url-input-wrap">
+        <span class="ms">link</span>
+        <input type="text" class="url-input" placeholder="Collez un lien de recette..." readonly>
+      </div>
+
+      <!-- Compatible sources -->
+      <div class="sources-label">Sources compatibles</div>
+      <div class="sources-grid">
+        <div class="source-item">
+          <div class="source-icon src-instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="source-name">Instagram</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-tiktok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.18 8.18 0 004.76 1.52V6.84a4.83 4.83 0 01-1-.15z"/></svg>
+          </div>
+          <div class="source-name">TikTok</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-youtube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <div class="source-name">YouTube</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-marmiton">
+            <span style="font-size:16px;font-weight:800">M</span>
+          </div>
+          <div class="source-name">Marmiton</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-750g">
+            <span style="font-size:13px;font-weight:800">750</span>
+          </div>
+          <div class="source-name">750g</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-allrecipes">
+            <span style="font-size:14px;font-weight:800">AR</span>
+          </div>
+          <div class="source-name">AllRecipes</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-bbc">
+            <span style="font-size:12px;font-weight:800">BBC</span>
+          </div>
+          <div class="source-name">BBC Food</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/></svg>
+          </div>
+          <div class="source-name">Pinterest</div>
+        </div>
+        <div class="source-item">
+          <div class="source-icon src-blog">
+            <span class="ms" style="font-size:20px">rss_feed</span>
+          </div>
+          <div class="source-name">Blog</div>
+        </div>
+      </div>
+
+      <!-- Import button -->
+      <button class="import-btn">Importer</button>
+
+      <!-- Scan link -->
+      <div class="scan-link" onclick="go(18)">Ou scannez une photo</div>
+    </div>
+  </div>
+
+<!-- S17: CAMERA CAPTURE -- V11 OCR -->
 <div class="scr" id="s17" data-s="off">
-<div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Notifications</div><div class="hdr-side r"></div></div>
-  <div style="padding:0 24px">
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px">
-      <span class="ms" style="font-size:22px;color:var(--terra);flex-shrink:0">auto_awesome</span>
-      <div><div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">Nouvelle recette indienne ajoutee</div><div style="font-size:11px;color:var(--t3);margin-top:4px">Il y a 2 heures</div></div>
+<div class="s17-cam">
+
+  <!-- Back button -->
+  <div class="cam-back" onclick="goBack()">
+    <span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span>
+  </div>
+
+  <!-- Full-screen viewfinder -->
+  <div class="s17-viewfinder">
+    <!-- Scanning line -->
+    <div class="fm-scanline"></div>
+
+    <!-- Corner brackets -->
+    <div class="fm-corner fm-tl"></div>
+    <div class="fm-corner fm-tr"></div>
+    <div class="fm-corner fm-bl"></div>
+    <div class="fm-corner fm-br"></div>
+
+    <!-- Center prompt -->
+    <div class="s17-prompt">
+      <span class="ms" style="font-size:48px;color:rgba(248,243,236,.2);margin-bottom:14px;display:block">photo_camera</span>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#f8f3ec;letter-spacing:.3px">Photographiez une recette</div>
+      <div style="font-size:12px;color:rgba(248,243,236,.6);margin-top:10px;letter-spacing:.2px">Livre, manuscrit, magazine, ecran...</div>
     </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px">
-      <span class="ms" style="font-size:22px;color:var(--sage);flex-shrink:0">calendar_month</span>
-      <div><div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">Votre planning de la semaine est pret</div><div style="font-size:11px;color:var(--t3);margin-top:4px">Il y a 5 heures</div></div>
+
+    <!-- Vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:2"></div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="s17-bottom">
+    <div class="s17-gallery">
+      <span class="ms" style="color:rgba(255,255,255,.6);font-size:22px">photo_library</span>
     </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px">
-      <span class="ms" style="font-size:22px;color:var(--gold);flex-shrink:0">star</span>
-      <div><div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">Brochettes de Poulet Grec - note 5 etoiles</div><div style="font-size:11px;color:var(--t3);margin-top:4px">Hier</div></div>
-    </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px">
-      <span class="ms" style="font-size:22px;color:var(--terra);flex-shrink:0">emoji_events</span>
-      <div><div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">Defi: cuisinez 3 plats cette semaine</div><div style="font-size:11px;color:var(--t3);margin-top:4px">Il y a 2 jours</div></div>
-    </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px">
-      <span class="ms" style="font-size:22px;color:var(--sage);flex-shrink:0">eco</span>
-      <div><div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">Nouvel ingredient de saison : asperges</div><div style="font-size:11px;color:var(--t3);margin-top:4px">Il y a 3 jours</div></div>
+    <div class="s17-capture"></div>
+    <div class="s17-flash">
+      <span class="ms" style="color:rgba(255,255,255,.6);font-size:22px">flash_off</span>
     </div>
   </div>
+
 </div>
 </div>
 
-<!-- S18: RECIPE RATING -->
+<!-- S18: VIDEO IMPORT -- V11 -->
 <div class="scr" id="s18" data-s="off">
-<div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Votre avis</div><div class="hdr-side r"></div></div>
-  <div style="text-align:center;padding:20px 24px">
-    <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:300;color:var(--t1);margin-bottom:20px;transition:color .4s">Comment etait ce plat ?</div>
-    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px">
-      <span class="ms" style="font-size:40px;color:var(--gold);font-variation-settings:'FILL' 1;cursor:pointer">star</span>
-      <span class="ms" style="font-size:40px;color:var(--gold);font-variation-settings:'FILL' 1;cursor:pointer">star</span>
-      <span class="ms" style="font-size:40px;color:var(--gold);font-variation-settings:'FILL' 1;cursor:pointer">star</span>
-      <span class="ms" style="font-size:40px;color:var(--t4);cursor:pointer">star</span>
-      <span class="ms" style="font-size:40px;color:var(--t4);cursor:pointer">star</span>
-    </div>
-    <textarea placeholder="Partagez votre experience culinaire..." style="width:100%;height:120px;border:1px solid var(--card-b);border-radius:16px;padding:16px;font-family:inherit;font-size:14px;background:var(--input-bg);color:var(--t1);resize:none;transition:background .4s,color .4s,border-color .4s"></textarea>
-    <div style="margin-top:16px;padding:40px;border:2px dashed var(--card-b);border-radius:16px;cursor:pointer;transition:border-color .4s">
-      <span class="ms" style="font-size:32px;color:var(--t4)">add_a_photo</span>
-      <div style="font-size:12px;color:var(--t3);margin-top:8px">Ajouter une photo</div>
-    </div>
-    <button style="margin-top:24px;width:100%;padding:16px;background:var(--terra);color:#fff;border:none;border-radius:980px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit">Publier</button>
-  </div>
-</div>
-</div>
+    <div class="video-import">
+      <div class="hdr">
+        <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+        <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1)">Video detectee</div>
+        <div class="hdr-side r"></div>
+      </div>
 
-<!-- S19: DIETARY PREFERENCES -->
+      <!-- Video frame -->
+      <div class="video-frame">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773983450794-08w3yhk5.jpg" alt="Video recette">
+        <div class="video-play">
+          <div class="video-play-btn">
+            <span class="ms">play_arrow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Source badge -->
+      <div class="video-source">
+        <div class="video-source-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.18 8.18 0 004.76 1.52V6.84a4.83 4.83 0 01-1-.15z"/></svg>
+        </div>
+        <div class="video-source-user">@cuisinerapide</div>
+      </div>
+
+      <!-- Extraction progress -->
+      <div class="extraction-list">
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>Titre detecte</b></div>
+          <div class="extract-value">Nachos cremeux au fromage fondant</div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>8 ingredients identifies</b></div>
+          <div class="extract-value"></div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>5 etapes extraites</b></div>
+          <div class="extract-value"></div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>Nutrition calculee</b></div>
+          <div class="extract-value">480 kcal</div>
+        </div>
+        <div class="extract-item">
+          <div class="extract-check done"><span class="ms">check_circle</span></div>
+          <div class="extract-text"><b>Traduction francaise</b></div>
+          <div class="extract-value"></div>
+        </div>
+      </div>
+
+      <!-- Add to book button -->
+      <button class="add-book-btn">Ajouter a mon book</button>
+    </div>
+  </div>
+
+<!-- S19: RESTAURANT MENU SCAN -- V11 -->
 <div class="scr" id="s19" data-s="off">
-<div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Preferences alimentaires</div><div class="hdr-side r"></div></div>
-  <div style="padding:0 24px">
-    <div class="set-row"><div class="set-l"><span class="ms">eco</span><div class="set-label">Vegetarien</div></div><button class="tg" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-    <div class="set-row"><div class="set-l"><span class="ms">grass</span><div class="set-label">Vegan</div></div><button class="tg" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-    <div class="set-row"><div class="set-l"><span class="ms">grain</span><div class="set-label">Sans gluten</div></div><button class="tg" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-    <div class="set-row"><div class="set-l"><span class="ms">water_drop</span><div class="set-label">Sans lactose</div></div><button class="tg" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-    <div class="set-row"><div class="set-l"><span class="ms">mosque</span><div class="set-label">Halal</div></div><button class="tg on" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-    <div class="set-row"><div class="set-l"><span class="ms">local_fire_department</span><div class="set-label">Keto</div></div><button class="tg" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-    <div class="sh" style="margin-top:16px"><div class="sh-t">Allergies</div></div>
-    <div class="diet-tags" style="margin-bottom:16px">
-      <div class="diet-tag">Sans arachides</div>
-      <div class="diet-tag">Pauvre en sel</div>
-      <div class="diet-tag" style="border-style:dashed;cursor:pointer">+ Ajouter</div>
-    </div>
-    <button style="margin-top:16px;width:100%;padding:16px;background:var(--terra);color:#fff;border:none;border-radius:980px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit">Sauvegarder</button>
+<div class="s19-cam">
+
+  <!-- Back button -->
+  <div class="cam-back" onclick="goBack()">
+    <span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span>
   </div>
+
+  <!-- Camera viewfinder with menu card -->
+  <div class="s19-viewfinder">
+    <!-- Corner brackets -->
+    <div class="fm-corner fm-tl" style="top:20px;left:20px"></div>
+    <div class="fm-corner fm-tr" style="top:20px;right:20px"></div>
+    <div class="fm-corner fm-bl" style="bottom:20px;left:20px"></div>
+    <div class="fm-corner fm-br" style="bottom:20px;right:20px"></div>
+
+    <!-- Scanning line -->
+    <div class="fm-scanline"></div>
+
+    <!-- Simulated menu card -->
+    <div class="s19-menu-card">
+      <div class="s19-menu-title">&mdash; Le Jardin des Saveurs &mdash;</div>
+
+      <div class="s19-menu-section">Entrees</div>
+      <div class="s19-menu-item">
+        <span class="name detected">Salade nicoise</span>
+        <span class="dots"></span>
+        <span class="price">14&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Soupe a l'oignon</span>
+        <span class="dots"></span>
+        <span class="price">12&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Tartare de saumon</span>
+        <span class="dots"></span>
+        <span class="price">16&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Veloute de champignons</span>
+        <span class="dots"></span>
+        <span class="price">11&euro;</span>
+      </div>
+
+      <div class="s19-menu-section">Plats</div>
+      <div class="s19-menu-item">
+        <span class="name detected">Filet de boeuf sauce bearnaise</span>
+        <span class="dots"></span>
+        <span class="price">28&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Risotto aux cepes</span>
+        <span class="dots"></span>
+        <span class="price">22&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Magret de canard</span>
+        <span class="dots"></span>
+        <span class="price">26&euro;</span>
+      </div>
+      <div class="s19-menu-item">
+        <span class="name detected">Loup de mer grille</span>
+        <span class="dots"></span>
+        <span class="price">24&euro;</span>
+      </div>
+    </div>
+
+    <!-- Vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;z-index:2"></div>
+  </div>
+
+  <!-- Detection results -->
+  <div class="s19-bottom">
+    <div class="s19-counter">
+      <div class="s19-counter-badge">
+        <span class="ms" style="font-size:16px">restaurant_menu</span>
+        8 plats detectes
+      </div>
+    </div>
+
+    <div class="s19-restaurant">
+      <span class="ms">location_on</span>
+      <span style="font-weight:500;color:var(--t1);transition:color .4s">Le Jardin des Saveurs</span>
+      <span style="font-size:11px;color:var(--t3);transition:color .4s">&mdash; detecte</span>
+    </div>
+
+    <button class="fm-cta" onclick="void(0)" style="margin:0 0 0 0">
+      <span class="ms" style="font-size:20px">add_business</span>
+      Creer la fiche restaurant
+    </button>
+  </div>
+
 </div>
 </div>
 
-<!-- S20: ACHIEVEMENT DETAIL -->
+<!-- S20: AI PROCESSING -- V11 -->
 <div class="scr" id="s20" data-s="off">
-<div class="academy" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Succes</div><div class="hdr-side r"></div></div>
-  <div style="text-align:center;padding:20px 24px">
-    <div style="width:80px;height:80px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 30px rgba(196,101,74,.3)"><span class="ms" style="font-size:40px;color:#fff;font-variation-settings:'FILL' 1">emoji_events</span></div>
-    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:300;color:var(--t1);margin-bottom:8px;transition:color .4s">Globe-Trotteur</div>
-    <div style="font-size:13px;color:var(--t3);margin-bottom:24px">Cuisinez des recettes de 10 pays differents</div>
-    <div style="background:var(--input-bg);border-radius:12px;height:10px;overflow:hidden;margin-bottom:8px;transition:background .4s"><div style="height:100%;width:70%;background:var(--terra);border-radius:12px"></div></div>
-    <div style="font-size:12px;color:var(--t2);margin-bottom:32px;transition:color .4s">7 / 10 pays</div>
-    <div class="sh"><div class="sh-t">Pays explores</div></div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;padding:0 0 20px">
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1EB;&#x1F1F7; France</div>
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1EE;&#x1F1F9; Italie</div>
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1EC;&#x1F1F7; Grece</div>
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1F2;&#x1F1E6; Maroc</div>
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1F2;&#x1F1FD; Mexique</div>
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1EF;&#x1F1F5; Japon</div>
-      <div style="padding:10px 16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:12px;font-size:13px;color:var(--t1);transition:color .4s,background .4s">&#x1F1EE;&#x1F1F3; Inde</div>
-    </div>
-  </div>
-</div>
-</div>
+    <div class="s20-wrap">
 
-<!-- S21: WEEKLY STATS -->
+      <!-- Source badge -->
+      <div class="source-badge">
+        <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+        <span>@chefitaliano</span>
+      </div>
+
+      <!-- Recipe image assembling -->
+      <div class="magic-img-wrap">
+        <img class="magic-img" src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774325522245-rxen3lel.jpg" alt="Recipe">
+      </div>
+
+      <!-- Title appearing letter by letter -->
+      <div class="magic-title" id="magicTitle">Casserole de fruits de mer a la mediterraneenne</div>
+
+      <!-- Extraction checklist -->
+      <div class="extract-list">
+        <div class="extract-step">
+          <div class="extract-check done"><span style="font-size:11px">&#10003;</span></div>
+          <span class="extract-label">Titre identifie</span>
+        </div>
+        <div class="extract-step">
+          <div class="extract-check done"><span style="font-size:11px">&#10003;</span></div>
+          <span class="extract-label"><span class="hl">12</span> ingredients extraits</span>
+        </div>
+        <div class="extract-step">
+          <div class="extract-check done"><span style="font-size:11px">&#10003;</span></div>
+          <span class="extract-label"><span class="hl">6</span> etapes de preparation</span>
+        </div>
+        <div class="extract-step">
+          <div class="extract-check done"><span style="font-size:11px">&#10003;</span></div>
+          <span class="extract-label">Nutrition calculee -- <span class="hl">520 kcal</span></span>
+        </div>
+        <div class="extract-step">
+          <div class="extract-check done"><span style="font-size:11px">&#10003;</span></div>
+          <span class="extract-label">Allergenes detectes -- <span class="hl">Crustaces, Poisson</span></span>
+        </div>
+        <div class="extract-step">
+          <div class="extract-check done"><span style="font-size:11px">&#10003;</span></div>
+          <span class="extract-label">Temps total -- <span class="hl">45 min</span></span>
+        </div>
+        <div class="extract-step">
+          <div class="extract-check pending"></div>
+          <span class="extract-label" style="color:var(--t3)">Traduction en cours...</span>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Patience text -->
+      <p class="patience-text">Patientez...</p>
+
+    </div>
+  </div>
+
+<!-- S21: REVIEW & EDIT -- V11 -->
 <div class="scr" id="s21" data-s="off">
-<div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Cette semaine</div><div class="hdr-side r"></div></div>
-  <div style="text-align:center;padding:20px 24px 8px">
-    <div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:300;color:var(--terra)">7</div>
-    <div style="font-size:14px;color:var(--t2);transition:color .4s">recettes cuisinees</div>
+    <div class="s21-wrap">
+
+      <!-- Header -->
+      <div class="hdr">
+        <div class="hdr-side l">
+          <div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div>
+        </div>
+        <span class="hdr-t">Verifier la recette</span>
+      </div>
+
+      <!-- Recipe hero -->
+      <div class="review-hero">
+        <img class="review-img" src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774325522245-rxen3lel.jpg" alt="Recipe">
+        <div class="review-info">
+          <div class="review-title">Casserole de fruits de mer</div>
+          <div class="review-badges">
+            <span class="badge-src">
+              <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6"/></svg>
+              Instagram
+            </span>
+            <span class="badge-conf">
+              <span class="ms" style="font-size:14px">verified</span>
+              Confiance IA : 94%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Field: Titre -->
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-label">Titre</span>
+          <button class="field-edit"><span class="ms">edit</span></button>
+        </div>
+        <div class="field-value">Casserole de fruits de mer a la mediterraneenne</div>
+      </div>
+
+      <!-- Field: Ingredients -->
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-label">Ingredients (12)</span>
+          <button class="field-edit"><span class="ms">edit</span></button>
+        </div>
+        <div class="ingr-item">
+          <span class="ingr-dot high"></span>
+          <span class="ingr-name">Crevettes</span>
+          <span class="ingr-qty">400g</span>
+        </div>
+        <div class="ingr-item">
+          <span class="ingr-dot high"></span>
+          <span class="ingr-name">Moules</span>
+          <span class="ingr-qty">300g</span>
+        </div>
+        <div class="ingr-item">
+          <span class="ingr-dot medium"></span>
+          <span class="ingr-name">Vin blanc</span>
+          <span class="ingr-qty">15cl</span>
+        </div>
+        <div class="ingr-item">
+          <span class="ingr-dot high"></span>
+          <span class="ingr-name">Safran</span>
+          <span class="ingr-qty">1 pincee</span>
+        </div>
+        <div class="ingr-more">
+          <span class="ms">expand_more</span>
+          +8 autres
+        </div>
+      </div>
+
+      <!-- Field: Preparation (collapsed) -->
+      <div class="field-card">
+        <div class="field-collapsed" onclick="this.parentElement.classList.toggle('expanded')">
+          <div>
+            <span class="field-label">Preparation (6 etapes)</span>
+          </div>
+          <span class="ms">expand_more</span>
+        </div>
+      </div>
+
+      <!-- Field: Nutrition -->
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-label">Nutrition</span>
+          <button class="field-edit"><span class="ms">edit</span></button>
+        </div>
+        <div class="nutri-text">520 kcal &nbsp;|&nbsp; 38g prot &nbsp;|&nbsp; 12g lip &nbsp;|&nbsp; 42g gluc</div>
+      </div>
+
+      <!-- Tags auto-suggested -->
+      <div class="tags-section">
+        <div class="tags-title">Tags suggeres</div>
+        <div class="tags-row">
+          <span class="tag-pill">Italien</span>
+          <span class="tag-pill">Fruits de mer</span>
+          <span class="tag-pill">45 min</span>
+          <span class="tag-pill">Intermediaire</span>
+        </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="review-bottom">
+        <button class="btn-primary">Ajouter a mon Book</button>
+        <button class="btn-secondary">Modifier</button>
+      </div>
+
+    </div>
   </div>
-  <div style="display:flex;gap:10px;padding:16px 24px">
-    <div style="flex:1;padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--terra)">1 840</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:4px">cal moyennes</div>
-    </div>
-    <div style="flex:1;padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--sage)">4</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:4px">pays explores</div>
-    </div>
-    <div style="flex:1;padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--gold)">3h40</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:4px">temps total</div>
-    </div>
-  </div>
-  <div class="sh"><div class="sh-t">Vos recettes de la semaine</div></div>
-  <div class="rr" onclick="showRecipe(0)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Lundi</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
-  <div class="rr" onclick="showRecipe(8)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Mardi</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
-  <div class="rr" onclick="showRecipe(6)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Mercredi</div><div class="rr-m"><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
-</div>
-</div>
 
 <!-- S22: AI CHEF CHAT -->
 <div class="scr" id="s22" data-s="off">
@@ -4012,113 +5977,322 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 </div>
 
-<!-- S23: PHOTO IDENTIFY -->
-<div class="scr" id="s23" data-s="off">
-<div class="fridge" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Identifier un plat</div><div class="hdr-side r"></div></div>
-  <div style="margin:0 24px;height:220px;border-radius:20px;background:#1a1816;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
-    <div style="width:60px;height:60px;border:2px solid rgba(196,101,74,.5);border-radius:50%;display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:28px;color:rgba(240,235,228,.4)">photo_camera</span></div>
-    <div style="position:absolute;bottom:12px;font-size:11px;color:rgba(240,235,228,.4)">Appuyez pour photographier</div>
-  </div>
-  <div style="margin:20px 24px;padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px">
-    <div style="display:flex;gap:14px;align-items:center;margin-bottom:12px">
-      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" style="width:64px;height:64px;border-radius:14px;object-fit:cover" alt="">
-      <div>
-        <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Spaghetti Bolognaise</div>
-        <div style="font-size:12px;color:var(--sage);font-weight:500;margin-top:4px">92% de confiance</div>
+<!-- S23: RESTAURANT MEMORY -- V11 -->
+<div class="scr s-bg" id="s23" data-s="off">
+    <div class="hdr">
+      <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+      <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--t1)">Mes restaurants</span>
+    </div>
+
+    <!-- Map area -->
+    <div style="margin:0 24px 8px;height:40vh;border-radius:22px;overflow:hidden;position:relative;background:var(--bg2);border:1px solid var(--card-b)">
+      <svg viewBox="0 0 400 420" style="width:100%;height:100%;opacity:.18" preserveAspectRatio="xMidYMid meet">
+        <path d="M200 30 C120 40,60 80,50 140 C38 210,45 260,80 310 C100 340,140 370,180 390 C200 400,220 400,240 390 C280 370,320 340,340 310 C375 260,382 210,370 140 C360 80,300 40,200 30Z" fill="none" stroke="var(--t4)" stroke-width="2.5"/>
+        <!-- Corsica -->
+        <ellipse cx="340" cy="350" rx="12" ry="22" fill="none" stroke="var(--t4)" stroke-width="2"/>
+      </svg>
+      <!-- Pins -->
+      <div class="map-pin" data-count="2" style="top:28%;left:52%"></div>
+      <div class="map-pin" data-count="1" style="top:50%;left:54%;animation-delay:.4s"></div>
+      <div class="map-pin" data-count="1" style="top:85%;left:48%;animation-delay:.8s"></div>
+      <!-- Marrakech pin — outside France outline, bottom-left -->
+      <div class="map-pin" data-count="1" style="top:88%;left:20%;animation-delay:1.2s"></div>
+    </div>
+
+    <div style="text-align:center;padding:0 24px 20px">
+      <span style="font-size:14px;color:var(--t3)">4 restaurants, 12 plats decouverts</span>
+    </div>
+
+    <!-- Restaurant cards -->
+    <div class="resto-card" onclick="go(24)">
+      <div class="resto-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Le Jardin des Saveurs"></div>
+      <div class="resto-info">
+        <div class="resto-name">Le Jardin des Saveurs</div>
+        <div class="resto-loc">Paris</div>
+        <div class="resto-meta">3 plats | Visite le 15 mars 2026</div>
+        <div class="resto-stars">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms half">star_half</span>
+        </div>
       </div>
     </div>
-    <div style="height:6px;border-radius:6px;background:var(--input-bg);overflow:hidden;transition:background .4s"><div style="height:100%;width:92%;background:var(--sage);border-radius:6px"></div></div>
-  </div>
-  <div style="padding:0 24px"><button onclick="showRecipe(8)" style="width:100%;padding:16px;background:var(--terra);color:#fff;border:none;border-radius:980px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit">Voir la recette</button></div>
-</div>
-</div>
 
-<!-- S24: SHARE RECIPE -->
-<div class="scr" id="s24" data-s="off">
-<div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Partager</div><div class="hdr-side r"></div></div>
-  <div style="margin:0 24px 20px;padding:16px;background:var(--card);border:1px solid var(--card-b);border-radius:18px;display:flex;gap:14px;align-items:center;transition:background .4s,border-color .4s">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:64px;height:64px;border-radius:14px;object-fit:cover" alt="">
-    <div>
-      <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Brochettes de Poulet Grec</div>
-      <div style="font-size:12px;color:var(--t3)">40 min &middot; 4 personnes</div>
-    </div>
-  </div>
-  <div style="padding:0 24px;display:flex;flex-direction:column;gap:10px">
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;display:flex;align-items:center;gap:14px;cursor:pointer">
-      <div style="width:44px;height:44px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:22px;color:#fff">chat</span></div>
-      <div style="font-size:14px;font-weight:500;color:var(--t1);transition:color .4s">WhatsApp</div>
-    </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;display:flex;align-items:center;gap:14px;cursor:pointer">
-      <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:22px;color:#fff">photo_camera</span></div>
-      <div style="font-size:14px;font-weight:500;color:var(--t1);transition:color .4s">Instagram</div>
-    </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;display:flex;align-items:center;gap:14px;cursor:pointer">
-      <div style="width:44px;height:44px;border-radius:50%;background:var(--t4);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:22px;color:var(--t1)">link</span></div>
-      <div style="font-size:14px;font-weight:500;color:var(--t1);transition:color .4s">Copier le lien</div>
-    </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;display:flex;align-items:center;gap:14px;cursor:pointer">
-      <div style="width:44px;height:44px;border-radius:50%;background:var(--t4);display:flex;align-items:center;justify-content:center"><span class="ms" style="font-size:22px;color:var(--t1)">mail</span></div>
-      <div style="font-size:14px;font-weight:500;color:var(--t1);transition:color .4s">Email</div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- S25: RECIPE NOTES -->
-<div class="scr" id="s25" data-s="off">
-<div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Mes notes</div><div class="hdr-side r"></div></div>
-  <div style="padding:0 24px">
-    <div style="display:flex;gap:14px;align-items:center;margin-bottom:20px">
-      <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" style="width:56px;height:56px;border-radius:14px;object-fit:cover" alt="">
-      <div>
-        <div style="font-size:15px;font-weight:500;color:var(--t1);transition:color .4s">Brochettes de Poulet Grec</div>
-        <div style="font-size:12px;color:var(--t3)">Grece &middot; 40 min</div>
+    <div class="resto-card" onclick="go(24)">
+      <div class="resto-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="Riad Zitoun"></div>
+      <div class="resto-info">
+        <div class="resto-name">Riad Zitoun</div>
+        <div class="resto-loc">Marrakech</div>
+        <div class="resto-meta">5 plats | Visite le 8 mars 2026</div>
+        <div class="resto-stars">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span>
+        </div>
       </div>
     </div>
-    <div class="sh"><div class="sh-t">Mes modifications</div></div>
-    <textarea placeholder="J'ai ajoute un peu plus de citron, reduit le temps de marinade a 1h..." style="width:100%;height:120px;border:1px solid var(--card-b);border-radius:16px;padding:16px;font-family:inherit;font-size:14px;background:var(--input-bg);color:var(--t1);resize:none;margin-bottom:20px;transition:background .4s,color .4s,border-color .4s"></textarea>
-    <div class="sh"><div class="sh-t">Photos de ma version</div></div>
-    <div style="display:flex;gap:12px;margin-bottom:24px">
-      <div style="width:100px;height:100px;border:2px dashed var(--card-b);border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .4s"><span class="ms" style="font-size:28px;color:var(--t4)">add_a_photo</span></div>
-      <div style="width:100px;height:100px;border:2px dashed var(--card-b);border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .4s"><span class="ms" style="font-size:28px;color:var(--t4)">add_a_photo</span></div>
-    </div>
-    <button style="width:100%;padding:16px;background:var(--terra);color:#fff;border:none;border-radius:980px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit">Sauvegarder</button>
-  </div>
-</div>
-</div>
 
-<!-- S26: SHOPPING BY STORE -->
+    <div class="resto-card" onclick="go(24)">
+      <div class="resto-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774023028463-5ykrwqqn.jpg" alt="Trattoria Bella"></div>
+      <div class="resto-info">
+        <div class="resto-name">Trattoria Bella</div>
+        <div class="resto-loc">Lyon</div>
+        <div class="resto-meta">4 plats | Visite le 22 fevrier 2026</div>
+        <div class="resto-stars">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms half">star_half</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:40px"></div>
+  </div>
+
+<!-- S24: RESTAURANT DETAIL -- V11 -->
+<div class="scr s-bg" id="s24" data-s="off">
+    <div class="hdr">
+      <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+      <span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:var(--t1)">Le Jardin des Saveurs</span>
+    </div>
+
+    <!-- Map embed simulation -->
+    <div class="map-embed">
+      <span class="ms">location_on</span>
+      <div class="map-embed-addr">12 Rue de la Paix, 75002 Paris</div>
+      <div class="map-embed-date">Visite le 15 mars 2026</div>
+    </div>
+
+    <!-- Plats decouverts -->
+    <div class="sh"><span class="sh-t">Plats decouverts</span></div>
+    <div class="hs">
+      <div class="dish-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Roti de boeuf">
+        <div class="dish-card-ov"><span>Roti de boeuf sauce bearnaise</span></div>
+      </div>
+      <div class="dish-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774129542351-tgrdtip4.jpg" alt="Ratatouille">
+        <div class="dish-card-ov"><span>Ratatouille en bouchees feuilletees</span></div>
+      </div>
+      <div class="dish-card">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774206403771-wpw29x6m.jpg" alt="Tarte cacao">
+        <div class="dish-card-ov"><span>Tarte cacao meringue</span></div>
+      </div>
+    </div>
+
+    <!-- Recettes inspirees -->
+    <div class="sh"><span class="sh-t">Recettes inspirees</span></div>
+    <div style="padding:0 0 8px">
+      <p style="font-size:12px;color:var(--t3);padding:0 24px 12px">Recreez ces plats chez vous</p>
+      <div class="rr" onclick="showRecipe()">
+        <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Roti"></div>
+        <div class="rr-info">
+          <div class="rr-n">Roti de boeuf maison</div>
+          <div class="rr-d">Sauce bearnaise onctueuse</div>
+          <div class="rr-m">
+            <span class="rr-star"><span class="ms">star</span>4.8</span>
+            <span class="rr-time"><span class="ms">schedule</span>1h30</span>
+          </div>
+        </div>
+      </div>
+      <div class="rr" onclick="showRecipe()">
+        <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774129542351-tgrdtip4.jpg" alt="Ratatouille"></div>
+        <div class="rr-info">
+          <div class="rr-n">Ratatouille feuilletee</div>
+          <div class="rr-d">Version bistrot chic</div>
+          <div class="rr-m">
+            <span class="rr-star"><span class="ms">star</span>4.6</span>
+            <span class="rr-time"><span class="ms">schedule</span>55min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes personnelles -->
+    <div class="sh"><span class="sh-t">Notes personnelles</span></div>
+    <div class="notes-card">
+      <p>Ambiance incroyable, terrasse avec vue. Le roti etait parfait — demander la sauce a part.</p>
+    </div>
+
+    <!-- Y retourner button -->
+    <button class="bookmark-btn" onclick="void(0)">
+      <span class="ms" style="font-size:20px">bookmark_add</span>
+      Y retourner
+    </button>
+  </div>
+
+<!-- S25: CULINARY TIMELINE -- V11 -->
+<div class="scr s-bg" id="s25" data-s="off">
+    <div class="hdr">
+      <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+      <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--t1)">Mon parcours</span>
+    </div>
+
+    <div class="timeline">
+      <!-- Mars 2026 -->
+      <div class="tl-month">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Mars 2026</div>
+        <div class="tl-card">
+          <div class="tl-stat">
+            <b>47</b> recettes capturees<br>
+            <b>12</b> cuisinees<br>
+            <b>3</b> restaurants visites
+          </div>
+          <div class="tl-flags">
+            <span>&#127467;&#127479;</span>
+            <span>&#127470;&#127481;</span>
+            <span>&#127474;&#127462;</span>
+            <span>&#127471;&#127477;</span>
+            <span>&#127481;&#127469;</span>
+          </div>
+          <div class="tl-badge">
+            <span class="ms">public</span>
+            <span>Globe-trotteur — 10 pays explores</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fevrier 2026 -->
+      <div class="tl-month">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Fevrier 2026</div>
+        <div class="tl-card">
+          <div class="tl-stat">
+            <b>32</b> recettes capturees<br>
+            <b>8</b> cuisinees
+          </div>
+          <div class="tl-badge">
+            <span class="ms">cake</span>
+            <span>Premier dessert reussi</span>
+          </div>
+          <div class="tl-fav">
+            <span class="ms">star</span>
+            Risotto aux cepes — cuisine 4 fois
+          </div>
+        </div>
+      </div>
+
+      <!-- Janvier 2026 -->
+      <div class="tl-month">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Janvier 2026</div>
+        <div class="tl-card">
+          <div class="tl-stat">
+            <b>Debut de l'aventure</b>
+          </div>
+          <div class="tl-badge">
+            <span class="ms">photo_camera</span>
+            <span>Premiere recette capturee</span>
+          </div>
+          <div class="tl-img">
+            <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="Premiere recette">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- S26: SOURCE DETAIL -- V11 -->
 <div class="scr" id="s26" data-s="off">
 <div class="prof" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Par magasin</div><div class="hdr-side r"></div></div>
-  <div class="cats" style="padding-top:8px">
-    <button class="pill on" onclick="pickCat(this)" style="flex-shrink:0">Carrefour</button>
-    <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">Leclerc</button>
-    <button class="pill" onclick="pickCat(this)" style="flex-shrink:0">March&eacute;</button>
+  <div class="hdr">
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+    <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);display:flex;align-items:center;gap:8px;transition:color .4s">
+      <!-- Instagram icon -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
+        <rect x="2" y="2" width="20" height="20" rx="6" stroke="var(--terra)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" stroke="var(--terra)" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.5" fill="var(--terra)"/>
+      </svg>
+      Mes captures Instagram
+    </div>
+    <div class="hdr-side r"></div>
   </div>
-  <div style="padding:0 24px">
-    <div class="sh"><div class="sh-t">Fruits &amp; Legumes</div></div>
-    <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:16px">
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Tomates &middot; 400g</div></div><div class="set-val">~1.20 EUR</div></div>
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Courgettes &middot; 300g</div></div><div class="set-val">~1.80 EUR</div></div>
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Citrons &middot; 3</div></div><div class="set-val">~1.00 EUR</div></div>
+
+  <!-- Subtitle -->
+  <div style="padding:0 24px 16px">
+    <div style="font-size:13px;color:var(--t3);transition:color .4s">23 recettes depuis Instagram</div>
+  </div>
+
+  <!-- Grid 2 columns -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 24px">
+    <!-- Card 1 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Pates Primavera</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 2 jours</div>
+      </div>
     </div>
-    <div class="sh"><div class="sh-t">Viandes &amp; Poissons</div></div>
-    <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:16px">
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Poulet &middot; 600g</div></div><div class="set-val">~5.50 EUR</div></div>
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Saint-Jacques &middot; 12</div></div><div class="set-val">~12.00 EUR</div></div>
+
+    <!-- Card 2 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123840123-hcuglgpc.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Posole Mexicain</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 3 jours</div>
+      </div>
     </div>
-    <div class="sh"><div class="sh-t">&Eacute;picerie</div></div>
-    <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:16px">
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Spaghetti &middot; 400g</div></div><div class="set-val">~1.20 EUR</div></div>
-      <div class="set-row" onclick="this.querySelector('.ms').textContent=this.querySelector('.ms').textContent==='check_box'?'check_box_outline_blank':'check_box'"><div class="set-l"><span class="ms" style="color:var(--terra)">check_box_outline_blank</span><div class="set-label">Huile d'olive &middot; 250ml</div></div><div class="set-val">~1.80 EUR</div></div>
+
+    <!-- Card 3 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774131760747-9z75526e.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Gateau Fondant Chocolat</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 5 jours</div>
+      </div>
     </div>
-    <div style="padding:16px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:16px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:14px;font-weight:500;color:var(--t1);transition:color .4s">Total estime</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--terra)">~24.50 EUR</div>
+
+    <!-- Card 4 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Sushi Bowl Saumon</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 1 semaine</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Tajine d'Agneau</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 1 semaine</div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Risotto aux Champignons</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 2 semaines</div>
+      </div>
     </div>
   </div>
 </div>
@@ -4171,40 +6345,87 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 </div>
 
-<!-- S29: COUNTRY DETAIL (FROM MAP) -->
+<!-- S29: DESKTOP PREVIEW -- V11 -->
 <div class="scr" id="s29" data-s="off">
-<div class="explore" style="padding-bottom:100px;min-height:100%">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);display:flex;align-items:center;gap:8px;transition:color .4s">&#x1F1EB;&#x1F1F7; France</div><div class="hdr-side r"></div></div>
-  <div style="height:180px;margin:0 24px;border-radius:20px;overflow:hidden;margin-bottom:20px;position:relative">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
-    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.7) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px">
-      <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4">241 133</div>
-      <div style="font-size:12px;color:rgba(240,235,228,.6)">recettes</div>
+<div class="prof" style="padding-bottom:100px;min-height:100%">
+  <div class="hdr">
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+    <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Multi-plateforme</div>
+    <div class="hdr-side r"></div>
+  </div>
+
+  <div style="padding:0 20px">
+    <!-- Simulated browser window -->
+    <div style="background:#faf6ef;border-radius:16px;border:1px solid var(--card-b);overflow:hidden;box-shadow:0 8px 32px rgba(45,30,15,.10);margin-bottom:20px">
+      <!-- Browser chrome -->
+      <div style="padding:10px 14px;background:rgba(0,0,0,.03);border-bottom:1px solid var(--sep);display:flex;align-items:center;gap:8px">
+        <div style="display:flex;gap:5px">
+          <div style="width:10px;height:10px;border-radius:50%;background:#e85d4a"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#b89840"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#6da06d"></div>
+        </div>
+        <!-- Address bar -->
+        <div style="flex:1;background:var(--input-bg);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .4s,color .4s">allrecipes.com/recipe/creamy-garlic-pasta</div>
+      </div>
+      <!-- Browser content -->
+      <div style="padding:20px 16px;position:relative">
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--t1);margin-bottom:8px;transition:color .4s">Creamy Garlic Pasta</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:6px;transition:color .4s">By ChefMaria &middot; 4.8 stars &middot; 2,341 reviews</div>
+        <div style="height:1px;background:var(--sep);margin:12px 0"></div>
+        <div style="font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:16px;transition:color .4s">
+          Prep: 10 min &middot; Cook: 20 min &middot; Servings: 4<br>
+          A rich and creamy garlic pasta that comes together in under 30 minutes...
+        </div>
+        <!-- OptiCook capture button floating -->
+        <div style="display:flex;justify-content:center">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--terra);border-radius:980px;cursor:pointer;box-shadow:0 4px 16px rgba(196,101,74,.35)">
+            <span style="font-size:14px;font-weight:600;color:#fff;letter-spacing:-.2px">Capturer avec OptiCook</span>
+            <span class="ms" style="font-size:18px;color:#fff">restaurant</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow flow indicator -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:20px">
+      <div style="width:2px;height:20px;background:linear-gradient(180deg,var(--terra),rgba(196,101,74,.2))"></div>
+      <span class="ms" style="font-size:24px;color:var(--terra)">arrow_downward</span>
+      <div style="width:2px;height:12px;background:linear-gradient(180deg,rgba(196,101,74,.2),transparent)"></div>
+    </div>
+
+    <!-- Simulated phone preview -->
+    <div style="display:flex;justify-content:center;margin-bottom:24px">
+      <div style="width:160px;border-radius:24px;border:3px solid var(--t4);overflow:hidden;padding:8px 6px 12px;background:var(--bg);transition:background .4s,border-color .4s">
+        <!-- Mini notch -->
+        <div style="width:48px;height:8px;background:var(--t4);border-radius:0 0 8px 8px;margin:0 auto 10px;transition:background .4s"></div>
+        <!-- Mini recipe card inside phone -->
+        <div style="border-radius:10px;overflow:hidden;border:1px solid var(--card-b);background:var(--card);transition:background .4s,border-color .4s">
+          <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" style="width:100%;height:70px;object-fit:cover" alt="">
+          <div style="padding:6px 8px">
+            <div style="font-size:9px;font-weight:600;color:var(--t1);margin-bottom:2px;transition:color .4s">Creamy Garlic Pasta</div>
+            <div style="font-size:7px;color:var(--t3);transition:color .4s">30 min &middot; 4 portions</div>
+            <div style="display:flex;align-items:center;gap:3px;margin-top:4px">
+              <span class="ms" style="font-size:10px;color:var(--sage)">check_circle</span>
+              <span style="font-size:7px;color:var(--sage)">Sauvegardee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caption text -->
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--t1);line-height:1.5;padding:0 12px;transition:color .4s">Capturee sur votre PC, disponible sur votre telephone</div>
+    </div>
+
+    <!-- Chrome extension badge -->
+    <div style="display:flex;justify-content:center">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--terra-g);border:1px solid rgba(196,101,74,.15);border-radius:980px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">
+        <span class="ms" style="font-size:18px;color:var(--terra)">extension</span>
+        <span style="font-size:13px;font-weight:500;color:var(--terra)">Extension Chrome bientot disponible</span>
+      </div>
     </div>
   </div>
-  <div class="sh"><div class="sh-t">Principales categories</div></div>
-  <div style="display:flex;gap:10px;padding:0 24px 20px">
-    <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:300;color:var(--terra)">120K</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:2px">Plat</div>
-    </div>
-    <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:300;color:var(--gold)">50K</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:2px">Dessert</div>
-    </div>
-    <div style="flex:1;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);text-align:center;transition:background .4s,border-color .4s">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:300;color:var(--sage)">30K</div>
-      <div style="font-size:10px;color:var(--t3);margin-top:2px">Entree</div>
-    </div>
-  </div>
-  <div class="sh"><div class="sh-t">Recettes vedettes</div></div>
-  <div class="grid" style="grid-template-columns:1fr 1fr;padding:0 24px 20px">
-    <div class="gc2" onclick="showRecipe(5)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774310261789-3dr9tfoi.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Tarte vanille</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(11)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Saint-Jacques linguines</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Lasagnes legumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
-    <div class="gc2" onclick="showRecipe(14)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Gateau rhubarbe</div><div class="gc2-m"><span class="ms">schedule</span> 15 min</div></div></div>
-  </div>
-  <div style="padding:0 24px"><button onclick="go(15)" style="width:100%;padding:16px;background:var(--terra);color:#fff;border:none;border-radius:980px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit">Explorer toutes les recettes</button></div>
 </div>
 </div>
 
@@ -4260,7 +6481,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <button class="tb" onclick="navTab(2)"><span class="ms">explore</span><span class="tb-label">Explorer</span></button>
   <button class="tb-c" onclick="handleCookAction()"><span class="ms">add</span></button>
   <button class="tb" onclick="navTab(7)"><span class="ms">calendar_month</span><span class="tb-label">Planifier</span></button>
-  <button class="tb" onclick="navTab(6)"><span class="ms">menu_book</span><span class="tb-label">Biblio.</span></button>
+  <button class="tb" onclick="navTab(6)"><span class="ms">menu_book</span><span class="tb-label">Book</span></button>
 </div>
 </div>
 
@@ -4492,7 +6713,7 @@ function pickCat(el){$$('.cats .pill').forEach(p=>p.classList.remove('on'));el.c
 /* ═══ Dock-style tab bar ═══ */
 const tabEl=$('#tabs');
 const alwaysHide=[0,4,27];
-const detailScreens=[3,15,16,17,18,19,20,21,22,23,24,25,26,28,29];
+const detailScreens=[3,9,15,16,17,18,19,20,21,23,24,25,26,29];
 let lastScrollY={};
 let tabVisible=true;
 let scrollTick=false;
@@ -5009,6 +7230,322 @@ function enterCookMode(){
     overlay.classList.remove('active');
   }, 600);
 }
+
+
+
+/* ═══ V11 NAVIGATION WIRING ═══ */
+block at the end.
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- ══════════════════════════════════════════════════════════
+     S29: DESKTOP PREVIEW — Multi-plateforme
+     ══════════════════════════════════════════════════════════ -->
+<div class="scr" id="s29" data-s="off">
+<div class="prof" style="padding-bottom:100px;min-height:100%">
+  <div class="hdr">
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+    <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Multi-plateforme</div>
+    <div class="hdr-side r"></div>
+  </div>
+
+  <div style="padding:0 20px">
+    <!-- Simulated browser window -->
+    <div style="background:#faf6ef;border-radius:16px;border:1px solid var(--card-b);overflow:hidden;box-shadow:0 8px 32px rgba(45,30,15,.10);margin-bottom:20px">
+      <!-- Browser chrome -->
+      <div style="padding:10px 14px;background:rgba(0,0,0,.03);border-bottom:1px solid var(--sep);display:flex;align-items:center;gap:8px">
+        <div style="display:flex;gap:5px">
+          <div style="width:10px;height:10px;border-radius:50%;background:#e85d4a"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#b89840"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#6da06d"></div>
+        </div>
+        <!-- Address bar -->
+        <div style="flex:1;background:var(--input-bg);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .4s,color .4s">allrecipes.com/recipe/creamy-garlic-pasta</div>
+      </div>
+      <!-- Browser content -->
+      <div style="padding:20px 16px;position:relative">
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--t1);margin-bottom:8px;transition:color .4s">Creamy Garlic Pasta</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:6px;transition:color .4s">By ChefMaria &middot; 4.8 stars &middot; 2,341 reviews</div>
+        <div style="height:1px;background:var(--sep);margin:12px 0"></div>
+        <div style="font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:16px;transition:color .4s">
+          Prep: 10 min &middot; Cook: 20 min &middot; Servings: 4<br>
+          A rich and creamy garlic pasta that comes together in under 30 minutes...
+        </div>
+        <!-- OptiCook capture button floating -->
+        <div style="display:flex;justify-content:center">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--terra);border-radius:980px;cursor:pointer;box-shadow:0 4px 16px rgba(196,101,74,.35)">
+            <span style="font-size:14px;font-weight:600;color:#fff;letter-spacing:-.2px">Capturer avec OptiCook</span>
+            <span class="ms" style="font-size:18px;color:#fff">restaurant</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow flow indicator -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:20px">
+      <div style="width:2px;height:20px;background:linear-gradient(180deg,var(--terra),rgba(196,101,74,.2))"></div>
+      <span class="ms" style="font-size:24px;color:var(--terra)">arrow_downward</span>
+      <div style="width:2px;height:12px;background:linear-gradient(180deg,rgba(196,101,74,.2),transparent)"></div>
+    </div>
+
+    <!-- Simulated phone preview -->
+    <div style="display:flex;justify-content:center;margin-bottom:24px">
+      <div style="width:160px;border-radius:24px;border:3px solid var(--t4);overflow:hidden;padding:8px 6px 12px;background:var(--bg);transition:background .4s,border-color .4s">
+        <!-- Mini notch -->
+        <div style="width:48px;height:8px;background:var(--t4);border-radius:0 0 8px 8px;margin:0 auto 10px;transition:background .4s"></div>
+        <!-- Mini recipe card inside phone -->
+        <div style="border-radius:10px;overflow:hidden;border:1px solid var(--card-b);background:var(--card);transition:background .4s,border-color .4s">
+          <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" style="width:100%;height:70px;object-fit:cover" alt="">
+          <div style="padding:6px 8px">
+            <div style="font-size:9px;font-weight:600;color:var(--t1);margin-bottom:2px;transition:color .4s">Creamy Garlic Pasta</div>
+            <div style="font-size:7px;color:var(--t3);transition:color .4s">30 min &middot; 4 portions</div>
+            <div style="display:flex;align-items:center;gap:3px;margin-top:4px">
+              <span class="ms" style="font-size:10px;color:var(--sage)">check_circle</span>
+              <span style="font-size:7px;color:var(--sage)">Sauvegardee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caption text -->
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--t1);line-height:1.5;padding:0 12px;transition:color .4s">Capturee sur votre PC, disponible sur votre telephone</div>
+    </div>
+
+    <!-- Chrome extension badge -->
+    <div style="display:flex;justify-content:center">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--terra-g);border:1px solid rgba(196,101,74,.15);border-radius:980px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">
+        <span class="ms" style="font-size:18px;color:var(--terra)">extension</span>
+        <span style="font-size:13px;font-weight:500;color:var(--terra)">Extension Chrome bientot disponible</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     S26: SOURCE DETAIL — Mes captures Instagram
+     ══════════════════════════════════════════════════════════ -->
+<div class="scr" id="s26" data-s="off">
+<div class="prof" style="padding-bottom:100px;min-height:100%">
+  <div class="hdr">
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
+    <div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);display:flex;align-items:center;gap:8px;transition:color .4s">
+      <!-- Instagram icon -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
+        <rect x="2" y="2" width="20" height="20" rx="6" stroke="var(--terra)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" stroke="var(--terra)" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.5" fill="var(--terra)"/>
+      </svg>
+      Mes captures Instagram
+    </div>
+    <div class="hdr-side r"></div>
+  </div>
+
+  <!-- Subtitle -->
+  <div style="padding:0 24px 16px">
+    <div style="font-size:13px;color:var(--t3);transition:color .4s">23 recettes depuis Instagram</div>
+  </div>
+
+  <!-- Grid 2 columns -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 24px">
+    <!-- Card 1 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Pates Primavera</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 2 jours</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123840123-hcuglgpc.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Posole Mexicain</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 3 jours</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774131760747-9z75526e.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Gateau Fondant Chocolat</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 5 jours</div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Sushi Bowl Saumon</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 1 semaine</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Tajine d'Agneau</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 1 semaine</div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+      <div style="position:relative;height:140px">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
+        <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div style="padding:10px 12px">
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Risotto aux Champignons</div>
+        <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 2 semaines</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVIGATION WIRING — append this <script> to end of index.html
+     ══════════════════════════════════════════════════════════ -->
+<script>
+/* ═══ v11-blockF Navigation Wiring ═══
+   Append this block AFTER the existing <script> in index.html.
+   It patches onclick handlers and ensures detailScreens is correct.
+*/
+
+(function(){
+  /* ── Detail screens that hide the tab bar ──
+     The existing detailScreens array in index.html already includes:
+     [3, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29]
+     If you need to verify/override, uncomment below:
+  */
+  // detailScreens.length = 0;
+  // detailScreens.push(3, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29);
+
+  /* ── Quick capture buttons on home (s1) ── */
+  // Scanner -> go(17)
+  // Importer -> go(16)
+  // Frigo -> go(8)
+  // These should be wired via onclick="go(17)" etc. on the home screen quick-action buttons.
+
+  /* ── Share sheet simulation ──
+     Tapping OptiCook icon in share sheet -> go(20) (processing)
+     After processing -> go(21) (review)
+     After review "Ajouter a mon Book" -> go(6) (library)
+  */
+
+  /* ── Restaurant flows ──
+     Scan menu -> go(19)
+     Restaurant memory -> go(23)
+     Restaurant detail -> go(24)
+  */
+
+  /* ── Other navigations ──
+     Timeline -> go(25)
+     Source detail (Instagram) -> go(26)
+     Desktop preview -> go(29)
+     Video import -> go(18)
+     Package scan -> go(9)
+  */
+
+  /* ── Helper: wire onclick by selector ──
+     Usage: wireNav('.some-selector', 17);
+     This finds all matching elements and sets their onclick to go(n).
+  */
+  function wireNav(selector, target) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        go(target);
+      });
+    });
+  }
+
+  /* ── Wire by data attributes ──
+     Add data-nav="29" to any element to auto-wire navigation.
+     Example: <div data-nav="29">Desktop Preview</div>
+  */
+  document.querySelectorAll('[data-nav]').forEach(function(el) {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var target = parseInt(el.getAttribute('data-nav'), 10);
+      if (!isNaN(target)) go(target);
+    });
+  });
+
+  /* ── Convenience navigation functions ──
+     Call these from onclick="" attributes in the HTML.
+  */
+  window.goScanner    = function() { go(17); };
+  window.goImporter   = function() { go(16); };
+  window.goFrigo      = function() { go(8);  };
+  window.goShareSheet = function() { go(20); };
+  window.goProcessing = function() { go(20); };
+  window.goReview     = function() { go(21); };
+  window.goLibrary    = function() { go(6);  };
+  window.goScanMenu   = function() { go(19); };
+  window.goRestMemory = function() { go(23); };
+  window.goRestDetail = function() { go(24); };
+  window.goTimeline   = function() { go(25); };
+  window.goSourceIG   = function() { go(26); };
+  window.goDesktop    = function() { go(29); };
+  window.goVideo      = function() { go(18); };
+  window.goPackage    = function() { go(9);  };
+
+  /* ── Auto-advance: processing -> review ──
+     When s20 (processing) becomes visible, auto-advance to s21 (review) after 2.5s.
+  */
+  var processingObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.type === 'attributes' && m.attributeName === 'data-s') {
+        var el = m.target;
+        if (el.id === 's20' && el.getAttribute('data-s') === 'on') {
+          setTimeout(function() {
+            if (cur === 20) go(21);
+          }, 2500);
+        }
+      }
+    });
+  });
+  var s20 = document.getElementById('s20');
+  if (s20) processingObserver.observe(s20, { attributes: true });
+
+})();
 
 </script>
 </body>
