@@ -4087,7 +4087,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="hdr">
   <div class="hdr-logo">Savora</div>
   <div class="hdr-side r">
-    <div class="hdr-btn" onclick="alert('Notifications')">
+    <div class="hdr-btn" onclick="go(14)">
       <span class="ms">notifications</span>
       <div style="position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--terra)"></div>
     </div>
@@ -4181,7 +4181,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
   <!-- Header -->
   <div class="hdr">
-    <div class="hdr-side l"><div class="hdr-btn" onclick="go(1)"><span class="ms">arrow_back</span></div></div>
+    <div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div>
     <div class="hdr-logo">Explorer</div>
     <div class="hdr-side r"></div>
   </div>
@@ -4877,7 +4877,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S5: SHOPPING LIST -->
 <div class="scr" id="s5" data-s="off">
 <div class="shop">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div><div class="hdr-side r"><div class="hdr-btn"><span class="ms">share</span></div></div></div>
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div><div class="hdr-side r"><div class="hdr-btn" onclick="void(0)"><span class="ms">share</span></div></div></div>
   <div class="shop-sum"><div><div class="shop-sum-l">Total estim&eacute;</div><div class="shop-sum-v">18.68 &#8364;</div></div><div class="shop-sum-r">14 articles</div></div>
   <div style="padding:8px 24px 16px">
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--t2);transition:color .4s">Tout ce qu'il vous faut</div>
@@ -5178,7 +5178,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
 
-    <button class="fm-cta" onclick="void(0)" style="margin:0">
+    <button class="fm-cta" onclick="go(2)" style="margin:0">
       <span class="ms" style="font-size:20px">auto_awesome</span>
       Voir les recettes
     </button>
@@ -5265,7 +5265,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- See all button -->
-  <button class="s9-see-all" onclick="void(0)">
+  <button class="s9-see-all" onclick="go(2)">
     <span class="ms" style="font-size:18px">auto_awesome</span>
     Voir toutes les recettes
   </button>
@@ -5395,11 +5395,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div style="padding:4px 24px 12px">
     <div style="font-size:11px;color:var(--t3);margin-bottom:8px">Recherches populaires</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">poulet</span>
-      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">v&eacute;g&eacute;tarien</span>
-      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">rapide</span>
-      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">sans gluten</span>
-      <span onclick="go(13)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">dessert</span>
+      <span onclick="pickCat(this)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">poulet</span>
+      <span onclick="pickCat(this)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">v&eacute;g&eacute;tarien</span>
+      <span onclick="pickCat(this)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">rapide</span>
+      <span onclick="pickCat(this)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">sans gluten</span>
+      <span onclick="pickCat(this)" style="padding:5px 12px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);font-size:11px;color:var(--t2);cursor:pointer;transition:background .4s">dessert</span>
     </div>
   </div>
   <div class="rr" onclick="showRecipe(0)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">&#x1F1EC;&#x1F1F7; Poulet marine aux herbes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
@@ -5606,7 +5606,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
 
       <!-- Import button -->
-      <button class="import-btn">Importer</button>
+      <button class="import-btn" onclick="go(20)">Importer</button>
 
       <!-- Scan link -->
       <div class="scan-link" onclick="go(18)">Ou scannez une photo</div>
@@ -5807,7 +5807,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span style="font-size:11px;color:var(--t3);transition:color .4s">&mdash; detecte</span>
     </div>
 
-    <button class="fm-cta" onclick="void(0)" style="margin:0 0 0 0">
+    <button class="fm-cta" onclick="go(23)" style="margin:0 0 0 0">
       <span class="ms" style="font-size:20px">add_business</span>
       Creer la fiche restaurant
     </button>
@@ -5818,6 +5818,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 <!-- S20: AI PROCESSING -- V11 -->
 <div class="scr" id="s20" data-s="off">
+    <div style="position:absolute;top:60px;right:20px;z-index:10"><div class="hdr-btn" onclick="goBack()" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15)"><span class="ms" style="color:#fff">close</span></div></div>
     <div class="s20-wrap">
 
       <!-- Source badge -->
@@ -6110,15 +6111,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <!-- Plats decouverts -->
     <div class="sh"><span class="sh-t">Plats decouverts</span></div>
     <div class="hs">
-      <div class="dish-card">
+      <div class="dish-card" onclick="showRecipe(6)">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Roti de boeuf">
         <div class="dish-card-ov"><span>Roti de boeuf sauce bearnaise</span></div>
       </div>
-      <div class="dish-card">
+      <div class="dish-card" onclick="showRecipe(7)">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774129542351-tgrdtip4.jpg" alt="Ratatouille">
         <div class="dish-card-ov"><span>Ratatouille en bouchees feuilletees</span></div>
       </div>
-      <div class="dish-card">
+      <div class="dish-card" onclick="showRecipe(3)">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774206403771-wpw29x6m.jpg" alt="Tarte cacao">
         <div class="dish-card-ov"><span>Tarte cacao meringue</span></div>
       </div>
@@ -6128,7 +6129,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="sh"><span class="sh-t">Recettes inspirees</span></div>
     <div style="padding:0 0 8px">
       <p style="font-size:12px;color:var(--t3);padding:0 24px 12px">Recreez ces plats chez vous</p>
-      <div class="rr" onclick="showRecipe()">
+      <div class="rr" onclick="showRecipe(6)">
         <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774039300965-7y930yt3.jpg" alt="Roti"></div>
         <div class="rr-info">
           <div class="rr-n">Roti de boeuf maison</div>
@@ -6139,7 +6140,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
           </div>
         </div>
       </div>
-      <div class="rr" onclick="showRecipe()">
+      <div class="rr" onclick="showRecipe(3)">
         <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774129542351-tgrdtip4.jpg" alt="Ratatouille"></div>
         <div class="rr-info">
           <div class="rr-n">Ratatouille feuilletee</div>
@@ -6159,7 +6160,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Y retourner button -->
-    <button class="bookmark-btn" onclick="void(0)">
+    <button class="bookmark-btn" onclick="this.innerHTML='<span class=ms>check</span> Sauvegarde';this.style.background='var(--sage)';this.style.color='#fff'">
       <span class="ms" style="font-size:20px">bookmark_add</span>
       Y retourner
     </button>
@@ -6262,7 +6263,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <!-- Grid 2 columns -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 24px">
     <!-- Card 1 -->
-    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="showRecipe(0)">
       <div style="position:relative;height:140px">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
         <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
@@ -6276,7 +6277,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Card 2 -->
-    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="showRecipe(2)">
       <div style="position:relative;height:140px">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774123840123-hcuglgpc.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
         <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
@@ -6290,7 +6291,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Card 3 -->
-    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="showRecipe(5)">
       <div style="position:relative;height:140px">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774131760747-9z75526e.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
         <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
@@ -6304,7 +6305,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Card 4 -->
-    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="showRecipe(7)">
       <div style="position:relative;height:140px">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
         <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
@@ -6318,7 +6319,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Card 5 -->
-    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="showRecipe(6)">
       <div style="position:relative;height:140px">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
         <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
@@ -6332,7 +6333,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </div>
 
     <!-- Card 6 -->
-    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="go(3)">
+    <div style="border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--card-b);box-shadow:var(--card-s);cursor:pointer;transition:background .4s,border-color .4s" onclick="showRecipe(11)">
       <div style="position:relative;height:140px">
         <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" style="width:100%;height:100%;object-fit:cover" alt="">
         <div style="position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center">
