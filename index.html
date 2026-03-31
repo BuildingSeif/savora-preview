@@ -63,7 +63,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     0 0 0 5px #2a2622,
     0 0 0 6px #3a3632,
     0 40px 80px rgba(0,0,0,.45);
-  contain:layout style paint;transition:background .5s;
+  contain:layout style paint;
   image-rendering:-webkit-optimize-contrast;
 }
 .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:126px;height:37px;background:#000;border-radius:20px;z-index:300}
@@ -85,6 +85,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   overflow-y:auto;overflow-x:hidden;
   -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
   overscroll-behavior-y:contain;scrollbar-width:none;
+  background:#0c0a08;
 }
 .scr::-webkit-scrollbar{display:none}
 /* Premium scroll physics */
