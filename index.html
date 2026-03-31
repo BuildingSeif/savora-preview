@@ -290,164 +290,237 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
    S30: ONBOARDING QUESTIONNAIRE — emotional personalization
    ========================================= */
 .ob-q{
-  background:var(--bg);min-height:100%;padding:0 0 60px;
+  background:var(--bg);min-height:100%;
   background-image:var(--bg-paper);background-size:256px;
   overflow-y:auto;overflow-x:hidden;
 }
-.ob-q-inner{padding:100px 28px 40px;min-height:100%}
 
-/* Progress bar */
+/* Progress — thin elegant line */
 .ob-progress{
-  position:sticky;top:59px;z-index:100;
-  padding:12px 28px 16px;
+  position:sticky;top:0;z-index:100;
+  padding:68px 32px 14px;
   background:var(--hdr-bg);
   backdrop-filter:blur(24px) saturate(200%);
   -webkit-backdrop-filter:blur(24px) saturate(200%);
 }
 .ob-progress-track{
-  width:100%;height:3px;border-radius:2px;
+  width:100%;height:2px;border-radius:1px;
   background:var(--sep);overflow:hidden;
 }
 .ob-progress-fill{
-  height:100%;border-radius:2px;
-  background:var(--terra);
-  transition:width .6s cubic-bezier(.16,1,.3,1);
+  height:100%;border-radius:1px;
+  background:linear-gradient(90deg,var(--terra),var(--gold));
+  transition:width .8s cubic-bezier(.16,1,.3,1);
 }
-.ob-progress-steps{
-  display:flex;justify-content:space-between;
-  margin-top:8px;font-size:11px;color:var(--t4);
-  font-weight:500;letter-spacing:.3px;
+.ob-progress-label{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:10px;
 }
-.ob-progress-steps span.active{color:var(--terra)}
-.ob-progress-steps span.done{color:var(--t3)}
+.ob-progress-label span{
+  font-size:11px;color:var(--t4);font-weight:400;letter-spacing:.3px;
+  transition:color .4s;
+}
+.ob-progress-label span.active{color:var(--terra);font-weight:500}
 
 /* Step container */
 .ob-step{
-  display:none;opacity:0;
-  transform:translateY(20px);
-  transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1);
+  display:none;
+  padding:20px 32px 40px;
+  min-height:calc(100vh - 100px);
 }
 .ob-step.active{
-  display:block;
-  opacity:1;transform:translateY(0);
+  display:flex;flex-direction:column;
+  animation:obStepIn .6s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes obStepIn{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-/* Step header */
-.ob-step-emoji{
-  font-size:48px;line-height:1;margin-bottom:16px;
-  display:block;
-  animation:obQFloat 3s ease-in-out infinite alternate;
+/* Step header — emotional */
+.ob-step-icon{
+  width:64px;height:64px;border-radius:20px;
+  background:var(--terra-g);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+  animation:obIconPulse 3s ease-in-out infinite alternate;
 }
-@keyframes obQFloat{
-  0%{transform:translateY(0) rotate(-2deg)}
-  100%{transform:translateY(-6px) rotate(2deg)}
+@keyframes obIconPulse{
+  0%{transform:scale(1) rotate(-1deg)}
+  100%{transform:scale(1.04) rotate(1deg)}
 }
+.ob-step-icon .ms{font-size:28px;color:var(--terra)}
+.ob-step-icon-emoji{font-size:32px;line-height:1}
+
 .ob-step-title{
   font-family:'Playfair Display',serif;font-weight:400;
-  font-size:28px;line-height:1.15;color:var(--t1);
+  font-size:30px;line-height:1.12;color:var(--t1);
   letter-spacing:-.3px;margin-bottom:8px;
   transition:color .4s;
 }
 .ob-step-sub{
-  font-size:14px;line-height:1.55;color:var(--t3);
-  font-weight:300;margin-bottom:28px;max-width:300px;
+  font-size:14px;line-height:1.6;color:var(--t3);
+  font-weight:300;margin-bottom:32px;max-width:320px;
   transition:color .4s;
 }
+.ob-step-whisper{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:13px;color:var(--terra);opacity:.7;
+  margin-top:-20px;margin-bottom:28px;
+}
 
-/* Selection chips — glassmorphic */
-.ob-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+/* Selection chips — glassmorphic cards */
+.ob-chips{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.ob-chips.grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.ob-chips.wrap{
+  flex-direction:row;flex-wrap:wrap;gap:10px;
+}
 .ob-chip{
-  padding:14px 20px;border-radius:18px;
+  padding:16px 18px;border-radius:18px;
   background:var(--card);
   border:1.5px solid var(--card-b);
-  box-shadow:var(--glass-s);
+  box-shadow:0 2px 12px rgba(45,30,15,.04);
   cursor:pointer;
-  display:flex;align-items:center;gap:10px;
+  display:flex;align-items:center;gap:14px;
   font-size:14px;font-weight:400;color:var(--t1);
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+  user-select:none;-webkit-user-select:none;
+  position:relative;overflow:hidden;
+}
+.ob-chip::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(196,101,74,.06),transparent 60%);
+  opacity:0;transition:opacity .35s;pointer-events:none;
+}
+.ob-chip:active{transform:scale(.97)}
+.ob-chip-icon{font-size:24px;line-height:1;flex-shrink:0}
+.ob-chip-body{flex:1;min-width:0}
+.ob-chip-label{font-size:14px;font-weight:500;color:var(--t1);transition:color .4s}
+.ob-chip-desc{font-size:11.5px;color:var(--t3);margin-top:2px;font-weight:300;line-height:1.4;transition:color .4s}
+.ob-chip-check{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  border:1.5px solid var(--t4);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+}
+.ob-chip-check .ms{font-size:14px;color:transparent;transition:color .2s}
+
+.ob-chip.selected{
+  border-color:var(--terra);
+  box-shadow:0 4px 20px rgba(196,101,74,.12);
+}
+.ob-chip.selected::before{opacity:1}
+.ob-chip.selected .ob-chip-check{
+  background:var(--terra);border-color:var(--terra);
+}
+.ob-chip.selected .ob-chip-check .ms{color:#fff}
+
+/* Multi-select tag chips */
+.ob-tag{
+  padding:10px 18px;border-radius:980px;
+  background:var(--card);
+  border:1.5px solid var(--card-b);
+  box-shadow:0 1px 6px rgba(45,30,15,.03);
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:400;color:var(--t2);
   transition:all .3s cubic-bezier(.16,1,.3,1);
   user-select:none;-webkit-user-select:none;
+  white-space:nowrap;
 }
-.ob-chip:active{transform:scale(.95)}
-.ob-chip .ob-chip-icon{font-size:22px;line-height:1;flex-shrink:0}
-.ob-chip .ob-chip-label{line-height:1.3}
-.ob-chip .ob-chip-desc{font-size:11px;color:var(--t3);margin-top:2px;font-weight:300}
-.ob-chip.selected{
-  background:var(--terra-g);
-  border-color:var(--terra);
-  color:var(--t1);
-  box-shadow:0 4px 16px rgba(196,101,74,.15);
+.ob-tag:active{transform:scale(.95)}
+.ob-tag .ob-tag-emoji{font-size:16px;line-height:1}
+.ob-tag.selected{
+  background:var(--terra);border-color:var(--terra);color:#fff;
+  box-shadow:0 4px 16px rgba(196,101,74,.25);
 }
-.ob-chip.selected .ob-chip-icon{transform:scale(1.1)}
-
-/* Full-width chip variant */
-.ob-chip.full{width:100%}
-
-/* Multi-select chips (cuisines, dietary) */
-.ob-chips.multi .ob-chip{flex:0 0 auto}
 
 /* Cuisine grid */
 .ob-cuisine-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;
 }
 .ob-cuisine{
-  padding:16px 10px;border-radius:18px;
+  padding:18px 8px 14px;border-radius:18px;
   background:var(--card);
   border:1.5px solid var(--card-b);
-  box-shadow:var(--glass-s);
+  box-shadow:0 2px 10px rgba(45,30,15,.04);
   text-align:center;cursor:pointer;
-  transition:all .3s cubic-bezier(.16,1,.3,1);
+  transition:all .35s cubic-bezier(.16,1,.3,1);
   user-select:none;-webkit-user-select:none;
+  position:relative;overflow:hidden;
 }
 .ob-cuisine:active{transform:scale(.93)}
-.ob-cuisine .ob-cuisine-flag{font-size:28px;display:block;margin-bottom:6px}
-.ob-cuisine .ob-cuisine-name{font-size:11px;font-weight:500;color:var(--t2);transition:color .4s}
+.ob-cuisine-flag{font-size:30px;display:block;margin-bottom:6px}
+.ob-cuisine-name{font-size:11px;font-weight:500;color:var(--t2);transition:color .4s}
 .ob-cuisine.selected{
-  background:var(--terra-g);
   border-color:var(--terra);
   box-shadow:0 4px 16px rgba(196,101,74,.15);
+  background:var(--terra-g);
 }
+.ob-cuisine.selected .ob-cuisine-name{color:var(--terra);font-weight:600}
 
-/* Slider */
-.ob-slider-wrap{margin-bottom:28px;padding:0 4px}
-.ob-slider-labels{display:flex;justify-content:space-between;margin-bottom:12px}
-.ob-slider-label{font-size:12px;color:var(--t3);font-weight:400}
-.ob-slider-label.active{color:var(--terra);font-weight:600}
-.ob-slider{
-  -webkit-appearance:none;appearance:none;width:100%;height:4px;
-  border-radius:2px;background:var(--sep);outline:none;
+/* Name input */
+.ob-name-input{
+  width:100%;padding:0;
+  border:none;border-bottom:2px solid var(--t4);
+  background:transparent;
+  font-family:'Playfair Display',serif;font-size:32px;font-weight:400;
+  color:var(--t1);letter-spacing:-.3px;
+  outline:none;
+  transition:border-color .4s,color .4s;
+  caret-color:var(--terra);
 }
-.ob-slider::-webkit-slider-thumb{
-  -webkit-appearance:none;width:28px;height:28px;border-radius:50%;
-  background:var(--terra);cursor:pointer;
-  box-shadow:0 4px 12px rgba(196,101,74,.3);
-  transition:transform .2s cubic-bezier(.16,1,.3,1);
+.ob-name-input::placeholder{color:var(--t4);font-style:italic}
+.ob-name-input:focus{border-bottom-color:var(--terra)}
+
+/* Measurement toggle cards */
+.ob-measure-card{
+  padding:20px;border-radius:20px;
+  background:var(--card);
+  border:1.5px solid var(--card-b);
+  box-shadow:0 2px 12px rgba(45,30,15,.04);
+  cursor:pointer;text-align:center;
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+  user-select:none;-webkit-user-select:none;
 }
-.ob-slider::-webkit-slider-thumb:active{transform:scale(1.15)}
+.ob-measure-card:active{transform:scale(.97)}
+.ob-measure-card .ob-measure-title{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:400;
+  color:var(--t1);margin-bottom:4px;transition:color .4s;
+}
+.ob-measure-card .ob-measure-examples{
+  font-size:12px;color:var(--t3);line-height:1.5;transition:color .4s;
+}
+.ob-measure-card.selected{
+  border-color:var(--terra);
+  background:var(--terra-g);
+  box-shadow:0 4px 20px rgba(196,101,74,.12);
+}
 
 /* Household counter */
-.ob-counter{
-  display:flex;align-items:center;gap:20px;
-  margin-top:16px;margin-bottom:28px;
-}
+.ob-counter{display:flex;align-items:center;gap:20px;margin-bottom:20px}
 .ob-counter-btn{
   width:44px;height:44px;border-radius:50%;
   background:var(--card);border:1.5px solid var(--card-b);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:20px;color:var(--terra);
-  box-shadow:var(--glass-s);
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(45,30,15,.04);
   transition:all .2s cubic-bezier(.16,1,.3,1);
 }
-.ob-counter-btn:active{transform:scale(.9);background:var(--terra-g)}
+.ob-counter-btn:active{transform:scale(.9);background:var(--terra-g);border-color:var(--terra)}
+.ob-counter-btn .ms{font-size:20px;color:var(--terra)}
 .ob-counter-val{
-  font-family:'Playfair Display',serif;font-size:42px;font-weight:400;
+  font-family:'Playfair Display',serif;font-size:48px;font-weight:400;
   color:var(--t1);min-width:50px;text-align:center;
   transition:color .4s;
 }
-.ob-counter-unit{font-size:13px;color:var(--t3);font-weight:400}
+.ob-counter-unit{font-size:12px;color:var(--t3);font-weight:400;text-align:center}
 
-/* Navigation buttons */
+/* Navigation */
 .ob-nav{
-  display:flex;gap:12px;margin-top:32px;
+  display:flex;gap:12px;margin-top:auto;padding-top:24px;
   padding-bottom:env(safe-area-inset-bottom,20px);
 }
 .ob-btn-next{
@@ -465,7 +538,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   pointer-events:none;
 }
 .ob-btn-next:active{transform:scale(.96);box-shadow:0 4px 16px rgba(196,101,74,.2)}
-.ob-btn-next:disabled{opacity:.4;cursor:default;transform:none}
+.ob-btn-next:disabled{opacity:.35;cursor:default;transform:none}
 .ob-btn-back{
   width:56px;height:56px;border-radius:50%;flex-shrink:0;
   background:var(--glass);
@@ -479,53 +552,73 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .ob-btn-back:active{transform:scale(.9);background:var(--terra-g)}
 .ob-btn-back .ms{font-size:20px;color:var(--t2)}
 .ob-btn-skip{
+  display:block;width:100%;text-align:center;
   background:none;border:none;
-  font-size:13px;color:var(--t3);font-weight:400;
-  cursor:pointer;padding:8px 0;margin-top:4px;
-  letter-spacing:.3px;
-  transition:color .2s;
+  font-size:13px;color:var(--t4);font-weight:400;
+  cursor:pointer;padding:12px 0 0;
+  letter-spacing:.3px;transition:color .2s;
 }
-.ob-btn-skip:hover{color:var(--terra)}
+.ob-btn-skip:active{color:var(--terra)}
 
-/* Summary card */
-.ob-summary{
-  background:var(--card);border:1px solid var(--card-b);
-  border-radius:22px;padding:24px;margin-bottom:24px;
-  box-shadow:var(--card-s);
+/* Personalizing — cinematic finale */
+.ob-finale{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;
+  text-align:center;min-height:calc(100vh - 120px);
+  padding:0 32px;
 }
-.ob-summary-row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:10px 0;border-bottom:1px solid var(--sep);
+.ob-finale-ring{
+  width:80px;height:80px;margin-bottom:28px;position:relative;
 }
-.ob-summary-row:last-child{border-bottom:none}
-.ob-summary-label{font-size:13px;color:var(--t3);font-weight:400}
-.ob-summary-value{font-size:14px;color:var(--t1);font-weight:500;text-align:right;transition:color .4s}
+.ob-finale-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ob-finale-ring circle{
+  fill:none;stroke-width:3;
+  cx:40;cy:40;r:37;
+  stroke-dasharray:232.5;
+  stroke-linecap:round;
+}
+.ob-finale-ring .track{stroke:var(--sep)}
+.ob-finale-ring .fill{
+  stroke:var(--terra);
+  stroke-dashoffset:232.5;
+  transition:stroke-dashoffset 2.5s cubic-bezier(.16,1,.3,1);
+}
+.ob-finale-ring .ms{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:28px;color:var(--terra);
+}
+.ob-finale-name{
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:400;
+  color:var(--t1);margin-bottom:6px;transition:color .4s;
+}
+.ob-finale-sub{
+  font-size:14px;color:var(--t3);line-height:1.5;margin-bottom:32px;
+  max-width:260px;font-weight:300;
+}
+.ob-finale-items{width:100%;max-width:300px;text-align:left}
+.ob-finale-item{
+  display:flex;align-items:center;gap:12px;
+  padding:8px 0;
+  opacity:0;transform:translateX(-12px);
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.ob-finale-item.show{opacity:1;transform:translateX(0)}
+.ob-finale-item .ms{
+  font-size:18px;color:var(--terra);
+  width:24px;text-align:center;flex-shrink:0;
+}
+.ob-finale-item span{font-size:13px;color:var(--t2);font-weight:400}
 
-/* Personalizing animation */
-.ob-personalizing{
-  text-align:center;padding:40px 0;
-}
-.ob-personalizing-spinner{
-  width:60px;height:60px;margin:0 auto 20px;
-  border:3px solid var(--sep);border-top-color:var(--terra);
-  border-radius:50%;
-  animation:obSpin 1s linear infinite;
-}
-@keyframes obSpin{to{transform:rotate(360deg)}}
-.ob-personalizing-text{
-  font-family:'Playfair Display',serif;font-size:20px;
-  color:var(--t1);margin-bottom:8px;transition:color .4s;
-}
-.ob-personalizing-sub{font-size:13px;color:var(--t3)}
+/* Greeting in home */
+.greet{padding:4px 24px 0;margin-bottom:2px}
+.greet-hi{font-size:13px;color:var(--t3);font-weight:400;margin-bottom:2px;transition:color .4s}
+.greet-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s}
+.greet-date{font-size:11px;color:var(--t4);margin-top:3px;letter-spacing:.3px;transition:color .4s}
 
 /* =========================================
    S1: HOME
    ========================================= */
 .home{background:var(--bg);padding-bottom:140px;min-height:100%;transition:background .5s}
-.greet{padding:0 24px;margin-bottom:12px}
-.greet-hi{font-size:14px;color:var(--t3);font-weight:400;margin-bottom:2px}
-.greet-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s}
-.greet-date{font-size:12px;color:var(--t3);margin-top:4px;letter-spacing:.3px}
 
 /* === GLASS UTILITY === */
 .glass{
@@ -4315,88 +4408,69 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s30" data-s="off">
 <div class="ob-q">
 
-<!-- Header -->
-<div class="hdr">
-  <div class="hdr-logo">Savora</div>
-</div>
-
 <!-- Progress -->
 <div class="ob-progress">
-  <div class="ob-progress-track"><div class="ob-progress-fill" id="obProgressFill" style="width:16.6%"></div></div>
-  <div class="ob-progress-steps" id="obProgressSteps">
-    <span class="active">1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+  <div class="ob-progress-track"><div class="ob-progress-fill" id="obProgressFill" style="width:12.5%"></div></div>
+  <div class="ob-progress-label" id="obProgressLabel">
+    <span class="active">1 / 8</span>
+    <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:var(--terra);opacity:.6" id="obProgressHint">Faisons connaissance</span>
   </div>
 </div>
 
-<div class="ob-q-inner">
-
-<!-- STEP 1: Who do you cook for? -->
+<!-- ═══ STEP 1: Your Name ═══ -->
 <div class="ob-step active" data-ob-step="0">
-  <span class="ob-step-emoji">&#127858;</span>
-  <div class="ob-step-title">Pour qui<br>cuisinez-vous ?</div>
-  <div class="ob-step-sub">Cette reponse nous aide a adapter les portions, les recettes et votre experience.</div>
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#128075;</span>
+  </div>
+  <div class="ob-step-title">Bonjour.</div>
+  <div class="ob-step-sub">Avant toute chose, comment vous appelez-vous ? On aimerait savoir a qui on parle.</div>
+
+  <input type="text" class="ob-name-input" id="obNameInput" placeholder="Votre prenom..." maxlength="20" autocomplete="given-name" autofocus>
+
+  <div class="ob-nav">
+    <button class="ob-btn-back" onclick="go(0)"><span class="ms">arrow_back</span></button>
+    <button class="ob-btn-next" id="obNext0" onclick="obNextStep()" disabled>Enchante</button>
+  </div>
+</div>
+
+<!-- ═══ STEP 2: Who do you cook for? ═══ -->
+<div class="ob-step" data-ob-step="1">
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#127858;</span>
+  </div>
+  <div class="ob-step-title" id="obWhoTitle">Pour qui<br>cuisinez-vous ?</div>
+  <div class="ob-step-sub">Seul dans votre cuisine, ou entoure de ceux que vous aimez ?</div>
 
   <div class="ob-chips" data-group="who">
-    <div class="ob-chip full" data-val="solo" onclick="obSelect(this)">
+    <div class="ob-chip" data-val="solo" onclick="obSelect(this)">
       <span class="ob-chip-icon">&#129485;</span>
-      <div><div class="ob-chip-label">Juste pour moi</div><div class="ob-chip-desc">Portions individuelles, rapide et simple</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">Juste pour moi</div><div class="ob-chip-desc">Portions solo, rapide et sans prise de tete</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="couple" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#128107;</span>
-      <div><div class="ob-chip-label">En couple</div><div class="ob-chip-desc">Recettes a deux, moments complices</div></div>
+    <div class="ob-chip" data-val="couple" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#128149;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">En couple</div><div class="ob-chip-desc">Des recettes a partager, des moments a deux</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="family" onclick="obSelect(this)">
+    <div class="ob-chip" data-val="family" onclick="obSelect(this)">
       <span class="ob-chip-icon">&#128106;</span>
-      <div><div class="ob-chip-label">En famille</div><div class="ob-chip-desc">Plats qui plaisent a tous les ages</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">En famille</div><div class="ob-chip-desc">Des plats qui mettent tout le monde d'accord</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="friends" onclick="obSelect(this)">
+    <div class="ob-chip" data-val="friends" onclick="obSelect(this)">
       <span class="ob-chip-icon">&#127881;</span>
-      <div><div class="ob-chip-label">Pour recevoir des amis</div><div class="ob-chip-desc">Impressionner sans stresser</div></div>
-    </div>
-    <div class="ob-chip full" data-val="pro" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#127860;</span>
-      <div><div class="ob-chip-label">Professionnel</div><div class="ob-chip-desc">Restaurant, traiteur, collectivite</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">Pour recevoir</div><div class="ob-chip-desc">Impressionner vos invites, sans le stress</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
   </div>
 
-  <!-- Household size (shows after family selected) -->
-  <div id="obHousehold" style="display:none">
-    <div style="font-size:13px;color:var(--t2);margin-bottom:8px;font-weight:500">Combien de personnes a table ?</div>
+  <!-- Household counter -->
+  <div id="obHousehold" style="display:none;margin-top:8px">
+    <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:12px">Combien a table, d'habitude ?</div>
     <div class="ob-counter">
       <div class="ob-counter-btn" onclick="obCount(-1)"><span class="ms">remove</span></div>
       <div><span class="ob-counter-val" id="obCountVal">4</span><div class="ob-counter-unit">personnes</div></div>
       <div class="ob-counter-btn" onclick="obCount(1)"><span class="ms">add</span></div>
-    </div>
-  </div>
-
-  <div class="ob-nav">
-    <button class="ob-btn-back" onclick="go(0)"><span class="ms">arrow_back</span></button>
-    <button class="ob-btn-next" id="obNext0" onclick="obNextStep()" disabled>Suivant</button>
-  </div>
-</div>
-
-<!-- STEP 2: Cooking skill level -->
-<div class="ob-step" data-ob-step="1">
-  <span class="ob-step-emoji">&#128170;</span>
-  <div class="ob-step-title">Quel est votre<br>niveau en cuisine ?</div>
-  <div class="ob-step-sub">Pas de jugement. On vous accompagne exactement la ou vous en etes.</div>
-
-  <div class="ob-chips" data-group="level">
-    <div class="ob-chip full" data-val="beginner" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#127793;</span>
-      <div><div class="ob-chip-label">Je debute</div><div class="ob-chip-desc">Je brule encore les pates (et c'est ok)</div></div>
-    </div>
-    <div class="ob-chip full" data-val="basic" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#127859;</span>
-      <div><div class="ob-chip-label">Je me debrouille</div><div class="ob-chip-desc">Les classiques, ca passe</div></div>
-    </div>
-    <div class="ob-chip full" data-val="comfortable" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#128293;</span>
-      <div><div class="ob-chip-label">Je suis a l'aise</div><div class="ob-chip-desc">J'improvise, je tente, je m'amuse</div></div>
-    </div>
-    <div class="ob-chip full" data-val="passionate" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#11088;</span>
-      <div><div class="ob-chip-label">Je suis passionne(e)</div><div class="ob-chip-desc">La cuisine, c'est ma joie de vivre</div></div>
     </div>
   </div>
 
@@ -4406,28 +4480,34 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 </div>
 
-<!-- STEP 3: How often do you cook? -->
+<!-- ═══ STEP 3: Skill Level ═══ -->
 <div class="ob-step" data-ob-step="2">
-  <span class="ob-step-emoji">&#128197;</span>
-  <div class="ob-step-title">Combien de fois<br>cuisinez-vous ?</div>
-  <div class="ob-step-sub">On adapte les suggestions et le planning a votre rythme.</div>
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#127860;</span>
+  </div>
+  <div class="ob-step-title">Ou en etes-vous<br>en cuisine ?</div>
+  <div class="ob-step-sub">Chaque cuisinier a commence par bruler quelque chose. Pas de jugement ici.</div>
 
-  <div class="ob-chips" data-group="frequency">
-    <div class="ob-chip full" data-val="rarely" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#127774;</span>
-      <div><div class="ob-chip-label">Rarement</div><div class="ob-chip-desc">De temps en temps, quand l'envie vient</div></div>
+  <div class="ob-chips" data-group="level">
+    <div class="ob-chip" data-val="beginner" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#127793;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Je debute</div><div class="ob-chip-desc">Je brule encore les pates — et c'est ok</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="few" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#127775;</span>
-      <div><div class="ob-chip-label">1 a 2 fois par semaine</div><div class="ob-chip-desc">Le week-end surtout</div></div>
+    <div class="ob-chip" data-val="basic" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#127859;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Je me debrouille</div><div class="ob-chip-desc">Les classiques passent, le reste... ca depend</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="regular" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#128171;</span>
-      <div><div class="ob-chip-label">3 a 4 fois par semaine</div><div class="ob-chip-desc">Ca fait partie de ma routine</div></div>
+    <div class="ob-chip" data-val="comfortable" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#128293;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">A l'aise</div><div class="ob-chip-desc">J'improvise, je goute, j'ajuste au feeling</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="daily" onclick="obSelect(this)">
-      <span class="ob-chip-icon">&#10024;</span>
-      <div><div class="ob-chip-label">Tous les jours</div><div class="ob-chip-desc">La cuisine, c'est sacre</div></div>
+    <div class="ob-chip" data-val="passionate" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#11088;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Passionne(e)</div><div class="ob-chip-desc">La cuisine, c'est ma facon d'aimer</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
   </div>
 
@@ -4437,188 +4517,263 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 </div>
 
-<!-- STEP 4: What cuisines excite you? -->
+<!-- ═══ STEP 4: Rhythm — frequency + time ═══ -->
 <div class="ob-step" data-ob-step="3">
-  <span class="ob-step-emoji">&#127757;</span>
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#9201;</span>
+  </div>
+  <div class="ob-step-title">Votre rythme<br>en cuisine</div>
+  <div class="ob-step-sub">Combien de temps vous avez, c'est aussi important que ce que vous cuisinez.</div>
+
+  <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:12px">Vous cuisinez combien de fois par semaine ?</div>
+  <div class="ob-chips grid" data-group="frequency" style="margin-bottom:24px">
+    <div class="ob-chip" data-val="rarely" onclick="obSelect(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#127774;</span>
+      <div class="ob-chip-label" style="font-size:13px">Rarement</div>
+    </div>
+    <div class="ob-chip" data-val="few" onclick="obSelect(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#127775;</span>
+      <div class="ob-chip-label" style="font-size:13px">1-2x / semaine</div>
+    </div>
+    <div class="ob-chip" data-val="regular" onclick="obSelect(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#128171;</span>
+      <div class="ob-chip-label" style="font-size:13px">3-4x / semaine</div>
+    </div>
+    <div class="ob-chip" data-val="daily" onclick="obSelect(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#10024;</span>
+      <div class="ob-chip-label" style="font-size:13px">Tous les jours</div>
+    </div>
+  </div>
+
+  <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:12px">Et combien de temps en general ?</div>
+  <div class="ob-chips grid" data-group="time">
+    <div class="ob-chip" data-val="15" onclick="obSelectTime(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#9889;</span>
+      <div class="ob-chip-label" style="font-size:13px">15 min</div>
+      <div class="ob-chip-desc" style="font-size:10px">Express</div>
+    </div>
+    <div class="ob-chip" data-val="30" onclick="obSelectTime(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#128336;</span>
+      <div class="ob-chip-label" style="font-size:13px">30 min</div>
+      <div class="ob-chip-desc" style="font-size:10px">Confortable</div>
+    </div>
+    <div class="ob-chip" data-val="60" onclick="obSelectTime(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#127859;</span>
+      <div class="ob-chip-label" style="font-size:13px">1 heure</div>
+      <div class="ob-chip-desc" style="font-size:10px">Tranquille</div>
+    </div>
+    <div class="ob-chip" data-val="90" onclick="obSelectTime(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px">&#128171;</span>
+      <div class="ob-chip-label" style="font-size:13px">+1 heure</div>
+      <div class="ob-chip-desc" style="font-size:10px">J'aime prendre le temps</div>
+    </div>
+  </div>
+
+  <div class="ob-nav">
+    <button class="ob-btn-back" onclick="obPrevStep()"><span class="ms">arrow_back</span></button>
+    <button class="ob-btn-next" id="obNext3" onclick="obNextStep()" disabled>Suivant</button>
+  </div>
+</div>
+
+<!-- ═══ STEP 5: Measurements ═══ -->
+<div class="ob-step" data-ob-step="4">
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#9878;&#65039;</span>
+  </div>
+  <div class="ob-step-title">Grammes<br>ou onces ?</div>
+  <div class="ob-step-sub">Chaque recette s'adaptera a vos unites. Plus jamais de conversion de tete.</div>
+
+  <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:12px">Systeme de mesure</div>
+  <div class="ob-chips" data-group="units" style="margin-bottom:24px">
+    <div class="ob-chip" data-val="metric" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#127466;&#127482;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Metrique</div><div class="ob-chip-desc">Grammes, litres, centimetres</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
+    </div>
+    <div class="ob-chip" data-val="imperial" onclick="obSelect(this)">
+      <span class="ob-chip-icon">&#127482;&#127480;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Imperial</div><div class="ob-chip-desc">Cups, ounces, fahrenheit</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
+    </div>
+  </div>
+
+  <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:12px">Temperature du four</div>
+  <div class="ob-chips grid" data-group="temp">
+    <div class="ob-chip" data-val="celsius" onclick="obSelectTemp(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px;font-family:'Playfair Display',serif;color:var(--terra)">&#176;C</span>
+      <div class="ob-chip-label" style="font-size:13px">Celsius</div>
+    </div>
+    <div class="ob-chip" data-val="fahrenheit" onclick="obSelectTemp(this)" style="justify-content:center;text-align:center;flex-direction:column;gap:4px;padding:18px 12px">
+      <span style="font-size:22px;font-family:'Playfair Display',serif;color:var(--terra)">&#176;F</span>
+      <div class="ob-chip-label" style="font-size:13px">Fahrenheit</div>
+    </div>
+  </div>
+
+  <div class="ob-nav">
+    <button class="ob-btn-back" onclick="obPrevStep()"><span class="ms">arrow_back</span></button>
+    <button class="ob-btn-next" id="obNext4" onclick="obNextStep()" disabled>Suivant</button>
+  </div>
+</div>
+
+<!-- ═══ STEP 6: Dream Cuisines ═══ -->
+<div class="ob-step" data-ob-step="5">
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#127757;</span>
+  </div>
   <div class="ob-step-title">Quelles cuisines<br>vous font rever ?</div>
-  <div class="ob-step-sub">Choisissez-en autant que vous voulez. On vous fera voyager.</div>
+  <div class="ob-step-sub">Fermez les yeux. Ou vous emmene l'odeur ? Choisissez autant que vous voulez.</div>
 
   <div class="ob-cuisine-grid" data-group="cuisines">
     <div class="ob-cuisine" data-val="france" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127467;&#127479;</span>
-      <div class="ob-cuisine-name">Francaise</div>
+      <span class="ob-cuisine-flag">&#127467;&#127479;</span><div class="ob-cuisine-name">Francaise</div>
     </div>
     <div class="ob-cuisine" data-val="italy" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127470;&#127481;</span>
-      <div class="ob-cuisine-name">Italienne</div>
+      <span class="ob-cuisine-flag">&#127470;&#127481;</span><div class="ob-cuisine-name">Italienne</div>
     </div>
     <div class="ob-cuisine" data-val="japan" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127471;&#127477;</span>
-      <div class="ob-cuisine-name">Japonaise</div>
+      <span class="ob-cuisine-flag">&#127471;&#127477;</span><div class="ob-cuisine-name">Japonaise</div>
     </div>
     <div class="ob-cuisine" data-val="morocco" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127474;&#127462;</span>
-      <div class="ob-cuisine-name">Marocaine</div>
+      <span class="ob-cuisine-flag">&#127474;&#127462;</span><div class="ob-cuisine-name">Marocaine</div>
     </div>
     <div class="ob-cuisine" data-val="india" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127470;&#127475;</span>
-      <div class="ob-cuisine-name">Indienne</div>
+      <span class="ob-cuisine-flag">&#127470;&#127475;</span><div class="ob-cuisine-name">Indienne</div>
     </div>
     <div class="ob-cuisine" data-val="mexico" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127474;&#127485;</span>
-      <div class="ob-cuisine-name">Mexicaine</div>
+      <span class="ob-cuisine-flag">&#127474;&#127485;</span><div class="ob-cuisine-name">Mexicaine</div>
     </div>
     <div class="ob-cuisine" data-val="thailand" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127481;&#127469;</span>
-      <div class="ob-cuisine-name">Thailandaise</div>
+      <span class="ob-cuisine-flag">&#127481;&#127469;</span><div class="ob-cuisine-name">Thai</div>
     </div>
     <div class="ob-cuisine" data-val="lebanon" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127473;&#127463;</span>
-      <div class="ob-cuisine-name">Libanaise</div>
+      <span class="ob-cuisine-flag">&#127473;&#127463;</span><div class="ob-cuisine-name">Libanaise</div>
     </div>
     <div class="ob-cuisine" data-val="china" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127464;&#127475;</span>
-      <div class="ob-cuisine-name">Chinoise</div>
+      <span class="ob-cuisine-flag">&#127464;&#127475;</span><div class="ob-cuisine-name">Chinoise</div>
     </div>
     <div class="ob-cuisine" data-val="spain" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127466;&#127480;</span>
-      <div class="ob-cuisine-name">Espagnole</div>
+      <span class="ob-cuisine-flag">&#127466;&#127480;</span><div class="ob-cuisine-name">Espagnole</div>
     </div>
     <div class="ob-cuisine" data-val="korea" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127472;&#127479;</span>
-      <div class="ob-cuisine-name">Coreenne</div>
+      <span class="ob-cuisine-flag">&#127472;&#127479;</span><div class="ob-cuisine-name">Coreenne</div>
     </div>
     <div class="ob-cuisine" data-val="all" onclick="obToggle(this)">
-      <span class="ob-cuisine-flag">&#127758;</span>
-      <div class="ob-cuisine-name">Toutes !</div>
+      <span class="ob-cuisine-flag">&#127758;</span><div class="ob-cuisine-name">Toutes !</div>
     </div>
   </div>
 
   <div class="ob-nav">
     <button class="ob-btn-back" onclick="obPrevStep()"><span class="ms">arrow_back</span></button>
-    <button class="ob-btn-next" id="obNext3" onclick="obNextStep()">Suivant</button>
+    <button class="ob-btn-next" id="obNext5" onclick="obNextStep()">Suivant</button>
   </div>
-  <button class="ob-btn-skip" onclick="obNextStep()">Passer cette etape</button>
+  <button class="ob-btn-skip" onclick="obNextStep()">Je veux tout decouvrir</button>
 </div>
 
-<!-- STEP 5: Dietary preferences -->
-<div class="ob-step" data-ob-step="4">
-  <span class="ob-step-emoji">&#127807;</span>
-  <div class="ob-step-title">Des preferences<br>alimentaires ?</div>
-  <div class="ob-step-sub">On s'adapte a vous. Selectionnez tout ce qui s'applique.</div>
+<!-- ═══ STEP 7: Dietary + Allergies ═══ -->
+<div class="ob-step" data-ob-step="6">
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#127807;</span>
+  </div>
+  <div class="ob-step-title">Votre corps,<br>vos regles.</div>
+  <div class="ob-step-sub">Des preferences ? Des allergies ? On s'adapte a vous, toujours.</div>
 
-  <div class="ob-chips multi" data-group="dietary">
-    <div class="ob-chip" data-val="none" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#127869;</span>
-      <span class="ob-chip-label">Aucune</span>
-    </div>
-    <div class="ob-chip" data-val="vegetarian" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#129388;</span>
-      <span class="ob-chip-label">Vegetarien</span>
-    </div>
-    <div class="ob-chip" data-val="vegan" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#127793;</span>
-      <span class="ob-chip-label">Vegan</span>
-    </div>
-    <div class="ob-chip" data-val="glutenfree" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#127838;</span>
-      <span class="ob-chip-label">Sans gluten</span>
-    </div>
-    <div class="ob-chip" data-val="halal" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#9774;&#65039;</span>
-      <span class="ob-chip-label">Halal</span>
-    </div>
-    <div class="ob-chip" data-val="kosher" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#10017;&#65039;</span>
-      <span class="ob-chip-label">Casher</span>
-    </div>
-    <div class="ob-chip" data-val="lactosefree" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#129371;</span>
-      <span class="ob-chip-label">Sans lactose</span>
-    </div>
-    <div class="ob-chip" data-val="lowcarb" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#129747;</span>
-      <span class="ob-chip-label">Low carb</span>
-    </div>
+  <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:12px">Regime alimentaire</div>
+  <div class="ob-chips wrap" data-group="dietary" style="margin-bottom:24px">
+    <div class="ob-tag" data-val="none" onclick="obToggle(this)"><span class="ob-tag-emoji">&#127869;</span> Omnivore</div>
+    <div class="ob-tag" data-val="vegetarian" onclick="obToggle(this)"><span class="ob-tag-emoji">&#129388;</span> Vegetarien</div>
+    <div class="ob-tag" data-val="vegan" onclick="obToggle(this)"><span class="ob-tag-emoji">&#127793;</span> Vegan</div>
+    <div class="ob-tag" data-val="pescatarian" onclick="obToggle(this)"><span class="ob-tag-emoji">&#128031;</span> Pescetarien</div>
+    <div class="ob-tag" data-val="halal" onclick="obToggle(this)"><span class="ob-tag-emoji">&#9774;&#65039;</span> Halal</div>
+    <div class="ob-tag" data-val="kosher" onclick="obToggle(this)"><span class="ob-tag-emoji">&#10017;&#65039;</span> Casher</div>
+  </div>
+
+  <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t2);margin-bottom:4px">Allergies ou intolerances</div>
+  <div style="font-size:11px;color:var(--terra);margin-bottom:12px;font-weight:500">&#9888;&#65039; On ne plaisante pas avec ca</div>
+  <div class="ob-chips wrap" data-group="allergies">
+    <div class="ob-tag" data-val="gluten" onclick="obToggle(this)"><span class="ob-tag-emoji">&#127838;</span> Gluten</div>
+    <div class="ob-tag" data-val="lactose" onclick="obToggle(this)"><span class="ob-tag-emoji">&#129371;</span> Lactose</div>
+    <div class="ob-tag" data-val="nuts" onclick="obToggle(this)"><span class="ob-tag-emoji">&#129372;</span> Fruits a coque</div>
+    <div class="ob-tag" data-val="shellfish" onclick="obToggle(this)"><span class="ob-tag-emoji">&#129424;</span> Crustaces</div>
+    <div class="ob-tag" data-val="eggs" onclick="obToggle(this)"><span class="ob-tag-emoji">&#129370;</span> Oeufs</div>
+    <div class="ob-tag" data-val="soy" onclick="obToggle(this)"><span class="ob-tag-emoji">&#127813;</span> Soja</div>
+    <div class="ob-tag" data-val="noallergy" onclick="obToggle(this)"><span class="ob-tag-emoji">&#10004;&#65039;</span> Aucune</div>
   </div>
 
   <div class="ob-nav">
     <button class="ob-btn-back" onclick="obPrevStep()"><span class="ms">arrow_back</span></button>
-    <button class="ob-btn-next" id="obNext4" onclick="obNextStep()">Suivant</button>
+    <button class="ob-btn-next" id="obNext6" onclick="obNextStep()">Suivant</button>
   </div>
-  <button class="ob-btn-skip" onclick="obNextStep()">Passer cette etape</button>
+  <button class="ob-btn-skip" onclick="obNextStep()">Pas de restriction</button>
 </div>
 
-<!-- STEP 6: What motivates you? (emotional close) -->
-<div class="ob-step" data-ob-step="5">
-  <span class="ob-step-emoji">&#10084;&#65039;</span>
-  <div class="ob-step-title">Qu'est-ce qui vous<br>motive a cuisiner ?</div>
-  <div class="ob-step-sub">La derniere question. La plus importante.</div>
+<!-- ═══ STEP 8: Motivation — emotional close ═══ -->
+<div class="ob-step" data-ob-step="7">
+  <div class="ob-step-icon">
+    <span class="ob-step-icon-emoji">&#10084;&#65039;</span>
+  </div>
+  <div class="ob-step-title">La derniere question.<br>La plus belle.</div>
+  <div class="ob-step-sub">Qu'est-ce qui vous pousse a enfiler ce tablier ?</div>
+  <div class="ob-step-whisper">"La cuisine, c'est l'amour rendu visible."</div>
 
   <div class="ob-chips" data-group="motivation">
-    <div class="ob-chip full" data-val="health" onclick="obToggle(this)">
+    <div class="ob-chip" data-val="health" onclick="obToggle(this)">
       <span class="ob-chip-icon">&#128154;</span>
-      <div><div class="ob-chip-label">Manger plus sainement</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">Prendre soin de moi</div><div class="ob-chip-desc">Mieux manger, me sentir bien</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="save" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#128176;</span>
-      <div><div class="ob-chip-label">Faire des economies</div></div>
-    </div>
-    <div class="ob-chip full" data-val="pleasure" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#128523;</span>
-      <div><div class="ob-chip-label">Le plaisir de cuisiner</div></div>
-    </div>
-    <div class="ob-chip full" data-val="family" onclick="obToggle(this)">
+    <div class="ob-chip" data-val="family" onclick="obToggle(this)">
       <span class="ob-chip-icon">&#128149;</span>
-      <div><div class="ob-chip-label">Faire plaisir a mes proches</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">Faire plaisir a ceux que j'aime</div><div class="ob-chip-desc">Voir leurs yeux briller a table</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="learn" onclick="obToggle(this)">
-      <span class="ob-chip-icon">&#128218;</span>
-      <div><div class="ob-chip-label">Apprendre et progresser</div></div>
+    <div class="ob-chip" data-val="pleasure" onclick="obToggle(this)">
+      <span class="ob-chip-icon">&#128523;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Le pur plaisir de cuisiner</div><div class="ob-chip-desc">Les odeurs, les textures, la creation</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
-    <div class="ob-chip full" data-val="discover" onclick="obToggle(this)">
+    <div class="ob-chip" data-val="save" onclick="obToggle(this)">
+      <span class="ob-chip-icon">&#128176;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Mieux gerer mon budget</div><div class="ob-chip-desc">Bien manger sans se ruiner</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
+    </div>
+    <div class="ob-chip" data-val="discover" onclick="obToggle(this)">
       <span class="ob-chip-icon">&#127757;</span>
-      <div><div class="ob-chip-label">Decouvrir le monde par la cuisine</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">Voyager par la cuisine</div><div class="ob-chip-desc">Un plat, un pays, une histoire</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
+    </div>
+    <div class="ob-chip" data-val="learn" onclick="obToggle(this)">
+      <span class="ob-chip-icon">&#128218;</span>
+      <div class="ob-chip-body"><div class="ob-chip-label">Progresser et apprendre</div><div class="ob-chip-desc">Devenir le cuisinier que j'admire</div></div>
+      <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
   </div>
 
   <div class="ob-nav">
     <button class="ob-btn-back" onclick="obPrevStep()"><span class="ms">arrow_back</span></button>
-    <button class="ob-btn-next" id="obNext5" onclick="obFinish()">Decouvrir mon experience</button>
+    <button class="ob-btn-next" id="obNext7" onclick="obFinish()">Decouvrir mon univers</button>
   </div>
 </div>
 
-<!-- STEP 7: Personalizing animation (auto-advances) -->
-<div class="ob-step" data-ob-step="6">
-  <div style="padding-top:60px">
-    <div class="ob-personalizing">
-      <div class="ob-personalizing-spinner"></div>
-      <div class="ob-personalizing-text">On prepare votre univers...</div>
-      <div class="ob-personalizing-sub">Recettes, suggestions et inspirations<br>adaptees a votre profil</div>
+<!-- ═══ STEP 9: Personalizing animation ═══ -->
+<div class="ob-step" data-ob-step="8">
+  <div class="ob-finale">
+    <div class="ob-finale-ring">
+      <svg viewBox="0 0 80 80"><circle class="track" /><circle class="fill" id="obRingFill" /></svg>
+      <span class="ms">restaurant</span>
     </div>
+    <div class="ob-finale-name" id="obFinaleName">Votre univers est pret</div>
+    <div class="ob-finale-sub">On a personnalise chaque detail pour vous</div>
 
-    <div class="ob-summary" id="obSummary" style="opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.16,1,.3,1) .8s">
-      <div class="ob-summary-row">
-        <span class="ob-summary-label">Cuisine pour</span>
-        <span class="ob-summary-value" id="obSumWho">—</span>
-      </div>
-      <div class="ob-summary-row">
-        <span class="ob-summary-label">Niveau</span>
-        <span class="ob-summary-value" id="obSumLevel">—</span>
-      </div>
-      <div class="ob-summary-row">
-        <span class="ob-summary-label">Frequence</span>
-        <span class="ob-summary-value" id="obSumFreq">—</span>
-      </div>
-      <div class="ob-summary-row">
-        <span class="ob-summary-label">Cuisines</span>
-        <span class="ob-summary-value" id="obSumCuisines">—</span>
-      </div>
+    <div class="ob-finale-items" id="obFinaleItems">
+      <div class="ob-finale-item" data-delay="400"><span class="ms">person</span><span id="obFItem0">Recettes adaptees</span></div>
+      <div class="ob-finale-item" data-delay="700"><span class="ms">straighten</span><span id="obFItem1">Unites configurees</span></div>
+      <div class="ob-finale-item" data-delay="1000"><span class="ms">restaurant_menu</span><span id="obFItem2">Portions ajustees</span></div>
+      <div class="ob-finale-item" data-delay="1300"><span class="ms">public</span><span id="obFItem3">Cuisines selectionnees</span></div>
+      <div class="ob-finale-item" data-delay="1600"><span class="ms">favorite</span><span id="obFItem4">Experience sur mesure</span></div>
     </div>
   </div>
 </div>
 
-</div><!-- /ob-q-inner -->
 </div><!-- /ob-q -->
 </div><!-- /s30 -->
 
@@ -4635,6 +4790,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div style="position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--terra)"></div>
     </div>
   </div>
+</div>
+
+<!-- Personalized Greeting -->
+<div class="greet" id="obGreeting">
+  <div class="greet-hi" id="obGreetTime">Bonjour</div>
+  <div class="greet-name" id="obGreetName">Bienvenue</div>
+  <div class="greet-date" id="obGreetDate"></div>
 </div>
 
 <!-- ELEMENT 1: Quick Capture Bar -->
@@ -8010,24 +8172,34 @@ function pickExpCuisine(el){
      ONBOARDING QUESTIONNAIRE — S30
      ═══════════════════════════════════════════ */
   var obStep = 0;
-  var obTotal = 7; // 6 question steps + 1 personalizing
-  var obData = { who: null, household: 4, level: null, frequency: null, cuisines: [], dietary: [], motivation: [] };
+  var obTotalSteps = 8; // 8 question steps + 1 finale
+  var obData = {
+    name: '',
+    who: null, household: 4,
+    level: null,
+    frequency: null, time: null,
+    units: null, temp: null,
+    cuisines: [], dietary: [], allergies: [],
+    motivation: []
+  };
 
-  var whoLabels = { solo:'Moi seul(e)', couple:'En couple', family:'En famille', friends:'Pour recevoir', pro:'Professionnel' };
-  var levelLabels = { beginner:'Debutant', basic:'Intermediaire', comfortable:'A l\'aise', passionate:'Passionne(e)' };
+  var whoLabels = { solo:'Juste moi', couple:'En couple', family:'En famille', friends:'Pour recevoir' };
+  var levelLabels = { beginner:'Debutant(e)', basic:'Intermediaire', comfortable:'A l\'aise', passionate:'Passionne(e)' };
   var freqLabels = { rarely:'Rarement', few:'1-2x/sem', regular:'3-4x/sem', daily:'Tous les jours' };
-  var cuisineLabels = { france:'FR', italy:'IT', japan:'JP', morocco:'MA', india:'IN', mexico:'MX', thailand:'TH', lebanon:'LB', china:'CN', spain:'ES', korea:'KR', all:'Toutes' };
+  var timeLabels = { '15':'15 min', '30':'30 min', '60':'1 heure', '90':'+1 heure' };
+  var unitLabels = { metric:'Metrique (g, ml, °C)', imperial:'Imperial (oz, cups, °F)' };
+  var cuisineLabels = { france:'Francaise', italy:'Italienne', japan:'Japonaise', morocco:'Marocaine', india:'Indienne', mexico:'Mexicaine', thailand:'Thai', lebanon:'Libanaise', china:'Chinoise', spain:'Espagnole', korea:'Coreenne', all:'Toutes' };
+  var stepHints = ['Faisons connaissance','Votre quotidien','Votre parcours','Votre rythme','Vos mesures','Vos envies','Votre sante','L\'essentiel','C\'est pret'];
 
   function obUpdateProgress() {
-    var pct = ((obStep + 1) / 6) * 100;
-    if (obStep >= 6) pct = 100;
-    document.getElementById('obProgressFill').style.width = Math.min(pct, 100) + '%';
-    var steps = document.querySelectorAll('#obProgressSteps span');
-    steps.forEach(function(s, i) {
-      s.className = '';
-      if (i < obStep) s.className = 'done';
-      if (i === obStep) s.className = 'active';
-    });
+    var pct = ((obStep + 1) / obTotalSteps) * 100;
+    if (obStep >= obTotalSteps) pct = 100;
+    var fill = document.getElementById('obProgressFill');
+    if (fill) fill.style.width = Math.min(pct, 100) + '%';
+    var label = document.querySelector('#obProgressLabel > span:first-child');
+    if (label) label.textContent = Math.min(obStep + 1, obTotalSteps) + ' / ' + obTotalSteps;
+    var hint = document.getElementById('obProgressHint');
+    if (hint) hint.textContent = stepHints[Math.min(obStep, stepHints.length - 1)] || '';
   }
 
   function obShowStep(idx) {
@@ -8038,24 +8210,47 @@ function pickExpCuisine(el){
     });
     var target = document.querySelector('[data-ob-step="' + idx + '"]');
     if (target) {
-      target.style.display = 'block';
-      // Trigger reflow for animation
-      target.offsetHeight;
-      requestAnimationFrame(function() {
-        target.classList.add('active');
-      });
+      target.style.display = 'flex';
+      target.style.flexDirection = 'column';
+      target.offsetHeight; // reflow
+      requestAnimationFrame(function() { target.classList.add('active'); });
     }
     obStep = idx;
     obUpdateProgress();
-    // Scroll to top of questionnaire
     var s30 = document.getElementById('s30');
     if (s30) s30.scrollTop = 0;
+
+    // Auto-focus name input on step 0
+    if (idx === 0) {
+      setTimeout(function() {
+        var inp = document.getElementById('obNameInput');
+        if (inp) inp.focus();
+      }, 400);
+    }
   }
 
+  // Name input handler
+  var nameInput = document.getElementById('obNameInput');
+  if (nameInput) {
+    nameInput.addEventListener('input', function() {
+      obData.name = this.value.trim();
+      var btn = document.getElementById('obNext0');
+      if (btn) btn.disabled = obData.name.length < 1;
+      // Update the who-step title with name
+      var whoTitle = document.getElementById('obWhoTitle');
+      if (whoTitle && obData.name) {
+        whoTitle.innerHTML = obData.name + ',<br>pour qui cuisinez-vous ?';
+      }
+    });
+    nameInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && obData.name.length >= 1) obNextStep();
+    });
+  }
+
+  // Single-select handler
   window.obSelect = function(chip) {
-    var group = chip.parentElement.dataset.group;
-    // Single select: deselect siblings
-    chip.parentElement.querySelectorAll('.ob-chip').forEach(function(c) {
+    var group = chip.closest('[data-group]').dataset.group;
+    chip.closest('[data-group]').querySelectorAll('.ob-chip').forEach(function(c) {
       c.classList.remove('selected');
     });
     chip.classList.add('selected');
@@ -8063,69 +8258,212 @@ function pickExpCuisine(el){
 
     if (group === 'who') {
       obData.who = val;
-      // Show household counter for family
       var hh = document.getElementById('obHousehold');
-      if (hh) hh.style.display = (val === 'family' || val === 'friends') ? 'block' : 'none';
+      if (hh) {
+        var showCounter = (val === 'family' || val === 'friends' || val === 'couple');
+        hh.style.display = showCounter ? 'block' : 'none';
+        if (val === 'solo') obData.household = 1;
+        else if (val === 'couple') obData.household = 2;
+        else obData.household = 4;
+        var cv = document.getElementById('obCountVal');
+        if (cv) cv.textContent = obData.household;
+      }
     }
     if (group === 'level') obData.level = val;
     if (group === 'frequency') obData.frequency = val;
+    if (group === 'units') obData.units = val;
 
-    // Enable next button
+    // Enable next button for current step
     var btn = document.getElementById('obNext' + obStep);
     if (btn) btn.disabled = false;
+
+    // For step 3 (rhythm), need both frequency AND time
+    if (group === 'frequency' || group === 'time') {
+      var btn3 = document.getElementById('obNext3');
+      if (btn3) btn3.disabled = !(obData.frequency && obData.time);
+    }
+    // For step 4 (measurements), need both units AND temp
+    if (group === 'units' || group === 'temp') {
+      var btn4 = document.getElementById('obNext4');
+      if (btn4) btn4.disabled = !(obData.units && obData.temp);
+    }
   };
 
+  // Time selector (separate from frequency)
+  window.obSelectTime = function(chip) {
+    var group = chip.closest('[data-group]');
+    group.querySelectorAll('.ob-chip').forEach(function(c) { c.classList.remove('selected'); });
+    chip.classList.add('selected');
+    obData.time = chip.dataset.val;
+    // Check if both selected
+    var btn3 = document.getElementById('obNext3');
+    if (btn3) btn3.disabled = !(obData.frequency && obData.time);
+  };
+
+  // Temp selector
+  window.obSelectTemp = function(chip) {
+    var group = chip.closest('[data-group]');
+    group.querySelectorAll('.ob-chip').forEach(function(c) { c.classList.remove('selected'); });
+    chip.classList.add('selected');
+    obData.temp = chip.dataset.val;
+    var btn4 = document.getElementById('obNext4');
+    if (btn4) btn4.disabled = !(obData.units && obData.temp);
+  };
+
+  // Multi-select toggle
   window.obToggle = function(chip) {
     chip.classList.toggle('selected');
-    var group = chip.parentElement.dataset.group;
-    var selected = chip.parentElement.querySelectorAll('.selected');
+    var groupEl = chip.closest('[data-group]');
+    if (!groupEl) return;
+    var group = groupEl.dataset.group;
     var vals = [];
-    selected.forEach(function(s) { vals.push(s.dataset.val); });
+    groupEl.querySelectorAll('.selected').forEach(function(s) { vals.push(s.dataset.val); });
 
     if (group === 'cuisines') obData.cuisines = vals;
     if (group === 'dietary') obData.dietary = vals;
+    if (group === 'allergies') obData.allergies = vals;
     if (group === 'motivation') obData.motivation = vals;
   };
 
+  // Household counter
   window.obCount = function(delta) {
     obData.household = Math.max(1, Math.min(12, obData.household + delta));
-    document.getElementById('obCountVal').textContent = obData.household;
+    var el = document.getElementById('obCountVal');
+    if (el) el.textContent = obData.household;
   };
 
   window.obNextStep = function() {
-    if (obStep < 6) obShowStep(obStep + 1);
+    if (obStep < obTotalSteps) obShowStep(obStep + 1);
   };
-
   window.obPrevStep = function() {
     if (obStep > 0) obShowStep(obStep - 1);
   };
 
+  // ── Personalization engine ──
+  function obApplyPersonalization() {
+    // 1. Greeting
+    var greetName = document.getElementById('obGreetName');
+    if (greetName && obData.name) {
+      greetName.textContent = obData.name;
+    }
+    // Time-based greeting
+    var greetHi = document.getElementById('obGreetTime');
+    if (greetHi) {
+      var h = new Date().getHours();
+      var greeting = h < 12 ? 'Bonjour' : h < 18 ? 'Bon apres-midi' : 'Bonsoir';
+      greetHi.textContent = greeting;
+    }
+    // Date
+    var greetDate = document.getElementById('obGreetDate');
+    if (greetDate) {
+      var days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+      var months = ['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+      var now = new Date();
+      greetDate.textContent = days[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()];
+    }
+
+    // 2. Portions — update all "4 portions" to match household
+    var portions = obData.household || 4;
+    document.querySelectorAll('.det-badge').forEach(function(b) {
+      if (b.textContent.match(/\d+ portions/)) {
+        b.innerHTML = '<span class="ms" style="font-size:14px">group</span> ' + portions + ' portions';
+      }
+    });
+    // Stats card portions
+    var statsCards = document.querySelectorAll('.det-stats > div');
+    if (statsCards[1]) {
+      var portDiv = statsCards[1].querySelector('div[style*="font-weight:600"]');
+      if (portDiv) portDiv.textContent = portions;
+    }
+
+    // 3. Measurement conversion
+    if (obData.units === 'imperial') {
+      // Convert all visible g -> oz, ml -> fl oz in ingredient lists
+      document.querySelectorAll('.ing-qty, .det-ing-qty').forEach(function(el) {
+        var txt = el.textContent;
+        txt = txt.replace(/(\d+)\s*g\b/g, function(m, n) {
+          return Math.round(parseInt(n) / 28.35 * 10) / 10 + ' oz';
+        });
+        txt = txt.replace(/(\d+)\s*ml\b/g, function(m, n) {
+          return Math.round(parseInt(n) / 29.57 * 10) / 10 + ' fl oz';
+        });
+        txt = txt.replace(/(\d+)\s*kg\b/g, function(m, n) {
+          return Math.round(parseInt(n) * 2.205 * 10) / 10 + ' lb';
+        });
+        el.textContent = txt;
+      });
+      // Convert temperatures
+      document.querySelectorAll('*').forEach(function(el) {
+        if (el.children.length === 0 && el.textContent.match(/\d+\s*°C/)) {
+          el.textContent = el.textContent.replace(/(\d+)\s*°C/g, function(m, n) {
+            return Math.round(parseInt(n) * 9/5 + 32) + '°F';
+          });
+        }
+      });
+    }
+
+    // 4. AI chat greeting personalization
+    var chatGreet = document.querySelector('#s22 [style*="Bonjour"]');
+    if (chatGreet && obData.name) {
+      chatGreet.textContent = 'Bonjour ' + obData.name + ' ! Que souhaitez-vous cuisiner aujourd\'hui ?';
+    }
+
+    // 5. Whisper personalization
+    var whisperCtx = document.querySelector('.whisper-ctx');
+    if (whisperCtx && obData.name) {
+      whisperCtx.textContent = obData.name + ', votre book grandit — continuez a explorer.';
+    }
+
+    // 6. Skill-based messaging
+    if (obData.level === 'beginner') {
+      var desc = document.querySelector('.det-desc');
+      // Could add "Recette accessible" badge
+    }
+  }
+
   window.obFinish = function() {
-    // Show personalizing step
-    obShowStep(6);
+    obShowStep(8); // Show finale
 
-    // Fill summary
-    document.getElementById('obSumWho').textContent = whoLabels[obData.who] || '—';
-    if ((obData.who === 'family' || obData.who === 'friends') && obData.household) {
-      document.getElementById('obSumWho').textContent += ' (' + obData.household + ' pers.)';
-    }
-    document.getElementById('obSumLevel').textContent = levelLabels[obData.level] || '—';
-    document.getElementById('obSumFreq').textContent = freqLabels[obData.frequency] || '—';
-    if (obData.cuisines.length > 0) {
-      var names = obData.cuisines.map(function(c) { return cuisineLabels[c] || c; });
-      document.getElementById('obSumCuisines').textContent = names.length > 3 ? names.slice(0, 3).join(', ') + ' +' + (names.length - 3) : names.join(', ');
-    }
-
-    // Show summary card with delay
+    // Animate the ring
     setTimeout(function() {
-      var sum = document.getElementById('obSummary');
-      if (sum) { sum.style.opacity = '1'; sum.style.transform = 'translateY(0)'; }
-    }, 600);
+      var ring = document.getElementById('obRingFill');
+      if (ring) ring.style.strokeDashoffset = '0';
+    }, 200);
 
-    // Auto-navigate to home
+    // Set finale name
+    var fName = document.getElementById('obFinaleName');
+    if (fName && obData.name) {
+      fName.textContent = obData.name + ', c\'est pret.';
+    }
+
+    // Fill finale items with actual choices
+    var items = [
+      obData.level ? levelLabels[obData.level] + ' — on adapte la difficulte' : 'Recettes adaptees a votre niveau',
+      obData.units ? unitLabels[obData.units] : 'Unites configurees',
+      obData.household ? obData.household + (obData.household > 1 ? ' personnes' : ' personne') + ' — portions ajustees' : 'Portions ajustees',
+      obData.cuisines.length > 0 ? obData.cuisines.slice(0,3).map(function(c){return cuisineLabels[c]||c}).join(', ') + (obData.cuisines.length > 3 ? ' +' + (obData.cuisines.length-3) : '') : 'Toutes les cuisines du monde',
+      obData.motivation.length > 0 ? 'Votre experience, sur mesure' : 'Pret a cuisiner'
+    ];
+    items.forEach(function(txt, i) {
+      var el = document.getElementById('obFItem' + i);
+      if (el) el.textContent = txt;
+    });
+
+    // Stagger the finale items
+    document.querySelectorAll('.ob-finale-item').forEach(function(item) {
+      var delay = parseInt(item.dataset.delay) || 0;
+      setTimeout(function() { item.classList.add('show'); }, delay);
+    });
+
+    // Apply personalization to the app
+    setTimeout(function() {
+      obApplyPersonalization();
+    }, 1000);
+
+    // Navigate to home after cinematic pause
     setTimeout(function() {
       go(1);
-    }, 3000);
+    }, 3500);
   };
 
 })();
