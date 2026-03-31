@@ -5425,65 +5425,16 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div style="flex:1;height:1px;background:var(--sep)"></div>
     </div>
 
-    <!-- Ingredient rows -->
+    <!-- Ingredient rows — populated dynamically by showRecipe(), static fallback with Spoonacular images -->
     <div class="det-ingredients" style="display:flex;flex-direction:column;gap:2px">
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Haricots blancs secs</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">400g</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Chapelure dor&eacute;e</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">80g</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Saucisses v&eacute;g&eacute;tales</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">4 pcs</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Tomates concass&eacute;es</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">400g</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Oignon jaune</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">2 pcs</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(109,160,109,.08);border:1.5px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--sage)">C</span></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Carottes</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">3 pcs</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Bouillon de l&eacute;gumes</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">500ml</span>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
-        <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
-        <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Thym et laurier</span>
-        <span style="font-size:14px;color:var(--t2);transition:color .4s">3 branches</span>
-      </div>
-
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/cannellini-beans.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Haricots blancs secs</span></div><span class="ing-dots"></span><span class="ing-a">400g</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/breadcrumbs.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Chapelure dor&eacute;e</span></div><span class="ing-dots"></span><span class="ing-a">80g</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/sausage.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Saucisses v&eacute;g&eacute;tales</span></div><span class="ing-dots"></span><span class="ing-a">4 pcs</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/tomato.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Tomates concass&eacute;es</span></div><span class="ing-dots"></span><span class="ing-a">400g</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/onion.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Oignon jaune</span></div><span class="ing-dots"></span><span class="ing-a">2 pcs</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/carrots.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Carottes</span></div><span class="ing-dots"></span><span class="ing-a">3 pcs</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/vegetable-broth.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Bouillon de l&eacute;gumes</span></div><span class="ing-dots"></span><span class="ing-a">500ml</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/thyme.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Thym et laurier</span></div><span class="ing-dots"></span><span class="ing-a">3 branches</span></div>
     </div>
   </div>
 
@@ -7483,20 +7434,23 @@ function showRecipe(idx){
   const co2El=document.querySelector('#s3 .det-co2-val');
   if(co2El)co2El.textContent=r.co2;
   /* Ingredient real food photos from OptiRecipe CDN */
-  /* Ingredients with recipe image from OptiRecipe + checkboxes */
+  /* Real ingredient images from Spoonacular CDN */
+  var ING_IMG_MAP={poulet:'chicken-breast.jpg',oignon:'onion.jpg',citron:'lemon.jpg',origan:'oregano.jpg',huile:'olive-oil.jpg',ail:'garlic.jpg',yaourt:'plain-yogurt.jpg',baies:'mixed-berries.jpg',miel:'honey.jpg',cannelle:'cinnamon.jpg',sauce:'chili-sauce.jpg',cumin:'cumin.jpg',poivron:'bell-pepper-orange.jpg',champignon:'brown-mushrooms.jpg',beurre:'butter-stick.jpg',persil:'parsley.jpg',vin:'white-wine.jpg',pate:'penne.jpg',courgette:'zucchini.jpg',tomate:'tomato.jpg',basilic:'fresh-basil.jpg',couscous:'couscous.jpg',abricot:'dried-apricots.jpg',tofu:'tofu.jpg',gingembre:'ginger.jpg',soja:'soy-sauce.jpg',spaghetti:'spaghetti.jpg',viande:'fresh-ground-beef.jpg',mozzarella:'mozzarella.jpg',farine:'flour.jpg',sucre:'sugar-in-bowl.jpg',oeuf:'egg.jpg',rhubarbe:'rhubarb.jpg',fromage:'parmesan.jpg',creme:'heavy-cream.jpg',vanille:'vanilla-extract.jpg',linguine:'linguine.jpg',carotte:'carrots.jpg',bouillon:'vegetable-broth.jpg',haricot:'cannellini-beans.jpg',chapelure:'breadcrumbs.jpg',saucisse:'sausage.jpg',herbe:'mixed-herbs.jpg',thym:'thyme.jpg',laurier:'bay-leaves.jpg',celeri:'celery.jpg','saint-jacques':'sea-scallops.jpg',amande:'almonds.jpg',cacao:'cocoa-powder.jpg',piment:'chili-peppers.jpg',aubergine:'eggplant.jpg',lasagne:'lasagna-noodles.jpg',bechamel:'milk.jpg',verveine:'lemon.jpg',levure:'active-dry-yeast.jpg',ras:'ras-el-hanout.jpg',panko:'panko.jpg',sesame:'sesame-seeds.jpg'};
+  function getIngImgUrl(name){var n=name.toLowerCase();for(var k in ING_IMG_MAP){if(n.indexOf(k)!==-1)return'https://img.spoonacular.com/ingredients_250x250/'+ING_IMG_MAP[k]}return'https://img.spoonacular.com/ingredients_250x250/mixed-vegetables.jpg'}
+  /* Ingredients with real product images + checkboxes */
   const ingBox=document.querySelector('#s3 .det-ingredients');
   if(ingBox){
     ingBox.innerHTML='';
     r.ingredients.forEach(function(ing){
-      ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon"><img src="'+r.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
+      ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon"><img src="'+getIngImgUrl(ing.name)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
     });
   }
-  /* Quick ingredient strip — recipe image */
+  /* Quick ingredient strip — real photos */
   var ingStrip=document.querySelector('#s3 .det-ing-strip');
   if(ingStrip&&r.ingredients){
     ingStrip.innerHTML='';
     r.ingredients.forEach(function(ing){
-      ingStrip.innerHTML+='<div class="det-ing-strip-item"><img src="'+r.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:14px"></div>';
+      ingStrip.innerHTML+='<div class="det-ing-strip-item"><img src="'+getIngImgUrl(ing.name)+'" alt="'+ing.name+'" style="width:100%;height:100%;object-fit:cover;border-radius:14px"></div>';
     });
   }
   /* "Ready by" timing — creates urgency */
