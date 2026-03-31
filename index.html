@@ -5237,8 +5237,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s3" data-s="off">
 <div class="det">
 
-  <!-- 1. HERO PHOTO — 50vh, full-bleed, parallax -->
-  <div class="det-hero" style="position:relative;width:100%;height:50vh;overflow:hidden">
+  <!-- 1. HERO PHOTO — 65vh immersive, title overlaid like a cookbook page -->
+  <div class="det-hero" style="position:relative;width:100%;height:65vh;overflow:hidden">
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform">
     <!-- Floating nav -->
     <div style="position:absolute;top:54px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10">
@@ -5248,62 +5248,78 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         <button style="width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="ms" style="color:#fff;font-size:20px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">bookmark_border</span></button>
       </div>
     </div>
-    <!-- Bottom gradient fade to cream -->
-    <div style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg) 0%,transparent 100%)"></div>
+    <!-- TITLE OVERLAID ON HERO — cookbook page feel -->
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:5;padding:0 24px 28px;background:linear-gradient(to top,rgba(12,8,4,.85) 0%,rgba(12,8,4,.5) 50%,transparent 100%)">
+      <!-- Country + difficulty inline -->
+      <div class="det-cat" style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,135,111,.9);margin-bottom:8px;text-shadow:0 1px 4px rgba(0,0,0,.3)">&#x1F1EB;&#x1F1F7; Plat &middot; France</div>
+      <!-- Title on the hero -->
+      <h1 class="det-t" style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4;line-height:1.12;margin:0 0 10px;text-shadow:0 2px 12px rgba(0,0,0,.4);letter-spacing:-.3px;transition:color .4s">Cassoulet v&eacute;g&eacute;talien</h1>
+      <!-- Emotional hook -->
+      <p class="det-desc" style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.5;color:rgba(240,235,228,.75);margin:0;text-shadow:0 1px 6px rgba(0,0,0,.3);transition:color .4s;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">La premi&egrave;re bouch&eacute;e vous transporte. Le jus coule, les herbes &eacute;clatent, le beurre noisette enveloppe chaque fibre.</p>
+    </div>
   </div>
 
-  <!-- 2. RECIPE TITLE SECTION -->
-  <div style="padding:0 22px;background:var(--bg);position:relative;z-index:2;margin-top:-24px">
-    <h1 class="det-t" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);line-height:1.25;margin:0 0 10px;transition:color .4s">Cassoulet v&eacute;g&eacute;talien</h1>
+  <!-- 2. DESIRE SECTION — minimal, emotional, action-first -->
+  <div style="padding:20px 22px 0;background:var(--bg);position:relative;z-index:2">
 
-    <!-- Meta line: flag + country + difficulty + time + servings -->
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--t2);transition:color .4s">
-      <span class="det-badge"><span style="font-size:16px">&#x1F1EB;&#x1F1F7;</span> France</span>
+    <!-- Social proof + confidence -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="ms" style="font-size:16px;color:var(--gold)">star</span>
+        <span style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">4.9</span>
+      </div>
       <span style="color:var(--t4)">&middot;</span>
-      <span class="det-badge" style="background:var(--terra-g);color:var(--terra)">Interm&eacute;diaire</span>
+      <span style="font-size:12px;color:var(--t3);transition:color .4s">Pr&eacute;par&eacute;e 1 247 fois</span>
       <span style="color:var(--t4)">&middot;</span>
-      <span class="det-badge"><span class="ms" style="font-size:14px">schedule</span> 1h 30</span>
-      <span style="color:var(--t4)">&middot;</span>
-      <span class="det-badge"><span class="ms" style="font-size:14px">group</span> 4 portions</span>
+      <div style="display:flex;align-items:center;gap:4px">
+        <span class="ms" style="font-size:14px;color:var(--terra)">schedule</span>
+        <span style="font-size:12px;color:var(--t2);transition:color .4s">1h 30</span>
+      </div>
     </div>
 
-    <!-- Description -->
-    <p class="det-desc" style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.65;color:var(--t2);margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .4s">La premiere bouchee vous transporte. Le jus coule, les herbes eclatent, le beurre noisette enveloppe chaque fibre. C'est le genre de plat qu'on refait le lendemain.</p>
+    <!-- Quick info — clean inline, not heavy cards -->
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:18px;font-size:13px;color:var(--t2);transition:color .4s">
+      <span class="det-badge" style="background:var(--terra-g);color:var(--terra)">Interm&eacute;diaire</span>
+      <span class="det-badge"><span class="ms" style="font-size:14px">group</span> 4 portions</span>
+      <span class="det-badge"><span class="ms" style="font-size:14px">local_fire_department</span> 470 kcal</span>
+      <span class="det-badge"><span class="ms" style="font-size:14px">euro</span> 3,50&euro;/pers</span>
+    </div>
 
     <!-- Dynamic elements for showRecipe() -->
-    <span class="det-source" style="display:block;font-size:11px;color:var(--t3);margin-bottom:12px"></span>
+    <span class="det-source" style="display:block;font-size:11px;color:var(--t3);margin-bottom:8px"></span>
     <div class="det-story"></div>
-    <div class="det-cost" style="font-size:13px;color:var(--t2);margin-bottom:12px;display:flex;align-items:center;gap:6px"></div>
-    <div class="det-nutri" style="font-size:13px;color:var(--t2);margin-bottom:16px"></div>
+    <div class="det-cost" style="display:none"></div>
+    <div class="det-nutri" style="display:none"></div>
 
-    <!-- CTA Button — Cuisiner -->
-    <button onclick="go(4)" style="width:100%;height:52px;border-radius:16px;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 4px 16px rgba(196,101,74,.3);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform='scale(1)'">
-      <span class="ms" style="color:#fff;font-size:20px">play_arrow</span>
-      <span style="font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#fff;letter-spacing:.3px">Lancer la pr&eacute;paration</span>
+    <!-- CTA Button — BIG, emotional, impossible to miss -->
+    <button onclick="go(4)" style="width:100%;height:56px;border-radius:28px;background:linear-gradient(135deg,var(--terra),#d4876f);border:none;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 8px 28px rgba(196,101,74,.4),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;margin-bottom:4px" onmousedown="this.style.transform='scale(.96)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.96)'" ontouchend="this.style.transform='scale(1)'">
+      <span class="ms" style="color:#fff;font-size:22px">restaurant</span>
+      <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:.5px">Cuisiner maintenant</span>
     </button>
+    <div style="text-align:center;margin-bottom:16px"><span style="font-size:11px;color:var(--t4)">85% r&eacute;ussissent du premier coup</span></div>
   </div>
 
-  <!-- 3. INFO CARDS ROW -->
-  <div class="det-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:20px 22px 0">
-    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
-      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">schedule</span>
-      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">1h 30</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">Temps</div>
+  <!-- 3. INFO CARDS ROW — compact, below the desire zone -->
+  <div class="det-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 22px">
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:12px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:18px;color:var(--terra);display:block;margin-bottom:3px">schedule</span>
+      <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">1h 30</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:1px;transition:color .4s">Temps</div>
     </div>
-    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
-      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">group</span>
-      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">4</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">Portions</div>
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:12px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:18px;color:var(--terra);display:block;margin-bottom:3px">local_fire_department</span>
+      <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">470</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:1px;transition:color .4s">kcal</div>
     </div>
-    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
-      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">local_fire_department</span>
-      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">470</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">kcal</div>
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:12px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:18px;color:var(--terra);display:block;margin-bottom:3px">group</span>
+      <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">4</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:1px;transition:color .4s">Portions</div>
     </div>
-    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:14px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
-      <span class="ms" style="font-size:20px;color:var(--terra);display:block;margin-bottom:4px">star</span>
-      <div style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">98</div>
-      <div style="font-size:11px;color:var(--t3);margin-top:2px;transition:color .4s">/100</div>
+    <div style="background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:12px 6px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--glass-s)">
+      <span class="ms" style="font-size:18px;color:var(--terra);display:block;margin-bottom:3px">eco</span>
+      <div style="font-size:13px;font-weight:600;color:var(--t1);transition:color .4s">A</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:1px;transition:color .4s">CO2</div>
     </div>
   </div>
 
