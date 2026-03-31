@@ -1466,6 +1466,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   animation:contentIn .4s cubic-bezier(.32,.72,.0,1) both;
 }
 @keyframes contentIn{from{opacity:.85;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* Recipe detail — Desire Engine animations */
+@keyframes detKenBurns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.06) translate(-1%,-1%)}}
+@keyframes detFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes detCtaBreathe{0%,100%{transform:scale(1);box-shadow:0 8px 28px rgba(196,101,74,.4)}50%{transform:scale(1.02);box-shadow:0 12px 36px rgba(196,101,74,.5)}}
+.det-ing-strip::-webkit-scrollbar{display:none}
+.det-ing-strip-item{width:48px;height:48px;border-radius:14px;overflow:hidden;flex-shrink:0;border:2px solid var(--card-b);transition:border-color .2s}
+.det-ing-strip-item img{width:100%;height:100%;object-fit:cover}
 .scr[data-s="on"] .greet{animation-delay:.05s}
 .scr[data-s="on"] .feat{animation-delay:.1s}
 .scr[data-s="on"] .sh{animation-delay:.08s}
@@ -5245,9 +5252,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s3" data-s="off">
 <div class="det">
 
-  <!-- 1. HERO PHOTO — 65vh immersive, title overlaid like a cookbook page -->
+  <!-- 1. HERO PHOTO — 65vh immersive, Ken Burns animation, title overlaid -->
   <div class="det-hero" style="position:relative;width:100%;height:65vh;overflow:hidden">
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform">
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;will-change:transform;animation:detKenBurns 12s ease-in-out infinite alternate">
     <!-- Floating nav -->
     <div style="position:absolute;top:54px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10">
       <button onclick="goBack()" style="width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer"><span class="ms" style="color:#fff;font-size:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))">arrow_back</span></button>
@@ -5257,36 +5264,58 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       </div>
     </div>
     <!-- TITLE OVERLAID ON HERO — cookbook page feel -->
-    <div style="position:absolute;bottom:0;left:0;right:0;z-index:5;padding:0 24px 28px;background:linear-gradient(to top,rgba(12,8,4,.85) 0%,rgba(12,8,4,.5) 50%,transparent 100%)">
-      <!-- Country + difficulty inline -->
-      <div class="det-cat" style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,135,111,.9);margin-bottom:8px;text-shadow:0 1px 4px rgba(0,0,0,.3)">&#x1F1EB;&#x1F1F7; Plat &middot; France</div>
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:5;padding:0 24px 28px;background:linear-gradient(to top,rgba(12,8,4,.88) 0%,rgba(12,8,4,.6) 45%,rgba(12,8,4,.15) 75%,transparent 100%)">
+      <!-- Country + category -->
+      <div class="det-cat" style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,135,111,.9);margin-bottom:8px;text-shadow:0 1px 4px rgba(0,0,0,.3);opacity:0;animation:detFadeUp .6s cubic-bezier(.16,1,.3,1) .2s forwards">&#x1F1EB;&#x1F1F7; Plat &middot; France</div>
       <!-- Title on the hero -->
-      <h1 class="det-t" style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4;line-height:1.12;margin:0 0 10px;text-shadow:0 2px 12px rgba(0,0,0,.4);letter-spacing:-.3px;transition:color .4s">Cassoulet v&eacute;g&eacute;talien</h1>
-      <!-- Emotional hook -->
-      <p class="det-desc" style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.5;color:rgba(240,235,228,.75);margin:0;text-shadow:0 1px 6px rgba(0,0,0,.3);transition:color .4s;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">La premi&egrave;re bouch&eacute;e vous transporte. Le jus coule, les herbes &eacute;clatent, le beurre noisette enveloppe chaque fibre.</p>
+      <h1 class="det-t" style="font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#f0ebe4;line-height:1.12;margin:0 0 12px;text-shadow:0 2px 12px rgba(0,0,0,.4);letter-spacing:-.3px;transition:color .4s;opacity:0;animation:detFadeUp .7s cubic-bezier(.16,1,.3,1) .35s forwards">Cassoulet v&eacute;g&eacute;talien</h1>
+      <!-- Emotional hook — sensory, evocative -->
+      <p class="det-desc" style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.5;color:rgba(240,235,228,.8);margin:0;text-shadow:0 1px 6px rgba(0,0,0,.3);transition:color .4s;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;opacity:0;animation:detFadeUp .7s cubic-bezier(.16,1,.3,1) .5s forwards">La premi&egrave;re bouch&eacute;e vous transporte. Le jus coule, les herbes &eacute;clatent, le beurre noisette enveloppe chaque fibre.</p>
     </div>
   </div>
 
-  <!-- 2. DESIRE SECTION — minimal, emotional, action-first -->
+  <!-- 2. DESIRE SECTION — emotional pull, then action -->
   <div style="padding:20px 22px 0;background:var(--bg);position:relative;z-index:2">
 
-    <!-- Social proof + confidence -->
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:6px">
-        <span class="ms" style="font-size:16px;color:var(--gold)">star</span>
+    <!-- Sensory anticipation line — makes you FEEL it -->
+    <div class="det-sensory" style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;line-height:1.6;color:var(--terra);margin-bottom:14px;padding:12px 16px;background:var(--terra-g);border-radius:14px;opacity:0;animation:detFadeUp .6s cubic-bezier(.16,1,.3,1) .6s forwards">
+      <span style="font-size:15px;margin-right:4px">&#x2728;</span> Imaginez : le beurre gr&eacute;sille, les oignons fondent, votre cuisine embaume les herbes de Provence&hellip;
+    </div>
+
+    <!-- Social proof + timing urgency -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:5px">
+        <span class="ms" style="font-size:15px;color:var(--gold)">star</span>
         <span style="font-size:14px;font-weight:600;color:var(--t1);transition:color .4s">4.9</span>
       </div>
       <span style="color:var(--t4)">&middot;</span>
       <span style="font-size:12px;color:var(--t3);transition:color .4s">Pr&eacute;par&eacute;e 1 247 fois</span>
       <span style="color:var(--t4)">&middot;</span>
       <div style="display:flex;align-items:center;gap:4px">
-        <span class="ms" style="font-size:14px;color:var(--terra)">schedule</span>
-        <span style="font-size:12px;color:var(--t2);transition:color .4s">1h 30</span>
+        <span class="ms" style="font-size:14px;color:var(--sage)">check_circle</span>
+        <span style="font-size:12px;color:var(--sage);font-weight:500">85% r&eacute;ussite</span>
       </div>
     </div>
 
-    <!-- Quick info — clean inline, not heavy cards -->
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:18px;font-size:13px;color:var(--t2);transition:color .4s">
+    <!-- "Ready by" timing — creates urgency -->
+    <div class="det-timing" style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px 14px;background:var(--glass);border:1px solid var(--glass-b);border-radius:12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+      <span class="ms" style="font-size:18px;color:var(--terra)">schedule</span>
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--t1);transition:color .4s">1h 30 de pr&eacute;paration</div>
+        <div class="det-ready-by" style="font-size:11px;color:var(--terra);font-weight:500"></div>
+      </div>
+    </div>
+
+    <!-- Quick ingredient visual strip — instant "do I have these?" scan -->
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-weight:500;letter-spacing:.3px">Un coup d'&oelig;il sur vos ingr&eacute;dients</div>
+      <div class="det-ing-strip" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px">
+        <!-- Populated by showRecipe() -->
+      </div>
+    </div>
+
+    <!-- Quick info badges -->
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:16px;font-size:13px;color:var(--t2);transition:color .4s">
       <span class="det-badge" style="background:var(--terra-g);color:var(--terra)">Interm&eacute;diaire</span>
       <span class="det-badge"><span class="ms" style="font-size:14px">group</span> 4 portions</span>
       <span class="det-badge"><span class="ms" style="font-size:14px">local_fire_department</span> 470 kcal</span>
@@ -5299,12 +5328,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="det-cost" style="display:none"></div>
     <div class="det-nutri" style="display:none"></div>
 
-    <!-- CTA Button — BIG, emotional, impossible to miss -->
-    <button onclick="go(4)" style="width:100%;height:56px;border-radius:28px;background:linear-gradient(135deg,var(--terra),#d4876f);border:none;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 8px 28px rgba(196,101,74,.4),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;margin-bottom:4px" onmousedown="this.style.transform='scale(.96)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.96)'" ontouchend="this.style.transform='scale(1)'">
+    <!-- CTA Button — warm gradient, breathing animation, impossible to miss -->
+    <button onclick="go(4)" class="det-cta-main" style="width:100%;height:58px;border-radius:29px;background:linear-gradient(135deg,var(--terra),#d4876f);border:none;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 8px 28px rgba(196,101,74,.4),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;margin-bottom:4px;animation:detCtaBreathe 3s ease-in-out infinite 1.5s" onmousedown="this.style.transform='scale(.96)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.96)'" ontouchend="this.style.transform='scale(1)'">
       <span class="ms" style="color:#fff;font-size:22px">restaurant</span>
       <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:.5px">Cuisiner maintenant</span>
     </button>
-    <div style="text-align:center;margin-bottom:16px"><span style="font-size:11px;color:var(--t4)">85% r&eacute;ussissent du premier coup</span></div>
+    <div style="text-align:center;margin-bottom:16px"><span class="det-ready-by2" style="font-size:11px;color:var(--terra);font-weight:500"></span></div>
   </div>
 
   <!-- 3. INFO CARDS ROW — compact, below the desire zone -->
@@ -7527,6 +7556,26 @@ function showRecipe(idx){
       ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon"><img src="'+getIngImg(ing.name)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
     });
   }
+  /* Quick ingredient visual strip */
+  var ingStrip=document.querySelector('#s3 .det-ing-strip');
+  if(ingStrip&&r.ingredients){
+    ingStrip.innerHTML='';
+    r.ingredients.forEach(function(ing){
+      ingStrip.innerHTML+='<div class="det-ing-strip-item"><img src="'+getIngImg(ing.name)+'" alt="'+ing.name+'"></div>';
+    });
+  }
+  /* "Ready by" timing — creates urgency */
+  var totalMin=getTotalTime(r);
+  var readyDate=new Date(Date.now()+totalMin*60000);
+  var readyStr='Pr\u00EAt \u00E0 '+readyDate.getHours()+'h'+String(readyDate.getMinutes()).padStart(2,'0')+' si vous commencez maintenant';
+  var readyEl=document.querySelector('#s3 .det-ready-by');
+  if(readyEl)readyEl.textContent=readyStr;
+  var readyEl2=document.querySelector('#s3 .det-ready-by2');
+  if(readyEl2)readyEl2.textContent=readyStr;
+  /* Sensory text per recipe */
+  var sensoryTexts={r01:'Le poulet dor\u00E9 cr\u00E9pite sur le grill, le citron \u00E9clate, l\u2019origan parfume l\u2019air\u2026',r02:'Le yaourt frais, les baies chaudes fondent, le miel de thym coule doucement\u2026',r03:'Les \u00E9pices fum\u00E9es enveloppent la cuisine, la viande fond sous la fourchette\u2026',r04:'Le beurre grille, l\u2019ail parfume, les champignons fondent dans la po\u00EAle\u2026',r05:'Les l\u00E9gumes croquent, le basilic embaume, les couleurs explosent dans l\u2019assiette\u2026',r06:'La p\u00E2te craque sous la dent, la cr\u00E8me vanill\u00E9e fond sur la langue\u2026',r07:'Le ras el hanout envahit la cuisine, le couscous absorbe toutes les saveurs\u2026',r08:'Le panko croustille, le s\u00E9same grill\u00E9 embaume, le champignon fond dedans\u2026',r09:'La sauce tomate mijote, la viande dore, le parmesan fond sur les p\u00E2tes br\u00FBlantes\u2026',r10:'Le zeste de citron parfume la p\u00E2te, la verveine apporte sa fra\u00EEcheur unique\u2026',r11:'La mozzarella file, les poivrons grill\u00E9s fondent, le poulet est tendre\u2026',r12:'Les Saint-Jacques saisissent dans le beurre noisette, le citron \u00E9clate\u2026',r13:'Le cacao se m\u00EAle aux \u00E9pices, les l\u00E9gumes confisent dans la sauce\u2026',r14:'La b\u00E9chamel gratine, les l\u00E9gumes du soleil fondent entre les feuilles\u2026',r15:'La rhubarbe acidul\u00E9e \u00E9clate dans le g\u00E2teau moelleux, le sucre glace fond\u2026'};
+  var sensoryEl=document.querySelector('#s3 .det-sensory');
+  if(sensoryEl){var sid=r.id;sensoryEl.innerHTML='<span style="font-size:15px;margin-right:4px">&#x2728;</span> '+(sensoryTexts[sid]||'Imaginez : les ar\u00F4mes envahissent votre cuisine, chaque ingr\u00E9dient prend vie\u2026');}
   /* Steps with timing hints */
   const stepsBox=document.querySelector('#s3 .det-steps');
   if(stepsBox){
