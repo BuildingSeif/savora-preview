@@ -5547,32 +5547,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <!-- CO2 badge (hidden, populated by showRecipe) -->
   <span class="det-co2-val" style="display:none"></span>
 
-  <!-- Vous aimerez aussi — prominent recommendations -->
-  <div style="padding:24px 22px 0">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <div style="flex:1;height:1px;background:var(--sep)"></div>
-      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Vous aimerez aussi</span>
-      <div style="flex:1;height:1px;background:var(--sep)"></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer" onclick="showRecipe('r05');go(3)">
-        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(0deg,rgba(16,12,8,.82),transparent)">
-          <div style="font-family:'Playfair Display',serif;font-size:14px;color:#f0ebe4;line-height:1.2">P&acirc;tes aux l&eacute;gumes du march&eacute;</div>
-          <div style="font-size:11px;color:rgba(240,235,228,.6);margin-top:4px;display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:13px">schedule</span> 25 min</div>
-        </div>
-      </div>
-      <div style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer" onclick="showRecipe('r12');go(3)">
-        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774033621145-ljnzx7mu.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(0deg,rgba(16,12,8,.82),transparent)">
-          <div style="font-family:'Playfair Display',serif;font-size:14px;color:#f0ebe4;line-height:1.2">Rago&ucirc;t marocain au couscous</div>
-          <div style="font-size:11px;color:rgba(240,235,228,.6);margin-top:4px;display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:13px">schedule</span> 45 min</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Conseil du chef -->
+  <!-- Conseil du chef — cooking tip, not a recommendation -->
   <div style="margin:20px 22px 0;padding:18px 20px;background:var(--terra-g);border-left:3px solid var(--terra);border-radius:0 16px 16px 0">
     <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
     <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;line-height:1.6;color:var(--t2);margin:0;transition:color .4s">Pour un r&eacute;sultat encore plus savoureux, cassez la cro&ucirc;te de chapelure &agrave; mi-cuisson et laissez-en reformer une nouvelle.</p>
