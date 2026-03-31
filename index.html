@@ -1019,12 +1019,12 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .nut-fill{height:100%;border-radius:2px}
 
 .ing-h{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--t1);margin-bottom:14px;transition:color .4s}
-.ing{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--sep)}
+.ing{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--sep)}
 .ing:last-child{border-bottom:none}
-.ing-icon{width:40px;height:40px;border-radius:12px;background:var(--terra-g);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;line-height:1}
+.ing-icon{width:32px;height:32px;border-radius:10px;background:var(--terra-g);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;line-height:1;overflow:hidden}
 .ing-l{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
 .ing-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ing-n{font-size:14px;font-weight:500;color:var(--t1);transition:color .4s}
+.ing-n{font-size:14px;font-weight:500;color:var(--t1);transition:color .4s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ing-dots{flex:1;border-bottom:1px dotted var(--t4);min-width:20px;margin:0 4px;align-self:flex-end;margin-bottom:4px}
 .ing-a{font-size:13px;color:var(--t3);white-space:nowrap;flex-shrink:0;font-weight:500}
 .ing-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
@@ -1456,7 +1456,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 @keyframes detFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes detCtaBreathe{0%,100%{transform:scale(1);box-shadow:0 8px 28px rgba(196,101,74,.4)}50%{transform:scale(1.02);box-shadow:0 12px 36px rgba(196,101,74,.5)}}
 .det-ing-strip::-webkit-scrollbar{display:none}
-.det-ing-strip-item{width:48px;height:48px;border-radius:14px;overflow:hidden;flex-shrink:0;border:2px solid var(--card-b);transition:border-color .2s}
+.det-ing-strip-item{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1.5px solid var(--card-b);transition:border-color .2s}
 .det-ing-strip-item img{width:100%;height:100%;object-fit:cover}
 .scr[data-s="on"] .greet{animation-delay:.05s}
 .scr[data-s="on"] .feat{animation-delay:.1s}
@@ -4861,7 +4861,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 </div>
 
 <!-- ELEMENT 2: Hero — last captured recipe -->
-<div class="hero-home" onclick="go(3)">
+<div class="hero-home" onclick="showRecipe(3);go(3)">
   <div class="hero-source-badge">
     <span class="ms">photo_camera</span>
   </div>
@@ -4897,32 +4897,32 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <button style="font-size:12px;color:var(--terra);font-weight:500;background:none;border:none;cursor:pointer;letter-spacing:.3px">Tout voir</button>
 </div>
 <div class="recent-scroll">
-  <!-- Card 1 — from Instagram -->
-  <div class="recent-card" onclick="go(3)">
+  <!-- Card 1 — Pâtes primavera (r04 Scampi champignons) -->
+  <div class="recent-card" onclick="showRecipe(4);go(3)">
     <div class="rc-source"><span class="ms">photo_camera</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="">
     <div class="rc-overlay">
       <div class="rc-title">&#127470;&#127481; P&acirc;tes primavera</div>
     </div>
   </div>
-  <!-- Card 2 — from web link -->
-  <div class="recent-card" onclick="go(3)">
+  <!-- Card 2 — Thon glacé (r01 Brochettes grecques) -->
+  <div class="recent-card" onclick="showRecipe(0);go(3)">
     <div class="rc-source"><span class="ms">link</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" alt="">
     <div class="rc-overlay">
       <div class="rc-title">&#127471;&#127477; Thon glac&eacute; wasabi</div>
     </div>
   </div>
-  <!-- Card 3 — from camera -->
-  <div class="recent-card" onclick="go(3)">
+  <!-- Card 3 — Ragoût (r07 Ragout marocain) -->
+  <div class="recent-card" onclick="showRecipe(6);go(3)">
     <div class="rc-source"><span class="ms">photo_camera</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" alt="">
     <div class="rc-overlay">
       <div class="rc-title">&#127474;&#127462; Rago&ucirc;t r&eacute;confortant</div>
     </div>
   </div>
-  <!-- Card 4 — from web -->
-  <div class="recent-card" onclick="go(3)">
+  <!-- Card 4 — Gâteau (r10 Gâteau citron) -->
+  <div class="recent-card" onclick="showRecipe(9);go(3)">
     <div class="rc-source"><span class="ms">language</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" alt="">
     <div class="rc-overlay">
@@ -5427,14 +5427,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
     <!-- Ingredient rows — populated dynamically by showRecipe(), static fallback with Spoonacular images -->
     <div class="det-ingredients" style="display:flex;flex-direction:column;gap:2px">
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/cannellini-beans.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Haricots blancs secs</span></div><span class="ing-dots"></span><span class="ing-a">400g</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/breadcrumbs.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Chapelure dor&eacute;e</span></div><span class="ing-dots"></span><span class="ing-a">80g</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/sausage.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Saucisses v&eacute;g&eacute;tales</span></div><span class="ing-dots"></span><span class="ing-a">4 pcs</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/tomato.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Tomates concass&eacute;es</span></div><span class="ing-dots"></span><span class="ing-a">400g</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/onion.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Oignon jaune</span></div><span class="ing-dots"></span><span class="ing-a">2 pcs</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/carrots.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Carottes</span></div><span class="ing-dots"></span><span class="ing-a">3 pcs</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/vegetable-broth.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Bouillon de l&eacute;gumes</span></div><span class="ing-dots"></span><span class="ing-a">500ml</span></div>
-      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/thyme.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">Thym et laurier</span></div><span class="ing-dots"></span><span class="ing-a">3 branches</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/cannellini-beans.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Haricots blancs secs</span></div><span class="ing-dots"></span><span class="ing-a">400g</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/breadcrumbs.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Chapelure dor&eacute;e</span></div><span class="ing-dots"></span><span class="ing-a">80g</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/sausage.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Saucisses v&eacute;g&eacute;tales</span></div><span class="ing-dots"></span><span class="ing-a">4 pcs</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/tomato.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Tomates concass&eacute;es</span></div><span class="ing-dots"></span><span class="ing-a">400g</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/onion.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Oignon jaune</span></div><span class="ing-dots"></span><span class="ing-a">2 pcs</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/carrots.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Carottes</span></div><span class="ing-dots"></span><span class="ing-a">3 pcs</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/vegetable-broth.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Bouillon de l&eacute;gumes</span></div><span class="ing-dots"></span><span class="ing-a">500ml</span></div>
+      <div class="ing"><div class="ing-check" onclick="this.classList.toggle('on')"><span class="ms">check</span></div><div class="ing-icon"><img src="https://img.spoonacular.com/ingredients_250x250/thyme.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">Thym et laurier</span></div><span class="ing-dots"></span><span class="ing-a">3 branches</span></div>
     </div>
   </div>
 
@@ -7382,6 +7382,8 @@ const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 
 /* ═══ showRecipe — populate S3 with real data ═══ */
 function showRecipe(idx){
+  /* Support both numeric index and string ID (e.g. 'r07') */
+  if(typeof idx==='string'){var found=RECIPES.findIndex(function(r){return r.id===idx});if(found!==-1)idx=found;else idx=0;}
   currentRecipeIndex=idx;
   const r=RECIPES[idx];
   const flag=getFlag(r.country);
@@ -7442,7 +7444,7 @@ function showRecipe(idx){
   if(ingBox){
     ingBox.innerHTML='';
     r.ingredients.forEach(function(ing){
-      ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon"><img src="'+getIngImgUrl(ing.name)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
+      ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon"><img src="'+getIngImgUrl(ing.name)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
     });
   }
   /* Quick ingredient strip — real photos */
