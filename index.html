@@ -2183,37 +2183,40 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* ===== COOK MODE V6 — KITCHEN COMPANION ===== */
 .km{
-  position:relative;background:#1a1714;height:100%;display:flex;flex-direction:column;
+  position:relative;background:var(--bg);height:100%;display:flex;flex-direction:column;
   overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  background-image:var(--bg-paper);background-size:256px;
 }
+[data-theme="dark"] .km{background:#1a1714;background-image:none}
 
 /* Top Bar */
 .km-bar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:60px 24px 16px;background:#1a1714;position:relative;z-index:10;
+  padding:60px 24px 16px;background:var(--hdr-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:relative;z-index:10;
   flex-shrink:0;
 }
 .km-close{
-  width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--glass-b);
+  background:var(--glass);display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:background .2s;-webkit-tap-highlight-color:transparent;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.km-close:active{background:rgba(255,255,255,.1)}
-.km-close .ms{font-size:18px;color:#f0ebe4}
+.km-close:active{background:var(--terra-g)}
+.km-close .ms{font-size:18px;color:var(--t1)}
 .km-title{
-  font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:#f0ebe4;
-  text-align:center;letter-spacing:.02em;opacity:.85;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t1);
+  text-align:center;letter-spacing:.02em;transition:color .4s;
 }
 .km-progress-label{
-  font-family:'Inter',sans-serif;font-size:12px;color:rgba(240,235,228,.35);
-  white-space:nowrap;min-width:80px;text-align:right;
+  font-family:'Inter',sans-serif;font-size:12px;color:var(--t3);
+  white-space:nowrap;min-width:80px;text-align:right;transition:color .4s;
 }
 
 /* Step Watermark */
 .km-watermark{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
   font-family:'Playfair Display',serif;font-size:140px;font-weight:400;
-  color:#f0ebe4;opacity:.08;pointer-events:none;user-select:none;
+  color:var(--terra);opacity:.06;pointer-events:none;user-select:none;
   line-height:1;z-index:1;
 }
 
@@ -2226,9 +2229,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 /* Step Instruction */
 .km-instruction{
-  font-family:'Inter',sans-serif;font-size:24px;font-weight:400;color:#f0ebe4;
-  text-align:center;line-height:1.7;max-width:320px;
-  letter-spacing:.01em;
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--t1);
+  text-align:center;line-height:1.65;max-width:320px;
+  letter-spacing:-.01em;transition:color .4s;
 }
 .km-step-time{
   font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
@@ -2242,7 +2245,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .km-timer-ring{position:relative;width:160px;height:160px}
 .km-timer-ring svg{width:160px;height:160px;transform:rotate(-90deg)}
 .km-ring-bg{
-  fill:none;stroke:rgba(255,255,255,.08);stroke-width:4;
+  fill:none;stroke:var(--sep);stroke-width:4;
 }
 .km-ring-progress{
   fill:none;stroke:var(--terra);stroke-width:4;
@@ -2254,18 +2257,19 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .km-timer-value{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   font-family:'Playfair Display',serif;font-size:28px;font-weight:400;
-  color:#f0ebe4;font-variant-numeric:tabular-nums;letter-spacing:.02em;
+  color:var(--t1);font-variant-numeric:tabular-nums;letter-spacing:.02em;transition:color .4s;
 }
 .km-timer-label{
-  font-family:'Inter',sans-serif;font-size:11px;color:rgba(240,235,228,.35);
-  letter-spacing:.04em;
+  font-family:'Inter',sans-serif;font-size:11px;color:var(--t3);
+  letter-spacing:.04em;transition:color .4s;
 }
 
 /* Bottom Navigation */
 .km-nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:20px 24px calc(20px + env(safe-area-inset-bottom, 12px));
-  background:#1a1714;position:relative;z-index:10;flex-shrink:0;
+  background:var(--hdr-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--sep);position:relative;z-index:10;flex-shrink:0;
 }
 .km-nav-btn{
   display:flex;align-items:center;justify-content:center;gap:6px;
@@ -2285,9 +2289,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .km-nav-next:active{
   background:rgba(196,119,68,.18);
 }
-.km-nav-btn:active{background:rgba(255,255,255,.06)}
-.km-nav-prev{color:#f0ebe4;opacity:.7}
-.km-nav-prev .ms{font-size:18px;color:#f0ebe4;opacity:.7}
+.km-nav-btn:active{background:var(--terra-g)}
+.km-nav-prev{color:var(--t2);opacity:.7}
+.km-nav-prev .ms{font-size:18px;color:var(--t2);opacity:.7}
 .km-nav-prev[disabled]{opacity:.25;pointer-events:none}
 .km-nav-next{color:var(--terra)}
 .km-nav-next .ms{font-size:18px;color:var(--terra)}
@@ -2297,17 +2301,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   display:flex;align-items:center;gap:4px;
   background:none;border:none;cursor:pointer;
   font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
-  color:rgba(240,235,228,.5);padding:12px 16px;min-height:48px;
+  color:var(--t3);padding:12px 16px;min-height:48px;
   border-radius:12px;transition:background .2s,color .2s;
   -webkit-tap-highlight-color:transparent;
 }
-.km-ing-toggle:active{background:rgba(255,255,255,.06)}
-.km-ing-toggle .ms{font-size:18px;color:rgba(240,235,228,.5);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.km-ing-toggle:active{background:var(--terra-g)}
+.km-ing-toggle .ms{font-size:18px;color:var(--t3);transition:transform .3s cubic-bezier(.16,1,.3,1)}
 .km-ing-toggle.open .ms{transform:rotate(180deg)}
 
 /* Ingredient Drawer */
 .km-drawer-overlay{
-  position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:20;
+  position:absolute;inset:0;background:rgba(0,0,0,.3);z-index:20;
   opacity:0;pointer-events:none;transition:opacity .3s ease;
 }
 .km-drawer-overlay.visible{opacity:1;pointer-events:auto}
@@ -2316,16 +2320,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   position:absolute;bottom:0;left:0;right:0;z-index:25;
   height:60%;transform:translateY(100%);
   transition:transform .4s cubic-bezier(.16,1,.3,1);
-  background:rgba(26,23,20,.92);
+  background:var(--bg);
   backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
-  border-top:1px solid rgba(255,255,255,.06);
+  border-top:1px solid var(--sep);
   border-radius:24px 24px 0 0;
   display:flex;flex-direction:column;
+  box-shadow:0 -8px 32px rgba(0,0,0,.1);
 }
 .km-drawer.open{transform:translateY(0)}
 
 .km-drawer-handle{
-  width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);
+  width:36px;height:4px;border-radius:2px;background:var(--t4);
   margin:12px auto 0;flex-shrink:0;
 }
 .km-drawer-header{
@@ -2334,14 +2339,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 }
 .km-drawer-title{
   font-family:'Playfair Display',serif;font-size:18px;font-weight:400;
-  color:#f0ebe4;
+  color:var(--t1);transition:color .4s;
 }
 .km-drawer-close{
-  width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--glass-b);
+  background:var(--glass);display:flex;align-items:center;justify-content:center;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
 }
-.km-drawer-close .ms{font-size:16px;color:rgba(240,235,228,.6)}
+.km-drawer-close .ms{font-size:16px;color:var(--t2)}
 
 .km-drawer-list{
   flex:1;overflow-y:auto;padding:0 24px 24px;
@@ -2351,13 +2356,13 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 .km-ing-item{
   display:flex;align-items:center;gap:14px;
-  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  padding:14px 0;border-bottom:1px solid var(--sep);
   cursor:pointer;-webkit-tap-highlight-color:transparent;
 }
 .km-ing-item:last-child{border-bottom:none}
 
 .km-ing-check{
-  width:22px;height:22px;border-radius:6px;border:1.5px solid rgba(255,255,255,.15);
+  width:22px;height:22px;border-radius:6px;border:1.5px solid var(--t4);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
   transition:background .2s,border-color .2s;
 }
@@ -2368,15 +2373,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .km-ing-item.checked .km-ing-check .ms{opacity:1}
 
 .km-ing-name{
-  font-family:'Inter',sans-serif;font-size:15px;color:#f0ebe4;
-  transition:opacity .2s,text-decoration-color .2s;
+  font-family:'Inter',sans-serif;font-size:15px;color:var(--t1);
+  transition:opacity .2s,text-decoration-color .2s,color .4s;
 }
 .km-ing-item.checked .km-ing-name{
-  opacity:.4;text-decoration:line-through;text-decoration-color:rgba(240,235,228,.3);
+  opacity:.4;text-decoration:line-through;text-decoration-color:var(--t4);
 }
 .km-ing-qty{
-  font-family:'Inter',sans-serif;font-size:13px;color:rgba(240,235,228,.35);
-  margin-left:auto;white-space:nowrap;
+  font-family:'Inter',sans-serif;font-size:13px;color:var(--t3);
+  margin-left:auto;white-space:nowrap;transition:color .4s;
 }
 
 /* Timer pulse animation */
@@ -5425,35 +5430,35 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(196,101,74,.08);border:1.5px solid rgba(196,101,74,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--terra)">H</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Haricots blancs secs</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">400g</span>
       </div>
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(184,152,64,.08);border:1.5px solid rgba(184,152,64,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold)">C</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Chapelure dor&eacute;e</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">80g</span>
       </div>
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(196,101,74,.08);border:1.5px solid rgba(196,101,74,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--terra)">H</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Saucisses v&eacute;g&eacute;tales</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">4 pcs</span>
       </div>
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(109,160,109,.08);border:1.5px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--sage)">T</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Tomates concass&eacute;es</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">400g</span>
       </div>
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(139,115,85,.08);border:1.5px solid rgba(139,115,85,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:#8b7355">O</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Oignon jaune</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">2 pcs</span>
       </div>
@@ -5467,14 +5472,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--sep)">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(139,115,85,.08);border:1.5px solid rgba(139,115,85,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:#8b7355">O</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Bouillon de l&eacute;gumes</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">500ml</span>
       </div>
 
       <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
         <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t4);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s" onclick="this.style.background=this.style.background?'':'var(--terra)';this.style.borderColor=this.style.borderColor==='var(--terra)'?'var(--t4)':'var(--terra)';this.innerHTML=this.innerHTML?'':'<span class=ms style=font-size:14px;color:#fff>check</span>'"></div>
-        <div style="width:40px;height:40px;border-radius:12px;background:rgba(109,160,109,.08);border:1.5px solid rgba(109,160,109,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--sage)">T</span></div>
+        <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
         <span style="flex:1;font-size:14px;color:var(--t1);transition:color .4s">Thym et laurier</span>
         <span style="font-size:14px;color:var(--t2);transition:color .4s">3 branches</span>
       </div>
@@ -5619,9 +5624,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- Voice control hint -->
-  <div style="position:absolute;top:110px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10">
-    <span class="ms" style="font-size:16px;color:var(--terra-l)">mic</span>
-    <span style="font-size:11px;color:rgba(240,235,228,.5);font-weight:400;letter-spacing:.3px">Dites &laquo; Suivant &raquo; pour avancer</span>
+  <div style="position:absolute;top:110px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 18px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10;box-shadow:var(--glass-s)">
+    <span class="ms" style="font-size:16px;color:var(--terra)">mic</span>
+    <span style="font-size:11px;color:var(--t3);font-weight:400;letter-spacing:.3px">Dites &laquo; Suivant &raquo; pour avancer</span>
   </div>
 
   <!-- Step Watermark -->
@@ -7478,27 +7483,20 @@ function showRecipe(idx){
   const co2El=document.querySelector('#s3 .det-co2-val');
   if(co2El)co2El.textContent=r.co2;
   /* Ingredient real food photos from OptiRecipe CDN */
-  /* Ingredient color palette for initial avatars */
-  var ING_COLORS=['#c4654a','#b89840','#6da06d','#8b7355','#a07060','#7a9e7a','#c49a6c','#6b8e8e'];
-  function getIngColor(i){return ING_COLORS[i%ING_COLORS.length]}
-  /* Ingredients with initial avatars + checkboxes */
+  /* Ingredients with recipe image from OptiRecipe + checkboxes */
   const ingBox=document.querySelector('#s3 .det-ingredients');
   if(ingBox){
     ingBox.innerHTML='';
-    r.ingredients.forEach(function(ing,i){
-      var initial=ing.name.charAt(0).toUpperCase();
-      var col=getIngColor(i);
-      ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon" style="background:'+col+'15;border:1.5px solid '+col+'30"><span style="font-family:Playfair Display,serif;font-size:16px;font-weight:500;color:'+col+'">'+initial+'</span></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
+    r.ingredients.forEach(function(ing){
+      ingBox.innerHTML+='<div class="ing"><div class="ing-check" onclick="this.classList.toggle(\'on\')"><span class="ms">check</span></div><div class="ing-icon"><img src="'+r.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px"></div><div class="ing-l"><span class="ing-n">'+ing.name.charAt(0).toUpperCase()+ing.name.slice(1)+'</span></div><span class="ing-dots"></span><span class="ing-a">'+ing.qty+'</span></div>';
     });
   }
-  /* Quick ingredient visual strip — initials */
+  /* Quick ingredient strip — recipe image */
   var ingStrip=document.querySelector('#s3 .det-ing-strip');
   if(ingStrip&&r.ingredients){
     ingStrip.innerHTML='';
-    r.ingredients.forEach(function(ing,i){
-      var initial=ing.name.charAt(0).toUpperCase();
-      var col=getIngColor(i);
-      ingStrip.innerHTML+='<div class="det-ing-strip-item" style="background:'+col+'15;border-color:'+col+'30;display:flex;align-items:center;justify-content:center"><span style="font-family:Playfair Display,serif;font-size:18px;font-weight:500;color:'+col+'">'+initial+'</span></div>';
+    r.ingredients.forEach(function(ing){
+      ingStrip.innerHTML+='<div class="det-ing-strip-item"><img src="'+r.img+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:14px"></div>';
     });
   }
   /* "Ready by" timing — creates urgency */
