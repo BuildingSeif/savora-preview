@@ -809,6 +809,23 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .exp-map-wrap .map-marker:nth-child(4){animation-delay:.4s}
 .exp-map-wrap .map-marker:nth-child(5){animation-delay:.5s}
 .exp-map-wrap .map-marker:nth-child(6){animation-delay:.6s}
+/* Alive map — markers breathe */
+@keyframes markerPulse{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 4px rgba(196,101,74,.3))}
+  50%{transform:scale(1.15);filter:drop-shadow(0 0 10px rgba(196,101,74,.5))}
+}
+.exp-map-wrap .map-marker circle{animation:markerPulse 3s ease-in-out infinite}
+.exp-map-wrap .map-marker:nth-child(odd) circle{animation-delay:.5s}
+.exp-map-wrap .map-marker:nth-child(3n) circle{animation-delay:1s}
+/* Map regions subtle glow animation */
+@keyframes regionGlow{
+  0%,100%{opacity:.8}
+  50%{opacity:1}
+}
+.exp-map-wrap path[class^="map-region"]{animation:regionGlow 6s ease-in-out infinite}
+.exp-map-wrap .map-region-asia{animation-delay:1s}
+.exp-map-wrap .map-region-americas{animation-delay:2s}
+.exp-map-wrap .map-region-africa{animation-delay:3s}
 .exp-map-wrap .map-marker:nth-child(7){animation-delay:.7s}
 .exp-map-wrap .map-marker:nth-child(8){animation-delay:.8s}
 .exp-map-wrap .map-marker:nth-child(9){animation-delay:.9s}
@@ -3007,7 +3024,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 /* Commencer button */
 .v6-cta-area{
   position:absolute;
-  bottom:56px;
+  bottom:44px;
   left:32px;right:32px;
   z-index:10;
 }
@@ -4841,20 +4858,30 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="hero-source-badge">
     <span class="ms">photo_camera</span>
   </div>
-  <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774023028463-5ykrwqqn.jpg" alt="Penne au poulet et creme de pesto">
+  <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774023028463-5ykrwqqn.jpg" alt="Penne au poulet et cr&egrave;me de pesto">
   <div class="hero-overlay">
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(212,135,111,.9);margin-bottom:4px;text-shadow:0 1px 8px rgba(0,0,0,.3)">Capture il y a 2 heures</div>
-    <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:#f0ebe4;line-height:1.1;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.4)">Penne au poulet et<br>creme de pesto</div>
+    <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:#f0ebe4;line-height:1.1;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.4)">Penne au poulet et<br>cr&egrave;me de pesto</div>
     <div style="display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:11px 24px;border-radius:980px;font-size:13px;font-weight:600;box-shadow:0 8px 28px rgba(196,101,74,.5),inset 0 1px 0 rgba(255,255,255,.15);text-shadow:0 1px 2px rgba(0,0,0,.2);width:fit-content">
       <span class="ms" style="font-size:18px">restaurant</span>Cuisiner
     </div>
   </div>
 </div>
 
-<!-- ELEMENT 3: Whisper -->
+<!-- ELEMENT 3: Progression + Whisper -->
+<div style="padding:14px 24px 0;display:flex;align-items:center;gap:12px">
+  <div style="flex:1;background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:12px 14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+    <div style="font-size:11px;color:var(--t3);margin-bottom:4px">Cette semaine</div>
+    <div style="font-size:16px;font-weight:600;color:var(--t1);transition:color .4s">3 recettes cuisin&eacute;es</div>
+  </div>
+  <div style="flex:1;background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:12px 14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+    <div style="font-size:11px;color:var(--t3);margin-bottom:4px">Cuisines explor&eacute;es</div>
+    <div style="font-size:16px;font-weight:600;color:var(--t1);transition:color .4s">5 pays <span style="font-size:12px">&#127758;</span></div>
+  </div>
+</div>
 <div class="whisper">
-  <div class="whisper-name">3 nouvelles recettes a decouvrir</div>
-  <div class="whisper-ctx">Basees sur vos gouts et vos envies.</div>
+  <div class="whisper-name" style="font-family:'Playfair Display',serif;font-style:italic">3 nouvelles recettes &agrave; d&eacute;couvrir</div>
+  <div class="whisper-ctx">Bas&eacute;es sur vos go&ucirc;ts et vos envies.</div>
 </div>
 
 <!-- ELEMENT 4: Recent captures scroll -->
@@ -4868,7 +4895,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="rc-source"><span class="ms">photo_camera</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="">
     <div class="rc-overlay">
-      <div class="rc-title">Pates primavera</div>
+      <div class="rc-title">&#127470;&#127481; P&acirc;tes primavera</div>
     </div>
   </div>
   <!-- Card 2 — from web link -->
@@ -4876,7 +4903,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="rc-source"><span class="ms">link</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" alt="">
     <div class="rc-overlay">
-      <div class="rc-title">Thon glace wasabi</div>
+      <div class="rc-title">&#127471;&#127477; Thon glac&eacute; wasabi</div>
     </div>
   </div>
   <!-- Card 3 — from camera -->
@@ -4884,7 +4911,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="rc-source"><span class="ms">photo_camera</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" alt="">
     <div class="rc-overlay">
-      <div class="rc-title">Ragout reconfortant</div>
+      <div class="rc-title">&#127474;&#127462; Rago&ucirc;t r&eacute;confortant</div>
     </div>
   </div>
   <!-- Card 4 — from web -->
@@ -4892,7 +4919,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="rc-source"><span class="ms">language</span></div>
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" alt="">
     <div class="rc-overlay">
-      <div class="rc-title">Gateau banane</div>
+      <div class="rc-title">&#127467;&#127479; G&acirc;teau banane</div>
     </div>
   </div>
 </div>
@@ -4916,7 +4943,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="rr" onclick="showRecipe('r05');go(3)">
     <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div>
     <div class="rr-info">
-      <div class="rr-n">Pates aux legumes du marche</div>
+      <div class="rr-n">P&acirc;tes aux l&eacute;gumes du march&eacute;</div>
       <div class="rr-d">&#127470;&#127481; Italie &middot; Facile</div>
       <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.6</span><span class="rr-time"><span class="ms">schedule</span> 25 min</span></div>
     </div>
@@ -4941,7 +4968,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
     <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.0) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px">
       <div style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px">Cuisine du printemps</div>
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#f0ebe4;line-height:1.15">Les legumes de saison<br>a l'honneur</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#f0ebe4;line-height:1.15">Les l&eacute;gumes de saison<br>&agrave; l'honneur</div>
     </div>
   </div>
 </div>
@@ -5037,7 +5064,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <!-- Floating stat pills -->
     <div class="exp-map-stats">
       <div class="exp-map-stat"><span class="ms">public</span> 100+ pays</div>
-      <div class="exp-map-stat"><span class="ms">restaurant</span> 1.3M+ recettes</div>
+      <div class="exp-map-stat"><span class="ms">restaurant</span> plus de 1 400 000 recettes</div>
     </div>
     <!-- Marker tooltip container -->
     <div class="exp-marker-tip" id="expMarkerTip">
@@ -5115,14 +5142,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="exp-duo-card" onclick="showRecipe(8)">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt="">
       <div class="exp-duo-card-ov">
-        <div class="exp-duo-card-t">Spaghetti Bolognaise</div>
+        <div class="exp-duo-card-t">&#127470;&#127481; Spaghetti Bolognaise</div>
         <div class="exp-duo-card-m"><span class="ms">schedule</span> 15 min</div>
       </div>
     </div>
     <div class="exp-duo-card" onclick="showRecipe(7)">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt="">
       <div class="exp-duo-card-ov">
-        <div class="exp-duo-card-t">Champignons farcis</div>
+        <div class="exp-duo-card-t">&#127467;&#127479; Champignons farcis</div>
         <div class="exp-duo-card-m"><span class="ms">schedule</span> 40 min</div>
       </div>
     </div>
@@ -5140,7 +5167,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="rr scroll-reveal" onclick="showRecipe(6)">
     <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div>
     <div class="rr-info">
-      <div class="rr-n">&#x1F1F2;&#x1F1E6; Ragout poulet aux epices marocaines</div>
+      <div class="rr-n">&#x1F1F2;&#x1F1E6; Ragout poulet aux &eacute;pices marocaines</div>
       <div class="rr-d">Epices, couscous dore</div>
       <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.7</span><span class="rr-time"><span class="ms">schedule</span> 60 min</span></div>
     </div>
@@ -5165,14 +5192,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="exp-duo-card" onclick="showRecipe(9)">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774310261789-3dr9tfoi.jpg" alt="">
       <div class="exp-duo-card-ov">
-        <div class="exp-duo-card-t">Tarte vanillee fondante</div>
+        <div class="exp-duo-card-t">Tarte vanill&eacute;e fondante</div>
         <div class="exp-duo-card-m"><span class="ms">schedule</span> 15 min</div>
       </div>
     </div>
     <div class="exp-duo-card" onclick="showRecipe(4)">
       <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" alt="">
       <div class="exp-duo-card-ov">
-        <div class="exp-duo-card-t">Pates legumes du marche</div>
+        <div class="exp-duo-card-t">P&acirc;tes l&eacute;gumes du march&eacute;</div>
         <div class="exp-duo-card-m"><span class="ms">schedule</span> 15 min</div>
       </div>
     </div>
@@ -5183,14 +5210,14 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg" alt=""></div>
     <div class="rr-info">
       <div class="rr-n">&#x1F1F2;&#x1F1FD; Mole de Fruits et Legumes</div>
-      <div class="rr-d">Cacao, epices, legumes de saison</div>
+      <div class="rr-d">Cacao, epices, l&eacute;gumes de saison</div>
       <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.6</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
     </div>
   </div>
   <div class="rr scroll-reveal" onclick="showRecipe(14)">
     <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg" alt=""></div>
     <div class="rr-info">
-      <div class="rr-n">&#x1F1EB;&#x1F1F7; Gateau moelleux a la rhubarbe</div>
+      <div class="rr-n">&#x1F1EB;&#x1F1F7; G&acirc;teau moelleux &agrave; la rhubarbe</div>
       <div class="rr-d">Fondant, acidule, gouter parfait</div>
       <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.5</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
     </div>
@@ -5198,8 +5225,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
   <!-- Bottom Grid -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 24px 24px">
-    <div class="gc2 scroll-reveal" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Lasagnes aux legumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
-    <div class="gc2 scroll-reveal" onclick="showRecipe(10)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773855747803-tuzq159y.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">Tartes poulet mozzarella</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
+    <div class="gc2 scroll-reveal" onclick="showRecipe(13)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#127470;&#127481; Lasagnes aux l&eacute;gumes</div><div class="gc2-m"><span class="ms">schedule</span> 45 min</div></div></div>
+    <div class="gc2 scroll-reveal" onclick="showRecipe(10)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773855747803-tuzq159y.jpg" alt=""><div class="gc2-ov"><div class="gc2-n">&#127467;&#127479; Tartes poulet mozzarella</div><div class="gc2-m"><span class="ms">schedule</span> 30 min</div></div></div>
   </div>
 
   <div style="height:100px"></div>
@@ -5520,6 +5547,36 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <!-- CO2 badge (hidden, populated by showRecipe) -->
   <span class="det-co2-val" style="display:none"></span>
 
+  <!-- Vous aimerez aussi — prominent recommendations -->
+  <div style="padding:24px 22px 0">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+      <span style="font-family:'Playfair Display',serif;font-size:11px;color:var(--t4);letter-spacing:2px;text-transform:uppercase">Vous aimerez aussi</span>
+      <div style="flex:1;height:1px;background:var(--sep)"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer" onclick="showRecipe('r05');go(3)">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(0deg,rgba(16,12,8,.82),transparent)">
+          <div style="font-family:'Playfair Display',serif;font-size:14px;color:#f0ebe4;line-height:1.2">P&acirc;tes aux l&eacute;gumes du march&eacute;</div>
+          <div style="font-size:11px;color:rgba(240,235,228,.6);margin-top:4px;display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:13px">schedule</span> 25 min</div>
+        </div>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer" onclick="showRecipe('r12');go(3)">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774033621145-ljnzx7mu.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(0deg,rgba(16,12,8,.82),transparent)">
+          <div style="font-family:'Playfair Display',serif;font-size:14px;color:#f0ebe4;line-height:1.2">Rago&ucirc;t marocain au couscous</div>
+          <div style="font-size:11px;color:rgba(240,235,228,.6);margin-top:4px;display:flex;align-items:center;gap:4px"><span class="ms" style="font-size:13px">schedule</span> 45 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conseil du chef -->
+  <div style="margin:20px 22px 0;padding:18px 20px;background:var(--terra-g);border-left:3px solid var(--terra);border-radius:0 16px 16px 0">
+    <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:6px">Conseil du chef</div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;line-height:1.6;color:var(--t2);margin:0;transition:color .4s">Pour un r&eacute;sultat encore plus savoureux, cassez la cro&ucirc;te de chapelure &agrave; mi-cuisson et laissez-en reformer une nouvelle.</p>
+  </div>
 
   <!-- Bottom padding for scroll -->
   <div style="height:40px"></div>
@@ -5541,6 +5598,15 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     </button>
     <div class="km-title" id="kmRecipeName">Cassoulet v&eacute;g&eacute;talien</div>
     <div class="km-progress-label" id="kmStepLabel">&Eacute;tape 4 sur 8</div>
+    <button class="km-close" style="right:16px;left:auto;position:absolute" aria-label="Taille du texte">
+      <span class="ms">search</span>
+    </button>
+  </div>
+
+  <!-- Voice control hint -->
+  <div style="position:absolute;top:110px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10">
+    <span class="ms" style="font-size:16px;color:var(--terra-l)">mic</span>
+    <span style="font-size:11px;color:rgba(240,235,228,.5);font-weight:400;letter-spacing:.3px">Dites &laquo; Suivant &raquo; pour avancer</span>
   </div>
 
   <!-- Step Watermark -->
@@ -5846,7 +5912,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div class="meal-day">
       <div class="meal-day-h"><div class="meal-day-name">Mardi 25 mars</div><div class="meal-day-cal">~1 580 cal</div></div>
       <div class="meal-slots">
-        <div class="meal-slot" onclick="showRecipe(9)"><div class="meal-slot-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-D&Eacute;JEUNER</div><div class="meal-slot-name">Gateau au Citron</div></div></div>
+        <div class="meal-slot" onclick="showRecipe(9)"><div class="meal-slot-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">PETIT-D&Eacute;JEUNER</div><div class="meal-slot-name">G&acirc;teau au Citron</div></div></div>
         <div class="meal-slot" onclick="showRecipe(13)"><div class="meal-slot-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">D&Eacute;JEUNER</div><div class="meal-slot-name">Lasagnes aux legumes</div></div></div>
         <div class="meal-slot" onclick="showRecipe(7)"><div class="meal-slot-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt=""></div><div class="meal-slot-info"><div class="meal-slot-type">D&Icirc;NER</div><div class="meal-slot-name">Champignons Farcis Asiatique</div></div></div>
       </div>
@@ -6170,7 +6236,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="rr" onclick="showRecipe(0)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">&#x1F1EC;&#x1F1F7; Poulet marine aux herbes</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
   <div class="rr" onclick="showRecipe(3)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Scampi de champignons aux pates</div><div class="rr-d">&#x1F1EE;&#x1F1F9; Champignons sautes au beurre</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 30 min</div></div></div></div>
   <div class="rr" onclick="showRecipe(8)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">&#x1F1EE;&#x1F1F9; Classique italien</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
-  <div class="rr" onclick="showRecipe(6)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">&#x1F1F2;&#x1F1E6; Epice et parfume</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
+  <div class="rr" onclick="showRecipe(6)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">&#x1F1F2;&#x1F1E6; &Eacute;pic&eacute; et parfum&eacute;</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
   <div class="rr" onclick="showRecipe(11)"><div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt=""></div><div class="rr-info"><div class="rr-n">Coquilles Saint-Jacques linguines</div><div class="rr-d">&#x1F1EB;&#x1F1F7; Beurre noisette et citron</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 98</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
 </div>
 </div>
@@ -7036,7 +7102,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         </div>
       </div>
       <div style="padding:10px 12px">
-        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Pates Primavera</div>
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">P&acirc;tes Primavera</div>
         <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 2 jours</div>
       </div>
     </div>
@@ -7064,7 +7130,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
         </div>
       </div>
       <div style="padding:10px 12px">
-        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">Gateau Fondant Chocolat</div>
+        <div style="font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;transition:color .4s">G&acirc;teau Fondant Chocolat</div>
         <div style="font-size:11px;color:var(--t3);transition:color .4s">il y a 5 jours</div>
       </div>
     </div>
@@ -7318,15 +7384,15 @@ const RECIPES = [
   {id:"r04",title:"Scampi de champignons sauvages aux pates fraiches",desc:"Le beurre grille, l ail parfume, les champignons fondent. Un plat qui se devore.",country:"Italie",category:"plat",difficulty:"facile",prep:15,cook:15,servings:4,cal:420,protein:18,cost:4.00,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg",source:"optirecipe",ingredients:[{name:"pates",qty:"400 g"},{name:"champignons",qty:"300 g"},{name:"beurre",qty:"50 g"},{name:"ail",qty:"4 gousses"},{name:"persil",qty:"15 g"},{name:"vin blanc",qty:"100 ml"}],steps:["Cuire les pates al dente.","Sauter les champignons dans le beurre avec l ail.","Deglaciser au vin blanc.","Melanger avec les pates et servir."]},
   {id:"r05",title:"Pates aux legumes croquants du marche",desc:"Les couleurs du marche dans votre assiette. Simple, frais, irresistible.",country:"Italie",category:"plat",difficulty:"facile",prep:10,cook:5,servings:4,cal:380,protein:14,cost:3.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg",source:"optirecipe",ingredients:[{name:"pates",qty:"400 g"},{name:"courgettes",qty:"200 g"},{name:"tomates cerises",qty:"200 g"},{name:"huile d olive",qty:"40 ml"},{name:"basilic",qty:"10 g"}],steps:["Cuire les pates.","Sauter les legumes a feu vif.","Melanger le tout avec basilic et huile d olive."]},
   {id:"r06",title:"Tarte vanillee au coeur fondant",desc:"La pate craque, la creme fond, la vanille enveloppe. Un silence a table.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:6,cal:280,protein:6,cost:2.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774310261789-3dr9tfoi.jpg",source:"optirecipe",ingredients:[{name:"pate sablee",qty:"1"},{name:"creme patissiere",qty:"400 ml"},{name:"vanille",qty:"1 gousse"},{name:"sucre glace",qty:"20 g"}],steps:["Cuire la pate a blanc 15 min a 180C.","Preparer la creme vanillee.","Garnir la tarte et refrigerer 2h."]},
-  {id:"r07",title:"Ragout de poulet aux epices marocaines et couscous dore",desc:"Les epices chantent, le poulet fond, le couscous absorbe tout. Le Maroc dans votre cuisine.",country:"Maroc",category:"plat",difficulty:"moyen",prep:30,cook:30,servings:4,cal:450,protein:38,cost:4.50,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg",source:"optirecipe",ingredients:[{name:"poulet",qty:"600 g"},{name:"couscous",qty:"300 g"},{name:"oignon",qty:"2"},{name:"tomates",qty:"400 g"},{name:"ras el hanout",qty:"15 g"},{name:"abricots secs",qty:"100 g"}],steps:["Faire dorer le poulet.","Ajouter oignons, tomates et epices.","Mijoter 45 min.","Servir sur le couscous."]},
+  {id:"r07",title:"Ragout de poulet aux &eacute;pices marocaines et couscous dore",desc:"Les epices chantent, le poulet fond, le couscous absorbe tout. Le Maroc dans votre cuisine.",country:"Maroc",category:"plat",difficulty:"moyen",prep:30,cook:30,servings:4,cal:450,protein:38,cost:4.50,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg",source:"optirecipe",ingredients:[{name:"poulet",qty:"600 g"},{name:"couscous",qty:"300 g"},{name:"oignon",qty:"2"},{name:"tomates",qty:"400 g"},{name:"ras el hanout",qty:"15 g"},{name:"abricots secs",qty:"100 g"}],steps:["Faire dorer le poulet.","Ajouter oignons, tomates et epices.","Mijoter 45 min.","Servir sur le couscous."]},
   {id:"r08",title:"Champignons farcis a la japonaise, panko et sesame",desc:"Croustillants dehors, fondants dedans. Le sesame grille fait le reste.",country:"Japon",category:"entree",difficulty:"moyen",prep:20,cook:20,servings:4,cal:180,protein:10,cost:3.00,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg",source:"optirecipe",ingredients:[{name:"champignons",qty:"12"},{name:"tofu",qty:"200 g"},{name:"sauce soja",qty:"30 ml"},{name:"gingembre",qty:"10 g"},{name:"oignons verts",qty:"4"}],steps:["Evider les champignons.","Preparer la farce au tofu et gingembre.","Farcir et enfourner 20 min a 190C."]},
   {id:"r09",title:"Spaghetti Bolognaise",desc:"Le classique italien par excellence, sauce tomate riche et viande mijotee.",country:"Italie",category:"plat",difficulty:"facile",prep:10,cook:5,servings:4,cal:520,protein:28,cost:3.50,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg",source:"optirecipe",ingredients:[{name:"spaghetti",qty:"400 g"},{name:"viande hachee",qty:"400 g"},{name:"tomates pelees",qty:"400 g"},{name:"oignon",qty:"1"},{name:"ail",qty:"3 gousses"},{name:"basilic",qty:"10 g"}],steps:["Faire revenir oignon et ail.","Ajouter la viande et faire dorer.","Incorporer les tomates et mijoter 30 min.","Servir sur les spaghetti."]},
-  {id:"r10",title:"Gateau au Citron et Verveine",desc:"Un gateau moelleux au citron parfume a la verveine fraiche.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:8,cal:310,protein:5,cost:2.00,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg",source:"optirecipe",ingredients:[{name:"farine",qty:"250 g"},{name:"sucre",qty:"180 g"},{name:"oeufs",qty:"3"},{name:"citron",qty:"2"},{name:"verveine",qty:"10 g"},{name:"beurre",qty:"120 g"}],steps:["Melanger beurre et sucre.","Ajouter oeufs, farine, zeste et verveine.","Cuire 35 min a 175C."]},
+  {id:"r10",title:"G&acirc;teau au Citron et Verveine",desc:"Un gateau moelleux au citron parfume a la verveine fraiche.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:8,cal:310,protein:5,cost:2.00,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773967970275-tuap63s6.jpg",source:"optirecipe",ingredients:[{name:"farine",qty:"250 g"},{name:"sucre",qty:"180 g"},{name:"oeufs",qty:"3"},{name:"citron",qty:"2"},{name:"verveine",qty:"10 g"},{name:"beurre",qty:"120 g"}],steps:["Melanger beurre et sucre.","Ajouter oeufs, farine, zeste et verveine.","Cuire 35 min a 175C."]},
   {id:"r11",title:"Tartes poulet mozzarella poivrons",desc:"Tartelettes garnies de poulet, mozzarella fondante et poivrons grilles.",country:"Italie",category:"entree",difficulty:"facile",prep:15,cook:15,servings:4,cal:390,protein:24,cost:4.00,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773855747803-tuzq159y.jpg",source:"optirecipe",ingredients:[{name:"pate feuilletee",qty:"1"},{name:"poulet",qty:"300 g"},{name:"mozzarella",qty:"200 g"},{name:"poivrons",qty:"2"},{name:"basilic",qty:"10 g"}],steps:["Foncer les moules avec la pate.","Garnir de poulet, mozzarella et poivrons.","Cuire 25 min a 200C."]},
   {id:"r12",title:"Coquilles Saint-Jacques linguines",desc:"Linguines aux Saint-Jacques poelees, beurre noisette et citron.",country:"France",category:"plat",difficulty:"moyen",prep:10,cook:5,servings:4,cal:460,protein:30,cost:8.00,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg",source:"optirecipe",ingredients:[{name:"linguines",qty:"400 g"},{name:"Saint-Jacques",qty:"12"},{name:"beurre",qty:"60 g"},{name:"citron",qty:"1"},{name:"persil",qty:"10 g"}],steps:["Cuire les linguines.","Poeler les Saint-Jacques 2 min par face.","Faire un beurre noisette au citron.","Dresser et servir."]},
-  {id:"r13",title:"Mole de Fruits et Legumes",desc:"Un mole mexicain riche melant cacao, epices et legumes de saison.",country:"Mexique",category:"plat",difficulty:"moyen",prep:10,cook:5,servings:4,cal:340,protein:12,cost:3.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg",source:"optirecipe",ingredients:[{name:"legumes varies",qty:"500 g"},{name:"cacao",qty:"20 g"},{name:"piments",qty:"2"},{name:"tomates",qty:"300 g"},{name:"amandes",qty:"50 g"}],steps:["Griller les piments et tomates.","Mixer avec cacao et amandes.","Cuire les legumes dans la sauce 25 min."]},
+  {id:"r13",title:"Mole de Fruits et Legumes",desc:"Un mole mexicain riche melant cacao, epices et l&eacute;gumes de saison.",country:"Mexique",category:"plat",difficulty:"moyen",prep:10,cook:5,servings:4,cal:340,protein:12,cost:3.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg",source:"optirecipe",ingredients:[{name:"legumes varies",qty:"500 g"},{name:"cacao",qty:"20 g"},{name:"piments",qty:"2"},{name:"tomates",qty:"300 g"},{name:"amandes",qty:"50 g"}],steps:["Griller les piments et tomates.","Mixer avec cacao et amandes.","Cuire les legumes dans la sauce 25 min."]},
   {id:"r14",title:"Lasagnes aux legumes du soleil",desc:"Lasagnes generereuses aux courgettes, aubergines et tomates confites.",country:"France",category:"plat",difficulty:"moyen",prep:25,cook:20,servings:6,cal:410,protein:18,cost:4.50,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg",source:"optirecipe",ingredients:[{name:"feuilles de lasagne",qty:"12"},{name:"courgettes",qty:"300 g"},{name:"aubergines",qty:"300 g"},{name:"sauce tomate",qty:"500 ml"},{name:"bechamel",qty:"400 ml"},{name:"fromage rape",qty:"150 g"}],steps:["Griller courgettes et aubergines.","Monter en couches avec sauce et bechamel.","Gratiner 30 min a 190C."]},
-  {id:"r15",title:"Gateau moelleux a la rhubarbe",desc:"Un gateau fondant a la rhubarbe acidulee, parfait pour le gouter.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:8,cal:290,protein:5,cost:2.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg",source:"optirecipe",ingredients:[{name:"rhubarbe",qty:"400 g"},{name:"farine",qty:"200 g"},{name:"sucre",qty:"150 g"},{name:"oeufs",qty:"3"},{name:"beurre",qty:"100 g"}],steps:["Prechauffer le four a 180 C (thermostat 6). Beurrer et fariner un moule a manque de 24 cm. Tapoter le fond pour retirer l exces de farine.","Eplucher la rhubarbe en tirant les fibres du dos avec un couteau d office. La couper en troncons de 2 cm. La faire degorger 20 min dans une passoire avec 2 cuilleres de sucre -- elle va rendre son eau et garder du croquant.","Travailler le beurre pommade au fouet avec le sucre restant jusqu a obtenir une creme lisse et mousseuse. C est la base de votre gateau -- ne brusquez pas cette etape.","Incorporer les oeufs un par un en fouettant bien entre chaque ajout. Si la pate tranche, ajoutez une cuillere de farine -- elle va se rattraper.","Tamiser la farine et la levure directement au-dessus du saladier. Incorporer en soulevant la pate a la maryse, avec des mouvements amples du fond vers le haut. On ne touille pas -- on souleve.","Egoutter la rhubarbe et l incorporer delicatement a la pate. Verser dans le moule. Lisser le dessus a la spatule coudee.","Enfourner 40 a 45 min. Le gateau est pret quand la lame d un couteau ressort avec quelques miettes humides -- pas seche, pas liquide. Laisser tiedir 10 min avant de demouler sur une grille.","Servir tiede, saupoudre d un voile de sucre glace. Se marie parfaitement avec une boule de creme glacee vanille ou un nuage de chantilly."]}
+  {id:"r15",title:"G&acirc;teau moelleux &agrave; la rhubarbe",desc:"Un gateau fondant a la rhubarbe acidulee, parfait pour le gouter.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:8,cal:290,protein:5,cost:2.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg",source:"optirecipe",ingredients:[{name:"rhubarbe",qty:"400 g"},{name:"farine",qty:"200 g"},{name:"sucre",qty:"150 g"},{name:"oeufs",qty:"3"},{name:"beurre",qty:"100 g"}],steps:["Prechauffer le four a 180 C (thermostat 6). Beurrer et fariner un moule a manque de 24 cm. Tapoter le fond pour retirer l exces de farine.","Eplucher la rhubarbe en tirant les fibres du dos avec un couteau d office. La couper en troncons de 2 cm. La faire degorger 20 min dans une passoire avec 2 cuilleres de sucre -- elle va rendre son eau et garder du croquant.","Travailler le beurre pommade au fouet avec le sucre restant jusqu a obtenir une creme lisse et mousseuse. C est la base de votre gateau -- ne brusquez pas cette etape.","Incorporer les oeufs un par un en fouettant bien entre chaque ajout. Si la pate tranche, ajoutez une cuillere de farine -- elle va se rattraper.","Tamiser la farine et la levure directement au-dessus du saladier. Incorporer en soulevant la pate a la maryse, avec des mouvements amples du fond vers le haut. On ne touille pas -- on souleve.","Egoutter la rhubarbe et l incorporer delicatement a la pate. Verser dans le moule. Lisser le dessus a la spatule coudee.","Enfourner 40 a 45 min. Le gateau est pret quand la lame d un couteau ressort avec quelques miettes humides -- pas seche, pas liquide. Laisser tiedir 10 min avant de demouler sur une grille.","Servir tiede, saupoudre d un voile de sucre glace. Se marie parfaitement avec une boule de creme glacee vanille ou un nuage de chantilly."]}
 ];
 
 /* Country flags for display */
