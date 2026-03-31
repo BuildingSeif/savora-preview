@@ -5224,6 +5224,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- Standard recipe rows -->
+  <div style="padding:0 24px">
   <div class="rr scroll-reveal" onclick="showRecipe(0)">
     <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt=""></div>
     <div class="rr-info">
@@ -5239,6 +5240,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div class="rr-d">Epices, couscous dore</div>
       <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.7</span><span class="rr-time"><span class="ms">schedule</span> 60 min</span></div>
     </div>
+  </div>
   </div>
 
   <!-- Second Hero -->
@@ -5274,6 +5276,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 
   <!-- More rows -->
+  <div style="padding:0 24px">
   <div class="rr scroll-reveal" onclick="showRecipe(12)">
     <div class="rr-img"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg" alt=""></div>
     <div class="rr-info">
@@ -5289,6 +5292,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <div class="rr-d">Fondant, acidule, gouter parfait</div>
       <div class="rr-m"><span class="rr-star"><span class="ms">star</span> 4.5</span><span class="rr-time"><span class="ms">schedule</span> 15 min</span></div>
     </div>
+  </div>
   </div>
 
   <!-- Bottom Grid -->
@@ -5610,31 +5614,6 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;line-height:1.6;color:var(--t2);margin:0;transition:color .4s">Pour un r&eacute;sultat encore plus savoureux, cassez la cro&ucirc;te de chapelure &agrave; mi-cuisson et laissez-en reformer une nouvelle.</p>
   </div>
 
-  <!-- Vous aimerez aussi — at the bottom, less prominent -->
-  <div style="padding:24px 22px 0">
-    <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t1);margin-bottom:14px;transition:color .4s">Vous aimerez aussi</div>
-    <div style="display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:8px">
-      <div onclick="showRecipe(6);go(3)" style="min-width:140px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0">
-        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
-        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:10px">
-          <div style="font-size:11px;font-weight:500;color:#f0ebe4;line-height:1.2">&#127474;&#127462; Rago&ucirc;t marocain</div>
-        </div>
-      </div>
-      <div onclick="showRecipe(3);go(3)" style="min-width:140px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0">
-        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
-        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:10px">
-          <div style="font-size:11px;font-weight:500;color:#f0ebe4;line-height:1.2">&#127470;&#127481; Scampi champignons</div>
-        </div>
-      </div>
-      <div onclick="showRecipe(13);go(3)" style="min-width:140px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0">
-        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
-        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:10px">
-          <div style="font-size:11px;font-weight:500;color:#f0ebe4;line-height:1.2">&#127467;&#127479; Lasagnes l&eacute;gumes</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Bottom padding for scroll -->
   <div style="height:40px"></div>
 
@@ -5902,15 +5881,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
   <!-- Recently Cooked -->
   <div class="sh"><div class="sh-t">Cuisin&eacute;es r&eacute;cemment</div><button class="sh-link" onclick="go(21)">Historique</button></div>
+  <div style="padding:0 24px">
   <div class="rr" onclick="showRecipe(0)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Brochettes de Poulet Grec</div><div class="rr-d">Hier &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 40 min</div></div></div></div>
   <div class="rr" onclick="showRecipe(6)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Ragout de poulet marocain</div><div class="rr-d">Il y a 3 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 1h</div></div></div></div>
   <div class="rr" onclick="showRecipe(8)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Spaghetti Bolognaise</div><div class="rr-d">Il y a 5 jours &middot; Note 5 &eacute;toiles</div><div class="rr-m"><div class="rr-star"><span class="ms">star</span> 5.0</div><div class="rr-time"><span class="ms">schedule</span> 15 min</div></div></div></div>
-
-  <!-- (Removed - replaced by Journey section above) -->
+  </div>
 
   <!-- Imported Recipes -->
   <div class="sh"><div class="sh-t">Recettes import&eacute;es</div><button class="sh-link" onclick="go(9)">Importer</button></div>
+  <div style="padding:0 24px">
   <div class="rr" onclick="showRecipe(11)"><div class="rr-img" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="rr-info"><div class="rr-n">Coquilles Saint-Jacques linguines</div><div class="rr-d">Import&eacute; il y a 2 jours</div><div class="rr-m"><div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px"><span class="ms" style="font-size:14px">link</span> food.com</div></div></div></div>
+  </div>
 
   <!-- Settings shortcut -->
   <div style="margin:16px 24px 0">
@@ -7519,7 +7500,7 @@ function showRecipe(idx){
   if(co2El)co2El.textContent=r.co2;
   /* Ingredient real food photos from OptiRecipe CDN */
   /* Real ingredient images from Spoonacular CDN */
-  var ING_IMG_MAP={poulet:'chicken-breast.jpg',oignon:'onion.jpg',citron:'lemon.jpg',origan:'oregano.jpg',huile:'olive-oil.jpg',ail:'garlic.jpg',yaourt:'plain-yogurt.jpg',baies:'mixed-berries.jpg',miel:'honey.jpg',cannelle:'cinnamon.jpg',sauce:'chili-sauce.jpg',cumin:'cumin.jpg',poivron:'bell-pepper-orange.jpg',champignon:'brown-mushrooms.jpg',beurre:'butter-stick.jpg',persil:'parsley.jpg',vin:'white-wine.jpg',pate:'penne.jpg',courgette:'zucchini.jpg',tomate:'tomato.jpg',basilic:'fresh-basil.jpg',couscous:'couscous.jpg',abricot:'dried-apricots.jpg',tofu:'tofu.jpg',gingembre:'ginger.jpg',soja:'soy-sauce.jpg',spaghetti:'spaghetti.jpg',viande:'fresh-ground-beef.jpg',mozzarella:'mozzarella.jpg',farine:'flour.jpg',sucre:'sugar-in-bowl.jpg',oeuf:'egg.jpg',rhubarbe:'rhubarb.jpg',fromage:'parmesan.jpg',creme:'heavy-cream.jpg',vanille:'vanilla-extract.jpg',linguine:'linguine.jpg',carotte:'carrots.jpg',bouillon:'vegetable-broth.jpg',haricot:'cannellini-beans.jpg',chapelure:'breadcrumbs.jpg',saucisse:'sausage.jpg',herbe:'mixed-herbs.jpg',thym:'thyme.jpg',laurier:'bay-leaves.jpg',celeri:'celery.jpg','saint-jacques':'sea-scallops.jpg',amande:'almonds.jpg',cacao:'cocoa-powder.jpg',piment:'chili-peppers.jpg',aubergine:'eggplant.jpg',lasagne:'lasagna-noodles.jpg',bechamel:'milk.jpg',verveine:'lemon.jpg',levure:'active-dry-yeast.jpg',ras:'ras-el-hanout.jpg',panko:'panko.jpg',sesame:'sesame-seeds.jpg'};
+  var ING_IMG_MAP={poulet:'chicken-breast.jpg',oignon:'onion.jpg',citron:'lemon.jpg',origan:'oregano.jpg',huile:'olive-oil.jpg',ail:'garlic.jpg',yaourt:'plain-yogurt.jpg',baies:'mixed-berries.jpg',miel:'honey.jpg',cannelle:'cinnamon.jpg',sauce:'chili-sauce.jpg',cumin:'cumin.jpg',poivron:'bell-pepper-orange.jpg',champignon:'brown-mushrooms.jpg',beurre:'butter-stick.jpg',persil:'parsley.jpg',vin:'white-wine.jpg',pate:'penne.jpg',courgette:'zucchini.jpg',tomate:'tomato.jpg',basilic:'fresh-basil.jpg',couscous:'couscous.jpg',abricot:'dried-apricots.jpg',tofu:'tofu.jpg',gingembre:'ginger.jpg',soja:'soy-sauce.jpg',spaghetti:'spaghetti.jpg',viande:'fresh-ground-beef.jpg',mozzarella:'mozzarella.jpg',farine:'all-purpose-flour.jpg',sucre:'granulated-sugar.jpg',oeuf:'egg.jpg',rhubarbe:'red-cabbage.jpg',fromage:'parmesan.jpg',creme:'heavy-cream.jpg',vanille:'vanilla-extract.jpg',linguine:'linguine.jpg',carotte:'carrots.jpg',bouillon:'vegetable-broth.jpg',haricot:'cannellini-beans.jpg',chapelure:'breadcrumbs.jpg',saucisse:'sausage.jpg',herbe:'mixed-herbs.jpg',thym:'thyme.jpg',laurier:'bay-leaves.jpg',celeri:'celery.jpg','saint-jacques':'sea-scallops.jpg',amande:'almonds.jpg',cacao:'cocoa-powder.jpg',piment:'chili-peppers.jpg',aubergine:'eggplant.jpg',lasagne:'lasagna-noodles.jpg',bechamel:'milk.jpg',verveine:'lemon.jpg',levure:'active-dry-yeast.jpg',ras:'ras-el-hanout.jpg',panko:'panko.jpg',sesame:'sesame-seeds.jpg'};
   function getIngImgUrl(name){var n=name.toLowerCase();for(var k in ING_IMG_MAP){if(n.indexOf(k)!==-1)return'https://img.spoonacular.com/ingredients_250x250/'+ING_IMG_MAP[k]}return'https://img.spoonacular.com/ingredients_250x250/mixed-vegetables.jpg'}
   /* Ingredients with real product images + checkboxes */
   const ingBox=document.querySelector('#s3 .det-ingredients');
