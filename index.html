@@ -4536,7 +4536,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="ob-chips" data-group="level">
     <div class="ob-chip" data-val="beginner" onclick="obSelect(this)">
       <span class="ob-chip-icon">&#127793;</span>
-      <div class="ob-chip-body"><div class="ob-chip-label">Je d&eacute;bute</div><div class="ob-chip-desc">Je br&ucirc;le encore les p&acirc;tes — et c'est ok</div></div>
+      <div class="ob-chip-body"><div class="ob-chip-label">Je d&eacute;bute</div><div class="ob-chip-desc">Je br&ucirc;le encore les p&acirc;tes, et c'est ok</div></div>
       <div class="ob-chip-check"><span class="ms">check</span></div>
     </div>
     <div class="ob-chip" data-val="basic" onclick="obSelect(this)">
@@ -4830,7 +4830,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="hdr">
   <div class="hdr-logo">Savora</div>
   <div class="hdr-side r">
-    <div class="hdr-btn" onclick="go(14)">
+    <div class="hdr-btn" onclick="go(14)" title="Notifications">
       <span class="ms">notifications</span>
       <div style="position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--terra)"></div>
     </div>
@@ -4889,6 +4889,38 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="whisper">
   <div class="whisper-name" style="font-family:'Playfair Display',serif;font-style:italic">3 nouvelles recettes &agrave; d&eacute;couvrir</div>
   <div class="whisper-ctx">Bas&eacute;es sur vos go&ucirc;ts et vos envies.</div>
+</div>
+
+<!-- ELEMENT 3b: Cuisines du monde — country circles -->
+<div class="recent-header">
+  <h2>Cuisines du monde</h2>
+  <button style="font-size:12px;color:var(--terra);font-weight:500;background:none;border:none;cursor:pointer;letter-spacing:.3px" onclick="go(2)">Tout voir</button>
+</div>
+<div style="display:flex;gap:14px;padding:0 24px 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+  <div onclick="go(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0">
+    <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid var(--terra);box-shadow:0 4px 12px rgba(196,101,74,.15)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <span style="font-size:11px;color:var(--t2);font-weight:500">&#127467;&#127479; France</span>
+  </div>
+  <div onclick="go(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0">
+    <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid var(--glass-b);box-shadow:0 4px 12px rgba(45,30,15,.08)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <span style="font-size:11px;color:var(--t2);font-weight:500">&#127470;&#127481; Italie</span>
+  </div>
+  <div onclick="go(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0">
+    <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid var(--glass-b);box-shadow:0 4px 12px rgba(45,30,15,.08)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <span style="font-size:11px;color:var(--t2);font-weight:500">&#127474;&#127462; Maroc</span>
+  </div>
+  <div onclick="go(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0">
+    <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid var(--glass-b);box-shadow:0 4px 12px rgba(45,30,15,.08)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774019430123-6j66epz7.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <span style="font-size:11px;color:var(--t2);font-weight:500">&#127471;&#127477; Japon</span>
+  </div>
+  <div onclick="go(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0">
+    <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid var(--glass-b);box-shadow:0 4px 12px rgba(45,30,15,.08)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <span style="font-size:11px;color:var(--t2);font-weight:500">&#127474;&#127485; Mexique</span>
+  </div>
+  <div onclick="go(2)" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0">
+    <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid var(--glass-b);box-shadow:0 4px 12px rgba(45,30,15,.08)"><img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773945119108-hge3eq0z.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <span style="font-size:11px;color:var(--t2);font-weight:500">&#127468;&#127479; Gr&egrave;ce</span>
+  </div>
 </div>
 
 <!-- ELEMENT 4: Recent captures scroll -->
@@ -4976,6 +5008,35 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.85) 0%,rgba(16,12,8,.0) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px">
       <div style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px">Cuisine du printemps</div>
       <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#f0ebe4;line-height:1.15">Les l&eacute;gumes de saison<br>&agrave; l'honneur</div>
+    </div>
+  </div>
+</div>
+
+<!-- ELEMENT 7: Rapide et facile — beginner/family appeal -->
+<div class="recent-header" style="margin-top:4px">
+  <h2>Rapide et facile</h2>
+  <button style="font-size:12px;color:var(--terra);font-weight:500;background:none;border:none;cursor:pointer;letter-spacing:.3px" onclick="go(13)">Tout voir</button>
+</div>
+<div class="recent-scroll">
+  <div class="recent-card" onclick="showRecipe(1);go(3)">
+    <div style="position:absolute;top:8px;left:8px;z-index:5;padding:3px 8px;border-radius:8px;background:rgba(109,160,109,.9);font-size:10px;font-weight:600;color:#fff;letter-spacing:.3px">10 min</div>
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773945119108-hge3eq0z.jpg" alt="">
+    <div class="rc-overlay">
+      <div class="rc-title">&#127468;&#127479; Yaourt grec baies chaudes</div>
+    </div>
+  </div>
+  <div class="recent-card" onclick="showRecipe(4);go(3)">
+    <div style="position:absolute;top:8px;left:8px;z-index:5;padding:3px 8px;border-radius:8px;background:rgba(109,160,109,.9);font-size:10px;font-weight:600;color:#fff;letter-spacing:.3px">15 min</div>
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774149369259-7cr4cjpz.jpg" alt="">
+    <div class="rc-overlay">
+      <div class="rc-title">&#127470;&#127481; P&acirc;tes l&eacute;gumes du march&eacute;</div>
+    </div>
+  </div>
+  <div class="recent-card" onclick="showRecipe(8);go(3)">
+    <div style="position:absolute;top:8px;left:8px;z-index:5;padding:3px 8px;border-radius:8px;background:rgba(109,160,109,.9);font-size:10px;font-weight:600;color:#fff;letter-spacing:.3px">15 min</div>
+    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774384275764-xf2gedcp.jpg" alt="">
+    <div class="rc-overlay">
+      <div class="rc-title">&#127470;&#127481; Spaghetti Bolognaise</div>
     </div>
   </div>
 </div>
@@ -5309,7 +5370,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <!-- Quick info badges -->
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:16px;font-size:13px;color:var(--t2);transition:color .4s">
       <span class="det-badge" style="background:var(--terra-g);color:var(--terra)">Interm&eacute;diaire</span>
-      <span class="det-badge"><span class="ms" style="font-size:14px">group</span> 4 portions</span>
+      <span class="det-badge" style="display:inline-flex;align-items:center;gap:6px"><span class="ms" style="font-size:14px">group</span><span onclick="event.stopPropagation();var v=this.nextElementSibling;var n=Math.max(1,parseInt(v.textContent)-1);v.textContent=n" style="width:22px;height:22px;border-radius:50%;background:var(--terra-g);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;font-weight:600;color:var(--terra)">-</span><span class="portion-count">4</span><span onclick="event.stopPropagation();var v=this.previousElementSibling;var n=parseInt(v.textContent)+1;v.textContent=n" style="width:22px;height:22px;border-radius:50%;background:var(--terra-g);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;font-weight:600;color:var(--terra)">+</span> portions</span>
       <span class="det-badge"><span class="ms" style="font-size:14px">local_fire_department</span> 470 kcal</span>
       <span class="det-badge"><span class="ms" style="font-size:14px">euro</span> 3,50&euro;/pers</span>
     </div>
@@ -5549,6 +5610,31 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;line-height:1.6;color:var(--t2);margin:0;transition:color .4s">Pour un r&eacute;sultat encore plus savoureux, cassez la cro&ucirc;te de chapelure &agrave; mi-cuisson et laissez-en reformer une nouvelle.</p>
   </div>
 
+  <!-- Vous aimerez aussi — at the bottom, less prominent -->
+  <div style="padding:24px 22px 0">
+    <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--t1);margin-bottom:14px;transition:color .4s">Vous aimerez aussi</div>
+    <div style="display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:8px">
+      <div onclick="showRecipe(6);go(3)" style="min-width:140px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773981168292-q3bnym5a.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:10px">
+          <div style="font-size:11px;font-weight:500;color:#f0ebe4;line-height:1.2">&#127474;&#127462; Rago&ucirc;t marocain</div>
+        </div>
+      </div>
+      <div onclick="showRecipe(3);go(3)" style="min-width:140px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:10px">
+          <div style="font-size:11px;font-weight:500;color:#f0ebe4;line-height:1.2">&#127470;&#127481; Scampi champignons</div>
+        </div>
+      </div>
+      <div onclick="showRecipe(13);go(3)" style="min-width:140px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0">
+        <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(16,12,8,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:10px">
+          <div style="font-size:11px;font-weight:500;color:#f0ebe4;line-height:1.2">&#127467;&#127479; Lasagnes l&eacute;gumes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bottom padding for scroll -->
   <div style="height:40px"></div>
 
@@ -5675,7 +5761,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S5: SHOPPING LIST -->
 <div class="scr" id="s5" data-s="off">
 <div class="shop">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div><div class="hdr-side r"><div class="hdr-btn" onclick="void(0)"><span class="ms">share</span></div></div></div>
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div style="font-family:'Playfair Display',serif;font-weight:400;font-size:18px;color:var(--t1);transition:color .4s">Liste de courses</div><div class="hdr-side r"><div class="hdr-btn" onclick="alert('Partage de la liste')"><span class="ms">share</span></div></div></div>
   <div class="shop-sum"><div><div class="shop-sum-l">Total estim&eacute;</div><div class="shop-sum-v">18.68 &#8364;</div></div><div class="shop-sum-r">14 articles</div></div>
   <div style="padding:8px 24px 16px">
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--t2);transition:color .4s">Tout ce qu'il vous faut</div>
@@ -6954,7 +7040,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
     <!-- Notes personnelles -->
     <div class="sh"><span class="sh-t">Notes personnelles</span></div>
     <div class="notes-card">
-      <p>Ambiance incroyable, terrasse avec vue. Le roti etait parfait — demander la sauce a part.</p>
+      <p>Ambiance incroyable, terrasse avec vue. Le roti etait parfait, demander la sauce a part.</p>
     </div>
 
     <!-- Y retourner button -->
@@ -6991,7 +7077,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
           </div>
           <div class="tl-badge">
             <span class="ms">public</span>
-            <span>Globe-trotteur — 10 pays explores</span>
+            <span>Globe-trotteur, 10 pays explores</span>
           </div>
         </div>
       </div>
@@ -7011,7 +7097,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
           </div>
           <div class="tl-fav">
             <span class="ms">star</span>
-            Risotto aux cepes — cuisine 4 fois
+            Risotto aux cepes, cuisine 4 fois
           </div>
         </div>
       </div>
@@ -7345,7 +7431,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
    RECIPES — Real data from OptiRecipe production
    ═══════════════════════════════════════════════ */
 const RECIPES = [
-  {id:"r01",title:"Brochettes de poulet a la grecque, citron et origan",desc:"Tendres et parfumees, dorees au grill, avec ce petit gout de Mediterranee.",country:"Grece",category:"plat",difficulty:"facile",prep:20,cook:20,servings:4,cal:380,protein:35,cost:3.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg",source:"optirecipe",ingredients:[{name:"poulet",qty:"600 g"},{name:"citron",qty:"2"},{name:"origan",qty:"10 g"},{name:"huile d olive",qty:"60 ml"},{name:"ail",qty:"3 gousses"}],steps:["Detailler les blancs de poulet en cubes reguliers de 3 cm. La regularite garantit une cuisson homogene — un morceau trop petit brulera pendant que le gros reste cru.","Preparer la marinade : presser les citrons, hacher finement l'ail, melanger avec l'huile d'olive, l'origan et une pincee genereuse de sel. Enrober les cubes de poulet et filmer au contact. Refrigerer au moins 2 heures — idealement toute une nuit.","Si vous utilisez des piques en bois, les faire tremper 30 min dans l'eau pour eviter qu'elles ne brulent. Enfiler les cubes en alternant avec des morceaux de poivron et d'oignon rouge.","Prechauffer le gril ou la plancha a feu vif. Huiler legerement la grille avec un papier absorbant imbibe d'huile. Poser les brochettes et ne plus y toucher pendant 4 minutes — c'est la caramelisation qui donne la croute doree.","Retourner d'un quart de tour toutes les 3-4 minutes. Le poulet est pret quand le jus qui perle est limpide, pas rose. Compter 12-15 min au total.","Dresser sur un plat chaud. Arroser d'un filet de jus de citron frais, parsemer d'origan frais et servir immediatement avec une salade grecque ou du riz pilaf."]},
+  {id:"r01",title:"Brochettes de poulet a la grecque, citron et origan",desc:"Tendres et parfumees, dorees au grill, avec ce petit gout de Mediterranee.",country:"Grece",category:"plat",difficulty:"facile",prep:20,cook:20,servings:4,cal:380,protein:35,cost:3.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773965427348-400en5yo.jpg",source:"optirecipe",ingredients:[{name:"poulet",qty:"600 g"},{name:"citron",qty:"2"},{name:"origan",qty:"10 g"},{name:"huile d olive",qty:"60 ml"},{name:"ail",qty:"3 gousses"}],steps:["Detailler les blancs de poulet en cubes reguliers de 3 cm. La regularite garantit une cuisson homogene. Un morceau trop petit brulera pendant que le gros reste cru.","Preparer la marinade : presser les citrons, hacher finement l'ail, melanger avec l'huile d'olive, l'origan et une pincee genereuse de sel. Enrober les cubes de poulet et filmer au contact. Refrigerer au moins 2 heures, idealement toute une nuit.","Si vous utilisez des piques en bois, les faire tremper 30 min dans l'eau pour eviter qu'elles ne brulent. Enfiler les cubes en alternant avec des morceaux de poivron et d'oignon rouge.","Prechauffer le gril ou la plancha a feu vif. Huiler legerement la grille avec un papier absorbant imbibe d'huile. Poser les brochettes et ne plus y toucher pendant 4 minutes, c'est la caramelisation qui donne la croute doree.","Retourner d'un quart de tour toutes les 3-4 minutes. Le poulet est pret quand le jus qui perle est limpide, pas rose. Compter 12-15 min au total.","Dresser sur un plat chaud. Arroser d'un filet de jus de citron frais, parsemer d'origan frais et servir immediatement avec une salade grecque ou du riz pilaf."]},
   {id:"r02",title:"Yaourt grec aux baies chaudes et miel de thym",desc:"Cremeux, acidule, reconfortant. Le petit-dejeuner qui change tout.",country:"Grece",category:"dessert",difficulty:"facile",prep:10,cook:10,servings:2,cal:220,protein:12,cost:2.00,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773945119108-hge3eq0z.jpg",source:"optirecipe",ingredients:[{name:"yaourt grec",qty:"400 g"},{name:"baies melangees",qty:"200 g"},{name:"miel",qty:"30 ml"},{name:"cannelle",qty:"2 g"}],steps:["Chauffer les baies avec le miel a feu moyen.","Cuire 8-10 min jusqu a caramelisation.","Servir sur le yaourt avec cannelle."]},
   {id:"r03",title:"Poulet mijote lentement aux epices fumees",desc:"La viande se defait a la fourchette, la sauce enrobe chaque bouchee.",country:"Mexique",category:"plat",difficulty:"facile",prep:10,cook:5,servings:4,cal:350,protein:30,cost:3.00,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774333143659-cni0pt5c.jpg",source:"optirecipe",ingredients:[{name:"poulet",qty:"500 g"},{name:"sauce chili",qty:"200 ml"},{name:"oignon",qty:"1"},{name:"poivrons",qty:"2"},{name:"cumin",qty:"5 g"}],steps:["Faire revenir l oignon et les poivrons.","Ajouter le poulet et la sauce chili.","Mijoter 15 min a feu doux.","Servir avec du riz."]},
   {id:"r04",title:"Scampi de champignons sauvages aux pates fraiches",desc:"Le beurre grille, l ail parfume, les champignons fondent. Un plat qui se devore.",country:"Italie",category:"plat",difficulty:"facile",prep:15,cook:15,servings:4,cal:420,protein:18,cost:4.00,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773982376685-1m6g8iw2.jpg",source:"optirecipe",ingredients:[{name:"pates",qty:"400 g"},{name:"champignons",qty:"300 g"},{name:"beurre",qty:"50 g"},{name:"ail",qty:"4 gousses"},{name:"persil",qty:"15 g"},{name:"vin blanc",qty:"100 ml"}],steps:["Cuire les pates al dente.","Sauter les champignons dans le beurre avec l ail.","Deglaciser au vin blanc.","Melanger avec les pates et servir."]},
@@ -7359,7 +7445,7 @@ const RECIPES = [
   {id:"r12",title:"Coquilles Saint-Jacques linguines",desc:"Linguines aux Saint-Jacques poelees, beurre noisette et citron.",country:"France",category:"plat",difficulty:"moyen",prep:10,cook:5,servings:4,cal:460,protein:30,cost:8.00,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774313581031-k8pal749.jpg",source:"optirecipe",ingredients:[{name:"linguines",qty:"400 g"},{name:"Saint-Jacques",qty:"12"},{name:"beurre",qty:"60 g"},{name:"citron",qty:"1"},{name:"persil",qty:"10 g"}],steps:["Cuire les linguines.","Poeler les Saint-Jacques 2 min par face.","Faire un beurre noisette au citron.","Dresser et servir."]},
   {id:"r13",title:"Mole de Fruits et Legumes",desc:"Un mole mexicain riche melant cacao, epices et l&eacute;gumes de saison.",country:"Mexique",category:"plat",difficulty:"moyen",prep:10,cook:5,servings:4,cal:340,protein:12,cost:3.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773932129955-40xqfyjw.jpg",source:"optirecipe",ingredients:[{name:"legumes varies",qty:"500 g"},{name:"cacao",qty:"20 g"},{name:"piments",qty:"2"},{name:"tomates",qty:"300 g"},{name:"amandes",qty:"50 g"}],steps:["Griller les piments et tomates.","Mixer avec cacao et amandes.","Cuire les legumes dans la sauce 25 min."]},
   {id:"r14",title:"Lasagnes aux legumes du soleil",desc:"Lasagnes generereuses aux courgettes, aubergines et tomates confites.",country:"France",category:"plat",difficulty:"moyen",prep:25,cook:20,servings:6,cal:410,protein:18,cost:4.50,co2:"B",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1773754079491-qbperxje.jpg",source:"optirecipe",ingredients:[{name:"feuilles de lasagne",qty:"12"},{name:"courgettes",qty:"300 g"},{name:"aubergines",qty:"300 g"},{name:"sauce tomate",qty:"500 ml"},{name:"bechamel",qty:"400 ml"},{name:"fromage rape",qty:"150 g"}],steps:["Griller courgettes et aubergines.","Monter en couches avec sauce et bechamel.","Gratiner 30 min a 190C."]},
-  {id:"r15",title:"G&acirc;teau moelleux &agrave; la rhubarbe",desc:"Un gateau fondant a la rhubarbe acidulee, parfait pour le gouter.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:8,cal:290,protein:5,cost:2.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg",source:"optirecipe",ingredients:[{name:"rhubarbe",qty:"400 g"},{name:"farine",qty:"200 g"},{name:"sucre",qty:"150 g"},{name:"oeufs",qty:"3"},{name:"beurre",qty:"100 g"}],steps:["Prechauffer le four a 180 C (thermostat 6). Beurrer et fariner un moule a manque de 24 cm. Tapoter le fond pour retirer l exces de farine.","Eplucher la rhubarbe en tirant les fibres du dos avec un couteau d office. La couper en troncons de 2 cm. La faire degorger 20 min dans une passoire avec 2 cuilleres de sucre -- elle va rendre son eau et garder du croquant.","Travailler le beurre pommade au fouet avec le sucre restant jusqu a obtenir une creme lisse et mousseuse. C est la base de votre gateau -- ne brusquez pas cette etape.","Incorporer les oeufs un par un en fouettant bien entre chaque ajout. Si la pate tranche, ajoutez une cuillere de farine -- elle va se rattraper.","Tamiser la farine et la levure directement au-dessus du saladier. Incorporer en soulevant la pate a la maryse, avec des mouvements amples du fond vers le haut. On ne touille pas -- on souleve.","Egoutter la rhubarbe et l incorporer delicatement a la pate. Verser dans le moule. Lisser le dessus a la spatule coudee.","Enfourner 40 a 45 min. Le gateau est pret quand la lame d un couteau ressort avec quelques miettes humides -- pas seche, pas liquide. Laisser tiedir 10 min avant de demouler sur une grille.","Servir tiede, saupoudre d un voile de sucre glace. Se marie parfaitement avec une boule de creme glacee vanille ou un nuage de chantilly."]}
+  {id:"r15",title:"G&acirc;teau moelleux &agrave; la rhubarbe",desc:"Un gateau fondant a la rhubarbe acidulee, parfait pour le gouter.",country:"France",category:"dessert",difficulty:"facile",prep:10,cook:5,servings:8,cal:290,protein:5,cost:2.50,co2:"A",img:"https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774307632624-9sivkr7h.jpg",source:"optirecipe",ingredients:[{name:"rhubarbe",qty:"400 g"},{name:"farine",qty:"200 g"},{name:"sucre",qty:"150 g"},{name:"oeufs",qty:"3"},{name:"beurre",qty:"100 g"}],steps:["Prechauffer le four a 180 C (thermostat 6). Beurrer et fariner un moule a manque de 24 cm. Tapoter le fond pour retirer l exces de farine.","Eplucher la rhubarbe en tirant les fibres du dos avec un couteau d office. La couper en troncons de 2 cm. La faire degorger 20 min dans une passoire avec 2 cuilleres de sucre, elle va rendre son eau et garder du croquant.","Travailler le beurre pommade au fouet avec le sucre restant jusqu a obtenir une creme lisse et mousseuse. C est la base de votre gateau, ne brusquez pas cette etape.","Incorporer les oeufs un par un en fouettant bien entre chaque ajout. Si la pate tranche, ajoutez une cuillere de farine, elle va se rattraper.","Tamiser la farine et la levure directement au-dessus du saladier. Incorporer en soulevant la pate a la maryse, avec des mouvements amples du fond vers le haut. On ne touille pas, on souleve.","Egoutter la rhubarbe et l incorporer delicatement a la pate. Verser dans le moule. Lisser le dessus a la spatule coudee.","Enfourner 40 a 45 min. Le gateau est pret quand la lame d un couteau ressort avec quelques miettes humides, pas seche, pas liquide. Laisser tiedir 10 min avant de demouler sur une grille.","Servir tiede, saupoudre d un voile de sucre glace. Se marie parfaitement avec une boule de creme glacee vanille ou un nuage de chantilly."]}
 ];
 
 /* Country flags for display */
@@ -8515,7 +8601,7 @@ function pickExpCuisine(el){
     // 5. Whisper personalization
     var whisperCtx = document.querySelector('.whisper-ctx');
     if (whisperCtx && obData.name) {
-      whisperCtx.textContent = obData.name + ', votre book grandit — continuez a explorer.';
+      whisperCtx.textContent = obData.name + ', votre book grandit. Continuez a explorer.';
     }
 
     // 6. Skill-based messaging
