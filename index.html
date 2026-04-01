@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>Savora</title>
+<title>SANZIA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 <style>
@@ -265,7 +265,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   transition:color .2s;
 }
 .onboard-login a:hover{color:rgba(200,192,184,.8)}
-/* Savora watermark */
+/* SANZIA watermark */
 .onboard-mark{
   position:absolute;top:0;left:0;right:0;padding-top:96px;
   z-index:2;text-align:center;
@@ -621,6 +621,80 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 .greet-hi{font-size:13px;color:var(--t3);font-weight:400;margin-bottom:2px;transition:color .4s}
 .greet-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--t1);letter-spacing:-.3px;transition:color .4s}
 .greet-date{font-size:11px;color:var(--t4);margin-top:3px;letter-spacing:.3px;transition:color .4s}
+
+/* Dashboard - Flavora-inspired */
+.dash{padding:0 24px 20px}
+.dash-days{display:flex;gap:6px;margin-bottom:20px;justify-content:center}
+.dash-day{
+  width:44px;padding:6px 0;text-align:center;border-radius:14px;cursor:pointer;
+  background:var(--card);border:1px solid var(--card-b);transition:all .3s;
+}
+.dash-day.today{background:var(--terra);border-color:var(--terra)}
+.dash-day-l{font-size:9px;color:var(--t3);font-weight:500;text-transform:uppercase;letter-spacing:.5px;display:block}
+.dash-day.today .dash-day-l{color:rgba(255,255,255,.7)}
+.dash-day-n{font-size:16px;font-weight:600;color:var(--t1);display:block;margin-top:2px}
+.dash-day.today .dash-day-n{color:#fff}
+
+.dash-stats{
+  background:var(--card);border:1px solid var(--card-b);border-radius:22px;
+  padding:20px;margin-bottom:16px;box-shadow:var(--card-s);text-align:center;
+}
+.dash-cal-ring{
+  width:120px;height:120px;border-radius:50%;margin:0 auto 12px;
+  position:relative;display:flex;align-items:center;justify-content:center;
+  background:conic-gradient(var(--terra) 0% 87%,var(--card-b) 87% 100%);
+}
+.dash-cal-inner{
+  width:100px;height:100px;border-radius:50%;background:var(--card);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.dash-cal-val{font-size:28px;font-weight:700;color:var(--t1)}
+.dash-cal-lbl{font-size:10px;color:var(--t3);margin-top:2px}
+.dash-cal-side{display:flex;justify-content:space-between;margin:0 20px 16px}
+.dash-cal-s{text-align:center}
+.dash-cal-s b{font-size:18px;color:var(--t1);display:block}
+.dash-cal-s span{font-size:10px;color:var(--t3)}
+.dash-macros{display:flex;gap:16px;justify-content:center}
+.dash-macro{text-align:center;flex:1}
+.dash-macro-lbl{font-size:11px;color:var(--t3);margin-bottom:6px;display:block}
+.dash-macro-bar{height:4px;border-radius:2px;background:var(--card-b);overflow:hidden}
+.dash-macro-fill{height:100%;border-radius:2px;background:var(--terra)}
+.dash-macro-val{font-size:11px;color:var(--t2);margin-top:4px;font-weight:500}
+
+.dash-xp{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--card-b);border-radius:16px;
+  padding:12px 16px;margin-bottom:16px;box-shadow:var(--glass-s);
+}
+.dash-xp-badge{
+  width:36px;height:36px;border-radius:50%;background:var(--terra-g);
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.dash-xp-info{flex:1}
+.dash-xp-title{font-size:12px;font-weight:600;color:var(--t1);display:block}
+.dash-xp-bar{height:4px;border-radius:2px;background:var(--card-b);margin-top:4px;overflow:hidden}
+.dash-xp-fill{height:100%;border-radius:2px;background:var(--sage);width:35%}
+.dash-xp-txt{font-size:10px;color:var(--t3);margin-top:3px}
+.dash-xp-pct{font-size:12px;font-weight:600;color:var(--sage);white-space:nowrap}
+
+.dash-meals{display:flex;flex-direction:column;gap:10px}
+.dash-meal{
+  display:flex;align-items:center;gap:12px;
+  background:var(--card);border:1px solid var(--card-b);border-radius:18px;
+  padding:14px 16px;cursor:pointer;box-shadow:var(--glass-s);
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.dash-meal:active{transform:scale(.97)}
+.dash-meal-icon{
+  width:44px;height:44px;border-radius:50%;overflow:hidden;
+  background:var(--card-b);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.dash-meal-icon img{width:100%;height:100%;object-fit:cover}
+.dash-meal-icon .ms{font-size:22px;color:var(--t3)}
+.dash-meal-info{flex:1}
+.dash-meal-name{font-size:14px;font-weight:500;color:var(--t1)}
+.dash-meal-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.dash-meal .ms:last-child{font-size:18px;color:var(--t4)}
 
 /* =========================================
    S1: HOME
@@ -1948,7 +2022,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   box-shadow:0 6px 20px rgba(196,101,74,.25);
 }
 
-/* Savora mark for V6 onboarding */
+/* SANZIA mark for V6 onboarding */
 .v6-onboard-mark{
   position:absolute;
   top:70px;
@@ -3067,7 +3141,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   50%{transform:scale(1.02);box-shadow:0 12px 42px rgba(196,101,74,.45)}
 }
 
-/* Savora mark */
+/* SANZIA mark */
 .v6-onboard-mark{
   position:absolute;
   top:70px;
@@ -4391,8 +4465,8 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="scr" id="s0" data-s="on">
 <div class="v6-onboard" id="onboardContainer">
 
-  <!-- Savora watermark -->
-  <div class="v6-onboard-mark">Savora</div>
+  <!-- SANZIA watermark -->
+  <div class="v6-onboard-mark">SANZIA</div>
 
   <!-- Language selector -->
   <div class="v6-lang-selector">
@@ -4828,7 +4902,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 <!-- Header -->
 <div class="hdr">
-  <div class="hdr-logo">Savora</div>
+  <div class="hdr-logo">SANZIA</div>
   <div class="hdr-side r">
     <div class="hdr-btn" onclick="go(14)" title="Notifications">
       <span class="ms">notifications</span>
@@ -4839,9 +4913,102 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 
 <!-- Personalized Greeting -->
 <div class="greet" id="obGreeting">
-  <div class="greet-hi" id="obGreetTime">Bonjour</div>
-  <div class="greet-name" id="obGreetName">Bienvenue</div>
+  <div class="greet-hi" id="obGreetTime">Le Chef vous accueille,</div>
+  <div class="greet-name" id="obGreetName">Marie</div>
   <div class="greet-date" id="obGreetDate"></div>
+  <div class="greet-date" style="margin-top:8px;color:var(--terra);font-weight:500;font-size:12px">3 nouvelles recettes maitrisees cette semaine</div>
+</div>
+
+<!-- SANZIA Dashboard -->
+<div class="dash">
+  <!-- Day selector -->
+  <div class="dash-days">
+    <div class="dash-day"><span class="dash-day-l">Lun</span><span class="dash-day-n">31</span></div>
+    <div class="dash-day today"><span class="dash-day-l">Mar</span><span class="dash-day-n">1</span></div>
+    <div class="dash-day"><span class="dash-day-l">Mer</span><span class="dash-day-n">2</span></div>
+    <div class="dash-day"><span class="dash-day-l">Jeu</span><span class="dash-day-n">3</span></div>
+    <div class="dash-day"><span class="dash-day-l">Ven</span><span class="dash-day-n">4</span></div>
+    <div class="dash-day"><span class="dash-day-l">Sam</span><span class="dash-day-n">5</span></div>
+    <div class="dash-day"><span class="dash-day-l">Dim</span><span class="dash-day-n">6</span></div>
+  </div>
+
+  <!-- Progression culinaire -->
+  <div class="dash-stats">
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:16px">
+      <div class="dash-cal-s"><b>12</b><span>recettes</span></div>
+      <div class="dash-cal-ring">
+        <div class="dash-cal-inner">
+          <div class="dash-cal-val">87%</div>
+          <div class="dash-cal-lbl">objectifs</div>
+        </div>
+      </div>
+      <div class="dash-cal-s"><b>4</b><span>cuisines</span></div>
+    </div>
+    <div class="dash-macros">
+      <div class="dash-macro">
+        <span class="dash-macro-lbl">Recettes maitrisees</span>
+        <div class="dash-macro-bar"><div class="dash-macro-fill" style="width:60%"></div></div>
+        <div class="dash-macro-val">12 cette semaine</div>
+      </div>
+      <div class="dash-macro">
+        <span class="dash-macro-lbl">Techniques apprises</span>
+        <div class="dash-macro-bar"><div class="dash-macro-fill" style="width:35%;background:var(--gold)"></div></div>
+        <div class="dash-macro-val">7 / 20</div>
+      </div>
+      <div class="dash-macro">
+        <span class="dash-macro-lbl">Pays explores</span>
+        <div class="dash-macro-bar"><div class="dash-macro-fill" style="width:30%;background:var(--sage)"></div></div>
+        <div class="dash-macro-val">4 / 15</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- XP / Level -->
+  <div class="dash-xp">
+    <div class="dash-xp-badge">&#127859;</div>
+    <div class="dash-xp-info">
+      <span class="dash-xp-title">Niveau 1 &mdash; Apprenti</span>
+      <div class="dash-xp-bar"><div class="dash-xp-fill"></div></div>
+      <div class="dash-xp-txt">52 / 150 XP</div>
+    </div>
+    <div class="dash-xp-pct">+23%</div>
+  </div>
+
+  <!-- Meals today -->
+  <div class="dash-meals">
+    <div class="dash-meal" onclick="go(3)">
+      <div class="dash-meal-icon"><span class="ms">coffee</span></div>
+      <div class="dash-meal-info">
+        <div class="dash-meal-name">Petit dejeuner</div>
+        <div class="dash-meal-sub">Croissants maison</div>
+      </div>
+      <span class="ms" style="color:var(--t4)">arrow_forward_ios</span>
+    </div>
+    <div class="dash-meal" onclick="go(3)">
+      <div class="dash-meal-icon"><span class="ms">restaurant</span></div>
+      <div class="dash-meal-info">
+        <div class="dash-meal-name">Dejeuner</div>
+        <div class="dash-meal-sub">Poulet roti aux herbes</div>
+      </div>
+      <span class="ms" style="color:var(--t4)">arrow_forward_ios</span>
+    </div>
+    <div class="dash-meal" onclick="go(3)">
+      <div class="dash-meal-icon"><span class="ms">dinner_dining</span></div>
+      <div class="dash-meal-info">
+        <div class="dash-meal-name">Diner</div>
+        <div class="dash-meal-sub">Ajouter</div>
+      </div>
+      <span class="ms" style="color:var(--t4)">arrow_forward_ios</span>
+    </div>
+    <div class="dash-meal" onclick="go(3)">
+      <div class="dash-meal-icon"><span class="ms">cookie</span></div>
+      <div class="dash-meal-info">
+        <div class="dash-meal-name">Collation</div>
+        <div class="dash-meal-sub">Cookies chocolat</div>
+      </div>
+      <span class="ms" style="color:var(--t4)">arrow_forward_ios</span>
+    </div>
+  </div>
 </div>
 
 <!-- ELEMENT 1: Quick Capture Bar — premium -->
@@ -4923,44 +5090,17 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   </div>
 </div>
 
-<!-- ELEMENT 4: Recent captures scroll -->
-<div class="recent-header">
-  <h2>Captures r&eacute;centes</h2>
-  <button style="font-size:12px;color:var(--terra);font-weight:500;background:none;border:none;cursor:pointer;letter-spacing:.3px">Tout voir</button>
-</div>
-<div class="recent-scroll">
-  <!-- Card 1 — Pâtes primavera (r04 Scampi champignons) -->
-  <div class="recent-card" onclick="showRecipe(4);go(3)">
-    <div class="rc-source"><span class="ms">photo_camera</span></div>
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774121186854-yxs3yatz.jpg" alt="">
-    <div class="rc-overlay">
-      <div class="rc-title">&#127470;&#127481; P&acirc;tes primavera</div>
-    </div>
+<!-- ELEMENT 4: Recent captures scroll — REMOVED for simplified home -->
+<!-- Captures recentes section commented out -->
+
+<!-- Explorer 130 pays CTA -->
+<div style="margin:0 24px 28px;padding:18px 20px;background:var(--card);border:1px solid var(--card-b);border-radius:22px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:var(--glass-s)" onclick="go(2)">
+  <span class="ms" style="font-size:28px;color:var(--terra)">public</span>
+  <div style="flex:1">
+    <div style="font-size:14px;font-weight:500;color:var(--t1)">Explorer le monde</div>
+    <div style="font-size:12px;color:var(--t3);margin-top:2px">130 pays, 1 400 000+ recettes</div>
   </div>
-  <!-- Card 2 — Thon glacé (r01 Brochettes grecques) -->
-  <div class="recent-card" onclick="showRecipe(0);go(3)">
-    <div class="rc-source"><span class="ms">link</span></div>
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774125684947-4c4rjkn8.jpg" alt="">
-    <div class="rc-overlay">
-      <div class="rc-title">&#127471;&#127477; Thon glac&eacute; wasabi</div>
-    </div>
-  </div>
-  <!-- Card 3 — Ragoût (r07 Ragout marocain) -->
-  <div class="recent-card" onclick="showRecipe(6);go(3)">
-    <div class="rc-source"><span class="ms">photo_camera</span></div>
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774011238569-8v7hn67u.jpg" alt="">
-    <div class="rc-overlay">
-      <div class="rc-title">&#127474;&#127462; Rago&ucirc;t r&eacute;confortant</div>
-    </div>
-  </div>
-  <!-- Card 4 — Gâteau (r10 Gâteau citron) -->
-  <div class="recent-card" onclick="showRecipe(9);go(3)">
-    <div class="rc-source"><span class="ms">language</span></div>
-    <img src="https://optirecipe-staging.up.railway.app/uploads/recipe-img-1774120891263-dp6mdc0h.jpg" alt="">
-    <div class="rc-overlay">
-      <div class="rc-title">&#127467;&#127479; G&acirc;teau banane</div>
-    </div>
-  </div>
+  <span class="ms" style="font-size:18px;color:var(--t4)">arrow_forward_ios</span>
 </div>
 
 <!-- ELEMENT 5: Recettes pour vous — database recipes, NOT captures -->
@@ -5773,7 +5913,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="library" style="padding-bottom:100px;min-height:100%;transition:background .5s">
   <div class="hdr">
     <div class="hdr-side l"></div>
-    <div class="hdr-logo">Savora</div>
+    <div class="hdr-logo">SANZIA</div>
     <div class="hdr-side r">
       <div class="hdr-btn" onclick="go(14)"><span class="ms">person</span></div>
     </div>
@@ -5903,7 +6043,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S7: MEAL PLAN -->
 <div class="scr" id="s7" data-s="off">
 <div class="meal">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">SANZIA</div><div class="hdr-side r"></div></div>
   <!-- Warm personal intro -->
   <div style="padding:0 24px 16px">
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">"Bien manger, c'est le d&eacute;but de tout."</div>
@@ -6141,7 +6281,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S10: ACADEMY / PROGRESSION -->
 <div class="scr" id="s10" data-s="off">
 <div class="academy">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">SANZIA</div><div class="hdr-side r"></div></div>
   <div style="padding:0 24px 16px">
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--t2);transition:color .4s">Progressez &agrave; votre rythme, une recette &agrave; la fois.</div>
   </div>
@@ -6243,7 +6383,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <!-- S13: SEARCH RESULTS -->
 <div class="scr" id="s13" data-s="off">
 <div class="library" style="padding-bottom:100px;min-height:100%;transition:background .5s">
-  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">Savora</div><div class="hdr-side r"></div></div>
+  <div class="hdr"><div class="hdr-side l"><div class="hdr-btn" onclick="goBack()"><span class="ms">arrow_back</span></div></div><div class="hdr-logo">SANZIA</div><div class="hdr-side r"></div></div>
   <div style="margin:8px 24px 16px;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--card-b);border-radius:50px;padding:0 8px 0 18px;height:46px;transition:background .4s">
     <span class="ms" style="color:var(--t3);font-size:20px">search</span>
     <span style="flex:1;font-size:14px;color:var(--t1);font-family:'Inter',sans-serif;transition:color .4s">poulet</span>
@@ -6302,11 +6442,11 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
   <div class="set-row"><div class="set-l"><span class="ms">translate</span><div class="set-label">Langue</div></div><div class="set-val">Fran&ccedil;ais</div></div>
   <div class="set-row"><div class="set-l"><span class="ms">dark_mode</span><div class="set-label">Mode sombre</div></div><button class="tg" id="darkTg" onclick="event.stopPropagation();toggleTheme()"><div class="tg-k"></div></button></div>
   <div class="set-row"><div class="set-l"><span class="ms">notifications</span><div class="set-label">Notifications</div></div><button class="tg on" onclick="event.stopPropagation();this.classList.toggle('on')"><div class="tg-k"></div></button></div>
-  <div class="set-row"><div class="set-l"><span class="ms" style="color:var(--terra)">workspace_premium</span><div class="set-label" style="color:var(--terra)">Savora Premium</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
+  <div class="set-row"><div class="set-l"><span class="ms" style="color:var(--terra)">workspace_premium</span><div class="set-label" style="color:var(--terra)">SANZIA Premium</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
   <div class="set-row"><div class="set-l"><span class="ms">help_outline</span><div class="set-label">Aide &amp; Support</div></div><span class="set-arr"><span class="ms">chevron_right</span></span></div>
-  <div class="set-row"><div class="set-l"><span class="ms">info_outline</span><div class="set-label">&Agrave; propos de Savora</div></div><div class="set-val">v1.0</div></div>
+  <div class="set-row"><div class="set-l"><span class="ms">info_outline</span><div class="set-label">&Agrave; propos de SANZIA</div></div><div class="set-val">v1.0</div></div>
   <div style="text-align:center;padding:20px 0 0;cursor:pointer"><span style="font-size:14px;color:var(--t3);font-weight:500">Se d&eacute;connecter</span></div>
-  <div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t4);transition:color .4s">Savora v1.0 &middot; Fait avec passion &agrave; Paris</div>
+  <div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t4);transition:color .4s">SANZIA v1.0 &middot; Fait avec passion &agrave; Paris</div>
 </div>
 </div>
 
@@ -7386,7 +7526,7 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
       <span class="ms" style="font-size:16px;color:var(--t4)">chevron_right</span>
     </div>
     <button class="action-close" onclick="closeActionMenu()">Fermer</button>
-    <div style="text-align:center;margin-top:16px;font-family:'Playfair Display',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t4);transition:color .4s">Savora</div>
+    <div style="text-align:center;margin-top:16px;font-family:'Playfair Display',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t4);transition:color .4s">SANZIA</div>
   </div>
 </div>
 
@@ -7395,9 +7535,9 @@ body{display:flex;justify-content:center;align-items:center;font-family:'Inter',
 <div class="tabs-in">
   <button class="tb on" onclick="navTab(1)"><span class="ms">home</span><span class="tb-label">Accueil</span></button>
   <button class="tb" onclick="navTab(2)"><span class="ms">explore</span><span class="tb-label">Explorer</span></button>
-  <button class="tb-c" onclick="handleCookAction()"><span class="ms">add</span></button>
-  <button class="tb" onclick="navTab(7)"><span class="ms">calendar_month</span><span class="tb-label">Planifier</span></button>
-  <button class="tb" onclick="navTab(6)"><span class="ms">menu_book</span><span class="tb-label">Book</span></button>
+  <button class="tb-c" onclick="handleCookAction()"><span class="ms">photo_camera</span></button>
+  <button class="tb" onclick="navTab(7)"><span class="ms">trending_up</span><span class="tb-label">Progres</span></button>
+  <button class="tb" onclick="navTab(6)"><span class="ms">person</span><span class="tb-label">Profil</span></button>
 </div>
 </div>
 
